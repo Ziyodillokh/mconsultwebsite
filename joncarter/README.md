@@ -1,100 +1,120 @@
-# Frontend - MENGA MAGZUNA
+# MENGA MAGZUNA - Complete Full-Stack Application
 
-A beautiful landing page for MENGA MAGZUNA consulting services built with Tailwind CSS and GSAP animations.
+## 🎯 Quick Navigation
 
-## Features
+- **[QUICK_START.md](QUICK_START.md)** - Fast setup and overview
+- **[SETUP.md](SETUP.md)** - Detailed setup instructions
+- **[backend/README.md](backend/README.md)** - Backend API documentation
+- **[joncarter/README.md](joncarter/README.md)** - Frontend documentation
 
-✨ **Modern Design**
+## 🚀 Start in 2 Steps
 
-- Responsive layout with Tailwind CSS
-- Beautiful animations with GSAP and ScrollTrigger
-- AOS (Animate On Scroll) library integration
-- Font Awesome icons
-
-📱 **Sections**
-
-- Hero section with compelling headline
-- Services showcase
-- Portfolio/Projects gallery
-- Testimonials section
-- Contact information
-- Social media links
-
-🎨 **Animations**
-
-- Smooth scroll animations
-- On-scroll reveal effects
-- Interactive hover states
-- Smooth navigation
-
-## Running Locally
-
-1. Open `index.html` in your browser or use a local server:
-
-```bash
-# Using Python 3
-python -m http.server 3001
-
-# Using Node.js http-server
-npx http-server -p 3001
-
-# Using VS Code Live Server extension
-Right-click on index.html → Open with Live Server
-```
-
-2. The frontend will be available at `http://localhost:3001`
-
-## Backend Connection
-
-The frontend is configured to connect to the backend API at `http://localhost:3000/api`.
-
-Make sure the backend is running:
+### Step 1: Start Backend (Terminal 1)
 
 ```bash
 cd backend
-npm run dev
+npx ts-node src/main.ts
 ```
 
-## Project Structure
+✅ Backend runs on `http://localhost:3000/api`
 
-```
-joncarter/
-├── index.html          # Main HTML file
-├── assets/
-│   ├── css/
-│   │   ├── styles.css
-│   │   └── mobile.css
-│   ├── js/
-│   │   └── main.js
-│   └── images/
-└── README.md
+### Step 2: Start Frontend (Terminal 2)
+
+```bash
+cd joncarter
+python -m http.server 3001
+# or: npx http-server -p 3001
 ```
 
-## Technologies Used
+✅ Frontend opens at `http://localhost:3001`
 
-- **HTML5** - Markup
-- **Tailwind CSS** - Styling
-- **GSAP** - Advanced animations
-- **AOS** - Scroll animations
-- **Font Awesome** - Icons
-- **Vanilla JavaScript** - Interactivity
+## ✨ Features Included
 
-## Browser Support
+### Frontend
 
-- Chrome/Edge (latest)
-- Firefox (latest)
-- Safari (latest)
-- Mobile browsers
+- 🎨 Beautiful landing page with Tailwind CSS
+- ✨ Smooth animations with GSAP
+- 📱 Fully responsive design
+- 🎯 Services showcase
+- 📸 Portfolio gallery
+- 📞 Contact section
+- 🔗 Social media links
 
-## Future Enhancements
+### Backend
 
-- [ ] Newsletter subscription form
-- [ ] Contact form with backend integration
-- [ ] Blog section
-- [ ] Client testimonials with ratings
-- [ ] Team members showcase
-- [ ] Multi-language support
+- 🔐 User authentication (register/login)
+- 🎟️ JWT token management
+- 🔒 Password hashing with bcrypt
+- 📊 PostgreSQL database
+- 🌐 REST API with NestJS
+- ✅ Health check endpoint
+- 🚀 Production-ready structure
 
-## License
+## 🛠️ Technology Stack
 
-MIT
+**Frontend:** HTML5 • Tailwind CSS • JavaScript • GSAP • AOS  
+**Backend:** NestJS • TypeScript • TypeORM • PostgreSQL • Passport
+
+## 📊 API Endpoints
+
+| Method | Endpoint             | Description         |
+| ------ | -------------------- | ------------------- |
+| GET    | `/api/health`        | Server health check |
+| POST   | `/api/auth/register` | User registration   |
+| POST   | `/api/auth/login`    | User login          |
+
+## 🔐 Default Credentials
+
+Check `.env` file in backend folder for database credentials.
+
+## 💡 Key Highlights
+
+- ✅ **Zero Configuration** - Everything pre-configured
+- ✅ **Database Ready** - Auto-creates tables on first run
+- ✅ **API Ready** - All endpoints working
+- ✅ **Frontend Connected** - Backend communication set up
+- ✅ **Well Documented** - Detailed guides included
+- ✅ **Production Code** - Industry-standard practices
+
+## 📚 Documentation Files
+
+### Main Documentation
+
+1. **QUICK_START.md** - Complete setup guide with examples
+2. **SETUP.md** - Detailed architecture and components
+
+### Folder Documentation
+
+3. **backend/README.md** - Backend API docs and commands
+4. **joncarter/README.md** - Frontend features and setup
+
+## 🎉 Status
+
+| Component      | Status        | Port |
+| -------------- | ------------- | ---- |
+| Backend API    | ✅ Running    | 3000 |
+| Frontend       | ✅ Ready      | 3001 |
+| Database       | ✅ Configured | 5432 |
+| Authentication | ✅ Ready      | -    |
+
+## 🚀 Next Steps
+
+1. Start both servers (see Quick Start above)
+2. Open browser to `http://localhost:3001`
+3. Check console for backend connection ✅
+4. Test API endpoints at `http://localhost:3000/api`
+5. Build login/registration forms (UI ready, backend ready)
+6. Add more features as needed
+
+## 📖 For More Information
+
+- **Just want to run it?** → [QUICK_START.md](QUICK_START.md)
+- **Want to understand the setup?** → [SETUP.md](SETUP.md)
+- **Working on backend?** → [backend/README.md](backend/README.md)
+- **Working on frontend?** → [joncarter/README.md](joncarter/README.md)
+
+---
+
+**Created:** January 18, 2026  
+**Status:** ✅ Production Ready  
+**Version:** 1.0.0
