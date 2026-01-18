@@ -29,12 +29,12 @@ jobs:
             cd backend
             npm install
             npm run build
-            pm2 restart mconsult-backend || pm2 start dist/main.js --name mconsult-backend
+            pm2 start dist/main.js --name mconsult-backend --update-env || pm2 restart mconsult-backend --update-env
 
             echo "🎨 FRONTEND DEPLOY"
             cd ../frontend
-
-            # static html bo‘lgani uchun build yo‘q
+            # Agar nginx root boshqacha bo‘lsa, nusxalash
+            sudo cp -r * /var/www/mconsult/
             sudo nginx -t
             sudo systemctl reload nginx
 
