@@ -48,7 +48,8 @@ body {
 }
 
 .premium-card {
-  height: 600px;
+  height: auto;
+  min-height: 550px;
   background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
   border: 1px solid rgba(255, 0, 0, 0.1);
   transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -56,6 +57,8 @@ body {
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   border-radius: 8px;
+  display: flex;
+  flex-direction: column;
 }
 
 .premium-card:hover {
