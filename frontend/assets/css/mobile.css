@@ -313,13 +313,13 @@ body {
 
 /* Very small screens (iPhone SE, etc) */
 @media (max-width: 375px) {
-  /* Scroller yanada tez */
+  /* Scroller normal tezlik */
   .scroller-inner {
-    animation: scroll 4s linear infinite !important;
+    animation: scroll 12s linear infinite !important;
   }
 
   #asosiy h1 {
-    font-size: 1.5rem !important;
+    font-size: 1.4rem !important;
   }
 
   nav a .text-2xl,
@@ -343,12 +343,33 @@ body {
     gap: 0.25rem !important;
   }
 
-  #yutuqlar .grid {
-    grid-template-columns: 1fr !important;
+  /* Yutuqlar - 2x2 grid saqlansin */
+  #yutuqlar .grid.md\\:grid-cols-4 {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  
+  #yutuqlar .grid.md\\:grid-cols-4 .text-6xl {
+    font-size: 1.5rem !important;
+  }
+  
+  #yutuqlar .grid.md\\:grid-cols-4 .text-lg {
+    font-size: 0.6rem !important;
   }
 
-  #boglanish .lg\\:grid-cols-4 {
-    grid-template-columns: 1fr !important;
+  /* Bog'lanish - 2x2 grid saqlansin */
+  #boglanish .grid.lg\\:grid-cols-4 {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  
+  #boglanish .grid.lg\\:grid-cols-4 .text-6xl {
+    font-size: 1.5rem !important;
+  }
+  
+  /* Hero rasmlar kichikroq */
+  #asosiy .relative .grid.grid-cols-2 > div,
+  #asosiy .relative .grid.grid-cols-2 .hero-image {
+    height: 140px !important;
+    flex: 0 0 80% !important;
   }
 }
 
