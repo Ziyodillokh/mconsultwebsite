@@ -342,6 +342,134 @@ body {
   #boglanish .grid.lg\\:grid-cols-4 > a:nth-child(3) .text-6xl {
     margin-bottom: 0 !important;
   }
+
+  /* FOOTER MOBILE - Professional Design */
+  footer {
+    padding: 0 !important;
+  }
+
+  footer > div:first-child {
+    padding: 2rem 1.5rem !important;
+  }
+
+  /* Grid - 2 ustun */
+  footer .grid.md\\:grid-cols-2.lg\\:grid-cols-4 {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 1.5rem 1rem !important;
+  }
+
+  /* Birinchi ustun (Logo va info) - to'liq kenglik */
+  footer .grid > div:first-child {
+    grid-column: 1 / -1 !important;
+    text-align: center !important;
+    padding-bottom: 1.5rem !important;
+    border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  footer .grid > div:first-child .text-2xl {
+    font-size: 1.25rem !important;
+  }
+
+  footer .grid > div:first-child p {
+    font-size: 0.8rem !important;
+    line-height: 1.6 !important;
+    max-width: 280px !important;
+    margin: 0 auto 1rem auto !important;
+  }
+
+  /* Social icons */
+  footer .flex.gap-4 {
+    justify-content: center !important;
+  }
+
+  footer .w-10.h-10 {
+    width: 2.25rem !important;
+    height: 2.25rem !important;
+    font-size: 0.9rem !important;
+  }
+
+  /* Qolgan 3 ta bo'lim - chapda 2 ta, o'ngda 1 ta */
+  footer h4 {
+    font-size: 0.85rem !important;
+    margin-bottom: 0.75rem !important;
+    letter-spacing: 0.05em !important;
+  }
+
+  footer ul {
+    gap: 0.4rem !important;
+  }
+
+  footer li {
+    font-size: 0.8rem !important;
+  }
+
+  footer ul.space-y-3 {
+    gap: 0.35rem !important;
+  }
+
+  footer ul.space-y-4 {
+    gap: 0.5rem !important;
+  }
+
+  /* Contact section - to'liq kenglik pastda */
+  footer .grid > div:last-child {
+    grid-column: 1 / -1 !important;
+    padding-top: 1rem !important;
+    border-top: 1px solid rgba(255,255,255,0.1) !important;
+    margin-top: 0.5rem !important;
+  }
+
+  footer .grid > div:last-child ul {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.75rem !important;
+  }
+
+  footer .grid > div:last-child li {
+    font-size: 0.75rem !important;
+  }
+
+  footer .grid > div:last-child .flex.items-start,
+  footer .grid > div:last-child .flex.items-center {
+    gap: 0.4rem !important;
+    align-items: center !important;
+  }
+
+  footer .grid > div:last-child i {
+    font-size: 0.85rem !important;
+    width: 16px !important;
+  }
+
+  footer .grid > div:last-child span,
+  footer .grid > div:last-child a {
+    font-size: 0.75rem !important;
+  }
+
+  /* Footer bottom */
+  footer .border-t {
+    padding: 1rem !important;
+  }
+
+  footer .border-t > div {
+    flex-direction: column !important;
+    text-align: center !important;
+    gap: 0.5rem !important;
+  }
+
+  footer .border-t p {
+    font-size: 0.7rem !important;
+  }
+
+  footer .border-t .flex.gap-6 {
+    justify-content: center !important;
+    gap: 1rem !important;
+  }
+
+  footer .border-t .flex.gap-6 a {
+    font-size: 0.7rem !important;
+  }
 }
 
 /* Very small screens (iPhone SE, etc) */
