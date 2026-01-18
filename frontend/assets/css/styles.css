@@ -404,84 +404,353 @@ body {
 /* MOBILE RESPONSIVE - Tailwind breakpoints */
 /* ============================================ */
 
-@media (max-width: 768px) {
-  /* Sections compact */
-  section {
-    padding-top: 2rem !important;
-    padding-bottom: 2rem !important;
+/* Tablet - 768px - 1024px */
+@media (max-width: 1024px) {
+  .premium-card {
+    height: auto !important;
+    min-height: 450px;
   }
 
-  /* Typography mobile */
-  h1,
-  .hero-title {
-    font-size: clamp(1.5rem, 8vw, 2.5rem) !important;
-    line-height: 1.1 !important;
+  .premium-card h3 {
+    font-size: 1.5rem !important;
   }
 
   .section-title {
-    font-size: clamp(1.5rem, 5vw, 2rem) !important;
+    font-size: clamp(2rem, 5vw, 3rem) !important;
+  }
+}
+
+/* Mobile - max 768px */
+@media (max-width: 768px) {
+  /* Navigation */
+  nav {
+    padding: 0.5rem 0 !important;
   }
 
-  /* Grid mobile */
-  .md\:grid-cols-2,
-  .lg\:grid-cols-2 {
+  nav .flex.justify-between {
+    padding: 0.75rem 1rem !important;
+  }
+
+  nav a .text-2xl {
+    font-size: 1.25rem !important;
+  }
+
+  nav .w-16 {
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+  }
+
+  nav .h-12 {
+    height: 1.75rem !important;
+    width: 1.75rem !important;
+  }
+
+  /* Sections */
+  section {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  #asosiy {
+    padding-top: 5rem !important;
+    min-height: auto !important;
+  }
+
+  /* Hero Title */
+  h1,
+  .hero-title {
+    font-size: clamp(1.75rem, 7vw, 2.5rem) !important;
+    line-height: 1.2 !important;
+  }
+
+  .section-title {
+    font-size: clamp(1.5rem, 6vw, 2rem) !important;
+    line-height: 1.2 !important;
+  }
+
+  /* Hero Grid */
+  .grid.lg\:grid-cols-2 {
     grid-template-columns: 1fr !important;
+    gap: 2rem !important;
   }
 
+  /* Hero images grid */
+  .grid.grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.5rem !important;
+  }
+
+  .hero-image {
+    height: 120px !important;
+    margin-top: 0 !important;
+  }
+
+  .hero-image.h-56 {
+    height: 120px !important;
+  }
+
+  .hero-image.mt-6,
+  .hero-image.-mt-6 {
+    margin-top: 0 !important;
+  }
+
+  /* Grid Fixes */
+  .md\:grid-cols-2,
+  .lg\:grid-cols-2,
   .lg\:grid-cols-3 {
     grid-template-columns: 1fr !important;
   }
 
+  .md\:grid-cols-4,
   .lg\:grid-cols-4 {
     grid-template-columns: repeat(2, 1fr) !important;
   }
 
-  /* Spacing mobile */
+  .grid-cols-3 {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+
+  /* Spacing */
   .gap-12 {
-    gap: 1rem !important;
+    gap: 1.5rem !important;
   }
 
   .gap-8 {
     gap: 1rem !important;
   }
 
+  .gap-6 {
+    gap: 0.75rem !important;
+  }
+
+  .px-6,
   .px-8 {
     padding-left: 1rem !important;
     padding-right: 1rem !important;
   }
 
-  .p-10 {
-    padding: 1rem !important;
+  .p-10,
+  .p-12 {
+    padding: 1.25rem !important;
   }
 
-  /* Card heights */
+  .py-40 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+
+  .py-32,
+  .py-28 {
+    padding-top: 2.5rem !important;
+    padding-bottom: 2.5rem !important;
+  }
+
+  /* Premium Cards */
   .premium-card {
     height: auto !important;
+    min-height: auto !important;
+    padding: 1.25rem !important;
   }
 
-  /* Margin/padding */
-  .mb-20 {
+  .premium-card .h-2\/3 {
+    height: 180px !important;
+  }
+
+  .premium-card h3 {
+    font-size: 1.25rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .premium-card p {
+    font-size: 0.875rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  .card-number {
+    font-size: 4rem !important;
+  }
+
+  /* Marketing Card */
+  .premium-card.lg\:p-24 {
+    padding: 1.5rem !important;
+    flex-direction: column !important;
+  }
+
+  .premium-card h3.text-6xl,
+  .premium-card h3.lg\:text-8xl {
+    font-size: 2rem !important;
     margin-bottom: 1rem !important;
   }
 
-  .mt-20 {
+  .premium-card .h-\[400px\] {
+    height: 200px !important;
+  }
+
+  .premium-card .px-16 {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+  }
+
+  .premium-card .py-6 {
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+  }
+
+  /* Margin/padding */
+  .mb-20,
+  .mb-32 {
+    margin-bottom: 1.5rem !important;
+  }
+
+  .mt-20,
+  .mt-24 {
+    margin-top: 1.5rem !important;
+  }
+
+  /* Stats section */
+  #yutuqlar .text-6xl {
+    font-size: 2.5rem !important;
+  }
+
+  #yutuqlar .text-lg {
+    font-size: 0.875rem !important;
+  }
+
+  #yutuqlar p {
+    font-size: 0.75rem !important;
+  }
+
+  /* About section cards */
+  #biz-haqimizda .p-10 {
+    padding: 1rem !important;
+  }
+
+  #biz-haqimizda .h-32 {
+    height: 100px !important;
+  }
+
+  #biz-haqimizda h3 {
+    font-size: 1rem !important;
+  }
+
+  #biz-haqimizda p {
+    font-size: 0.8rem !important;
+  }
+
+  /* Contact section */
+  #boglanish .text-6xl {
+    font-size: 2.5rem !important;
+  }
+
+  #boglanish .p-8 {
+    padding: 1rem !important;
+  }
+
+  /* Scroller */
+  .scroller {
+    padding: 10px 0 !important;
+  }
+
+  .scroller-inner {
+    font-size: 1rem !important;
+  }
+
+  /* Footer */
+  footer {
+    padding: 2rem 1rem !important;
+  }
+
+  footer .text-3xl {
+    font-size: 1.25rem !important;
+  }
+
+  footer .gap-8 {
+    gap: 1.5rem !important;
+  }
+
+  /* Decorative elements hide on mobile */
+  .absolute.w-40,
+  .absolute.w-56,
+  .absolute.w-72,
+  .absolute.w-96 {
+    display: none !important;
+  }
+
+  /* Hero 98% badge */
+  .absolute.-bottom-4.-left-4 {
+    position: relative !important;
+    bottom: auto !important;
+    left: auto !important;
     margin-top: 1rem !important;
+    display: inline-block !important;
+    padding: 0.75rem 1rem !important;
+  }
+
+  .absolute.-bottom-4.-left-4 .text-3xl {
+    font-size: 1.5rem !important;
+  }
+
+  /* Hero features */
+  .hero-feature {
+    padding: 0.5rem !important;
+  }
+
+  .hero-feature .text-2xl {
+    font-size: 1.25rem !important;
+  }
+
+  .hero-feature .text-\[10px\] {
+    font-size: 8px !important;
+  }
+
+  /* Buttons */
+  .px-8 {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+
+  .py-3 {
+    padding-top: 0.625rem !important;
+    padding-bottom: 0.625rem !important;
+  }
+
+  /* Modal responsive */
+  #loginModal > div,
+  #registerModal > div {
+    margin: 1rem !important;
+    padding: 1.5rem !important;
+    max-height: 90vh !important;
+    overflow-y: auto !important;
   }
 }
 
-@media (max-width: 640px) {
+/* Small Mobile - max 480px */
+@media (max-width: 480px) {
   section {
-    padding-top: 1.5rem !important;
-    padding-bottom: 1.5rem !important;
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  #asosiy {
+    padding-top: 4.5rem !important;
   }
 
   h1,
   .hero-title {
-    font-size: clamp(1.25rem, 7vw, 2rem) !important;
+    font-size: clamp(1.5rem, 8vw, 2rem) !important;
   }
 
   .section-title {
-    font-size: clamp(1.25rem, 4vw, 1.75rem) !important;
+    font-size: clamp(1.25rem, 6vw, 1.5rem) !important;
+  }
+
+  /* Two column grids become single on very small screens */
+  .grid-cols-3,
+  .md\:grid-cols-4,
+  .lg\:grid-cols-4 {
+    grid-template-columns: repeat(2, 1fr) !important;
   }
 
   .text-base {
@@ -495,16 +764,38 @@ body {
   .gap-12,
   .gap-8,
   .gap-6 {
-    gap: 0.75rem !important;
+    gap: 0.5rem !important;
   }
 
-  .p-10 {
-    padding: 0.75rem !important;
+  .p-10,
+  .p-12 {
+    padding: 1rem !important;
   }
 
+  .px-6,
   .px-8 {
     padding-left: 0.75rem !important;
     padding-right: 0.75rem !important;
+  }
+
+  /* Premium cards on small screens */
+  .premium-card .h-2\/3 {
+    height: 150px !important;
+  }
+
+  /* Stats */
+  #yutuqlar .text-6xl {
+    font-size: 2rem !important;
+  }
+
+  /* Contact icons */
+  #boglanish .text-6xl {
+    font-size: 2rem !important;
+  }
+
+  /* Hero images */
+  .hero-image {
+    height: 100px !important;
   }
 }
 
