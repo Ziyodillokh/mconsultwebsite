@@ -226,6 +226,50 @@ body {
     transform: scale(0.98);
   }
 
+  /* YUTUQLAR - 4 ta statistika 2x2 grid */
+  #yutuqlar {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  #yutuqlar .max-w-\[1600px\] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  
+  #yutuqlar .grid.md\\:grid-cols-4 {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.75rem !important;
+  }
+  
+  #yutuqlar .grid.md\\:grid-cols-4 > div {
+    padding: 1rem !important;
+  }
+  
+  #yutuqlar .grid.md\\:grid-cols-4 .text-6xl {
+    font-size: 2rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+  
+  #yutuqlar .grid.md\\:grid-cols-4 .text-lg {
+    font-size: 0.7rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+  
+  #yutuqlar .grid.md\\:grid-cols-4 .text-sm {
+    font-size: 0.65rem !important;
+    display: none !important;
+  }
+  
+  #yutuqlar .section-title {
+    font-size: 1.5rem !important;
+  }
+  
+  #yutuqlar .mb-20 {
+    margin-bottom: 1rem !important;
+  }
+
   /* BOG'LANISH - kontaktlar grid */
   #boglanish .grid.lg\\:grid-cols-4 {
     display: grid !important;
