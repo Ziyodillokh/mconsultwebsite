@@ -1,0 +1,1094 @@
+﻿<!doctype html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MENGA MAGZUNA | Premium Konsalting</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+  </head>
+  <body>
+    <nav
+      class="fixed w-full z-50 py-0 px-0 bg-gradient-to-r from-red-600 via-red-500 to-red-600 shadow-2xl backdrop-blur-md border-b-4 border-red-700"
+    >
+      <div class="flex justify-between items-center px-8 py-4">
+        <a href="#asosiy" class="flex items-center gap-3 group">
+          <div
+            class="bg-white rounded-full shadow-xl group-hover:shadow-2xl transition-all duration-300 group-hover:scale-110 relative overflow-hidden w-16 h-16 flex items-center justify-center border-3 border-white"
+          >
+            <img
+              src="./assets/images/logo.png"
+              alt="MAGZUNA Logo"
+              class="h-12 w-12 object-cover rounded-full"
+            />
+          </div>
+          <div class="flex flex-col leading-none">
+            <span
+              class="text-2xl font-black text-white syncopate tracking-tight"
+              >Mag'zuna</span
+            >
+            <span
+              class="text-xs font-bold text-white/90 tracking-widest uppercase mt-0.5"
+              >Consult</span
+            >
+          </div>
+        </a>
+        <div class="hidden lg:flex space-x-1 items-center">
+          <a
+            href="#asosiy"
+            class="nav-link group relative px-4 py-2 rounded-lg"
+          >
+            <span
+              class="relative z-10 text-sm font-bold uppercase tracking-wider text-white group-hover:text-white transition-colors duration-300"
+              >Asosiy</span
+            >
+            <span
+              class="absolute inset-0 bg-white/20 rounded-lg scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
+            ></span>
+          </a>
+          <a
+            href="#xizmatlar"
+            class="nav-link group relative px-4 py-2 rounded-lg"
+          >
+            <span
+              class="relative z-10 text-sm font-bold uppercase tracking-wider text-white group-hover:text-white transition-colors duration-300"
+              >Xizmatlar</span
+            >
+            <span
+              class="absolute inset-0 bg-white/20 rounded-lg scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
+            ></span>
+          </a>
+          <a
+            href="#yutuqlar"
+            class="nav-link group relative px-4 py-2 rounded-lg"
+          >
+            <span
+              class="relative z-10 text-sm font-bold uppercase tracking-wider text-white group-hover:text-white transition-colors duration-300"
+              >Yutuqlar</span
+            >
+            <span
+              class="absolute inset-0 bg-white/20 rounded-lg scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
+            ></span>
+          </a>
+          <a
+            href="#biz-haqimizda"
+            class="nav-link group relative px-4 py-2 rounded-lg"
+          >
+            <span
+              class="relative z-10 text-sm font-bold uppercase tracking-wider text-white group-hover:text-white transition-colors duration-300"
+              >Haqimizda</span
+            >
+            <span
+              class="absolute inset-0 bg-white/20 rounded-lg scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
+            ></span>
+          </a>
+          <div class="w-px h-6 bg-white/20 mx-2"></div>
+          <button
+            onclick="openAuthModal('login')"
+            class="nav-link group relative px-6 py-2 rounded-full bg-transparent text-white font-bold hover:bg-white/10 transition-all duration-300 ml-2 border-2 border-white"
+          >
+            <i class="fas fa-sign-in-alt mr-2"></i>Kirish
+          </button>
+          <button
+            onclick="openAuthModal('register')"
+            class="nav-link group relative px-6 py-2 rounded-full bg-white text-red-600 font-bold hover:bg-gray-100 transition-all duration-300 ml-2"
+          >
+            <i class="fas fa-user-plus mr-2"></i>Ro'yxatdan o'tish
+          </button>
+        </div>
+        <div
+          class="h-8 w-8 flex flex-col justify-center space-y-1.5 group cursor-pointer"
+        >
+          <div class="h-0.5 w-6 bg-white transition-all group-hover:w-8"></div>
+          <div class="h-0.5 w-8 bg-white transition-all group-hover:w-6"></div>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <section
+        id="asosiy"
+        class="min-h-screen flex items-center relative px-6 hero-bg pattern-dots pt-24 pb-16"
+      >
+        <div class="w-full max-w-screen-2xl mx-auto">
+          <!-- Decorative shapes background -->
+          <div
+            class="absolute top-10 left-10 w-40 h-40 bg-red-100 rounded-3xl opacity-20 rotate-12"
+          ></div>
+          <div
+            class="absolute bottom-20 right-10 w-56 h-56 bg-red-50 rounded-full opacity-30"
+          ></div>
+          <div
+            class="absolute top-1/2 right-1/4 w-32 h-32 border-4 border-red-200 rounded-full opacity-20"
+          ></div>
+
+          <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div class="z-10">
+              <p
+                class="uppercase tracking-[0.2em] text-red-600 mb-4 font-bold text-xs"
+                data-aos="fade-down"
+              ></p>
+              <h1
+                class="text-4xl md:text-6xl font-black syncopate mb-5 leading-tight"
+                data-aos="zoom-in"
+              >
+                Biznesingizni <br />
+                <span class="text-red-600">Yangi Cho'qqiga</span> <br />
+                Olib Chiqing
+              </h1>
+              <p
+                class="text-base text-gray-600 mb-6 leading-relaxed max-w-xl"
+                data-aos="fade-up"
+                data-aos-delay="200"
+              >
+                Professional konsalting xizmatlari: buxgalteriya, IT, marketing,
+                HR va ko'plab boshqa xizmatlar. 10+ yillik tajriba va 500+
+                mamnun mijozlar bilan ishonchli hamkoringiz.
+              </p>
+
+              <div
+                class="flex flex-col sm:flex-row gap-3 mb-10"
+                data-aos="fade-up"
+                data-aos-delay="300"
+              >
+                <a
+                  href="#xizmatlar"
+                  class="bg-red-600 text-white px-8 py-3 font-bold uppercase tracking-wider hover:bg-black transition duration-500 text-xs inline-flex items-center justify-center gap-2 rounded-full shadow-lg hover:shadow-2xl"
+                >
+                  <i class="fas fa-rocket"></i>
+                  Xizmatlarimiz
+                </a>
+                <a
+                  href="#boglanish"
+                  class="border-2 border-red-600 text-red-600 px-8 py-3 font-bold uppercase tracking-wider hover:bg-red-600 hover:text-white transition duration-500 text-xs inline-flex items-center justify-center gap-2 rounded-full"
+                >
+                  <i class="fas fa-phone"></i>
+                  Bog'lanish
+                </a>
+              </div>
+
+              <div
+                class="grid grid-cols-3 gap-3"
+                data-aos="fade-up"
+                data-aos-delay="400"
+              >
+                <div class="hero-feature p-3 text-center">
+                  <div class="text-2xl font-black text-red-600 mb-1">10+</div>
+                  <div
+                    class="text-[10px] text-gray-600 uppercase leading-tight"
+                  >
+                    Yillik<br />Tajriba
+                  </div>
+                </div>
+                <div class="hero-feature p-3 text-center">
+                  <div class="text-2xl font-black text-red-600 mb-1">500+</div>
+                  <div
+                    class="text-[10px] text-gray-600 uppercase leading-tight"
+                  >
+                    Mamnun<br />Mijozlar
+                  </div>
+                </div>
+                <div class="hero-feature p-3 text-center">
+                  <div class="text-2xl font-black text-red-600 mb-1">24/7</div>
+                  <div
+                    class="text-[10px] text-gray-600 uppercase leading-tight"
+                  >
+                    Onlayn<br />Qo'llab
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="relative z-10"
+              data-aos="fade-left"
+              data-aos-delay="500"
+            >
+              <div class="grid grid-cols-2 gap-3">
+                <div
+                  class="hero-image h-56 animate-slide-up"
+                  style="animation-delay: 0.1s"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80&w=800"
+                    class="w-full h-full object-cover"
+                    alt="Jamoa"
+                  />
+                </div>
+                <div
+                  class="hero-image h-56 mt-6 animate-slide-up"
+                  style="animation-delay: 0.2s"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=800"
+                    class="w-full h-full object-cover"
+                    alt="Biznes"
+                  />
+                </div>
+                <div
+                  class="hero-image h-56 -mt-6 animate-slide-up"
+                  style="animation-delay: 0.3s"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800"
+                    class="w-full h-full object-cover"
+                    alt="Strategiya"
+                  />
+                </div>
+                <div
+                  class="hero-image h-56 animate-slide-up"
+                  style="animation-delay: 0.4s"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800"
+                    class="w-full h-full object-cover"
+                    alt="Analytics"
+                  />
+                </div>
+              </div>
+
+              <div
+                class="absolute -bottom-4 -left-4 bg-red-600 text-white p-5 rounded-2xl shadow-2xl animate-slide-up"
+                style="animation-delay: 0.6s"
+              >
+                <div class="text-3xl font-black mb-1">98%</div>
+                <div class="text-[10px] uppercase tracking-wider leading-tight">
+                  Mijozlar<br />Mamnunligi
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="scroller">
+        <div
+          class="scroller-inner text-4xl font-black uppercase tracking-tighter flex space-x-12"
+        >
+          <span>Buxgalteriya •</span> <span>Brokerlik •</span>
+          <span>IT Xizmatlari •</span> <span>Malakasini Oshirish •</span>
+          <span>Litsenziya Yordam •</span> <span>Energiya Audit •</span>
+          <span>Marketing & Sotuv •</span>
+          <span>Buxgalteriya •</span> <span>Brokerlik •</span>
+          <span>IT Xizmatlari •</span> <span>Malakasini Oshirish •</span>
+          <span>Litsenziya Yordam •</span> <span>Energiya Audit •</span>
+          <span>Marketing & Sotuv •</span>
+        </div>
+      </div>
+
+      <section id="xizmatlar" class="py-40 px-6 relative overflow-hidden">
+        <!-- Decorative elements -->
+        <div
+          class="absolute top-20 right-0 w-96 h-96 bg-red-100 rounded-full -mr-48 opacity-20"
+        ></div>
+        <div
+          class="absolute bottom-0 left-0 w-72 h-72 bg-red-50 rounded-3xl rotate-45 opacity-15"
+        ></div>
+
+        <div class="max-w-[1600px] mx-auto relative z-10">
+          <div class="flex flex-col mb-32">
+            <h2 class="section-title mb-4">
+              Bizning <span class="text-red-600 glow-text">Xizmatlarimiz</span>
+            </h2>
+            <div class="h-1 w-40 bg-red-600 neon-border"></div>
+          </div>
+
+          <div class="grid lg:grid-cols-3 gap-12">
+            <div class="premium-card p-12 group">
+              <span class="card-number">01</span>
+              <div class="h-2/3 overflow-hidden mb-8">
+                <img
+                  src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=800"
+                  class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700"
+                  alt="Buxgalteriya"
+                />
+              </div>
+              <h3 class="text-4xl font-bold mb-4 uppercase">Buxgalteriya</h3>
+              <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                Soliq va moliya olamida tartib va aniqlik. Biz har bir
+                tiyiningizni hisoblab beramiz.
+              </p>
+              <a
+                href="#boglanish"
+                class="text-red-600 font-bold uppercase tracking-widest text-xs border-b border-red-600 pb-2"
+                >Batafsil</a
+              >
+            </div>
+
+            <div class="premium-card p-12 group">
+              <span class="card-number">02</span>
+              <div class="h-2/3 overflow-hidden mb-8">
+                <img
+                  src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&q=80&w=800"
+                  class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700"
+                  alt="Brokerlik"
+                />
+              </div>
+              <h3 class="text-4xl font-bold mb-4 uppercase">Brokerlik</h3>
+              <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                Investitsiya va birja operatsiyalari bo'yicha professional
+                maslahatlar.
+              </p>
+              <a
+                href="#boglanish"
+                class="text-red-600 font-bold uppercase tracking-widest text-xs border-b border-red-600 pb-2"
+                >Batafsil</a
+              >
+            </div>
+
+            <div class="premium-card p-12 group">
+              <span class="card-number">03</span>
+              <div class="h-2/3 overflow-hidden mb-8">
+                <img
+                  src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800"
+                  class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700"
+                  alt="IT"
+                />
+              </div>
+              <h3 class="text-4xl font-bold mb-4 uppercase">IT Xizmatlari</h3>
+              <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                Biznesingizni raqamli dunyo bilan bog'laymiz. Dasturlash va
+                kiber xavfsizlik.
+              </p>
+              <a
+                href="#boglanish"
+                class="text-red-600 font-bold uppercase tracking-widest text-xs border-b border-red-600 pb-2"
+                >Batafsil</a
+              >
+            </div>
+
+            <div class="premium-card p-12 group">
+              <span class="card-number">04</span>
+              <div class="h-2/3 overflow-hidden mb-8">
+                <img
+                  src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&q=80&w=800"
+                  class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700"
+                  alt="HR"
+                />
+              </div>
+              <h3 class="text-4xl font-bold mb-4 uppercase">
+                Malakasini Oshirish
+              </h3>
+              <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                Xodimlaringizni professional darajaga ko'tarish uchun tayyorlash
+                va malaka shaklantirish programmalari.
+              </p>
+              <a
+                href="#boglanish"
+                class="text-red-600 font-bold uppercase tracking-widest text-xs border-b border-red-600 pb-2"
+                >Batafsil</a
+              >
+            </div>
+
+            <div class="premium-card p-12 group">
+              <span class="card-number">05</span>
+              <div class="h-2/3 overflow-hidden mb-8">
+                <img
+                  src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=800"
+                  class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700"
+                  alt="Litsenziya"
+                />
+              </div>
+              <h3 class="text-4xl font-bold mb-4 uppercase">
+                Litsenziya Yordam
+              </h3>
+              <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                Biznesni ro'yxatga olish, ruxsatnoma va litsenziya olishda
+                amaliy yordam berish.
+              </p>
+              <a
+                href="#boglanish"
+                class="text-red-600 font-bold uppercase tracking-widest text-xs border-b border-red-600 pb-2"
+                >Batafsil</a
+              >
+            </div>
+
+            <div class="premium-card p-12 group">
+              <span class="card-number">06</span>
+              <div class="h-2/3 overflow-hidden mb-8">
+                <img
+                  src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=800"
+                  class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700"
+                  alt="Energy"
+                />
+              </div>
+              <h3 class="text-4xl font-bold mb-4 uppercase">Energiya Audit</h3>
+              <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                Energiya sarfini optimallashtirish va xarajatlarni 30% gacha
+                tejash.
+              </p>
+              <a
+                href="#boglanish"
+                class="text-red-600 font-bold uppercase tracking-widest text-xs border-b border-red-600 pb-2"
+                >Batafsil</a
+              >
+            </div>
+          </div>
+
+          <div
+            class="mt-20 group premium-card p-12 lg:p-24 flex flex-col lg:flex-row items-center gap-16"
+          >
+            <span class="card-number">07</span>
+            <div class="flex-1">
+              <h3 class="text-6xl lg:text-8xl font-black uppercase mb-8">
+                Marketing <br />
+                & <span class="text-red-600 glow-text">Sotuv</span>
+              </h3>
+              <p
+                class="text-xl text-gray-400 max-w-xl mb-12 italic border-l-4 border-red-600 pl-6"
+              >
+                "Biz biznesingizni nafaqat ko'rsatamiz, balki uni bozordagi
+                yetakchiga aylantiramiz."
+              </p>
+              <a
+                href="#boglanish"
+                class="inline-block bg-white text-black px-16 py-6 font-black uppercase hover:bg-red-600 hover:text-white transition-all"
+              >
+                Sotuvni Boshlash
+              </a>
+            </div>
+            <div class="flex-1 h-[400px] w-full">
+              <img
+                src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?auto=format&fit=crop&q=80&w=800"
+                class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700"
+                alt="Marketing"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="yutuqlar" class="py-32 stats-bg relative overflow-hidden">
+        <!-- Decorative shapes -->
+        <div
+          class="absolute top-0 left-0 w-96 h-96 bg-red-200 rounded-full -ml-48 -mt-48 opacity-20"
+        ></div>
+        <div
+          class="absolute bottom-0 right-0 w-72 h-72 bg-red-100 rounded-3xl opacity-15"
+        ></div>
+
+        <div class="max-w-[1600px] mx-auto px-6 relative z-10">
+          <div class="text-center mb-20">
+            <h2 class="section-title text-black mb-6">
+              Bizning <span class="text-red-600">Yutuqlarimiz</span>
+            </h2>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+              Raqamlar bizning ishimizning sifati va mijozlarimiz ishonchini aks
+              ettiradi
+            </p>
+          </div>
+          <div class="grid md:grid-cols-4 gap-12 text-center">
+            <div
+              data-aos="fade-up"
+              class="bg-white/80 backdrop-blur p-8 rounded-lg shadow-lg"
+            >
+              <div class="text-6xl font-black italic text-red-600 mb-3">
+                10+
+              </div>
+              <div
+                class="uppercase tracking-widest font-bold text-lg text-black mb-2"
+              >
+                Yillik Tajriba
+              </div>
+              <p class="text-gray-500 text-sm">
+                O'n yildan ortiq bozorda faol ishlaymiz
+              </p>
+            </div>
+            <div
+              data-aos="fade-up"
+              data-aos-delay="100"
+              class="bg-white/80 backdrop-blur p-8 rounded-lg shadow-lg"
+            >
+              <div class="text-6xl font-black italic text-red-600 mb-3">
+                500+
+              </div>
+              <div
+                class="uppercase tracking-widest font-bold text-lg text-black mb-2"
+              >
+                Kompaniyalar
+              </div>
+              <p class="text-gray-500 text-sm">
+                Yuzlab kompaniyalarga xizmat ko'rsatdik
+              </p>
+            </div>
+            <div
+              data-aos="fade-up"
+              data-aos-delay="200"
+              class="bg-white/80 backdrop-blur p-8 rounded-lg shadow-lg"
+            >
+              <div class="text-6xl font-black italic text-red-600 mb-3">
+                98%
+              </div>
+              <div
+                class="uppercase tracking-widest font-bold text-lg text-black mb-2"
+              >
+                Natija
+              </div>
+              <p class="text-gray-500 text-sm">
+                Mijozlarimizning mamnunlik darajasi
+              </p>
+            </div>
+            <div
+              data-aos="fade-up"
+              data-aos-delay="300"
+              class="bg-white/80 backdrop-blur p-8 rounded-lg shadow-lg"
+            >
+              <div class="text-6xl font-black italic text-red-600 mb-3">
+                24/7
+              </div>
+              <div
+                class="uppercase tracking-widest font-bold text-lg text-black mb-2"
+              >
+                Qo'llab-quvvatlash
+              </div>
+              <p class="text-gray-500 text-sm">
+                Har qanday vaqtda sizning xizmatingizdamiz
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="biz-haqimizda"
+        class="py-28 px-6 bg-gradient-to-br from-white via-gray-50 to-white relative overflow-hidden"
+      >
+        <!-- Decorative shapes -->
+        <div
+          class="absolute top-0 right-0 w-96 h-96 bg-red-100 rounded-full -mr-48 -mt-48 opacity-25"
+        ></div>
+        <div
+          class="absolute bottom-0 left-0 w-96 h-96 bg-red-100 rounded-full -ml-48 -mb-48 opacity-20"
+        ></div>
+        <div
+          class="absolute top-1/3 right-1/4 w-1 h-64 bg-gradient-to-b from-red-600 to-transparent opacity-20"
+        ></div>
+
+        <div class="max-w-[1200px] mx-auto relative z-10">
+          <div class="text-center mb-20">
+            <h2 class="section-title mb-6 text-black" data-aos="fade-up">
+              Nima Uchun <span class="text-red-600">Biz?</span>
+            </h2>
+            <div
+              class="h-1 w-40 bg-gradient-to-r from-red-600 via-red-400 to-transparent mx-auto mb-8 rounded-full"
+            ></div>
+            <p
+              class="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed font-medium"
+            >
+              Bizning maxfiy - odamlar va ularning muvaffaqiyati
+            </p>
+            <p
+              class="text-base text-gray-600 max-w-2xl mx-auto mt-4 leading-relaxed"
+            >
+              10 yil tajribada sanoat bo'ylab qo'llab-quvvatlagan 500+
+              kompaniya. Biz faqat xizmat ko'rsatmiz emas, strategik hamkorlik
+              va uzoq muddat rivojlanishga yo'naltiramiz.
+            </p>
+          </div>
+
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-20">
+            <!-- Card 1 -->
+            <div
+              class="group relative bg-white rounded-2xl p-10 shadow-lg hover:shadow-2xl transition-all duration-300 border border-red-100 overflow-hidden"
+              data-aos="fade-up"
+              data-aos-delay="0"
+            >
+              <div
+                class="absolute inset-0 bg-gradient-to-br from-red-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              ></div>
+              <div class="relative z-10">
+                <img
+                  src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop"
+                  alt="Fast Results"
+                  class="w-full h-32 object-cover rounded-lg mb-6 group-hover:scale-105 transition-transform duration-300"
+                />
+                <h3 class="text-xl font-bold mb-3 text-black">Tezkor Natija</h3>
+                <p class="text-gray-700 leading-relaxed text-sm">
+                  Sizning vazifalaringizni tezda va samarali hal qilamiz.
+                </p>
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div
+              class="group relative bg-white rounded-2xl p-10 shadow-lg hover:shadow-2xl transition-all duration-300 border border-red-100 overflow-hidden"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              <div
+                class="absolute inset-0 bg-gradient-to-br from-red-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              ></div>
+              <div class="relative z-10">
+                <img
+                  src="https://images.unsplash.com/photo-1552521514-5fefe8c9ef14?w=600&h=400&fit=crop"
+                  alt="Premium Quality"
+                  class="w-full h-32 object-cover rounded-lg mb-6 group-hover:scale-105 transition-transform duration-300"
+                />
+                <h3 class="text-xl font-bold mb-3 text-black">Premium Sifat</h3>
+                <p class="text-gray-700 leading-relaxed text-sm">
+                  Har bitta loyihada eng yuqori standartni qo'llaymiz.
+                </p>
+              </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div
+              class="group relative bg-white rounded-2xl p-10 shadow-lg hover:shadow-2xl transition-all duration-300 border border-red-100 overflow-hidden"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <div
+                class="absolute inset-0 bg-gradient-to-br from-red-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              ></div>
+              <div class="relative z-10">
+                <img
+                  src="https://images.unsplash.com/photo-1552666731-f7b2e0e24b2d?w=600&h=400&fit=crop"
+                  alt="Trusted Partner"
+                  class="w-full h-32 object-cover rounded-lg mb-6 group-hover:scale-105 transition-transform duration-300"
+                />
+                <h3 class="text-xl font-bold mb-3 text-black">
+                  Ishonchli Hamkor
+                </h3>
+                <p class="text-gray-700 leading-relaxed text-sm">
+                  Uzoq muddat hamkorlik va o'zaro sodiqlik asosida ishlaymiz.
+                </p>
+              </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div
+              class="group relative bg-white rounded-2xl p-10 shadow-lg hover:shadow-2xl transition-all duration-300 border border-red-100 overflow-hidden"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
+              <div
+                class="absolute inset-0 bg-gradient-to-br from-red-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              ></div>
+              <div class="relative z-10">
+                <img
+                  src="https://images.unsplash.com/photo-1552627881-e59a81c5d75b?w=600&h=400&fit=crop"
+                  alt="Expert Team"
+                  class="w-full h-32 object-cover rounded-lg mb-6 group-hover:scale-105 transition-transform duration-300"
+                />
+                <h3 class="text-xl font-bold mb-3 text-black">
+                  Mutaxassis Jamoa
+                </h3>
+                <p class="text-gray-700 leading-relaxed text-sm">
+                  Har sohada o'z sohasining eng yaxshi mutaxassislari bilan.
+                </p>
+              </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div
+              class="group relative bg-white rounded-2xl p-10 shadow-lg hover:shadow-2xl transition-all duration-300 border border-red-100 overflow-hidden"
+              data-aos="fade-up"
+              data-aos-delay="400"
+            >
+              <div
+                class="absolute inset-0 bg-gradient-to-br from-red-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              ></div>
+              <div class="relative z-10">
+                <img
+                  src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop"
+                  alt="24/7 Support"
+                  class="w-full h-32 object-cover rounded-lg mb-6 group-hover:scale-105 transition-transform duration-300"
+                />
+                <h3 class="text-xl font-bold mb-3 text-black">
+                  24/7 Qo'llab-quvvatlash
+                </h3>
+                <p class="text-gray-700 leading-relaxed text-sm">
+                  Har qanday vaqtda sizning fikrimizda bo'lamiz.
+                </p>
+              </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div
+              class="group relative bg-white rounded-2xl p-10 shadow-lg hover:shadow-2xl transition-all duration-300 border border-red-100 overflow-hidden"
+              data-aos="fade-up"
+              data-aos-delay="500"
+            >
+              <div
+                class="absolute inset-0 bg-gradient-to-br from-red-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              ></div>
+              <div class="relative z-10">
+                <img
+                  src="https://images.unsplash.com/photo-1552521514-5fefe8c9ef14?w=600&h=400&fit=crop"
+                  alt="Proven Results"
+                  class="w-full h-32 object-cover rounded-lg mb-6 group-hover:scale-105 transition-transform duration-300"
+                />
+                <h3 class="text-xl font-bold mb-3 text-black">
+                  Sertifikatsiya Olgan
+                </h3>
+                <p class="text-gray-700 leading-relaxed text-sm">
+                  Xalqaro standartlar va sertifikatsiya bilan ishlashimiz.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="boglanish"
+        class="py-40 px-6 relative bg-gradient-to-b from-gray-50 to-white overflow-hidden"
+      >
+        <!-- Decorative elements -->
+        <div
+          class="absolute top-0 right-0 w-96 h-96 bg-red-100 rounded-full -mr-48 -mt-48 opacity-25"
+        ></div>
+        <div
+          class="absolute bottom-10 left-10 w-72 h-72 border-4 border-red-200 rounded-3xl opacity-20 rotate-45"
+        ></div>
+
+        <div class="absolute inset-0 opacity-5 z-0">
+          <img
+            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2000"
+            class="w-full h-full object-cover"
+          />
+        </div>
+        <div class="max-w-[1600px] mx-auto relative z-10">
+          <div class="text-center mb-16">
+            <h2 class="section-title mb-8 text-black" data-aos="zoom-in">
+              Bizga <span class="text-red-600">Murojaat</span> Qiling
+            </h2>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+              O'zbekistonning eng kuchli biznes mutaxassislari bilan bog'laning
+              va biznesingizni yangi bosqichga olib chiqing
+            </p>
+          </div>
+
+          <div class="grid lg:grid-cols-4 gap-12">
+            <!-- Telegram -->
+            <a
+              href="https://t.me/yourusername"
+              target="_blank"
+              class="group text-center hover:bg-red-50 p-8 rounded-xl transition-all duration-300"
+              data-aos="fade-up"
+            >
+              <div
+                class="text-6xl mb-4 text-red-600 group-hover:scale-125 transition-transform"
+              >
+                <i class="fab fa-telegram"></i>
+              </div>
+              <h3 class="text-lg font-bold uppercase mb-2 text-black">
+                Telegram
+              </h3>
+              <p class="text-gray-600 text-sm mb-4">Tez aloqa</p>
+              <div
+                class="text-red-600 font-bold uppercase tracking-widest text-xs hover:text-red-700"
+              >
+                @yourusername
+              </div>
+            </a>
+
+            <!-- Instagram -->
+            <a
+              href="https://instagram.com/yourusername"
+              target="_blank"
+              class="group text-center hover:bg-red-50 p-8 rounded-xl transition-all duration-300"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              <div
+                class="text-6xl mb-4 text-red-600 group-hover:scale-125 transition-transform"
+              >
+                <i class="fab fa-instagram"></i>
+              </div>
+              <h3 class="text-lg font-bold uppercase mb-2 text-black">
+                Instagram
+              </h3>
+              <p class="text-gray-600 text-sm mb-4">Ijtimoiy tarmoq</p>
+              <div
+                class="text-red-600 font-bold uppercase tracking-widest text-xs hover:text-red-700"
+              >
+                @yourusername
+              </div>
+            </a>
+
+            <!-- Email -->
+            <a
+              href="mailto:info@magzuna.uz"
+              class="group text-center hover:bg-red-50 p-8 rounded-xl transition-all duration-300"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <div
+                class="text-6xl mb-4 text-red-600 group-hover:scale-125 transition-transform"
+              >
+                <i class="fas fa-envelope"></i>
+              </div>
+              <h3 class="text-lg font-bold uppercase mb-2 text-black">Email</h3>
+              <p class="text-gray-600 text-sm mb-4">Rasmiy manzil</p>
+              <div
+                class="text-red-600 font-bold uppercase tracking-widest text-xs hover:text-red-700"
+              >
+                info@magzuna.uz
+              </div>
+            </a>
+
+            <!-- Telefon -->
+            <a
+              href="tel:+998901234567"
+              class="group text-center hover:bg-red-50 p-8 rounded-xl transition-all duration-300"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
+              <div
+                class="text-6xl mb-4 text-red-600 group-hover:scale-125 transition-transform"
+              >
+                <i class="fas fa-phone"></i>
+              </div>
+              <h3 class="text-lg font-bold uppercase mb-2 text-black">
+                Telefon
+              </h3>
+              <p class="text-gray-600 text-sm mb-4">Qo'ng'iroq</p>
+              <div
+                class="text-red-600 font-bold uppercase tracking-widest text-xs hover:text-red-700"
+              >
+                +998 90 123 45 67
+              </div>
+            </a>
+          </div>
+
+          <div class="mt-24 text-center" data-aos="fade-up">
+            <h3
+              class="text-3xl font-black uppercase mb-4 text-black leading-tight"
+            >
+              Birgalikda <span class="text-red-600">Kuchlimiz</span>
+            </h3>
+            <p class="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
+              Bugun bizga murojaat qiling va sizning biznesingiz uchun
+              individual strategiya ishlab chiqamiz
+            </p>
+            <a
+              href="#xizmatlar"
+              class="inline-block bg-red-600 text-white px-12 py-4 font-bold uppercase hover:bg-red-700 hover:shadow-lg transition-all rounded-lg"
+            >
+              Bepul Konsultatsiya
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer
+      class="p-20 border-t border-gray-200 text-center text-sm font-medium tracking-[0.5em] text-gray-600 bg-white"
+    >
+      <div class="mb-8">
+        <a href="#asosiy" class="text-3xl font-bold syncopate text-black"
+          >MAG'ZUNA CONSULT<span class="text-red-600 glow-text">.</span></a
+        >
+      </div>
+      <div class="flex justify-center gap-8 mb-8 text-2xl">
+        <a
+          href="https://t.me/yourusername"
+          class="hover:text-red-600 transition"
+          ><i class="fab fa-telegram"></i
+        ></a>
+        <a
+          href="https://instagram.com/yourusername"
+          class="hover:text-red-600 transition"
+          ><i class="fab fa-instagram"></i
+        ></a>
+        <a href="mailto:info@magzuna.uz" class="hover:text-red-600 transition"
+          ><i class="fas fa-envelope"></i
+        ></a>
+        <a href="tel:+998901234567" class="hover:text-red-600 transition"
+          ><i class="fas fa-phone"></i
+        ></a>
+      </div>
+      <p class="text-gray-500">
+        © 2026 MAGZUNA CONSULT | PREMIUM KONSALTING XIZMATLARI
+      </p>
+    </footer>
+
+    <!-- Login Modal -->
+    <div
+      id="loginModal"
+      class="fixed inset-0 bg-black/50 hidden z-[100] flex items-center justify-center p-4 backdrop-blur-sm"
+    >
+      <div
+        class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 animate-scale-in"
+      >
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-3xl font-bold text-black">Kirish</h2>
+          <button
+            onclick="closeAuthModal('login')"
+            class="text-gray-400 hover:text-gray-600 transition"
+          >
+            <i class="fas fa-times text-2xl"></i>
+          </button>
+        </div>
+
+        <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-4">
+          <div>
+            <label class="block text-sm font-bold text-gray-700 mb-2"
+              >Email</label
+            >
+            <input
+              type="email"
+              id="loginEmail"
+              required
+              class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none transition"
+              placeholder="you@example.com"
+            />
+          </div>
+
+          <div>
+            <label class="block text-sm font-bold text-gray-700 mb-2"
+              >Parol</label
+            >
+            <input
+              type="password"
+              id="loginPassword"
+              required
+              class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none transition"
+              placeholder="••••••••"
+            />
+          </div>
+
+          <div
+            id="loginError"
+            class="hidden bg-red-100 border-2 border-red-600 text-red-600 px-4 py-3 rounded-lg"
+          >
+            <p id="loginErrorMsg"></p>
+          </div>
+
+          <button
+            type="submit"
+            id="loginBtn"
+            class="w-full bg-red-600 text-white py-3 rounded-lg font-bold hover:bg-red-700 transition-all duration-300 flex items-center justify-center gap-2"
+          >
+            <i class="fas fa-sign-in-alt"></i>
+            <span id="loginBtnText">Kirish</span>
+          </button>
+
+          <div class="text-center text-gray-600 text-sm">
+            Akkauntingiz yo'qmi?
+            <button
+              type="button"
+              onclick="switchAuthModal()"
+              class="text-red-600 font-bold hover:underline"
+            >
+              Ro'yxatdan o'ting
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div
+      id="registerModal"
+      class="fixed inset-0 bg-black/50 hidden z-[100] flex items-center justify-center p-4 backdrop-blur-sm"
+    >
+      <div
+        class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 animate-scale-in"
+      >
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-3xl font-bold text-black">Ro'yxatdan o'tish</h2>
+          <button
+            onclick="closeAuthModal('register')"
+            class="text-gray-400 hover:text-gray-600 transition"
+          >
+            <i class="fas fa-times text-2xl"></i>
+          </button>
+        </div>
+
+        <form
+          id="registerForm"
+          onsubmit="handleRegister(event)"
+          class="space-y-4"
+        >
+          <div>
+            <label class="block text-sm font-bold text-gray-700 mb-2"
+              >Ismi</label
+            >
+            <input
+              type="text"
+              id="registerName"
+              required
+              class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none transition"
+              placeholder="Sizning ismingiz"
+            />
+          </div>
+
+          <div>
+            <label class="block text-sm font-bold text-gray-700 mb-2"
+              >Email</label
+            >
+            <input
+              type="email"
+              id="registerEmail"
+              required
+              class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none transition"
+              placeholder="you@example.com"
+            />
+          </div>
+
+          <div>
+            <label class="block text-sm font-bold text-gray-700 mb-2"
+              >Parol</label
+            >
+            <input
+              type="password"
+              id="registerPassword"
+              required
+              minlength="6"
+              class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none transition"
+              placeholder="••••••••"
+            />
+            <p class="text-xs text-gray-500 mt-1">Kamida 6 ta belgi</p>
+          </div>
+
+          <div
+            id="registerError"
+            class="hidden bg-red-100 border-2 border-red-600 text-red-600 px-4 py-3 rounded-lg"
+          >
+            <p id="registerErrorMsg"></p>
+          </div>
+
+          <div
+            id="registerSuccess"
+            class="hidden bg-green-100 border-2 border-green-600 text-green-600 px-4 py-3 rounded-lg"
+          >
+            <p id="registerSuccessMsg"></p>
+          </div>
+
+          <button
+            type="submit"
+            id="registerBtn"
+            class="w-full bg-red-600 text-white py-3 rounded-lg font-bold hover:bg-red-700 transition-all duration-300 flex items-center justify-center gap-2"
+          >
+            <i class="fas fa-user-plus"></i>
+            <span id="registerBtnText">Ro'yxatdan o'tish</span>
+          </button>
+
+          <div class="text-center text-gray-600 text-sm">
+            Allaqachon akkauntingiz bor?
+            <button
+              type="button"
+              onclick="switchAuthModal()"
+              class="text-red-600 font-bold hover:underline"
+            >
+              Kirish
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="./assets/js/main.js"></script>
+  </body>
+</html>
