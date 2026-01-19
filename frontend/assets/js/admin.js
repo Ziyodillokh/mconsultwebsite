@@ -108,11 +108,7 @@ function showAdminPanel() {
   DOM.adminLayout().style.display = "block";
 
   // Update user info in sidebar
-  const initials = getInitials(state.user.name);
-  const sidebarAvatar = document.getElementById("sidebarAvatar");
   const sidebarUserName = document.getElementById("sidebarUserName");
-
-  if (sidebarAvatar) sidebarAvatar.textContent = initials;
   if (sidebarUserName) sidebarUserName.textContent = state.user.name;
 
   // Update settings form
@@ -941,9 +937,7 @@ async function handleProfileUpdate(e) {
     localStorage.setItem("adminUser", JSON.stringify(state.user));
 
     // Update sidebar
-    const sidebarAvatar = document.getElementById("sidebarAvatar");
     const sidebarUserName = document.getElementById("sidebarUserName");
-    if (sidebarAvatar) sidebarAvatar.textContent = getInitials(name);
     if (sidebarUserName) sidebarUserName.textContent = name;
 
     showToast("Profil yangilandi", "success");
