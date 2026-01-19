@@ -29,7 +29,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth removed - causes touchpad lag */
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
@@ -1148,7 +1148,7 @@ button:disabled {
   box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
 }
 
-/* Desktop scrolling - PURE NATIVE */
+/* Desktop scrolling - CLEAN */
 @media (min-width: 1024px) {
   /* Force proper height chain */
   #serviceModal > .lg\\:flex {
@@ -1161,23 +1161,12 @@ button:disabled {
     overflow: hidden !important;
   }
 
-  /* Desktop scroll area - OPTIMIZED FOR TOUCHPAD */
+  /* Desktop scroll area - SIMPLE */
   #serviceModal .desktop-scroll-area {
     flex: 1 1 auto !important;
     min-height: 0 !important;
     overflow-y: auto !important;
     overflow-x: hidden !important;
-    /* CRITICAL: Disable ALL transitions for scroll performance */
-    transition: none !important;
-    animation: none !important;
-    will-change: scroll-position;
-    contain: layout style;
-  }
-
-  /* Disable transitions on ALL children during scroll */
-  #serviceModal .desktop-scroll-area * {
-    transition: none !important;
-    animation: none !important;
   }
 
   #serviceModal .desktop-scroll-area::-webkit-scrollbar {

@@ -1231,7 +1231,9 @@ if (heroTitle) {
   });
 }
 
-// Section animations - only if sections exist
+// Section animations - DISABLED for better scroll performance
+// ScrollTrigger causes touchpad lag, using CSS animations instead
+/*
 const sections = gsap.utils.toArray("section");
 if (sections.length > 0) {
   sections.forEach((section) => {
@@ -1248,6 +1250,7 @@ if (sections.length > 0) {
     });
   });
 }
+*/
 
 // Smooth scroll for navigation links
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
@@ -1848,11 +1851,18 @@ function openServiceModal(number, title, description, imageUrl) {
 
   // CRITICAL: Kill ALL GSAP animations and disable ScrollTrigger
   if (typeof gsap !== "undefined") {
-    gsap.killTweensOf("*"); // Stop all running animations
+    gsap.killTweensOf("*");
   }
   if (typeof ScrollTrigger !== "undefined") {
-    ScrollTrigger.getAll().forEach((trigger) => trigger.kill()); // Kill, not just disable
+    ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
   }
+
+  // Initialize smooth scroll for modal
+  setTimeout(() => {
+    if (typeof window.initModalSmoothScroll === "function") {
+      window.initModalSmoothScroll();
+    }
+  }, 100);
 
   // Apply current language translations to modal
   setLanguage(currentLanguage);
@@ -1864,8 +1874,10 @@ function closeServiceModal() {
   modal.classList.add("hide");
   modal.classList.remove("show");
 
-  // Note: ScrollTrigger was killed, it won't restart automatically
-  // This is intentional - animations only run once on page load
+  // Destroy smooth scroll
+  if (typeof window.destroyModalSmoothScroll === "function") {
+    window.destroyModalSmoothScroll();
+  }
 
   setTimeout(() => {
     modal.classList.add("hidden");
@@ -2057,26 +2069,16 @@ document.addEventListener("keydown", (e) => {
 });
 
 // ============================================
-// SMOOTH SCROLL - CSS ONLY (NO JS INTERFERENCE)
-// ============================================
-// SCROLL RESET FOR LANGUAGE CHANGE
+// MODAL SCROLL - PURE NATIVE (NO JS)
 // ============================================
 
-// Reset scroll position when language changes
+// Empty functions for compatibility
+window.initModalSmoothScroll = () => {};
+window.destroyModalSmoothScroll = () => {};
 window.resetModalScroll = () => {
   const modal = document.getElementById("serviceModal");
-  if (modal && !modal.classList.contains("hidden")) {
-    // Reset desktop scroll area
-    const desktopScrollArea = modal.querySelector(".desktop-scroll-area");
-    if (desktopScrollArea) {
-      desktopScrollArea.scrollTop = 0;
-    }
-    // Reset mobile scroll area
-    const mobileScrollArea = modal.querySelector(
-      ".lg\\:hidden .overflow-y-auto",
-    );
-    if (mobileScrollArea) {
-      mobileScrollArea.scrollTop = 0;
-    }
+  if (modal) {
+    const scrollArea = modal.querySelector(".desktop-scroll-area");
+    if (scrollArea) scrollArea.scrollTop = 0;
   }
 };
