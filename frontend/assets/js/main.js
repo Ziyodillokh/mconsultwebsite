@@ -29,6 +29,7 @@ const translations = {
     hero_stat_experience: "Yillik tajriba",
     hero_stat_clients: "Mamnun mijozlar",
     hero_stat_support: "Qo'llab-quvvatlash",
+    hero_stat_satisfaction: "Mijozlar Mamnunligi",
     hero_satisfaction: "Mijozlar Mamnunligi",
 
     // Scroller
@@ -223,6 +224,7 @@ const translations = {
     hero_stat_experience: "Лет опыта",
     hero_stat_clients: "Довольных клиентов",
     hero_stat_support: "Поддержка",
+    hero_stat_satisfaction: "Удовлетворённость Клиентов",
     hero_satisfaction: "Удовлетворённость Клиентов",
 
     // Scroller
@@ -415,6 +417,7 @@ const translations = {
     hero_stat_experience: "Years Experience",
     hero_stat_clients: "Happy Clients",
     hero_stat_support: "Support",
+    hero_stat_satisfaction: "Client Satisfaction",
     hero_satisfaction: "Client Satisfaction",
 
     // Scroller
@@ -791,7 +794,15 @@ function closeMobileLangDropdown() {
 
 // Initialize plugins
 gsap.registerPlugin(ScrollTrigger);
-AOS.init({ duration: 800, once: true, offset: 50 });
+
+// AOS - lighter on mobile for better performance
+const isMobile = window.innerWidth < 768;
+AOS.init({ 
+  duration: isMobile ? 400 : 800, 
+  once: true, 
+  offset: isMobile ? 20 : 50,
+  disable: false
+});
 
 // ============================================
 // Mobile Menu Toggle
@@ -1605,6 +1616,9 @@ function openServiceModal(number, title, description, imageUrl) {
   modal.classList.remove("hidden");
   modal.classList.add("flex", "show");
   document.body.style.overflow = "hidden";
+  
+  // Apply current language translations to modal
+  setLanguage(currentLanguage);
 }
 
 // Close Service Modal
