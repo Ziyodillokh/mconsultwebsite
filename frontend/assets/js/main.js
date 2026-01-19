@@ -721,6 +721,20 @@ function setLanguage(lang) {
 
 // Initialize language on page load
 document.addEventListener("DOMContentLoaded", () => {
+  // Set navbar spacer height dynamically
+  function setNavbarSpacer() {
+    const nav = document.querySelector("nav");
+    const spacer = document.getElementById("navbarSpacer");
+    if (nav && spacer) {
+      const navHeight = nav.offsetHeight;
+      spacer.style.height = navHeight - 50 + "px"; // navbar height - 15px for tighter spacing
+    }
+  }
+
+  // Set on load and resize
+  setNavbarSpacer();
+  window.addEventListener("resize", setNavbarSpacer);
+
   // Set initial language
   setLanguage(currentLanguage);
 
