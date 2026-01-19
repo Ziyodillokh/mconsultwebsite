@@ -19,23 +19,35 @@ jobs:
           port: 22
 
           script: |
-            echo "📂 Loyihaga o‘tyapman..."
+            echo "📂 Loyihaga o'tyapman..."
             cd /root/mconsultwebsite
 
-            echo "📥 Git pull..."
+            echo "📥 Git pull qilyapman..."
             git pull origin main
 
             echo "🔧 BACKEND DEPLOY"
             cd backend
+            echo "  ├─ Dependencies o'rnatyapman..."
             npm install
+            echo "  ├─ Build qilyapman..."
             npm run build
-            pm2 start dist/main.js --name mconsult-backend --update-env || pm2 restart mconsult-backend --update-env
+            echo "  └─ PM2 restart..."
+            pm2 restart mconsult-backend --update-env || pm2 start dist/main.js --name mconsult-backend
 
             echo "🎨 FRONTEND DEPLOY"
             cd ../frontend
-            # Agar nginx root boshqacha bo‘lsa, nusxalash
-            sudo cp -r * /var/www/mconsult/
+            echo "  ├─ Fayllarni /var/www/magzunaconsult ga ko'chiryapman..."
+            sudo cp -r * /var/www/magzunaconsult/
+            echo "  ├─ Ruxsatlarni sozlayapman..."
+            sudo chown -R www-data:www-data /var/www/magzunaconsult
+            sudo chmod -R 755 /var/www/magzunaconsult
+            echo "  ├─ Nginx test..."
             sudo nginx -t
+            echo "  └─ Nginx reload..."
             sudo systemctl reload nginx
 
-            echo "✅ FRONTEND + BACKEND DEPLOY TUGADI"
+            echo "✅ DEPLOY MUVAFFAQIYATLI TUGADI!"
+            echo "🌐 Sayt: https://magzunaconsult.uz"
+
+            echo "📊 Status:"
+            pm2 status mconsult-backend
