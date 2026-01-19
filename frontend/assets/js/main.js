@@ -156,12 +156,16 @@ const translations = {
     // Service Modal Features
     feature_professional: "Professional yondashuv",
     feature_professional_desc: "Malakali mutaxassislar",
+    feature_professional_short: "Professional",
     feature_fast: "Tezkor xizmat",
     feature_fast_desc: "Qisqa muddatda",
+    feature_fast_short: "Tezkor",
     feature_support: "24/7 Qo'llab-quvvatlash",
     feature_support_desc: "Doim aloqadamiz",
+    feature_support_short: "24/7 Yordam",
     feature_guarantee: "Kafolat",
     feature_guarantee_desc: "Sifat kafolati",
+    feature_guarantee_short: "Kafolat",
 
     // Service Modal Sections
     service_about: "Xizmat haqida",
@@ -349,12 +353,16 @@ const translations = {
     // Service Modal Features
     feature_professional: "Профессиональный подход",
     feature_professional_desc: "Квалифицированные специалисты",
+    feature_professional_short: "Профессионально",
     feature_fast: "Быстрый сервис",
     feature_fast_desc: "В короткие сроки",
+    feature_fast_short: "Быстро",
     feature_support: "Поддержка 24/7",
     feature_support_desc: "Всегда на связи",
+    feature_support_short: "24/7 Помощь",
     feature_guarantee: "Гарантия",
     feature_guarantee_desc: "Гарантия качества",
+    feature_guarantee_short: "Гарантия",
 
     // Service Modal Sections
     service_about: "О услуге",
@@ -538,12 +546,16 @@ const translations = {
     // Service Modal Features
     feature_professional: "Professional Approach",
     feature_professional_desc: "Qualified specialists",
+    feature_professional_short: "Professional",
     feature_fast: "Fast Service",
     feature_fast_desc: "Quick turnaround",
+    feature_fast_short: "Fast",
     feature_support: "24/7 Support",
     feature_support_desc: "Always available",
+    feature_support_short: "24/7 Help",
     feature_guarantee: "Guarantee",
     feature_guarantee_desc: "Quality assured",
+    feature_guarantee_short: "Guarantee",
 
     // Service Modal Sections
     service_about: "About Service",
@@ -660,9 +672,18 @@ function setLanguage(lang) {
   // Update scroller content
   updateScrollerContent(lang);
 
-  // Update placeholders
+  // Update placeholders for all input fields
   const placeholders = {
     registerName: { uz: "Sizning ismingiz", ru: "Ваше имя", en: "Your name" },
+    loginEmail: { uz: "Email manzilingiz", ru: "Ваш email", en: "Your email" },
+    loginPassword: { uz: "Parolingiz", ru: "Ваш пароль", en: "Your password" },
+    registerEmail: { uz: "Email manzilingiz", ru: "Ваш email", en: "Your email" },
+    registerPassword: { uz: "Parol kiriting", ru: "Введите пароль", en: "Enter password" },
+    registerConfirmPassword: { uz: "Parolni tasdiqlang", ru: "Подтвердите пароль", en: "Confirm password" },
+    orderPhoneNumberDesktop: { uz: "+998 90 123 45 67", ru: "+998 90 123 45 67", en: "+998 90 123 45 67" },
+    orderUserDescriptionDesktop: { uz: "Qisqacha izoh yozing...", ru: "Напишите краткий комментарий...", en: "Write a brief description..." },
+    orderPhoneNumberMobile: { uz: "+998 90 123 45 67", ru: "+998 90 123 45 67", en: "+998 90 123 45 67" },
+    orderUserDescriptionMobile: { uz: "Qisqacha izoh...", ru: "Краткий комментарий...", en: "Brief description..." },
   };
   Object.keys(placeholders).forEach((id) => {
     const el = document.getElementById(id);
@@ -797,11 +818,11 @@ gsap.registerPlugin(ScrollTrigger);
 
 // AOS - lighter on mobile for better performance
 const isMobile = window.innerWidth < 768;
-AOS.init({ 
-  duration: isMobile ? 400 : 800, 
-  once: true, 
+AOS.init({
+  duration: isMobile ? 400 : 800,
+  once: true,
   offset: isMobile ? 20 : 50,
-  disable: false
+  disable: false,
 });
 
 // ============================================
@@ -1616,7 +1637,7 @@ function openServiceModal(number, title, description, imageUrl) {
   modal.classList.remove("hidden");
   modal.classList.add("flex", "show");
   document.body.style.overflow = "hidden";
-  
+
   // Apply current language translations to modal
   setLanguage(currentLanguage);
 }
