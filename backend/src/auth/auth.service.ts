@@ -11,9 +11,15 @@ function validateEmail(email: string): boolean {
   return emailRegex.test(email);
 }
 
-function validatePassword(password: string): { valid: boolean; message: string } {
+function validatePassword(password: string): {
+  valid: boolean;
+  message: string;
+} {
   if (password.length < 6) {
-    return { valid: false, message: "Parol kamida 6 ta belgidan iborat bo'lishi kerak" };
+    return {
+      valid: false,
+      message: "Parol kamida 6 ta belgidan iborat bo'lishi kerak",
+    };
   }
   if (password.length > 100) {
     return { valid: false, message: "Parol juda uzun" };
@@ -23,7 +29,10 @@ function validatePassword(password: string): { valid: boolean; message: string }
 
 function validateName(name: string): { valid: boolean; message: string } {
   if (!name || name.trim().length < 2) {
-    return { valid: false, message: "Ism kamida 2 ta belgidan iborat bo'lishi kerak" };
+    return {
+      valid: false,
+      message: "Ism kamida 2 ta belgidan iborat bo'lishi kerak",
+    };
   }
   if (name.length > 100) {
     return { valid: false, message: "Ism juda uzun" };

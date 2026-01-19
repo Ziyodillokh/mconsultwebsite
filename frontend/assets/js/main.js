@@ -170,7 +170,7 @@ const translations = {
 
     // Language selector
     lang_select: "Tilni tanlang",
-    
+
     // User actions
     btn_logout: "Chiqish",
     welcome_user: "Xush kelibsiz",
@@ -340,7 +340,7 @@ const translations = {
 
     // Language selector
     lang_select: "Выберите язык",
-    
+
     // User actions
     btn_logout: "Выход",
     welcome_user: "Добро пожаловать",
@@ -506,7 +506,7 @@ const translations = {
 
     // Language selector
     lang_select: "Select Language",
-    
+
     // User actions
     btn_logout: "Logout",
     welcome_user: "Welcome",
@@ -847,7 +847,7 @@ async function handleLogin(event) {
       localStorage.setItem("user", JSON.stringify(data.user));
 
       // Show success message in current language
-      const welcomeMsg = getTranslation('welcome_user');
+      const welcomeMsg = getTranslation("welcome_user");
       alert(`${welcomeMsg}, ${data.user.name}!`);
 
       // Close modal and reset form
@@ -858,7 +858,9 @@ async function handleLogin(event) {
       updateNavbarForLoggedIn();
     } else {
       loginErrorMsg.textContent =
-        data.message || getTranslation('auth_login_error') || "Login muvaffaqiyatsiz bo'ldi";
+        data.message ||
+        getTranslation("auth_login_error") ||
+        "Login muvaffaqiyatsiz bo'ldi";
       loginError.classList.remove("hidden");
     }
   } catch (error) {
@@ -866,14 +868,14 @@ async function handleLogin(event) {
     const errorMsgs = {
       uz: "Server bilan aloqa o'rnatib bo'lmadi. Iltimos qayta urinib ko'ring.",
       ru: "Не удалось подключиться к серверу. Пожалуйста, попробуйте снова.",
-      en: "Could not connect to server. Please try again."
+      en: "Could not connect to server. Please try again.",
     };
     loginErrorMsg.textContent = errorMsgs[currentLanguage] || errorMsgs.uz;
     loginError.classList.remove("hidden");
   } finally {
     // Enable button
     loginBtn.disabled = false;
-    loginBtnText.textContent = getTranslation('btn_login');
+    loginBtnText.textContent = getTranslation("btn_login");
   }
 }
 
@@ -932,9 +934,10 @@ async function handleRegister(event) {
       const successMsgs = {
         uz: `Xush kelibsiz, ${data.user.name}! Ro'yxatdan o'tish muvaffaqiyatli bo'ldi.`,
         ru: `Добро пожаловать, ${data.user.name}! Регистрация успешна.`,
-        en: `Welcome, ${data.user.name}! Registration successful.`
+        en: `Welcome, ${data.user.name}! Registration successful.`,
       };
-      registerSuccessMsg.textContent = successMsgs[currentLanguage] || successMsgs.uz;
+      registerSuccessMsg.textContent =
+        successMsgs[currentLanguage] || successMsgs.uz;
       registerSuccess.classList.remove("hidden");
 
       // Reset form
@@ -947,7 +950,9 @@ async function handleRegister(event) {
       }, 2000);
     } else {
       registerErrorMsg.textContent =
-        data.message || getTranslation('auth_register_error') || "Ro'yxatdan o'tish muvaffaqiyatsiz bo'ldi";
+        data.message ||
+        getTranslation("auth_register_error") ||
+        "Ro'yxatdan o'tish muvaffaqiyatsiz bo'ldi";
       registerError.classList.remove("hidden");
     }
   } catch (error) {
@@ -955,14 +960,14 @@ async function handleRegister(event) {
     const errorMsgs = {
       uz: "Server bilan aloqa o'rnatib bo'lmadi. Iltimos qayta urinib ko'ring.",
       ru: "Не удалось подключиться к серверу. Пожалуйста, попробуйте снова.",
-      en: "Could not connect to server. Please try again."
+      en: "Could not connect to server. Please try again.",
     };
     registerErrorMsg.textContent = errorMsgs[currentLanguage] || errorMsgs.uz;
     registerError.classList.remove("hidden");
   } finally {
     // Enable button
     registerBtn.disabled = false;
-    registerBtnText.textContent = getTranslation('auth_register_title');
+    registerBtnText.textContent = getTranslation("auth_register_title");
   }
 }
 
@@ -971,34 +976,46 @@ function updateNavbarForLoggedIn() {
   const user = JSON.parse(localStorage.getItem("user"));
   if (user) {
     console.log("✅ Logged in as:", user.name);
-    
+
     // Update desktop login/register buttons
-    const desktopLoginBtn = document.querySelector('button[onclick="openAuthModal(\'login\')"]');
-    const desktopRegisterBtn = document.querySelector('button[onclick="openAuthModal(\'register\')"]');
-    
+    const desktopLoginBtn = document.querySelector(
+      "button[onclick=\"openAuthModal('login')\"]",
+    );
+    const desktopRegisterBtn = document.querySelector(
+      "button[onclick=\"openAuthModal('register')\"]",
+    );
+
     if (desktopLoginBtn && desktopRegisterBtn) {
       // Replace login button with user info
-      desktopLoginBtn.innerHTML = `<i class="fas fa-user mr-2"></i><span>${user.name.split(' ')[0]}</span>`;
+      desktopLoginBtn.innerHTML = `<i class="fas fa-user mr-2"></i><span>${user.name.split(" ")[0]}</span>`;
       desktopLoginBtn.onclick = null;
-      desktopLoginBtn.classList.add('cursor-default');
-      
+      desktopLoginBtn.classList.add("cursor-default");
+
       // Replace register button with logout
-      desktopRegisterBtn.innerHTML = `<i class="fas fa-sign-out-alt mr-2"></i><span data-lang-key="btn_logout">${getTranslation('btn_logout')}</span>`;
+      desktopRegisterBtn.innerHTML = `<i class="fas fa-sign-out-alt mr-2"></i><span data-lang-key="btn_logout">${getTranslation("btn_logout")}</span>`;
       desktopRegisterBtn.onclick = handleLogout;
-      desktopRegisterBtn.classList.remove('bg-white', 'text-red-600');
-      desktopRegisterBtn.classList.add('bg-red-700', 'text-white', 'hover:bg-red-800');
+      desktopRegisterBtn.classList.remove("bg-white", "text-red-600");
+      desktopRegisterBtn.classList.add(
+        "bg-red-700",
+        "text-white",
+        "hover:bg-red-800",
+      );
     }
-    
+
     // Update mobile menu buttons
-    const mobileLoginBtn = document.querySelector('#mobileMenu button[onclick="openAuthModal(\'login\')"]');
-    const mobileRegisterBtn = document.querySelector('#mobileMenu button[onclick="openAuthModal(\'register\')"]');
-    
+    const mobileLoginBtn = document.querySelector(
+      "#mobileMenu button[onclick=\"openAuthModal('login')\"]",
+    );
+    const mobileRegisterBtn = document.querySelector(
+      "#mobileMenu button[onclick=\"openAuthModal('register')\"]",
+    );
+
     if (mobileLoginBtn && mobileRegisterBtn) {
       mobileLoginBtn.innerHTML = `<i class="fas fa-user mr-2"></i><span>${user.name}</span>`;
       mobileLoginBtn.onclick = null;
-      mobileLoginBtn.classList.add('cursor-default');
-      
-      mobileRegisterBtn.innerHTML = `<i class="fas fa-sign-out-alt mr-2"></i><span>${getTranslation('btn_logout')}</span>`;
+      mobileLoginBtn.classList.add("cursor-default");
+
+      mobileRegisterBtn.innerHTML = `<i class="fas fa-sign-out-alt mr-2"></i><span>${getTranslation("btn_logout")}</span>`;
       mobileRegisterBtn.onclick = handleLogout;
     }
   }
@@ -1006,22 +1023,22 @@ function updateNavbarForLoggedIn() {
 
 // Get translation helper
 function getTranslation(key) {
-  return translations[currentLanguage]?.[key] || translations['uz'][key] || key;
+  return translations[currentLanguage]?.[key] || translations["uz"][key] || key;
 }
 
 // Handle logout
 function handleLogout() {
   localStorage.removeItem("token");
   localStorage.removeItem("user");
-  
+
   // Show logout message
   const logoutMsg = {
     uz: "Tizimdan chiqdingiz",
     ru: "Вы вышли из системы",
-    en: "You have been logged out"
+    en: "You have been logged out",
   };
   alert(logoutMsg[currentLanguage] || logoutMsg.uz);
-  
+
   // Reload page to reset UI
   window.location.reload();
 }
@@ -1030,7 +1047,7 @@ function handleLogout() {
 document.addEventListener("DOMContentLoaded", () => {
   const user = localStorage.getItem("user");
   const token = localStorage.getItem("token");
-  
+
   if (user && token) {
     // Verify token is still valid (optional - can add API call)
     updateNavbarForLoggedIn();

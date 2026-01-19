@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Panel - Mag'zuna Consult</title>
+    <link rel="icon" type="image/x-icon" href="./assets/images/favicon.ico" />
+    <link rel="apple-touch-icon" href="./assets/images/logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -17,81 +19,98 @@
     />
     <link rel="stylesheet" href="./assets/css/admin.css" />
   </head>
-  <body class="bg-gray-100 min-h-screen">
+  <body class="bg-gray-50 min-h-screen">
     <!-- Login Modal -->
     <div
       id="loginModal"
-      class="fixed inset-0 bg-gray-900/95 z-50 flex items-center justify-center p-4"
+      class="fixed inset-0 bg-gradient-to-br from-gray-900 via-red-900/20 to-gray-900 z-50 flex items-center justify-center p-4"
     >
-      <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8">
-        <div class="text-center mb-8">
-          <div
-            class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-4"
-          >
-            <i class="fas fa-shield-alt text-white text-2xl"></i>
-          </div>
-          <h1 class="text-2xl font-bold text-gray-900">Admin Panel</h1>
-          <p class="text-gray-500 mt-2">Tizimga kirish</p>
-        </div>
+      <div
+        class="bg-white rounded-3xl shadow-2xl max-w-md w-full p-8 relative overflow-hidden"
+      >
+        <!-- Background decoration -->
+        <div
+          class="absolute -top-20 -right-20 w-40 h-40 bg-red-100 rounded-full opacity-50"
+        ></div>
+        <div
+          class="absolute -bottom-10 -left-10 w-32 h-32 bg-red-50 rounded-full opacity-50"
+        ></div>
 
-        <form id="adminLoginForm" class="space-y-4">
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2"
-              >Email</label
+        <div class="relative z-10">
+          <div class="text-center mb-8">
+            <!-- Logo -->
+            <div
+              class="w-20 h-20 mx-auto mb-4 rounded-2xl overflow-hidden shadow-xl border-4 border-white bg-white"
             >
-            <div class="relative">
-              <i
-                class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
-              ></i>
-              <input
-                type="email"
-                id="loginEmail"
-                required
-                class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:outline-none transition"
-                placeholder="admin@magzuna.uz"
+              <img
+                src="./assets/images/logo.png"
+                alt="Mag'zuna Logo"
+                class="w-full h-full object-cover"
               />
             </div>
+            <h1 class="text-2xl font-bold text-gray-900">Admin Panel</h1>
+            <p class="text-gray-500 mt-2">Mag'zuna Consult boshqaruv tizimi</p>
           </div>
 
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2"
-              >Parol</label
-            >
-            <div class="relative">
-              <i
-                class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
-              ></i>
-              <input
-                type="password"
-                id="loginPassword"
-                required
-                class="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:outline-none transition"
-                placeholder="••••••••"
-              />
+          <form id="adminLoginForm" class="space-y-5">
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2"
+                >Email</label
+              >
+              <div class="relative">
+                <i
+                  class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+                ></i>
+                <input
+                  type="email"
+                  id="loginEmail"
+                  required
+                  class="w-full pl-12 pr-4 py-3.5 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:outline-none transition bg-gray-50 focus:bg-white"
+                  placeholder="admin@magzuna.uz"
+                />
+              </div>
             </div>
+
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2"
+                >Parol</label
+              >
+              <div class="relative">
+                <i
+                  class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+                ></i>
+                <input
+                  type="password"
+                  id="loginPassword"
+                  required
+                  class="w-full pl-12 pr-4 py-3.5 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:outline-none transition bg-gray-50 focus:bg-white"
+                  placeholder="••••••••"
+                />
+              </div>
+            </div>
+
+            <div
+              id="loginError"
+              class="hidden bg-red-50 border-2 border-red-200 text-red-600 px-4 py-3 rounded-xl text-sm font-medium"
+            ></div>
+
+            <button
+              type="submit"
+              class="w-full bg-gradient-to-r from-red-600 to-red-700 text-white py-4 rounded-xl font-bold hover:from-red-700 hover:to-red-800 transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+            >
+              <i class="fas fa-sign-in-alt"></i>
+              Kirish
+            </button>
+          </form>
+
+          <div class="mt-8 text-center">
+            <a
+              href="./index.html"
+              class="inline-flex items-center gap-2 text-gray-500 hover:text-red-600 transition text-sm font-medium"
+            >
+              <i class="fas fa-arrow-left"></i>Bosh sahifaga qaytish
+            </a>
           </div>
-
-          <div
-            id="loginError"
-            class="hidden bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-xl text-sm"
-          ></div>
-
-          <button
-            type="submit"
-            class="w-full bg-red-600 text-white py-3 rounded-xl font-semibold hover:bg-red-700 transition-all duration-300 flex items-center justify-center gap-2"
-          >
-            <i class="fas fa-sign-in-alt"></i>
-            Kirish
-          </button>
-        </form>
-
-        <div class="mt-6 text-center">
-          <a
-            href="./index.html"
-            class="text-gray-500 hover:text-red-600 transition text-sm"
-          >
-            <i class="fas fa-arrow-left mr-2"></i>Bosh sahifaga qaytish
-          </a>
         </div>
       </div>
     </div>
@@ -101,19 +120,24 @@
       <!-- Sidebar -->
       <aside
         id="sidebar"
-        class="fixed left-0 top-0 h-full w-64 bg-gray-900 text-white z-40 transform -translate-x-full lg:translate-x-0 transition-transform duration-300"
+        class="fixed left-0 top-0 h-full w-64 bg-gradient-to-b from-gray-900 to-gray-800 text-white z-40 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 shadow-2xl"
       >
         <!-- Logo -->
-        <div class="p-6 border-b border-gray-800">
-          <a href="./index.html" class="flex items-center gap-3">
+        <div class="p-6 border-b border-gray-700/50">
+          <a href="./index.html" class="flex items-center gap-3 group">
             <div
-              class="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center"
+              class="w-12 h-12 rounded-xl overflow-hidden shadow-lg border-2 border-white/20 group-hover:border-red-500 transition-all duration-300 bg-white"
             >
-              <i class="fas fa-gem text-white"></i>
+              <img
+                src="./assets/images/logo.png"
+                alt="Mag'zuna Logo"
+                class="w-full h-full object-cover"
+              />
             </div>
-            <span class="text-xl font-bold"
-              >MAG'ZUNA<span class="text-red-500">.</span></span
-            >
+            <div>
+              <span class="text-xl font-bold tracking-tight">MAG'ZUNA</span>
+              <p class="text-xs text-gray-400 font-medium">Admin Panel</p>
+            </div>
           </a>
         </div>
 
@@ -147,26 +171,36 @@
 
         <!-- User Info -->
         <div
-          class="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-800"
+          class="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-700/50 bg-gray-900/50 backdrop-blur-sm"
         >
           <div class="flex items-center gap-3 mb-3">
-            <div
-              class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center"
-            >
-              <i class="fas fa-user text-white"></i>
+            <div class="relative">
+              <div
+                id="adminAvatar"
+                class="w-11 h-11 rounded-full overflow-hidden border-2 border-red-500 shadow-lg bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center"
+              >
+                <span id="adminInitials" class="text-white font-bold text-sm"
+                  >AD</span
+                >
+              </div>
+              <span
+                class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-gray-900 rounded-full"
+              ></span>
             </div>
-            <div>
-              <p id="adminName" class="font-medium text-sm">Admin</p>
-              <p id="adminEmail" class="text-gray-400 text-xs">
+            <div class="flex-1 min-w-0">
+              <p id="adminName" class="font-semibold text-sm truncate">Admin</p>
+              <p id="adminEmail" class="text-gray-400 text-xs truncate">
                 admin@magzuna.uz
               </p>
             </div>
           </div>
           <button
             onclick="logout()"
-            class="w-full flex items-center justify-center gap-2 px-4 py-2 bg-gray-800 hover:bg-red-600 rounded-lg transition-all duration-300 text-sm"
+            class="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-gray-800 hover:bg-red-600 rounded-xl transition-all duration-300 text-sm font-medium group"
           >
-            <i class="fas fa-sign-out-alt"></i>
+            <i
+              class="fas fa-sign-out-alt group-hover:rotate-12 transition-transform"
+            ></i>
             Chiqish
           </button>
         </div>
@@ -182,48 +216,96 @@
       </button>
 
       <!-- Main Content -->
-      <main class="lg:ml-64 min-h-screen">
+      <main class="lg:ml-64 min-h-screen bg-gray-50">
         <!-- Header -->
         <header
-          class="bg-white shadow-sm sticky top-0 z-30 px-6 py-4 flex items-center justify-between"
+          class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-30 px-6 py-4 flex items-center justify-between border-b border-gray-100"
         >
           <div class="lg:hidden w-10"></div>
-          <h1 id="pageTitle" class="text-xl font-bold text-gray-900">
-            Dashboard
-          </h1>
-          <div class="flex items-center gap-4">
+          <div>
+            <h1 id="pageTitle" class="text-xl font-bold text-gray-900">
+              Dashboard
+            </h1>
+            <p class="text-xs text-gray-500 mt-0.5">
+              Mag'zuna Consult boshqaruvi
+            </p>
+          </div>
+          <div class="flex items-center gap-3">
             <button
-              class="relative w-10 h-10 flex items-center justify-center text-gray-500 hover:text-red-600 transition"
+              class="relative w-10 h-10 flex items-center justify-center text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-xl transition-all"
             >
-              <i class="fas fa-bell text-xl"></i>
+              <i class="fas fa-bell text-lg"></i>
               <span
-                class="absolute top-1 right-1 w-2 h-2 bg-red-600 rounded-full"
+                class="absolute top-2 right-2 w-2 h-2 bg-red-600 rounded-full animate-pulse"
               ></span>
             </button>
             <button
               onclick="loadDashboard()"
-              class="text-gray-500 hover:text-red-600 transition"
+              class="w-10 h-10 flex items-center justify-center text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-xl transition-all"
+              title="Yangilash"
             >
               <i class="fas fa-sync-alt text-lg"></i>
             </button>
+            <div
+              class="hidden md:flex items-center gap-2 pl-3 border-l border-gray-200"
+            >
+              <div
+                class="w-8 h-8 rounded-full bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center"
+              >
+                <span
+                  id="headerAdminInitials"
+                  class="text-white text-xs font-bold"
+                  >AD</span
+                >
+              </div>
+              <span
+                id="headerAdminName"
+                class="text-sm font-medium text-gray-700"
+                >Admin</span
+              >
+            </div>
           </div>
         </header>
 
         <!-- Dashboard Section -->
         <section id="dashboardSection" class="p-6">
+          <!-- Welcome Banner -->
+          <div
+            class="bg-gradient-to-r from-red-600 to-red-700 rounded-2xl p-6 mb-8 text-white relative overflow-hidden"
+          >
+            <div
+              class="absolute right-0 top-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"
+            ></div>
+            <div
+              class="absolute left-20 bottom-0 w-32 h-32 bg-white/5 rounded-full translate-y-1/2"
+            ></div>
+            <div class="relative z-10">
+              <h2 class="text-2xl font-bold mb-2">
+                Xush kelibsiz, <span id="welcomeName">Admin</span>! 👋
+              </h2>
+              <p class="text-white/80">
+                Mag'zuna Consult boshqaruv paneliga xush kelibsiz. Bugungi
+                statistikangiz quyida.
+              </p>
+            </div>
+          </div>
+
           <!-- Stats Cards -->
           <div
             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
           >
-            <div class="stat-card bg-white rounded-2xl p-6 shadow-sm">
+            <div
+              class="stat-card bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:border-blue-200 transition-all"
+            >
               <div class="flex items-center justify-between mb-4">
                 <div
-                  class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center"
+                  class="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/30"
                 >
-                  <i class="fas fa-users text-blue-600 text-xl"></i>
+                  <i class="fas fa-users text-white text-xl"></i>
                 </div>
-                <span class="text-green-500 text-sm font-medium"
-                  ><i class="fas fa-arrow-up"></i> 12%</span
+                <span
+                  class="text-green-500 text-sm font-semibold bg-green-50 px-2 py-1 rounded-lg"
+                  ><i class="fas fa-arrow-up mr-1"></i>12%</span
                 >
               </div>
               <h3 class="text-3xl font-bold text-gray-900" id="statTotalUsers">
@@ -232,15 +314,18 @@
               <p class="text-gray-500 text-sm mt-1">Jami foydalanuvchilar</p>
             </div>
 
-            <div class="stat-card bg-white rounded-2xl p-6 shadow-sm">
+            <div
+              class="stat-card bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:border-green-200 transition-all"
+            >
               <div class="flex items-center justify-between mb-4">
                 <div
-                  class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center"
+                  class="w-14 h-14 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center shadow-lg shadow-green-500/30"
                 >
-                  <i class="fas fa-user-check text-green-600 text-xl"></i>
+                  <i class="fas fa-user-check text-white text-xl"></i>
                 </div>
-                <span class="text-green-500 text-sm font-medium"
-                  ><i class="fas fa-arrow-up"></i> 8%</span
+                <span
+                  class="text-green-500 text-sm font-semibold bg-green-50 px-2 py-1 rounded-lg"
+                  ><i class="fas fa-arrow-up mr-1"></i>8%</span
                 >
               </div>
               <h3 class="text-3xl font-bold text-gray-900" id="statActiveUsers">
@@ -249,13 +334,19 @@
               <p class="text-gray-500 text-sm mt-1">Faol foydalanuvchilar</p>
             </div>
 
-            <div class="stat-card bg-white rounded-2xl p-6 shadow-sm">
+            <div
+              class="stat-card bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:border-purple-200 transition-all"
+            >
               <div class="flex items-center justify-between mb-4">
                 <div
-                  class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center"
+                  class="w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg shadow-purple-500/30"
                 >
-                  <i class="fas fa-user-shield text-purple-600 text-xl"></i>
+                  <i class="fas fa-user-shield text-white text-xl"></i>
                 </div>
+                <span
+                  class="text-purple-500 text-sm font-semibold bg-purple-50 px-2 py-1 rounded-lg"
+                  ><i class="fas fa-shield-alt mr-1"></i>Admin</span
+                >
               </div>
               <h3 class="text-3xl font-bold text-gray-900" id="statAdminUsers">
                 0
@@ -263,15 +354,18 @@
               <p class="text-gray-500 text-sm mt-1">Adminlar</p>
             </div>
 
-            <div class="stat-card bg-white rounded-2xl p-6 shadow-sm">
+            <div
+              class="stat-card bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:border-orange-200 transition-all"
+            >
               <div class="flex items-center justify-between mb-4">
                 <div
-                  class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center"
+                  class="w-14 h-14 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center shadow-lg shadow-orange-500/30"
                 >
-                  <i class="fas fa-user-plus text-orange-600 text-xl"></i>
+                  <i class="fas fa-user-plus text-white text-xl"></i>
                 </div>
-                <span class="text-green-500 text-sm font-medium"
-                  ><i class="fas fa-arrow-up"></i> Bugun</span
+                <span
+                  class="text-orange-500 text-sm font-semibold bg-orange-50 px-2 py-1 rounded-lg"
+                  ><i class="fas fa-clock mr-1"></i>Bugun</span
                 >
               </div>
               <h3

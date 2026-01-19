@@ -57,9 +57,38 @@ function showAdminPanel() {
   document.getElementById("adminName").textContent = currentUser.name;
   document.getElementById("adminEmail").textContent = currentUser.email;
 
+  // Update admin initials
+  const initials = getInitials(currentUser.name);
+  const initialsEl = document.getElementById("adminInitials");
+  if (initialsEl) {
+    initialsEl.textContent = initials;
+  }
+
+  // Update header admin info
+  const headerInitials = document.getElementById("headerAdminInitials");
+  const headerName = document.getElementById("headerAdminName");
+  const welcomeName = document.getElementById("welcomeName");
+  if (headerInitials) headerInitials.textContent = initials;
+  if (headerName) headerName.textContent = currentUser.name.split(" ")[0];
+  if (welcomeName) welcomeName.textContent = currentUser.name.split(" ")[0];
+
   // Settings
-  document.getElementById("settingsName").value = currentUser.name;
-  document.getElementById("settingsEmail").value = currentUser.email;
+  if (document.getElementById("settingsName")) {
+    document.getElementById("settingsName").value = currentUser.name;
+  }
+  if (document.getElementById("settingsEmail")) {
+    document.getElementById("settingsEmail").value = currentUser.email;
+  }
+}
+
+// Get initials from name
+function getInitials(name) {
+  if (!name) return "AD";
+  const parts = name.trim().split(" ");
+  if (parts.length >= 2) {
+    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+  }
+  return name.substring(0, 2).toUpperCase();
 }
 
 // Setup Event Listeners
