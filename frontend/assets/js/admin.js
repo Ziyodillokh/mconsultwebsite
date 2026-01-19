@@ -462,6 +462,7 @@ function showSection(section) {
   document.getElementById("dashboardSection").classList.add("hidden");
   document.getElementById("usersSection").classList.add("hidden");
   document.getElementById("settingsSection").classList.add("hidden");
+  document.getElementById("ordersSection").classList.add("hidden");
 
   // Remove active from all nav links
   document.querySelectorAll(".nav-link").forEach((link) => {
@@ -479,6 +480,7 @@ function showSection(section) {
     dashboard: "Dashboard",
     users: "Foydalanuvchilar",
     settings: "Sozlamalar",
+    orders: "Zakazlar",
   };
   document.getElementById("pageTitle").textContent = titles[section];
 
@@ -487,6 +489,8 @@ function showSection(section) {
     loadDashboard();
   } else if (section === "users") {
     loadUsers();
+  } else if (section === "orders") {
+    loadOrders();
   }
 
   // Close sidebar on mobile
@@ -710,3 +714,204 @@ function formatDate(dateString) {
     day: "numeric",
   });
 }
+
+// ============================================
+// ORDERS MANAGEMENT
+// ============================================
+
+let allOrders = [];
+let currentOrderId = null;
+
+// Load Orders
+async function loadOrders() {
+  try {
+    const orders = await apiRequest("/orders");
+    allOrders = orders;
+    
+    // Load stats
+    const stats = await apiRequest("/orders/stats");
+    updateOrderStats(stats);
+    
+    renderOrders(orders);
+    updateOrdersBadge(stats.pending);
+  } catch (error) {
+    console.error("Orders load error:", error);
+    showToast(error.message, "error");
+  }
+}
+
+// Update Order Stats
+function updateOrderStats(stats) {
+  document.getElementById("statTotalOrders").textContent = stats.total;
+  document.getElementById("statPendingOrders").textContent = stats.pending;
+  document.getElementById("statInProgressOrders").textContent = stats.inProgress;
+  document.getElementById("statCompletedOrders").textContent = stats.completed;
+  document.getElementById("statCancelledOrders").textContent = stats.cancelled;
+}
+
+// Update Orders Badge
+function updateOrdersBadge(count) {
+  const badge = document.getElementById("ordersBadge");
+  if (count > 0) {
+    badge.textContent = count;
+    badge.classList.remove("hidden");
+  } else {
+    badge.classList.add("hidden");
+  }
+}
+
+// Render Orders
+function renderOrders(orders) {
+  const tbody = document.getElementById("ordersTableBody");
+  const emptyState = document.getElementById("ordersEmptyState");
+  const searchValue = document.getElementById("orderSearchInput")?.value?.toLowerCase() || "";
+  const statusFilter = document.getElementById("orderStatusFilter")?.value || "";
+  
+  // Filter orders
+  let filteredOrders = orders.filter(order => {
+    const matchesSearch = 
+      order.serviceName.toLowerCase().includes(searchValue) ||
+      order.phoneNumber.includes(searchValue) ||
+      order.user?.name?.toLowerCase().includes(searchValue) ||
+      order.description.toLowerCase().includes(searchValue);
+    
+    const matchesStatus = !statusFilter || order.status === statusFilter;
+    
+    return matchesSearch && matchesStatus;
+  });
+  
+  if (filteredOrders.length === 0) {
+    tbody.innerHTML = "";
+    emptyState.classList.remove("hidden");
+    return;
+  }
+  
+  emptyState.classList.add("hidden");
+  
+  tbody.innerHTML = filteredOrders.map(order => `
+    <tr class="border-b border-gray-100 hover:bg-gray-50 transition cursor-pointer" onclick="openOrderModal('${order.id}')">
+      <td class="py-4 px-6">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
+            <span class="text-red-600 font-bold text-sm">${order.serviceNumber}</span>
+          </div>
+          <span class="font-medium text-gray-900">${order.serviceName}</span>
+        </div>
+      </td>
+      <td class="py-4 px-6">
+        <div>
+          <p class="font-medium text-gray-900">${order.user?.name || "-"}</p>
+          <p class="text-xs text-gray-500">${order.user?.email || "-"}</p>
+        </div>
+      </td>
+      <td class="py-4 px-6">
+        <a href="tel:${order.phoneNumber}" class="text-red-600 font-medium hover:underline">
+          ${order.phoneNumber}
+        </a>
+      </td>
+      <td class="py-4 px-6">
+        <p class="text-gray-600 text-sm truncate max-w-[200px]" title="${order.description}">
+          ${order.description}
+        </p>
+      </td>
+      <td class="py-4 px-6">
+        ${getStatusBadge(order.status)}
+      </td>
+      <td class="py-4 px-6 text-gray-500 text-sm">
+        ${formatDate(order.createdAt)}
+      </td>
+      <td class="py-4 px-6 text-right">
+        <button onclick="event.stopPropagation(); openOrderModal('${order.id}')" 
+                class="text-gray-400 hover:text-red-600 transition">
+          <i class="fas fa-eye"></i>
+        </button>
+      </td>
+    </tr>
+  `).join("");
+}
+
+// Get Status Badge HTML
+function getStatusBadge(status) {
+  const badges = {
+    pending: '<span class="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-medium">Kutilmoqda</span>',
+    in_progress: '<span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">Jarayonda</span>',
+    completed: '<span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">Bajarilgan</span>',
+    cancelled: '<span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-xs font-medium">Bekor qilingan</span>'
+  };
+  return badges[status] || badges.pending;
+}
+
+// Open Order Modal
+function openOrderModal(orderId) {
+  const order = allOrders.find(o => o.id === orderId);
+  if (!order) return;
+  
+  currentOrderId = orderId;
+  
+  document.getElementById("orderServiceName").textContent = `${order.serviceNumber} - ${order.serviceName}`;
+  document.getElementById("orderCustomerName").textContent = order.user?.name || "-";
+  document.getElementById("orderCustomerEmail").textContent = order.user?.email || "-";
+  document.getElementById("orderPhone").textContent = order.phoneNumber;
+  document.getElementById("orderDescription").textContent = order.description;
+  document.getElementById("orderStatusSelect").value = order.status;
+  document.getElementById("orderCreatedAt").textContent = formatDate(order.createdAt);
+  
+  document.getElementById("orderModal").classList.remove("hidden");
+}
+
+// Close Order Modal
+function closeOrderModal() {
+  document.getElementById("orderModal").classList.add("hidden");
+  currentOrderId = null;
+}
+
+// Update Order Status
+async function updateOrderStatus() {
+  if (!currentOrderId) return;
+  
+  const status = document.getElementById("orderStatusSelect").value;
+  
+  try {
+    await apiRequest(`/orders/${currentOrderId}/status`, "PUT", { status });
+    showToast("Status yangilandi");
+    closeOrderModal();
+    loadOrders();
+  } catch (error) {
+    showToast(error.message, "error");
+  }
+}
+
+// Delete Current Order
+async function deleteCurrentOrder() {
+  if (!currentOrderId) return;
+  
+  if (!confirm("Ushbu zakazni o'chirishni xohlaysizmi?")) return;
+  
+  try {
+    await apiRequest(`/orders/${currentOrderId}`, "DELETE");
+    showToast("Zakaz o'chirildi");
+    closeOrderModal();
+    loadOrders();
+  } catch (error) {
+    showToast(error.message, "error");
+  }
+}
+
+// Setup Order Filters
+document.addEventListener("DOMContentLoaded", () => {
+  // Order search
+  const orderSearch = document.getElementById("orderSearchInput");
+  if (orderSearch) {
+    let searchTimeout;
+    orderSearch.addEventListener("input", () => {
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(() => renderOrders(allOrders), 300);
+    });
+  }
+  
+  // Order status filter
+  const orderStatusFilter = document.getElementById("orderStatusFilter");
+  if (orderStatusFilter) {
+    orderStatusFilter.addEventListener("change", () => renderOrders(allOrders));
+  }
+});

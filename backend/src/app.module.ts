@@ -3,8 +3,10 @@ import { ConfigModule } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { AuthModule } from "./auth/auth.module";
 import { AdminModule } from "./admin/admin.module";
+import { OrdersModule } from "./orders/orders.module";
 import { AppController } from "./app.controller";
 import { User } from "./entities/user.entity";
+import { Order } from "./entities/order.entity";
 
 @Module({
   imports: [
@@ -19,7 +21,7 @@ import { User } from "./entities/user.entity";
       username: process.env.DB_USERNAME || "postgres",
       password: process.env.DB_PASSWORD || "postgres",
       database: process.env.DB_NAME || "magzuna_db",
-      entities: [User],
+      entities: [User, Order],
       migrations: ["dist/migrations/*.js"],
       synchronize: process.env.DB_SYNC === "true",
       logging: false,
@@ -28,6 +30,7 @@ import { User } from "./entities/user.entity";
     TypeOrmModule.forFeature([User]),
     AuthModule,
     AdminModule,
+    OrdersModule,
   ],
   controllers: [AppController],
 })

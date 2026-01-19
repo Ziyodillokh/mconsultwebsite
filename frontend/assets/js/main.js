@@ -1199,3 +1199,143 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     }, 4000);
   });
 })();
+
+// ============================================
+// SERVICE MODAL & ORDER SYSTEM
+// ============================================
+
+// Open Service Modal
+function openServiceModal(number, title, description, imageUrl) {
+  document.getElementById("serviceModalNumber").textContent = number;
+  document.getElementById("serviceModalTitle").textContent = title;
+  document.getElementById("serviceModalDesc").textContent = description;
+  document.getElementById("serviceModalImage").src = imageUrl;
+  document.getElementById("serviceModalImage").alt = title;
+  
+  // Set hidden form values
+  document.getElementById("orderServiceName").value = title;
+  document.getElementById("orderServiceNumber").value = number;
+  
+  // Check if user is logged in
+  const token = localStorage.getItem("token");
+  const user = localStorage.getItem("user");
+  
+  if (token && user) {
+    // Show order form
+    document.getElementById("orderLoginRequired").classList.add("hidden");
+    document.getElementById("serviceOrderForm").classList.remove("hidden");
+    // Reset form
+    document.getElementById("serviceOrderForm").reset();
+    document.getElementById("orderFormError").classList.add("hidden");
+    document.getElementById("orderFormSuccess").classList.add("hidden");
+  } else {
+    // Show login required message
+    document.getElementById("orderLoginRequired").classList.remove("hidden");
+    document.getElementById("serviceOrderForm").classList.add("hidden");
+  }
+  
+  document.getElementById("serviceModal").classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+}
+
+// Close Service Modal
+function closeServiceModal() {
+  document.getElementById("serviceModal").classList.add("hidden");
+  document.body.style.overflow = "";
+}
+
+// Submit Order
+async function submitOrder(event) {
+  event.preventDefault();
+  
+  const token = localStorage.getItem("token");
+  if (!token) {
+    closeServiceModal();
+    openAuthModal("login");
+    return;
+  }
+  
+  const serviceName = document.getElementById("orderServiceName").value;
+  const serviceNumber = document.getElementById("orderServiceNumber").value;
+  const phoneNumber = document.getElementById("orderPhoneNumber").value;
+  const description = document.getElementById("orderUserDescription").value;
+  
+  const errorEl = document.getElementById("orderFormError");
+  const successEl = document.getElementById("orderFormSuccess");
+  const submitBtn = document.getElementById("orderSubmitBtn");
+  
+  // Validate
+  if (!phoneNumber || !description) {
+    errorEl.textContent = "Barcha maydonlarni to'ldiring";
+    errorEl.classList.remove("hidden");
+    return;
+  }
+  
+  // Disable button
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Yuborilmoqda...';
+  
+  try {
+    const response = await fetch(`${API_BASE_URL}/orders`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        serviceName,
+        serviceNumber,
+        phoneNumber,
+        description
+      })
+    });
+    
+    const data = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(data.message || "Xatolik yuz berdi");
+    }
+    
+    // Success
+    errorEl.classList.add("hidden");
+    successEl.textContent = "Zakazingiz muvaffaqiyatli yuborildi! Tez orada siz bilan bog'lanamiz.";
+    successEl.classList.remove("hidden");
+    
+    // Reset form
+    document.getElementById("serviceOrderForm").reset();
+    
+    // Close modal after 3 seconds
+    setTimeout(() => {
+      closeServiceModal();
+    }, 3000);
+    
+  } catch (error) {
+    errorEl.textContent = error.message;
+    errorEl.classList.remove("hidden");
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Zakaz yuborish';
+  }
+}
+
+// Close modal on outside click
+document.addEventListener("DOMContentLoaded", () => {
+  const serviceModal = document.getElementById("serviceModal");
+  if (serviceModal) {
+    serviceModal.addEventListener("click", (e) => {
+      if (e.target === serviceModal) {
+        closeServiceModal();
+      }
+    });
+  }
+});
+
+// Close modal on Escape key
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    const serviceModal = document.getElementById("serviceModal");
+    if (serviceModal && !serviceModal.classList.contains("hidden")) {
+      closeServiceModal();
+    }
+  }
+});
