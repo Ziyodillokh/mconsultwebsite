@@ -1,686 +1,1011 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="uz">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Panel - Mag'zuna Consult</title>
-  <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg" />
-  <link rel="apple-touch-icon" href="../assets/images/favicon.svg" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="stylesheet" href="../assets/css/admin.css" />
-</head>
-<body>
-  <!-- Login Modal -->
-  <div id="loginModal" class="login-modal">
-    <div class="login-card">
-      <div class="login-logo">
-        <div class="login-logo-icon">
-          <i class="fas fa-shield-halved"></i>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Panel - Mag'zuna Consult</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg" />
+    <link rel="apple-touch-icon" href="../assets/images/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../assets/css/admin.css" />
+  </head>
+  <body>
+    <!-- Login Modal -->
+    <div id="loginModal" class="login-modal">
+      <div class="login-card">
+        <div class="login-logo">
+          <div class="login-logo-icon">
+            <i class="fas fa-shield-halved"></i>
+          </div>
+          <h1>Admin Panel</h1>
+          <p>Mag'zuna Consult boshqaruv tizimi</p>
         </div>
-        <h1>Admin Panel</h1>
-        <p>Mag'zuna Consult boshqaruv tizimi</p>
-      </div>
-      
-      <form id="adminLoginForm" class="login-form">
-        <div class="form-group">
-          <label>Email</label>
-          <input type="email" id="loginEmail" required placeholder="admin@magzuna.uz" />
-        </div>
-        
-        <div class="form-group">
-          <label>Parol</label>
-          <input type="password" id="loginPassword" required placeholder="••••••••" />
-        </div>
-        
-        <div id="loginError" class="login-error">
-          <i class="fas fa-exclamation-circle"></i>
-          <span>Email yoki parol noto'g'ri</span>
-        </div>
-        
-        <button type="submit" class="btn btn-primary btn-lg">
-          <i class="fas fa-sign-in-alt"></i>
-          Kirish
-        </button>
-      </form>
-      
-      <div style="text-align: center; margin-top: 24px;">
-        <a href="../" style="color: var(--gray-500); text-decoration: none; font-size: 13px; font-weight: 500;">
-          <i class="fas fa-arrow-left" style="margin-right: 6px;"></i>
-          Bosh sahifaga qaytish
-        </a>
-      </div>
-    </div>
-  </div>
 
-  <!-- Main Admin Layout -->
-  <div id="adminLayout" class="admin-layout" style="display: none;">
-    
-    <!-- Sidebar -->
-    <aside id="sidebar" class="admin-sidebar">
-      <!-- Logo -->
-      <div class="sidebar-logo">
-        <div class="sidebar-logo-icon">
-          <i class="fas fa-bolt"></i>
-        </div>
-        <div class="sidebar-logo-text">
-          <h1>MAG'ZUNA</h1>
-          <span>Admin Panel</span>
-        </div>
-      </div>
-      
-      <!-- Navigation -->
-      <nav class="sidebar-nav">
-        <div class="nav-section">
-          <div class="nav-section-title">Asosiy</div>
-          <a href="#dashboard" class="nav-item active" data-section="dashboard">
-            <i class="fas fa-chart-pie"></i>
-            <span>Dashboard</span>
-          </a>
-          <a href="#orders" class="nav-item" data-section="orders">
-            <i class="fas fa-shopping-bag"></i>
-            <span>Zakazlar</span>
-            <span id="ordersBadge" class="badge">0</span>
-          </a>
-        </div>
-        
-        <div class="nav-section">
-          <div class="nav-section-title">Boshqaruv</div>
-          <a href="#users" class="nav-item" data-section="users">
-            <i class="fas fa-users"></i>
-            <span>Foydalanuvchilar</span>
-          </a>
-          <a href="#settings" class="nav-item" data-section="settings">
-            <i class="fas fa-cog"></i>
-            <span>Sozlamalar</span>
-          </a>
-        </div>
-      </nav>
-      
-      <!-- Sidebar Footer -->
-      <div class="sidebar-footer">
-        <div class="sidebar-user">
-          <div class="sidebar-user-avatar" id="sidebarAvatar">AD</div>
-          <div class="sidebar-user-info">
-            <h4 id="sidebarUserName">Admin</h4>
-            <span id="sidebarUserRole">Administrator</span>
-          </div>
-        </div>
-        <button class="sidebar-logout" onclick="logout()">
-          <i class="fas fa-sign-out-alt"></i>
-          <span>Chiqish</span>
-        </button>
-      </div>
-    </aside>
-    
-    <!-- Mobile Overlay -->
-    <div id="mobileOverlay" class="mobile-overlay" onclick="closeSidebar()"></div>
-    
-    <!-- Main Content -->
-    <main class="admin-main">
-      <!-- Header -->
-      <header class="admin-header">
-        <div class="header-left">
-          <button class="sidebar-toggle" onclick="toggleSidebar()">
-            <i class="fas fa-bars"></i>
-          </button>
-          <div class="page-title">
-            <h1 id="pageTitle">Dashboard</h1>
-            <p id="pageSubtitle">Statistika va ma'lumotlar</p>
-          </div>
-        </div>
-        
-        <div class="header-right">
-          <div class="header-search">
-            <i class="fas fa-search"></i>
-            <input type="text" placeholder="Qidirish..." id="globalSearch" />
-            <kbd>⌘K</kbd>
-          </div>
-          
-          <button class="theme-toggle" onclick="toggleTheme()" title="Mavzuni o'zgartirish">
-            <i class="fas fa-moon" id="themeIcon"></i>
-          </button>
-          
-          <button class="header-btn" onclick="loadDashboard()" title="Yangilash">
-            <i class="fas fa-sync-alt"></i>
-          </button>
-          
-          <button class="header-btn" title="Bildirishnomalar">
-            <i class="fas fa-bell"></i>
-            <span class="notification-dot"></span>
-          </button>
-        </div>
-      </header>
-      
-      <!-- Content Area -->
-      <div class="admin-content">
-        
-        <!-- Dashboard Section -->
-        <section id="dashboardSection" class="section-content">
-          <!-- Stats Grid -->
-          <div class="stats-grid">
-            <div class="stat-card">
-              <div class="stat-card-header">
-                <div class="stat-card-icon primary">
-                  <i class="fas fa-shopping-bag"></i>
-                </div>
-                <div class="stat-card-trend up">
-                  <i class="fas fa-arrow-up"></i>
-                  12%
-                </div>
-              </div>
-              <div class="stat-card-value" id="statTotalOrders">0</div>
-              <div class="stat-card-label">Jami zakazlar</div>
-            </div>
-            
-            <div class="stat-card">
-              <div class="stat-card-header">
-                <div class="stat-card-icon blue">
-                  <i class="fas fa-clock"></i>
-                </div>
-                <div class="stat-card-trend up">
-                  <i class="fas fa-arrow-up"></i>
-                  8%
-                </div>
-              </div>
-              <div class="stat-card-value" id="statNewOrders">0</div>
-              <div class="stat-card-label">Yangi zakazlar</div>
-            </div>
-            
-            <div class="stat-card">
-              <div class="stat-card-header">
-                <div class="stat-card-icon green">
-                  <i class="fas fa-check-circle"></i>
-                </div>
-                <div class="stat-card-trend up">
-                  <i class="fas fa-arrow-up"></i>
-                  15%
-                </div>
-              </div>
-              <div class="stat-card-value" id="statCompletedOrders">0</div>
-              <div class="stat-card-label">Bajarilgan</div>
-            </div>
-            
-            <div class="stat-card">
-              <div class="stat-card-header">
-                <div class="stat-card-icon purple">
-                  <i class="fas fa-users"></i>
-                </div>
-                <div class="stat-card-trend up">
-                  <i class="fas fa-arrow-up"></i>
-                  5%
-                </div>
-              </div>
-              <div class="stat-card-value" id="statTotalUsers">0</div>
-              <div class="stat-card-label">Foydalanuvchilar</div>
-            </div>
-          </div>
-          
-          <!-- Recent Orders Preview -->
-          <div class="orders-container">
-            <div class="orders-header">
-              <div class="orders-title">
-                <h2>So'nggi zakazlar</h2>
-                <span class="orders-count" id="recentOrdersCount">0 ta</span>
-              </div>
-              <div class="orders-actions">
-                <a href="#orders" class="btn btn-outline btn-sm" onclick="showSection('orders')">
-                  Barchasini ko'rish
-                  <i class="fas fa-arrow-right"></i>
-                </a>
-              </div>
-            </div>
-            <div class="orders-table-wrapper">
-              <table class="orders-table">
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Mijoz</th>
-                    <th>Xizmat</th>
-                    <th>Sana</th>
-                    <th>Status</th>
-                    <th>Amallar</th>
-                  </tr>
-                </thead>
-                <tbody id="recentOrdersTable">
-                  <!-- JS orqali to'ldiriladi -->
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </section>
-        
-        <!-- Orders Section -->
-        <section id="ordersSection" class="section-content" style="display: none;">
-          <div class="orders-container">
-            <!-- Orders Header -->
-            <div class="orders-header">
-              <div class="orders-title">
-                <h2>Barcha zakazlar</h2>
-                <span class="orders-count" id="totalOrdersCount">0 ta</span>
-              </div>
-              <div class="orders-actions">
-                <div class="view-toggle">
-                  <button class="active" data-view="table" title="Jadval ko'rinishi">
-                    <i class="fas fa-list"></i>
-                  </button>
-                  <button data-view="cards" title="Karta ko'rinishi">
-                    <i class="fas fa-th-large"></i>
-                  </button>
-                </div>
-                <button class="btn btn-primary btn-sm" onclick="loadOrders()">
-                  <i class="fas fa-sync-alt"></i>
-                  Yangilash
-                </button>
-              </div>
-            </div>
-            
-            <!-- Filter Tabs -->
-            <div class="filter-tabs">
-              <button class="filter-tab active" data-status="all">
-                Barchasi
-                <span class="count" id="countAll">0</span>
-              </button>
-              <button class="filter-tab" data-status="new">
-                <span class="dot"></span>
-                Yangi
-                <span class="count" id="countNew">0</span>
-              </button>
-              <button class="filter-tab" data-status="accepted">
-                <span class="dot"></span>
-                Qabul qilingan
-                <span class="count" id="countAccepted">0</span>
-              </button>
-              <button class="filter-tab" data-status="progress">
-                <span class="dot"></span>
-                Jarayonda
-                <span class="count" id="countProgress">0</span>
-              </button>
-              <button class="filter-tab" data-status="ready">
-                <span class="dot"></span>
-                Tayyor
-                <span class="count" id="countReady">0</span>
-              </button>
-              <button class="filter-tab" data-status="closed">
-                <span class="dot"></span>
-                Yopilgan
-                <span class="count" id="countClosed">0</span>
-              </button>
-              <button class="filter-tab" data-status="cancelled">
-                <span class="dot"></span>
-                Bekor qilingan
-                <span class="count" id="countCancelled">0</span>
-              </button>
-            </div>
-            
-            <!-- Filters Bar -->
-            <div class="orders-filters">
-              <div class="filter-search">
-                <i class="fas fa-search"></i>
-                <input type="text" id="orderSearchInput" placeholder="Telefon, ism yoki xizmat bo'yicha qidirish..." />
-              </div>
-              <div class="filter-date">
-                <input type="date" id="dateFrom" />
-                <span>dan</span>
-                <input type="date" id="dateTo" />
-                <span>gacha</span>
-              </div>
-              <button class="filter-btn secondary" onclick="clearFilters()">
-                <i class="fas fa-times"></i>
-                Tozalash
-              </button>
-            </div>
-            
-            <!-- Orders Table View -->
-            <div class="orders-table-wrapper" id="ordersTableView">
-              <table class="orders-table">
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Mijoz</th>
-                    <th>Xizmat</th>
-                    <th>Sana</th>
-                    <th>Status</th>
-                    <th>Amallar</th>
-                  </tr>
-                </thead>
-                <tbody id="ordersTableBody">
-                  <!-- JS orqali to'ldiriladi -->
-                </tbody>
-              </table>
-              
-              <!-- Empty State -->
-              <div id="ordersEmptyState" class="empty-state" style="display: none;">
-                <div class="empty-state-icon">
-                  <i class="fas fa-inbox"></i>
-                </div>
-                <h3>Zakazlar topilmadi</h3>
-                <p>Filterlarni o'zgartiring yoki yangi zakaz kuting</p>
-              </div>
-            </div>
-            
-            <!-- Orders Cards View -->
-            <div class="orders-cards" id="ordersCardsView">
-              <!-- JS orqali to'ldiriladi -->
-            </div>
-            
-            <!-- Pagination -->
-            <div class="orders-pagination">
-              <div class="pagination-info">
-                Ko'rsatilmoqda: <strong id="showingFrom">0</strong> - <strong id="showingTo">0</strong>, jami <strong id="totalOrders">0</strong> ta
-              </div>
-              <div class="pagination-controls">
-                <select class="per-page-select" id="perPageSelect">
-                  <option value="10">10 ta</option>
-                  <option value="25">25 ta</option>
-                  <option value="50">50 ta</option>
-                </select>
-                <button class="pagination-btn" id="prevPage" disabled>
-                  <i class="fas fa-chevron-left"></i>
-                </button>
-                <div id="paginationNumbers">
-                  <!-- JS orqali to'ldiriladi -->
-                </div>
-                <button class="pagination-btn" id="nextPage">
-                  <i class="fas fa-chevron-right"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
-        
-        <!-- Users Section -->
-        <section id="usersSection" class="section-content" style="display: none;">
-          <div class="orders-container">
-            <div class="orders-header">
-              <div class="orders-title">
-                <h2>Foydalanuvchilar</h2>
-                <span class="orders-count" id="totalUsersCount">0 ta</span>
-              </div>
-              <div class="orders-actions">
-                <button class="btn btn-primary btn-sm" onclick="openUserModal()">
-                  <i class="fas fa-plus"></i>
-                  Yangi foydalanuvchi
-                </button>
-              </div>
-            </div>
-            
-            <div class="orders-filters">
-              <div class="filter-search">
-                <i class="fas fa-search"></i>
-                <input type="text" id="userSearchInput" placeholder="Ism yoki email bo'yicha qidirish..." />
-              </div>
-              <select id="roleFilter" class="per-page-select">
-                <option value="">Barcha rollar</option>
-                <option value="admin">Admin</option>
-                <option value="user">User</option>
-              </select>
-              <select id="statusFilter" class="per-page-select">
-                <option value="">Barcha status</option>
-                <option value="true">Faol</option>
-                <option value="false">Nofaol</option>
-              </select>
-            </div>
-            
-            <div class="orders-table-wrapper">
-              <table class="orders-table">
-                <thead>
-                  <tr>
-                    <th>Foydalanuvchi</th>
-                    <th>Email</th>
-                    <th>Rol</th>
-                    <th>Status</th>
-                    <th>Yaratilgan</th>
-                    <th>Amallar</th>
-                  </tr>
-                </thead>
-                <tbody id="usersTableBody">
-                  <!-- JS orqali to'ldiriladi -->
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </section>
-        
-        <!-- Settings Section -->
-        <section id="settingsSection" class="section-content" style="display: none;">
-          <div style="max-width: 600px;">
-            <div class="orders-container" style="margin-bottom: 20px;">
-              <div class="orders-header" style="border-bottom: none;">
-                <div class="orders-title">
-                  <h2>Profil sozlamalari</h2>
-                </div>
-              </div>
-              <div style="padding: 0 24px 24px;">
-                <form id="profileForm">
-                  <div class="info-grid">
-                    <div class="info-item">
-                      <label>Ism</label>
-                      <input type="text" id="settingsName" style="width: 100%; padding: 10px 12px; border: 1px solid var(--gray-200); border-radius: var(--radius-md); font-size: 14px; margin-top: 8px;" />
-                    </div>
-                    <div class="info-item">
-                      <label>Email</label>
-                      <input type="email" id="settingsEmail" disabled style="width: 100%; padding: 10px 12px; border: 1px solid var(--gray-200); border-radius: var(--radius-md); font-size: 14px; margin-top: 8px; background: var(--gray-100);" />
-                    </div>
-                  </div>
-                  <button type="submit" class="btn btn-primary" style="margin-top: 20px;">
-                    <i class="fas fa-save"></i>
-                    Saqlash
-                  </button>
-                </form>
-              </div>
-            </div>
-            
-            <div class="orders-container">
-              <div class="orders-header" style="border-bottom: none;">
-                <div class="orders-title">
-                  <h2>Parolni o'zgartirish</h2>
-                </div>
-              </div>
-              <div style="padding: 0 24px 24px;">
-                <form id="passwordForm">
-                  <div class="info-grid">
-                    <div class="info-item">
-                      <label>Yangi parol</label>
-                      <input type="password" id="newPassword" placeholder="••••••••" style="width: 100%; padding: 10px 12px; border: 1px solid var(--gray-200); border-radius: var(--radius-md); font-size: 14px; margin-top: 8px;" />
-                    </div>
-                    <div class="info-item">
-                      <label>Parolni tasdiqlash</label>
-                      <input type="password" id="confirmPassword" placeholder="••••••••" style="width: 100%; padding: 10px 12px; border: 1px solid var(--gray-200); border-radius: var(--radius-md); font-size: 14px; margin-top: 8px;" />
-                    </div>
-                  </div>
-                  <button type="submit" class="btn btn-secondary" style="margin-top: 20px;">
-                    <i class="fas fa-key"></i>
-                    Parolni yangilash
-                  </button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </section>
-        
-      </div>
-    </main>
-  </div>
-  
-  <!-- Order Detail Drawer -->
-  <div id="drawerOverlay" class="drawer-overlay" onclick="closeOrderDrawer()"></div>
-  <div id="orderDrawer" class="order-drawer">
-    <div class="drawer-header">
-      <h2>
-        <i class="fas fa-receipt" style="color: var(--primary);"></i>
-        Zakaz #<span id="drawerOrderId">0</span>
-      </h2>
-      <button class="drawer-close" onclick="closeOrderDrawer()">
-        <i class="fas fa-times"></i>
-      </button>
-    </div>
-    
-    <div class="drawer-content">
-      <!-- Customer Info -->
-      <div class="drawer-section">
-        <div class="drawer-section-title">Mijoz ma'lumotlari</div>
-        <div class="info-grid">
-          <div class="info-item">
-            <label>Ism</label>
-            <span id="drawerCustomerName">-</span>
-          </div>
-          <div class="info-item">
-            <label>Telefon</label>
-            <span id="drawerPhone"><a href="tel:">-</a></span>
-          </div>
-          <div class="info-item full">
+        <form id="adminLoginForm" class="login-form">
+          <div class="form-group">
             <label>Email</label>
-            <span id="drawerEmail">-</span>
+            <input
+              type="email"
+              id="loginEmail"
+              required
+              placeholder="admin@magzuna.uz"
+            />
           </div>
-        </div>
-      </div>
-      
-      <!-- Service Info -->
-      <div class="drawer-section">
-        <div class="drawer-section-title">Xizmat ma'lumotlari</div>
-        <div class="info-grid">
-          <div class="info-item full">
-            <label>Xizmat nomi</label>
-            <span id="drawerServiceName">-</span>
+
+          <div class="form-group">
+            <label>Parol</label>
+            <input
+              type="password"
+              id="loginPassword"
+              required
+              placeholder="••••••••"
+            />
           </div>
-          <div class="info-item full">
-            <label>Tavsif</label>
-            <span id="drawerDescription">-</span>
+
+          <div id="loginError" class="login-error">
+            <i class="fas fa-exclamation-circle"></i>
+            <span>Email yoki parol noto'g'ri</span>
           </div>
-        </div>
-      </div>
-      
-      <!-- Status -->
-      <div class="drawer-section">
-        <div class="drawer-section-title">Status</div>
-        <div class="info-grid" style="grid-template-columns: 1fr;">
-          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-            <button class="status-badge status-new" data-status="new" onclick="setOrderStatus('new')">
-              Yangi
-            </button>
-            <button class="status-badge status-accepted" data-status="accepted" onclick="setOrderStatus('accepted')">
-              Qabul qilingan
-            </button>
-            <button class="status-badge status-progress" data-status="progress" onclick="setOrderStatus('progress')">
-              Jarayonda
-            </button>
-            <button class="status-badge status-ready" data-status="ready" onclick="setOrderStatus('ready')">
-              Tayyor
-            </button>
-            <button class="status-badge status-closed" data-status="closed" onclick="setOrderStatus('closed')">
-              Yopilgan
-            </button>
-            <button class="status-badge status-cancelled" data-status="cancelled" onclick="setOrderStatus('cancelled')">
-              Bekor qilingan
-            </button>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Timeline -->
-      <div class="drawer-section">
-        <div class="drawer-section-title">Tarix</div>
-        <div class="order-timeline" id="orderTimeline">
-          <!-- JS orqali to'ldiriladi -->
-        </div>
-      </div>
-      
-      <!-- Comment -->
-      <div class="drawer-section">
-        <div class="drawer-section-title">Izoh</div>
-        <div class="comment-box">
-          <textarea id="orderComment" placeholder="Izoh qoldiring..."></textarea>
+
+          <button type="submit" class="btn btn-primary btn-lg">
+            <i class="fas fa-sign-in-alt"></i>
+            Kirish
+          </button>
+        </form>
+
+        <div style="text-align: center; margin-top: 24px">
+          <a
+            href="../"
+            style="
+              color: var(--gray-500);
+              text-decoration: none;
+              font-size: 13px;
+              font-weight: 500;
+            "
+          >
+            <i class="fas fa-arrow-left" style="margin-right: 6px"></i>
+            Bosh sahifaga qaytish
+          </a>
         </div>
       </div>
     </div>
-    
-    <div class="drawer-footer">
-      <button class="btn btn-secondary" onclick="closeOrderDrawer()">
-        <i class="fas fa-times"></i>
-        Yopish
-      </button>
-      <button class="btn btn-primary" onclick="saveOrderChanges()">
-        <i class="fas fa-save"></i>
-        Saqlash
-      </button>
+
+    <!-- Main Admin Layout -->
+    <div id="adminLayout" class="admin-layout" style="display: none">
+      <!-- Sidebar -->
+      <aside id="sidebar" class="admin-sidebar">
+        <!-- Logo -->
+        <div class="sidebar-logo">
+          <div class="sidebar-logo-icon">
+            <img src="../assets/images/logo.png" alt="Mag'zuna Logo" />
+          </div>
+          <div class="sidebar-logo-text">
+            <h1>MAG'ZUNA</h1>
+            <span>Admin Panel</span>
+          </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="sidebar-nav">
+          <div class="nav-section">
+            <div class="nav-section-title">Asosiy</div>
+            <a
+              href="#dashboard"
+              class="nav-item active"
+              data-section="dashboard"
+            >
+              <i class="fas fa-chart-pie"></i>
+              <span>Dashboard</span>
+            </a>
+            <a href="#orders" class="nav-item" data-section="orders">
+              <i class="fas fa-shopping-bag"></i>
+              <span>Zakazlar</span>
+              <span id="ordersBadge" class="badge">0</span>
+            </a>
+          </div>
+
+          <div class="nav-section">
+            <div class="nav-section-title">Boshqaruv</div>
+            <a href="#users" class="nav-item" data-section="users">
+              <i class="fas fa-users"></i>
+              <span>Foydalanuvchilar</span>
+            </a>
+            <a href="#settings" class="nav-item" data-section="settings">
+              <i class="fas fa-cog"></i>
+              <span>Sozlamalar</span>
+            </a>
+          </div>
+        </nav>
+
+        <!-- Sidebar Footer -->
+        <div class="sidebar-footer">
+          <div class="sidebar-user">
+            <div class="sidebar-user-avatar" id="sidebarAvatar">
+              <img
+                src="../assets/images/admin.png"
+                alt="Admin"
+                style="
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  border-radius: 50%;
+                "
+              />
+            </div>
+            <div class="sidebar-user-info">
+              <h4 id="sidebarUserName">Admin</h4>
+              <span id="sidebarUserRole">Administrator</span>
+            </div>
+          </div>
+          <button class="sidebar-logout" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Chiqish</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- Mobile Overlay -->
+      <div
+        id="mobileOverlay"
+        class="mobile-overlay"
+        onclick="closeSidebar()"
+      ></div>
+
+      <!-- Main Content -->
+      <main class="admin-main">
+        <!-- Header -->
+        <header class="admin-header">
+          <div class="header-left">
+            <button class="sidebar-toggle" onclick="toggleSidebar()">
+              <i class="fas fa-bars"></i>
+            </button>
+            <div class="page-title">
+              <h1 id="pageTitle">Dashboard</h1>
+              <p id="pageSubtitle">Statistika va ma'lumotlar</p>
+            </div>
+          </div>
+
+          <div class="header-right">
+            <div class="header-search">
+              <i class="fas fa-search"></i>
+              <input type="text" placeholder="Qidirish..." id="globalSearch" />
+              <kbd>⌘K</kbd>
+            </div>
+
+            <button
+              class="theme-toggle"
+              onclick="toggleTheme()"
+              title="Mavzuni o'zgartirish"
+            >
+              <i class="fas fa-moon" id="themeIcon"></i>
+            </button>
+
+            <button
+              class="header-btn"
+              onclick="loadDashboard()"
+              title="Yangilash"
+            >
+              <i class="fas fa-sync-alt"></i>
+            </button>
+
+            <button class="header-btn" title="Bildirishnomalar">
+              <i class="fas fa-bell"></i>
+              <span class="notification-dot"></span>
+            </button>
+          </div>
+        </header>
+
+        <!-- Content Area -->
+        <div class="admin-content">
+          <!-- Dashboard Section -->
+          <section id="dashboardSection" class="section-content">
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+              <div class="stat-card">
+                <div class="stat-card-header">
+                  <div class="stat-card-icon primary">
+                    <i class="fas fa-shopping-bag"></i>
+                  </div>
+                  <div class="stat-card-trend up">
+                    <i class="fas fa-arrow-up"></i>
+                    12%
+                  </div>
+                </div>
+                <div class="stat-card-value" id="statTotalOrders">0</div>
+                <div class="stat-card-label">Jami zakazlar</div>
+              </div>
+
+              <div class="stat-card">
+                <div class="stat-card-header">
+                  <div class="stat-card-icon blue">
+                    <i class="fas fa-clock"></i>
+                  </div>
+                  <div class="stat-card-trend up">
+                    <i class="fas fa-arrow-up"></i>
+                    8%
+                  </div>
+                </div>
+                <div class="stat-card-value" id="statNewOrders">0</div>
+                <div class="stat-card-label">Yangi zakazlar</div>
+              </div>
+
+              <div class="stat-card">
+                <div class="stat-card-header">
+                  <div class="stat-card-icon green">
+                    <i class="fas fa-check-circle"></i>
+                  </div>
+                  <div class="stat-card-trend up">
+                    <i class="fas fa-arrow-up"></i>
+                    15%
+                  </div>
+                </div>
+                <div class="stat-card-value" id="statCompletedOrders">0</div>
+                <div class="stat-card-label">Bajarilgan</div>
+              </div>
+
+              <div class="stat-card">
+                <div class="stat-card-header">
+                  <div class="stat-card-icon purple">
+                    <i class="fas fa-users"></i>
+                  </div>
+                  <div class="stat-card-trend up">
+                    <i class="fas fa-arrow-up"></i>
+                    5%
+                  </div>
+                </div>
+                <div class="stat-card-value" id="statTotalUsers">0</div>
+                <div class="stat-card-label">Foydalanuvchilar</div>
+              </div>
+            </div>
+
+            <!-- Recent Orders Preview -->
+            <div class="orders-container">
+              <div class="orders-header">
+                <div class="orders-title">
+                  <h2>So'nggi zakazlar</h2>
+                  <span class="orders-count" id="recentOrdersCount">0 ta</span>
+                </div>
+                <div class="orders-actions">
+                  <a
+                    href="#orders"
+                    class="btn btn-outline btn-sm"
+                    onclick="showSection('orders')"
+                  >
+                    Barchasini ko'rish
+                    <i class="fas fa-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="orders-table-wrapper">
+                <table class="orders-table">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Mijoz</th>
+                      <th>Xizmat</th>
+                      <th>Sana</th>
+                      <th>Status</th>
+                      <th>Amallar</th>
+                    </tr>
+                  </thead>
+                  <tbody id="recentOrdersTable">
+                    <!-- JS orqali to'ldiriladi -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <!-- Orders Section -->
+          <section
+            id="ordersSection"
+            class="section-content"
+            style="display: none"
+          >
+            <div class="orders-container">
+              <!-- Orders Header -->
+              <div class="orders-header">
+                <div class="orders-title">
+                  <h2>Barcha zakazlar</h2>
+                  <span class="orders-count" id="totalOrdersCount">0 ta</span>
+                </div>
+                <div class="orders-actions">
+                  <div class="view-toggle">
+                    <button
+                      class="active"
+                      data-view="table"
+                      title="Jadval ko'rinishi"
+                    >
+                      <i class="fas fa-list"></i>
+                    </button>
+                    <button data-view="cards" title="Karta ko'rinishi">
+                      <i class="fas fa-th-large"></i>
+                    </button>
+                  </div>
+                  <button class="btn btn-primary btn-sm" onclick="loadOrders()">
+                    <i class="fas fa-sync-alt"></i>
+                    Yangilash
+                  </button>
+                </div>
+              </div>
+
+              <!-- Filter Tabs -->
+              <div class="filter-tabs">
+                <button class="filter-tab active" data-status="all">
+                  Barchasi
+                  <span class="count" id="countAll">0</span>
+                </button>
+                <button class="filter-tab" data-status="new">
+                  <span class="dot"></span>
+                  Yangi
+                  <span class="count" id="countNew">0</span>
+                </button>
+                <button class="filter-tab" data-status="accepted">
+                  <span class="dot"></span>
+                  Qabul qilingan
+                  <span class="count" id="countAccepted">0</span>
+                </button>
+                <button class="filter-tab" data-status="progress">
+                  <span class="dot"></span>
+                  Jarayonda
+                  <span class="count" id="countProgress">0</span>
+                </button>
+                <button class="filter-tab" data-status="ready">
+                  <span class="dot"></span>
+                  Tayyor
+                  <span class="count" id="countReady">0</span>
+                </button>
+                <button class="filter-tab" data-status="closed">
+                  <span class="dot"></span>
+                  Yopilgan
+                  <span class="count" id="countClosed">0</span>
+                </button>
+                <button class="filter-tab" data-status="cancelled">
+                  <span class="dot"></span>
+                  Bekor qilingan
+                  <span class="count" id="countCancelled">0</span>
+                </button>
+              </div>
+
+              <!-- Filters Bar -->
+              <div class="orders-filters">
+                <div class="filter-search">
+                  <i class="fas fa-search"></i>
+                  <input
+                    type="text"
+                    id="orderSearchInput"
+                    placeholder="Telefon, ism yoki xizmat bo'yicha qidirish..."
+                  />
+                </div>
+                <div class="filter-date">
+                  <input type="date" id="dateFrom" />
+                  <span>dan</span>
+                  <input type="date" id="dateTo" />
+                  <span>gacha</span>
+                </div>
+                <button class="filter-btn secondary" onclick="clearFilters()">
+                  <i class="fas fa-times"></i>
+                  Tozalash
+                </button>
+              </div>
+
+              <!-- Orders Table View -->
+              <div class="orders-table-wrapper" id="ordersTableView">
+                <table class="orders-table">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Mijoz</th>
+                      <th>Xizmat</th>
+                      <th>Sana</th>
+                      <th>Status</th>
+                      <th>Amallar</th>
+                    </tr>
+                  </thead>
+                  <tbody id="ordersTableBody">
+                    <!-- JS orqali to'ldiriladi -->
+                  </tbody>
+                </table>
+
+                <!-- Empty State -->
+                <div
+                  id="ordersEmptyState"
+                  class="empty-state"
+                  style="display: none"
+                >
+                  <div class="empty-state-icon">
+                    <i class="fas fa-inbox"></i>
+                  </div>
+                  <h3>Zakazlar topilmadi</h3>
+                  <p>Filterlarni o'zgartiring yoki yangi zakaz kuting</p>
+                </div>
+              </div>
+
+              <!-- Orders Cards View -->
+              <div class="orders-cards" id="ordersCardsView">
+                <!-- JS orqali to'ldiriladi -->
+              </div>
+
+              <!-- Pagination -->
+              <div class="orders-pagination">
+                <div class="pagination-info">
+                  Ko'rsatilmoqda: <strong id="showingFrom">0</strong> -
+                  <strong id="showingTo">0</strong>, jami
+                  <strong id="totalOrders">0</strong> ta
+                </div>
+                <div class="pagination-controls">
+                  <select class="per-page-select" id="perPageSelect">
+                    <option value="10">10 ta</option>
+                    <option value="25">25 ta</option>
+                    <option value="50">50 ta</option>
+                  </select>
+                  <button class="pagination-btn" id="prevPage" disabled>
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <div id="paginationNumbers">
+                    <!-- JS orqali to'ldiriladi -->
+                  </div>
+                  <button class="pagination-btn" id="nextPage">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Users Section -->
+          <section
+            id="usersSection"
+            class="section-content"
+            style="display: none"
+          >
+            <div class="orders-container">
+              <div class="orders-header">
+                <div class="orders-title">
+                  <h2>Foydalanuvchilar</h2>
+                  <span class="orders-count" id="totalUsersCount">0 ta</span>
+                </div>
+                <div class="orders-actions">
+                  <button
+                    class="btn btn-primary btn-sm"
+                    onclick="openUserModal()"
+                  >
+                    <i class="fas fa-plus"></i>
+                    Yangi foydalanuvchi
+                  </button>
+                </div>
+              </div>
+
+              <div class="orders-filters">
+                <div class="filter-search">
+                  <i class="fas fa-search"></i>
+                  <input
+                    type="text"
+                    id="userSearchInput"
+                    placeholder="Ism yoki email bo'yicha qidirish..."
+                  />
+                </div>
+                <select id="roleFilter" class="per-page-select">
+                  <option value="">Barcha rollar</option>
+                  <option value="admin">Admin</option>
+                  <option value="user">User</option>
+                </select>
+                <select id="statusFilter" class="per-page-select">
+                  <option value="">Barcha status</option>
+                  <option value="true">Faol</option>
+                  <option value="false">Nofaol</option>
+                </select>
+              </div>
+
+              <div class="orders-table-wrapper">
+                <table class="orders-table">
+                  <thead>
+                    <tr>
+                      <th>Foydalanuvchi</th>
+                      <th>Email</th>
+                      <th>Rol</th>
+                      <th>Status</th>
+                      <th>Yaratilgan</th>
+                      <th>Amallar</th>
+                    </tr>
+                  </thead>
+                  <tbody id="usersTableBody">
+                    <!-- JS orqali to'ldiriladi -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <!-- Settings Section -->
+          <section
+            id="settingsSection"
+            class="section-content"
+            style="display: none"
+          >
+            <div style="max-width: 600px">
+              <div class="orders-container" style="margin-bottom: 20px">
+                <div class="orders-header" style="border-bottom: none">
+                  <div class="orders-title">
+                    <h2>Profil sozlamalari</h2>
+                  </div>
+                </div>
+                <div style="padding: 0 24px 24px">
+                  <form id="profileForm">
+                    <div class="info-grid">
+                      <div class="info-item">
+                        <label>Ism</label>
+                        <input
+                          type="text"
+                          id="settingsName"
+                          style="
+                            width: 100%;
+                            padding: 10px 12px;
+                            border: 1px solid var(--gray-200);
+                            border-radius: var(--radius-md);
+                            font-size: 14px;
+                            margin-top: 8px;
+                          "
+                        />
+                      </div>
+                      <div class="info-item">
+                        <label>Email</label>
+                        <input
+                          type="email"
+                          id="settingsEmail"
+                          disabled
+                          style="
+                            width: 100%;
+                            padding: 10px 12px;
+                            border: 1px solid var(--gray-200);
+                            border-radius: var(--radius-md);
+                            font-size: 14px;
+                            margin-top: 8px;
+                            background: var(--gray-100);
+                          "
+                        />
+                      </div>
+                    </div>
+                    <button
+                      type="submit"
+                      class="btn btn-primary"
+                      style="margin-top: 20px"
+                    >
+                      <i class="fas fa-save"></i>
+                      Saqlash
+                    </button>
+                  </form>
+                </div>
+              </div>
+
+              <div class="orders-container">
+                <div class="orders-header" style="border-bottom: none">
+                  <div class="orders-title">
+                    <h2>Parolni o'zgartirish</h2>
+                  </div>
+                </div>
+                <div style="padding: 0 24px 24px">
+                  <form id="passwordForm">
+                    <div class="info-grid">
+                      <div class="info-item">
+                        <label>Yangi parol</label>
+                        <input
+                          type="password"
+                          id="newPassword"
+                          placeholder="••••••••"
+                          style="
+                            width: 100%;
+                            padding: 10px 12px;
+                            border: 1px solid var(--gray-200);
+                            border-radius: var(--radius-md);
+                            font-size: 14px;
+                            margin-top: 8px;
+                          "
+                        />
+                      </div>
+                      <div class="info-item">
+                        <label>Parolni tasdiqlash</label>
+                        <input
+                          type="password"
+                          id="confirmPassword"
+                          placeholder="••••••••"
+                          style="
+                            width: 100%;
+                            padding: 10px 12px;
+                            border: 1px solid var(--gray-200);
+                            border-radius: var(--radius-md);
+                            font-size: 14px;
+                            margin-top: 8px;
+                          "
+                        />
+                      </div>
+                    </div>
+                    <button
+                      type="submit"
+                      class="btn btn-secondary"
+                      style="margin-top: 20px"
+                    >
+                      <i class="fas fa-key"></i>
+                      Parolni yangilash
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
     </div>
-  </div>
-  
-  <!-- User Modal -->
-  <div id="userModal" class="confirm-modal">
-    <div class="confirm-modal-content" style="max-width: 450px;">
-      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
-        <h3 id="userModalTitle" style="margin: 0;">Yangi foydalanuvchi</h3>
-        <button onclick="closeUserModal()" style="background: none; border: none; color: var(--gray-500); cursor: pointer; font-size: 18px;">
+
+    <!-- Order Detail Drawer -->
+    <div
+      id="drawerOverlay"
+      class="drawer-overlay"
+      onclick="closeOrderDrawer()"
+    ></div>
+    <div id="orderDrawer" class="order-drawer">
+      <div class="drawer-header">
+        <h2>
+          <i class="fas fa-receipt" style="color: var(--primary)"></i>
+          Zakaz #<span id="drawerOrderId">0</span>
+        </h2>
+        <button class="drawer-close" onclick="closeOrderDrawer()">
           <i class="fas fa-times"></i>
         </button>
       </div>
-      
-      <form id="userForm">
-        <input type="hidden" id="userId" />
-        
-        <div style="margin-bottom: 16px;">
-          <label style="display: block; font-size: 13px; font-weight: 600; color: var(--gray-700); margin-bottom: 8px;">Ism</label>
-          <input type="text" id="userName" required placeholder="Foydalanuvchi ismi" style="width: 100%; height: 44px; padding: 0 14px; border: 1px solid var(--gray-200); border-radius: var(--radius-md); font-size: 14px;" />
-        </div>
-        
-        <div style="margin-bottom: 16px;">
-          <label style="display: block; font-size: 13px; font-weight: 600; color: var(--gray-700); margin-bottom: 8px;">Email</label>
-          <input type="email" id="userEmail" required placeholder="email@example.com" style="width: 100%; height: 44px; padding: 0 14px; border: 1px solid var(--gray-200); border-radius: var(--radius-md); font-size: 14px;" />
-        </div>
-        
-        <div style="margin-bottom: 16px;" id="passwordField">
-          <label style="display: block; font-size: 13px; font-weight: 600; color: var(--gray-700); margin-bottom: 8px;">Parol</label>
-          <input type="password" id="userPassword" placeholder="••••••••" style="width: 100%; height: 44px; padding: 0 14px; border: 1px solid var(--gray-200); border-radius: var(--radius-md); font-size: 14px;" />
-          <p id="passwordHint" style="display: none; font-size: 11px; color: var(--gray-500); margin-top: 6px;">Bo'sh qoldiring agar o'zgartirmoqchi bo'lmasangiz</p>
-        </div>
-        
-        <div style="margin-bottom: 16px;">
-          <label style="display: block; font-size: 13px; font-weight: 600; color: var(--gray-700); margin-bottom: 8px;">Rol</label>
-          <select id="userRole" style="width: 100%; height: 44px; padding: 0 14px; border: 1px solid var(--gray-200); border-radius: var(--radius-md); font-size: 14px;">
-            <option value="user">User</option>
-            <option value="admin">Admin</option>
-          </select>
-        </div>
-        
-        <div style="margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
-          <input type="checkbox" id="userActive" checked style="width: 18px; height: 18px;" />
-          <label for="userActive" style="font-size: 13px; font-weight: 500; color: var(--gray-700);">Faol</label>
-        </div>
-        
-        <div id="userFormError" style="display: none; background: #fef2f2; border: 1px solid #fecaca; color: #dc2626; padding: 12px; border-radius: var(--radius-md); font-size: 13px; margin-bottom: 16px;"></div>
-        
-        <div style="display: flex; gap: 12px;">
-          <button type="button" onclick="closeUserModal()" class="btn btn-secondary" style="flex: 1;">Bekor qilish</button>
-          <button type="submit" class="btn btn-primary" style="flex: 1;">Saqlash</button>
-        </div>
-      </form>
-    </div>
-  </div>
-  
-  <!-- Delete Confirmation Modal -->
-  <div id="deleteModal" class="confirm-modal">
-    <div class="confirm-modal-content">
-      <div class="confirm-modal-icon danger">
-        <i class="fas fa-trash-alt"></i>
-      </div>
-      <h3>O'chirishni tasdiqlang</h3>
-      <p>Ushbu elementni o'chirishni xohlaysizmi? Bu amalni qaytarib bo'lmaydi.</p>
-      <div class="confirm-modal-actions">
-        <button class="btn btn-secondary" onclick="closeDeleteModal()">Bekor qilish</button>
-        <button class="btn btn-danger" id="confirmDeleteBtn">O'chirish</button>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Toast Container -->
-  <div class="toast-container" id="toastContainer">
-    <!-- Toasts will be added here dynamically -->
-  </div>
 
-  <script src="../assets/js/admin.js"></script>
-</body>
+      <div class="drawer-content">
+        <!-- Customer Info -->
+        <div class="drawer-section">
+          <div class="drawer-section-title">Mijoz ma'lumotlari</div>
+          <div class="info-grid">
+            <div class="info-item">
+              <label>Ism</label>
+              <span id="drawerCustomerName">-</span>
+            </div>
+            <div class="info-item">
+              <label>Telefon</label>
+              <span id="drawerPhone"><a href="tel:">-</a></span>
+            </div>
+            <div class="info-item full">
+              <label>Email</label>
+              <span id="drawerEmail">-</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service Info -->
+        <div class="drawer-section">
+          <div class="drawer-section-title">Xizmat ma'lumotlari</div>
+          <div class="info-grid">
+            <div class="info-item full">
+              <label>Xizmat nomi</label>
+              <span id="drawerServiceName">-</span>
+            </div>
+            <div class="info-item full">
+              <label>Tavsif</label>
+              <span id="drawerDescription">-</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Status -->
+        <div class="drawer-section">
+          <div class="drawer-section-title">Status</div>
+          <div class="info-grid" style="grid-template-columns: 1fr">
+            <div style="display: flex; gap: 8px; flex-wrap: wrap">
+              <button
+                class="status-badge status-new"
+                data-status="new"
+                onclick="setOrderStatus('new')"
+              >
+                Yangi
+              </button>
+              <button
+                class="status-badge status-accepted"
+                data-status="accepted"
+                onclick="setOrderStatus('accepted')"
+              >
+                Qabul qilingan
+              </button>
+              <button
+                class="status-badge status-progress"
+                data-status="progress"
+                onclick="setOrderStatus('progress')"
+              >
+                Jarayonda
+              </button>
+              <button
+                class="status-badge status-ready"
+                data-status="ready"
+                onclick="setOrderStatus('ready')"
+              >
+                Tayyor
+              </button>
+              <button
+                class="status-badge status-closed"
+                data-status="closed"
+                onclick="setOrderStatus('closed')"
+              >
+                Yopilgan
+              </button>
+              <button
+                class="status-badge status-cancelled"
+                data-status="cancelled"
+                onclick="setOrderStatus('cancelled')"
+              >
+                Bekor qilingan
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline -->
+        <div class="drawer-section">
+          <div class="drawer-section-title">Tarix</div>
+          <div class="order-timeline" id="orderTimeline">
+            <!-- JS orqali to'ldiriladi -->
+          </div>
+        </div>
+
+        <!-- Comment -->
+        <div class="drawer-section">
+          <div class="drawer-section-title">Izoh</div>
+          <div class="comment-box">
+            <textarea
+              id="orderComment"
+              placeholder="Izoh qoldiring..."
+            ></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="drawer-footer">
+        <button class="btn btn-secondary" onclick="closeOrderDrawer()">
+          <i class="fas fa-times"></i>
+          Yopish
+        </button>
+        <button class="btn btn-primary" onclick="saveOrderChanges()">
+          <i class="fas fa-save"></i>
+          Saqlash
+        </button>
+      </div>
+    </div>
+
+    <!-- User Modal -->
+    <div id="userModal" class="confirm-modal">
+      <div class="confirm-modal-content" style="max-width: 450px">
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+          "
+        >
+          <h3 id="userModalTitle" style="margin: 0">Yangi foydalanuvchi</h3>
+          <button
+            onclick="closeUserModal()"
+            style="
+              background: none;
+              border: none;
+              color: var(--gray-500);
+              cursor: pointer;
+              font-size: 18px;
+            "
+          >
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <form id="userForm">
+          <input type="hidden" id="userId" />
+
+          <div style="margin-bottom: 16px">
+            <label
+              style="
+                display: block;
+                font-size: 13px;
+                font-weight: 600;
+                color: var(--gray-700);
+                margin-bottom: 8px;
+              "
+              >Ism</label
+            >
+            <input
+              type="text"
+              id="userName"
+              required
+              placeholder="Foydalanuvchi ismi"
+              style="
+                width: 100%;
+                height: 44px;
+                padding: 0 14px;
+                border: 1px solid var(--gray-200);
+                border-radius: var(--radius-md);
+                font-size: 14px;
+              "
+            />
+          </div>
+
+          <div style="margin-bottom: 16px">
+            <label
+              style="
+                display: block;
+                font-size: 13px;
+                font-weight: 600;
+                color: var(--gray-700);
+                margin-bottom: 8px;
+              "
+              >Email</label
+            >
+            <input
+              type="email"
+              id="userEmail"
+              required
+              placeholder="email@example.com"
+              style="
+                width: 100%;
+                height: 44px;
+                padding: 0 14px;
+                border: 1px solid var(--gray-200);
+                border-radius: var(--radius-md);
+                font-size: 14px;
+              "
+            />
+          </div>
+
+          <div style="margin-bottom: 16px" id="passwordField">
+            <label
+              style="
+                display: block;
+                font-size: 13px;
+                font-weight: 600;
+                color: var(--gray-700);
+                margin-bottom: 8px;
+              "
+              >Parol</label
+            >
+            <input
+              type="password"
+              id="userPassword"
+              placeholder="••••••••"
+              style="
+                width: 100%;
+                height: 44px;
+                padding: 0 14px;
+                border: 1px solid var(--gray-200);
+                border-radius: var(--radius-md);
+                font-size: 14px;
+              "
+            />
+            <p
+              id="passwordHint"
+              style="
+                display: none;
+                font-size: 11px;
+                color: var(--gray-500);
+                margin-top: 6px;
+              "
+            >
+              Bo'sh qoldiring agar o'zgartirmoqchi bo'lmasangiz
+            </p>
+          </div>
+
+          <div style="margin-bottom: 16px">
+            <label
+              style="
+                display: block;
+                font-size: 13px;
+                font-weight: 600;
+                color: var(--gray-700);
+                margin-bottom: 8px;
+              "
+              >Rol</label
+            >
+            <select
+              id="userRole"
+              style="
+                width: 100%;
+                height: 44px;
+                padding: 0 14px;
+                border: 1px solid var(--gray-200);
+                border-radius: var(--radius-md);
+                font-size: 14px;
+              "
+            >
+              <option value="user">User</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+
+          <div
+            style="
+              margin-bottom: 20px;
+              display: flex;
+              align-items: center;
+              gap: 10px;
+            "
+          >
+            <input
+              type="checkbox"
+              id="userActive"
+              checked
+              style="width: 18px; height: 18px"
+            />
+            <label
+              for="userActive"
+              style="font-size: 13px; font-weight: 500; color: var(--gray-700)"
+              >Faol</label
+            >
+          </div>
+
+          <div
+            id="userFormError"
+            style="
+              display: none;
+              background: #fef2f2;
+              border: 1px solid #fecaca;
+              color: #dc2626;
+              padding: 12px;
+              border-radius: var(--radius-md);
+              font-size: 13px;
+              margin-bottom: 16px;
+            "
+          ></div>
+
+          <div style="display: flex; gap: 12px">
+            <button
+              type="button"
+              onclick="closeUserModal()"
+              class="btn btn-secondary"
+              style="flex: 1"
+            >
+              Bekor qilish
+            </button>
+            <button type="submit" class="btn btn-primary" style="flex: 1">
+              Saqlash
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="confirm-modal">
+      <div class="confirm-modal-content">
+        <div class="confirm-modal-icon danger">
+          <i class="fas fa-trash-alt"></i>
+        </div>
+        <h3>O'chirishni tasdiqlang</h3>
+        <p>
+          Ushbu elementni o'chirishni xohlaysizmi? Bu amalni qaytarib bo'lmaydi.
+        </p>
+        <div class="confirm-modal-actions">
+          <button class="btn btn-secondary" onclick="closeDeleteModal()">
+            Bekor qilish
+          </button>
+          <button class="btn btn-danger" id="confirmDeleteBtn">
+            O'chirish
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer">
+      <!-- Toasts will be added here dynamically -->
+    </div>
+
+    <script src="../assets/js/admin.js"></script>
+  </body>
 </html>

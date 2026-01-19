@@ -17,18 +17,18 @@ const state = {
   currentOrderId: null,
   currentUserId: null,
   filters: {
-    status: 'all',
-    search: '',
-    dateFrom: '',
-    dateTo: ''
+    status: "all",
+    search: "",
+    dateFrom: "",
+    dateTo: "",
   },
   pagination: {
     page: 1,
     limit: 10,
-    total: 0
+    total: 0,
   },
-  view: 'table', // 'table' or 'cards'
-  theme: localStorage.getItem('adminTheme') || 'light'
+  view: "table", // 'table' or 'cards'
+  theme: localStorage.getItem("adminTheme") || "light",
 };
 
 // Status configurations
@@ -42,26 +42,26 @@ const STATUS_CONFIG = {
   // Backend compatibility
   pending: { label: "Yangi", class: "status-new" },
   in_progress: { label: "Jarayonda", class: "status-progress" },
-  completed: { label: "Tayyor", class: "status-ready" }
+  completed: { label: "Tayyor", class: "status-ready" },
 };
 
 // ============================================
 // DOM ELEMENTS
 // ============================================
 const DOM = {
-  loginModal: () => document.getElementById('loginModal'),
-  adminLayout: () => document.getElementById('adminLayout'),
-  sidebar: () => document.getElementById('sidebar'),
-  mobileOverlay: () => document.getElementById('mobileOverlay'),
-  orderDrawer: () => document.getElementById('orderDrawer'),
-  drawerOverlay: () => document.getElementById('drawerOverlay'),
-  toastContainer: () => document.getElementById('toastContainer')
+  loginModal: () => document.getElementById("loginModal"),
+  adminLayout: () => document.getElementById("adminLayout"),
+  sidebar: () => document.getElementById("sidebar"),
+  mobileOverlay: () => document.getElementById("mobileOverlay"),
+  orderDrawer: () => document.getElementById("orderDrawer"),
+  drawerOverlay: () => document.getElementById("drawerOverlay"),
+  toastContainer: () => document.getElementById("toastContainer"),
 };
 
 // ============================================
 // INITIALIZATION
 // ============================================
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   initTheme();
   checkAuth();
   setupEventListeners();
@@ -69,10 +69,10 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initTheme() {
-  if (state.theme === 'dark') {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    const icon = document.getElementById('themeIcon');
-    if (icon) icon.className = 'fas fa-sun';
+  if (state.theme === "dark") {
+    document.documentElement.setAttribute("data-theme", "dark");
+    const icon = document.getElementById("themeIcon");
+    if (icon) icon.className = "fas fa-sun";
   }
 }
 
@@ -80,44 +80,44 @@ function initTheme() {
 // AUTHENTICATION
 // ============================================
 function checkAuth() {
-  const token = localStorage.getItem('adminToken');
-  const user = localStorage.getItem('adminUser');
+  const token = localStorage.getItem("adminToken");
+  const user = localStorage.getItem("adminUser");
 
   if (token && user) {
     try {
       state.user = JSON.parse(user);
-      if (state.user.role === 'admin') {
+      if (state.user.role === "admin") {
         showAdminPanel();
         loadDashboard();
         return;
       }
     } catch (e) {
-      console.error('Parse error:', e);
+      console.error("Parse error:", e);
     }
   }
   showLoginModal();
 }
 
 function showLoginModal() {
-  DOM.loginModal().classList.remove('hidden');
-  DOM.adminLayout().style.display = 'none';
+  DOM.loginModal().classList.remove("hidden");
+  DOM.adminLayout().style.display = "none";
 }
 
 function showAdminPanel() {
-  DOM.loginModal().classList.add('hidden');
-  DOM.adminLayout().style.display = 'block';
+  DOM.loginModal().classList.add("hidden");
+  DOM.adminLayout().style.display = "block";
 
   // Update user info in sidebar
   const initials = getInitials(state.user.name);
-  const sidebarAvatar = document.getElementById('sidebarAvatar');
-  const sidebarUserName = document.getElementById('sidebarUserName');
-  
+  const sidebarAvatar = document.getElementById("sidebarAvatar");
+  const sidebarUserName = document.getElementById("sidebarUserName");
+
   if (sidebarAvatar) sidebarAvatar.textContent = initials;
   if (sidebarUserName) sidebarUserName.textContent = state.user.name;
 
   // Update settings form
-  const settingsName = document.getElementById('settingsName');
-  const settingsEmail = document.getElementById('settingsEmail');
+  const settingsName = document.getElementById("settingsName");
+  const settingsEmail = document.getElementById("settingsEmail");
   if (settingsName) settingsName.value = state.user.name;
   if (settingsEmail) settingsEmail.value = state.user.email;
 }
@@ -125,61 +125,60 @@ function showAdminPanel() {
 async function handleLogin(e) {
   e.preventDefault();
 
-  const email = document.getElementById('loginEmail').value;
-  const password = document.getElementById('loginPassword').value;
-  const errorEl = document.getElementById('loginError');
+  const email = document.getElementById("loginEmail").value;
+  const password = document.getElementById("loginPassword").value;
+  const errorEl = document.getElementById("loginError");
 
   try {
     const response = await fetch(`${API_URL}/auth/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password })
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
     });
 
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error(data.message || 'Login xatosi');
+      throw new Error(data.message || "Login xatosi");
     }
 
-    if (data.user.role !== 'admin') {
-      throw new Error('Admin huquqi talab qilinadi');
+    if (data.user.role !== "admin") {
+      throw new Error("Admin huquqi talab qilinadi");
     }
 
-    localStorage.setItem('adminToken', data.token);
-    localStorage.setItem('adminUser', JSON.stringify(data.user));
+    localStorage.setItem("adminToken", data.token);
+    localStorage.setItem("adminUser", JSON.stringify(data.user));
     state.user = data.user;
 
     showAdminPanel();
     loadDashboard();
-    errorEl.classList.remove('show');
-
+    errorEl.classList.remove("show");
   } catch (error) {
-    errorEl.querySelector('span').textContent = error.message;
-    errorEl.classList.add('show');
+    errorEl.querySelector("span").textContent = error.message;
+    errorEl.classList.add("show");
   }
 }
 
 function logout() {
-  localStorage.removeItem('adminToken');
-  localStorage.removeItem('adminUser');
+  localStorage.removeItem("adminToken");
+  localStorage.removeItem("adminUser");
   state.user = null;
   showLoginModal();
-  showToast('Tizimdan chiqdingiz', 'success');
+  showToast("Tizimdan chiqdingiz", "success");
 }
 
 // ============================================
 // API HELPERS
 // ============================================
-async function apiRequest(endpoint, method = 'GET', body = null) {
-  const token = localStorage.getItem('adminToken');
+async function apiRequest(endpoint, method = "GET", body = null) {
+  const token = localStorage.getItem("adminToken");
 
   const options = {
     method,
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    }
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
   };
 
   if (body) {
@@ -193,7 +192,7 @@ async function apiRequest(endpoint, method = 'GET', body = null) {
     if (response.status === 401 || response.status === 403) {
       logout();
     }
-    throw new Error(data.message || 'Xatolik yuz berdi');
+    throw new Error(data.message || "Xatolik yuz berdi");
   }
 
   return data;
@@ -205,14 +204,20 @@ async function apiRequest(endpoint, method = 'GET', body = null) {
 async function loadDashboard() {
   try {
     // Load stats
-    const dashboardResponse = await apiRequest('/admin/dashboard');
+    const dashboardResponse = await apiRequest("/admin/dashboard");
     const stats = dashboardResponse.data;
 
     // Update dashboard stats
-    updateElement('statTotalOrders', stats.totalOrders || stats.totalUsers || 0);
-    updateElement('statNewOrders', stats.newOrders || stats.newUsersToday || 0);
-    updateElement('statCompletedOrders', stats.completedOrders || stats.activeUsers || 0);
-    updateElement('statTotalUsers', stats.totalUsers || 0);
+    updateElement(
+      "statTotalOrders",
+      stats.totalOrders || stats.totalUsers || 0,
+    );
+    updateElement("statNewOrders", stats.newOrders || stats.newUsersToday || 0);
+    updateElement(
+      "statCompletedOrders",
+      stats.completedOrders || stats.activeUsers || 0,
+    );
+    updateElement("statTotalUsers", stats.totalUsers || 0);
 
     // Load orders for recent orders table
     await loadOrders();
@@ -221,19 +226,20 @@ async function loadDashboard() {
     renderRecentOrders(state.orders.slice(0, 5));
 
     // Update badge
-    const newOrdersCount = state.orders.filter(o => o.status === 'pending' || o.status === 'new').length;
+    const newOrdersCount = state.orders.filter(
+      (o) => o.status === "pending" || o.status === "new",
+    ).length;
     updateOrdersBadge(newOrdersCount);
-
   } catch (error) {
-    console.error('Dashboard load error:', error);
-    showToast(error.message, 'error');
+    console.error("Dashboard load error:", error);
+    showToast(error.message, "error");
   }
 }
 
 function renderRecentOrders(orders) {
-  const tbody = document.getElementById('recentOrdersTable');
-  const countEl = document.getElementById('recentOrdersCount');
-  
+  const tbody = document.getElementById("recentOrdersTable");
+  const countEl = document.getElementById("recentOrdersCount");
+
   if (countEl) countEl.textContent = `${orders.length} ta`;
 
   if (!tbody) return;
@@ -249,14 +255,16 @@ function renderRecentOrders(orders) {
     return;
   }
 
-  tbody.innerHTML = orders.map(order => `
+  tbody.innerHTML = orders
+    .map(
+      (order) => `
     <tr onclick="openOrderDrawer('${order.id}')" style="cursor: pointer;">
-      <td><span class="order-id">#${order.id?.slice(-6) || '000000'}</span></td>
+      <td><span class="order-id">#${order.id?.slice(-6) || "000000"}</span></td>
       <td>
         <div class="customer-cell">
-          <div class="customer-avatar">${getInitials(order.user?.name || 'M')}</div>
+          <div class="customer-avatar">${getInitials(order.user?.name || "M")}</div>
           <div class="customer-info">
-            <h4>${order.user?.name || 'Noma\'lum'}</h4>
+            <h4>${order.user?.name || "Noma'lum"}</h4>
             <a href="tel:${order.phoneNumber}">${order.phoneNumber}</a>
           </div>
         </div>
@@ -264,7 +272,7 @@ function renderRecentOrders(orders) {
       <td>
         <div class="service-cell">
           <div class="service-icon"><i class="fas fa-briefcase"></i></div>
-          <span class="service-name">${order.serviceName || 'Xizmat'}</span>
+          <span class="service-name">${order.serviceName || "Xizmat"}</span>
         </div>
       </td>
       <td>
@@ -283,7 +291,9 @@ function renderRecentOrders(orders) {
         </button>
       </td>
     </tr>
-  `).join('');
+  `,
+    )
+    .join("");
 }
 
 // ============================================
@@ -291,12 +301,12 @@ function renderRecentOrders(orders) {
 // ============================================
 async function loadOrders() {
   try {
-    const orders = await apiRequest('/orders');
-    state.orders = Array.isArray(orders) ? orders : (orders.data || []);
-    
+    const orders = await apiRequest("/orders");
+    state.orders = Array.isArray(orders) ? orders : orders.data || [];
+
     // Load stats
     try {
-      const stats = await apiRequest('/orders/stats');
+      const stats = await apiRequest("/orders/stats");
       updateOrderCounts(stats);
     } catch (e) {
       // Stats endpoint might not exist, calculate from orders
@@ -304,63 +314,68 @@ async function loadOrders() {
     }
 
     renderOrders();
-    
   } catch (error) {
-    console.error('Orders load error:', error);
-    showToast(error.message, 'error');
+    console.error("Orders load error:", error);
+    showToast(error.message, "error");
   }
 }
 
 function updateOrderCounts(stats) {
-  updateElement('countAll', stats.total || state.orders.length);
-  updateElement('countNew', stats.pending || 0);
-  updateElement('countAccepted', stats.accepted || 0);
-  updateElement('countProgress', stats.inProgress || stats.in_progress || 0);
-  updateElement('countReady', stats.completed || stats.ready || 0);
-  updateElement('countClosed', stats.closed || 0);
-  updateElement('countCancelled', stats.cancelled || 0);
-  updateElement('totalOrdersCount', `${stats.total || state.orders.length} ta`);
+  updateElement("countAll", stats.total || state.orders.length);
+  updateElement("countNew", stats.pending || 0);
+  updateElement("countAccepted", stats.accepted || 0);
+  updateElement("countProgress", stats.inProgress || stats.in_progress || 0);
+  updateElement("countReady", stats.completed || stats.ready || 0);
+  updateElement("countClosed", stats.closed || 0);
+  updateElement("countCancelled", stats.cancelled || 0);
+  updateElement("totalOrdersCount", `${stats.total || state.orders.length} ta`);
 }
 
 function updateOrderCountsFromOrders() {
   const counts = {
     all: state.orders.length,
-    new: 0, pending: 0,
+    new: 0,
+    pending: 0,
     accepted: 0,
-    progress: 0, in_progress: 0,
-    ready: 0, completed: 0,
+    progress: 0,
+    in_progress: 0,
+    ready: 0,
+    completed: 0,
     closed: 0,
-    cancelled: 0
+    cancelled: 0,
   };
 
-  state.orders.forEach(order => {
-    const status = order.status || 'pending';
+  state.orders.forEach((order) => {
+    const status = order.status || "pending";
     if (counts[status] !== undefined) counts[status]++;
   });
 
-  updateElement('countAll', counts.all);
-  updateElement('countNew', counts.new + counts.pending);
-  updateElement('countAccepted', counts.accepted);
-  updateElement('countProgress', counts.progress + counts.in_progress);
-  updateElement('countReady', counts.ready + counts.completed);
-  updateElement('countClosed', counts.closed);
-  updateElement('countCancelled', counts.cancelled);
-  updateElement('totalOrdersCount', `${counts.all} ta`);
+  updateElement("countAll", counts.all);
+  updateElement("countNew", counts.new + counts.pending);
+  updateElement("countAccepted", counts.accepted);
+  updateElement("countProgress", counts.progress + counts.in_progress);
+  updateElement("countReady", counts.ready + counts.completed);
+  updateElement("countClosed", counts.closed);
+  updateElement("countCancelled", counts.cancelled);
+  updateElement("totalOrdersCount", `${counts.all} ta`);
 }
 
 function renderOrders() {
   const { status, search, dateFrom, dateTo } = state.filters;
-  
+
   let filteredOrders = [...state.orders];
 
   // Status filter
-  if (status !== 'all') {
-    filteredOrders = filteredOrders.filter(order => {
-      const orderStatus = order.status || 'pending';
+  if (status !== "all") {
+    filteredOrders = filteredOrders.filter((order) => {
+      const orderStatus = order.status || "pending";
       // Handle status mapping
-      if (status === 'new') return orderStatus === 'new' || orderStatus === 'pending';
-      if (status === 'progress') return orderStatus === 'progress' || orderStatus === 'in_progress';
-      if (status === 'ready') return orderStatus === 'ready' || orderStatus === 'completed';
+      if (status === "new")
+        return orderStatus === "new" || orderStatus === "pending";
+      if (status === "progress")
+        return orderStatus === "progress" || orderStatus === "in_progress";
+      if (status === "ready")
+        return orderStatus === "ready" || orderStatus === "completed";
       return orderStatus === status;
     });
   }
@@ -368,23 +383,28 @@ function renderOrders() {
   // Search filter
   if (search) {
     const searchLower = search.toLowerCase();
-    filteredOrders = filteredOrders.filter(order => 
-      order.phoneNumber?.includes(search) ||
-      order.user?.name?.toLowerCase().includes(searchLower) ||
-      order.serviceName?.toLowerCase().includes(searchLower) ||
-      order.description?.toLowerCase().includes(searchLower)
+    filteredOrders = filteredOrders.filter(
+      (order) =>
+        order.phoneNumber?.includes(search) ||
+        order.user?.name?.toLowerCase().includes(searchLower) ||
+        order.serviceName?.toLowerCase().includes(searchLower) ||
+        order.description?.toLowerCase().includes(searchLower),
     );
   }
 
   // Date filter
   if (dateFrom) {
     const fromDate = new Date(dateFrom);
-    filteredOrders = filteredOrders.filter(order => new Date(order.createdAt) >= fromDate);
+    filteredOrders = filteredOrders.filter(
+      (order) => new Date(order.createdAt) >= fromDate,
+    );
   }
   if (dateTo) {
     const toDate = new Date(dateTo);
     toDate.setHours(23, 59, 59, 999);
-    filteredOrders = filteredOrders.filter(order => new Date(order.createdAt) <= toDate);
+    filteredOrders = filteredOrders.filter(
+      (order) => new Date(order.createdAt) <= toDate,
+    );
   }
 
   // Pagination
@@ -395,12 +415,12 @@ function renderOrders() {
 
   // Update pagination info
   state.pagination.total = total;
-  updateElement('showingFrom', total > 0 ? startIndex + 1 : 0);
-  updateElement('showingTo', Math.min(startIndex + limit, total));
-  updateElement('totalOrders', total);
+  updateElement("showingFrom", total > 0 ? startIndex + 1 : 0);
+  updateElement("showingTo", Math.min(startIndex + limit, total));
+  updateElement("totalOrders", total);
 
   // Render based on view
-  if (state.view === 'table') {
+  if (state.view === "table") {
     renderOrdersTable(paginatedOrders);
   } else {
     renderOrdersCards(paginatedOrders);
@@ -410,33 +430,35 @@ function renderOrders() {
 }
 
 function renderOrdersTable(orders) {
-  const tbody = document.getElementById('ordersTableBody');
-  const emptyState = document.getElementById('ordersEmptyState');
-  const tableWrapper = document.getElementById('ordersTableView');
-  const cardsView = document.getElementById('ordersCardsView');
+  const tbody = document.getElementById("ordersTableBody");
+  const emptyState = document.getElementById("ordersEmptyState");
+  const tableWrapper = document.getElementById("ordersTableView");
+  const cardsView = document.getElementById("ordersCardsView");
 
   if (!tbody) return;
 
   // Show/hide views
-  tableWrapper.style.display = 'block';
-  cardsView.classList.remove('active');
+  tableWrapper.style.display = "block";
+  cardsView.classList.remove("active");
 
   if (orders.length === 0) {
-    tbody.innerHTML = '';
-    emptyState.style.display = 'block';
+    tbody.innerHTML = "";
+    emptyState.style.display = "block";
     return;
   }
 
-  emptyState.style.display = 'none';
+  emptyState.style.display = "none";
 
-  tbody.innerHTML = orders.map(order => `
+  tbody.innerHTML = orders
+    .map(
+      (order) => `
     <tr onclick="openOrderDrawer('${order.id}')">
-      <td><span class="order-id">#${order.id?.slice(-6) || '000000'}</span></td>
+      <td><span class="order-id">#${order.id?.slice(-6) || "000000"}</span></td>
       <td>
         <div class="customer-cell">
-          <div class="customer-avatar">${getInitials(order.user?.name || 'M')}</div>
+          <div class="customer-avatar">${getInitials(order.user?.name || "M")}</div>
           <div class="customer-info">
-            <h4>${order.user?.name || 'Noma\'lum'}</h4>
+            <h4>${order.user?.name || "Noma'lum"}</h4>
             <a href="tel:${order.phoneNumber}" onclick="event.stopPropagation();">${order.phoneNumber}</a>
           </div>
         </div>
@@ -444,7 +466,7 @@ function renderOrdersTable(orders) {
       <td>
         <div class="service-cell">
           <div class="service-icon"><i class="fas fa-briefcase"></i></div>
-          <span class="service-name">${order.serviceName || 'Xizmat'}</span>
+          <span class="service-name">${order.serviceName || "Xizmat"}</span>
         </div>
       </td>
       <td>
@@ -470,44 +492,48 @@ function renderOrdersTable(orders) {
         </button>
       </td>
     </tr>
-  `).join('');
+  `,
+    )
+    .join("");
 }
 
 function renderOrdersCards(orders) {
-  const cardsView = document.getElementById('ordersCardsView');
-  const tableWrapper = document.getElementById('ordersTableView');
-  const emptyState = document.getElementById('ordersEmptyState');
+  const cardsView = document.getElementById("ordersCardsView");
+  const tableWrapper = document.getElementById("ordersTableView");
+  const emptyState = document.getElementById("ordersEmptyState");
 
   if (!cardsView) return;
 
   // Show/hide views
-  tableWrapper.style.display = 'none';
-  cardsView.classList.add('active');
+  tableWrapper.style.display = "none";
+  cardsView.classList.add("active");
 
   if (orders.length === 0) {
-    cardsView.innerHTML = '';
-    emptyState.style.display = 'block';
+    cardsView.innerHTML = "";
+    emptyState.style.display = "block";
     return;
   }
 
-  emptyState.style.display = 'none';
+  emptyState.style.display = "none";
 
-  cardsView.innerHTML = orders.map(order => `
+  cardsView.innerHTML = orders
+    .map(
+      (order) => `
     <div class="order-card" onclick="openOrderDrawer('${order.id}')">
       <div class="order-card-header">
-        <span class="order-card-id">#${order.id?.slice(-6) || '000000'}</span>
+        <span class="order-card-id">#${order.id?.slice(-6) || "000000"}</span>
         ${getStatusBadgeHTML(order.status)}
       </div>
       <div class="order-card-customer">
-        <div class="customer-avatar">${getInitials(order.user?.name || 'M')}</div>
+        <div class="customer-avatar">${getInitials(order.user?.name || "M")}</div>
         <div class="customer-info">
-          <h4>${order.user?.name || 'Noma\'lum'}</h4>
+          <h4>${order.user?.name || "Noma'lum"}</h4>
           <a href="tel:${order.phoneNumber}" onclick="event.stopPropagation();">${order.phoneNumber}</a>
         </div>
       </div>
       <div class="order-card-service">
         <div class="service-icon"><i class="fas fa-briefcase"></i></div>
-        <span class="service-name">${order.serviceName || 'Xizmat'}</span>
+        <span class="service-name">${order.serviceName || "Xizmat"}</span>
       </div>
       <div class="order-card-footer">
         <span class="order-card-date">
@@ -516,15 +542,17 @@ function renderOrdersCards(orders) {
         </span>
       </div>
     </div>
-  `).join('');
+  `,
+    )
+    .join("");
 }
 
 function renderPagination() {
   const { page, limit, total } = state.pagination;
   const totalPages = Math.ceil(total / limit);
-  const container = document.getElementById('paginationNumbers');
-  const prevBtn = document.getElementById('prevPage');
-  const nextBtn = document.getElementById('nextPage');
+  const container = document.getElementById("paginationNumbers");
+  const prevBtn = document.getElementById("prevPage");
+  const nextBtn = document.getElementById("nextPage");
 
   if (!container) return;
 
@@ -533,12 +561,12 @@ function renderPagination() {
   nextBtn.disabled = page >= totalPages;
 
   // Generate page numbers
-  let html = '';
+  let html = "";
   const startPage = Math.max(1, page - 2);
   const endPage = Math.min(totalPages, page + 2);
 
   for (let i = startPage; i <= endPage; i++) {
-    html += `<button class="pagination-btn ${i === page ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
+    html += `<button class="pagination-btn ${i === page ? "active" : ""}" onclick="goToPage(${i})">${i}</button>`;
   }
 
   container.innerHTML = html;
@@ -553,67 +581,70 @@ function goToPage(page) {
 // ORDER DRAWER
 // ============================================
 function openOrderDrawer(orderId) {
-  const order = state.orders.find(o => o.id === orderId);
+  const order = state.orders.find((o) => o.id === orderId);
   if (!order) return;
 
   state.currentOrderId = orderId;
 
   // Populate drawer
-  updateElement('drawerOrderId', order.id?.slice(-6) || '000000');
-  updateElement('drawerCustomerName', order.user?.name || 'Noma\'lum');
-  
-  const phoneEl = document.getElementById('drawerPhone');
+  updateElement("drawerOrderId", order.id?.slice(-6) || "000000");
+  updateElement("drawerCustomerName", order.user?.name || "Noma'lum");
+
+  const phoneEl = document.getElementById("drawerPhone");
   if (phoneEl) {
     phoneEl.innerHTML = `<a href="tel:${order.phoneNumber}">${order.phoneNumber}</a>`;
   }
-  
-  updateElement('drawerEmail', order.user?.email || '-');
-  updateElement('drawerServiceName', order.serviceName || '-');
-  updateElement('drawerDescription', order.description || '-');
+
+  updateElement("drawerEmail", order.user?.email || "-");
+  updateElement("drawerServiceName", order.serviceName || "-");
+  updateElement("drawerDescription", order.description || "-");
 
   // Highlight current status
   const currentStatus = mapStatusToLocal(order.status);
-  document.querySelectorAll('#orderDrawer .status-badge').forEach(btn => {
-    btn.style.opacity = btn.dataset.status === currentStatus ? '1' : '0.5';
-    btn.style.transform = btn.dataset.status === currentStatus ? 'scale(1.05)' : 'scale(1)';
+  document.querySelectorAll("#orderDrawer .status-badge").forEach((btn) => {
+    btn.style.opacity = btn.dataset.status === currentStatus ? "1" : "0.5";
+    btn.style.transform =
+      btn.dataset.status === currentStatus ? "scale(1.05)" : "scale(1)";
   });
 
   // Render timeline
   renderOrderTimeline(order);
 
   // Show drawer
-  DOM.orderDrawer().classList.add('open');
-  DOM.drawerOverlay().classList.add('show');
-  document.body.style.overflow = 'hidden';
+  DOM.orderDrawer().classList.add("open");
+  DOM.drawerOverlay().classList.add("show");
+  document.body.style.overflow = "hidden";
 }
 
 function closeOrderDrawer() {
-  DOM.orderDrawer().classList.remove('open');
-  DOM.drawerOverlay().classList.remove('show');
-  document.body.style.overflow = '';
+  DOM.orderDrawer().classList.remove("open");
+  DOM.drawerOverlay().classList.remove("show");
+  document.body.style.overflow = "";
   state.currentOrderId = null;
 }
 
 function renderOrderTimeline(order) {
-  const timeline = document.getElementById('orderTimeline');
+  const timeline = document.getElementById("orderTimeline");
   if (!timeline) return;
 
   const currentStatus = mapStatusToLocal(order.status);
-  const statuses = ['new', 'accepted', 'progress', 'ready', 'closed'];
+  const statuses = ["new", "accepted", "progress", "ready", "closed"];
   const currentIndex = statuses.indexOf(currentStatus);
 
-  timeline.innerHTML = statuses.map((status, index) => {
-    const config = STATUS_CONFIG[status];
-    const isCompleted = index < currentIndex;
-    const isActive = index === currentIndex;
+  timeline.innerHTML = statuses
+    .map((status, index) => {
+      const config = STATUS_CONFIG[status];
+      const isCompleted = index < currentIndex;
+      const isActive = index === currentIndex;
 
-    return `
-      <div class="timeline-item ${isCompleted ? 'completed' : ''} ${isActive ? 'active' : ''}">
+      return `
+      <div class="timeline-item ${isCompleted ? "completed" : ""} ${isActive ? "active" : ""}">
         <h4>${config.label}</h4>
-        <p>${isCompleted ? 'Bajarildi' : isActive ? 'Hozirgi holat' : 'Kutilmoqda'}</p>
+        <p>${isCompleted ? "Bajarildi" : isActive ? "Hozirgi holat" : "Kutilmoqda"}</p>
       </div>
     `;
-  }).join('');
+    })
+    .join("");
 }
 
 async function setOrderStatus(newStatus) {
@@ -622,21 +653,24 @@ async function setOrderStatus(newStatus) {
   try {
     // Map local status to API status
     const apiStatus = mapStatusToAPI(newStatus);
-    
-    await apiRequest(`/orders/${state.currentOrderId}/status`, 'PUT', { status: apiStatus });
-    
-    showToast('Status yangilandi', 'success');
-    
+
+    await apiRequest(`/orders/${state.currentOrderId}/status`, "PUT", {
+      status: apiStatus,
+    });
+
+    showToast("Status yangilandi", "success");
+
     // Update local state
-    const order = state.orders.find(o => o.id === state.currentOrderId);
+    const order = state.orders.find((o) => o.id === state.currentOrderId);
     if (order) {
       order.status = apiStatus;
     }
 
     // Update UI
-    document.querySelectorAll('#orderDrawer .status-badge').forEach(btn => {
-      btn.style.opacity = btn.dataset.status === newStatus ? '1' : '0.5';
-      btn.style.transform = btn.dataset.status === newStatus ? 'scale(1.05)' : 'scale(1)';
+    document.querySelectorAll("#orderDrawer .status-badge").forEach((btn) => {
+      btn.style.opacity = btn.dataset.status === newStatus ? "1" : "0.5";
+      btn.style.transform =
+        btn.dataset.status === newStatus ? "scale(1.05)" : "scale(1)";
     });
 
     renderOrderTimeline(order);
@@ -644,43 +678,44 @@ async function setOrderStatus(newStatus) {
     updateOrderCountsFromOrders();
 
     // Update badge
-    const newOrdersCount = state.orders.filter(o => o.status === 'pending' || o.status === 'new').length;
+    const newOrdersCount = state.orders.filter(
+      (o) => o.status === "pending" || o.status === "new",
+    ).length;
     updateOrdersBadge(newOrdersCount);
-
   } catch (error) {
-    showToast(error.message, 'error');
+    showToast(error.message, "error");
   }
 }
 
 async function saveOrderChanges() {
   if (!state.currentOrderId) return;
 
-  const comment = document.getElementById('orderComment')?.value;
-  
+  const comment = document.getElementById("orderComment")?.value;
+
   // If there's a comment, you might want to save it
   // For now, just close the drawer
   closeOrderDrawer();
-  showToast('O\'zgarishlar saqlandi', 'success');
+  showToast("O'zgarishlar saqlandi", "success");
 }
 
 async function confirmDeleteOrder(orderId) {
   state.currentOrderId = orderId;
-  
-  const modal = document.getElementById('deleteModal');
-  const confirmBtn = document.getElementById('confirmDeleteBtn');
-  
+
+  const modal = document.getElementById("deleteModal");
+  const confirmBtn = document.getElementById("confirmDeleteBtn");
+
   confirmBtn.onclick = async () => {
     try {
-      await apiRequest(`/orders/${orderId}`, 'DELETE');
-      showToast('Zakaz o\'chirildi', 'success');
+      await apiRequest(`/orders/${orderId}`, "DELETE");
+      showToast("Zakaz o'chirildi", "success");
       closeDeleteModal();
       await loadOrders();
     } catch (error) {
-      showToast(error.message, 'error');
+      showToast(error.message, "error");
     }
   };
-  
-  modal.classList.add('show');
+
+  modal.classList.add("show");
 }
 
 // ============================================
@@ -689,21 +724,23 @@ async function confirmDeleteOrder(orderId) {
 async function loadUsers() {
   try {
     let endpoint = `/admin/users?page=${state.pagination.page}&limit=${state.pagination.limit}`;
-    
+
     const response = await apiRequest(endpoint);
     state.users = response.data?.users || [];
-    
+
     renderUsersTable();
-    updateElement('totalUsersCount', `${response.data?.total || state.users.length} ta`);
-    
+    updateElement(
+      "totalUsersCount",
+      `${response.data?.total || state.users.length} ta`,
+    );
   } catch (error) {
-    console.error('Users load error:', error);
-    showToast(error.message, 'error');
+    console.error("Users load error:", error);
+    showToast(error.message, "error");
   }
 }
 
 function renderUsersTable() {
-  const tbody = document.getElementById('usersTableBody');
+  const tbody = document.getElementById("usersTableBody");
   if (!tbody) return;
 
   if (state.users.length === 0) {
@@ -717,7 +754,9 @@ function renderUsersTable() {
     return;
   }
 
-  tbody.innerHTML = state.users.map(user => `
+  tbody.innerHTML = state.users
+    .map(
+      (user) => `
     <tr>
       <td>
         <div class="customer-cell">
@@ -729,13 +768,13 @@ function renderUsersTable() {
       </td>
       <td style="color: var(--gray-600);">${user.email}</td>
       <td>
-        <span class="status-badge ${user.role === 'admin' ? 'status-accepted' : 'status-new'}" style="cursor: default;">
-          ${user.role === 'admin' ? 'Admin' : 'User'}
+        <span class="status-badge ${user.role === "admin" ? "status-accepted" : "status-new"}" style="cursor: default;">
+          ${user.role === "admin" ? "Admin" : "User"}
         </span>
       </td>
       <td>
-        <span class="status-badge ${user.isActive ? 'status-ready' : 'status-cancelled'}" style="cursor: default;">
-          ${user.isActive ? 'Faol' : 'Nofaol'}
+        <span class="status-badge ${user.isActive ? "status-ready" : "status-cancelled"}" style="cursor: default;">
+          ${user.isActive ? "Faol" : "Nofaol"}
         </span>
       </td>
       <td style="color: var(--gray-500);">${formatDate(user.createdAt)}</td>
@@ -746,44 +785,50 @@ function renderUsersTable() {
         <button class="action-btn view" onclick="toggleUserStatus('${user.id}')" title="Status">
           <i class="fas fa-power-off"></i>
         </button>
-        ${user.id !== state.user?.id ? `
+        ${
+          user.id !== state.user?.id
+            ? `
           <button class="action-btn delete" onclick="confirmDeleteUser('${user.id}')" title="O'chirish">
             <i class="fas fa-trash"></i>
           </button>
-        ` : ''}
+        `
+            : ""
+        }
       </td>
     </tr>
-  `).join('');
+  `,
+    )
+    .join("");
 }
 
 function openUserModal(userId = null) {
-  const modal = document.getElementById('userModal');
-  const title = document.getElementById('userModalTitle');
-  const passwordField = document.getElementById('passwordField');
-  const passwordInput = document.getElementById('userPassword');
-  const passwordHint = document.getElementById('passwordHint');
+  const modal = document.getElementById("userModal");
+  const title = document.getElementById("userModalTitle");
+  const passwordField = document.getElementById("passwordField");
+  const passwordInput = document.getElementById("userPassword");
+  const passwordHint = document.getElementById("passwordHint");
 
   // Reset form
-  document.getElementById('userForm').reset();
-  document.getElementById('userId').value = '';
-  document.getElementById('userFormError').style.display = 'none';
+  document.getElementById("userForm").reset();
+  document.getElementById("userId").value = "";
+  document.getElementById("userFormError").style.display = "none";
 
   if (userId) {
-    title.textContent = 'Foydalanuvchini tahrirlash';
-    passwordInput.removeAttribute('required');
-    passwordHint.style.display = 'block';
+    title.textContent = "Foydalanuvchini tahrirlash";
+    passwordInput.removeAttribute("required");
+    passwordHint.style.display = "block";
     loadUserForEdit(userId);
   } else {
-    title.textContent = 'Yangi foydalanuvchi';
-    passwordInput.setAttribute('required', '');
-    passwordHint.style.display = 'none';
+    title.textContent = "Yangi foydalanuvchi";
+    passwordInput.setAttribute("required", "");
+    passwordHint.style.display = "none";
   }
 
-  modal.classList.add('show');
+  modal.classList.add("show");
 }
 
 function closeUserModal() {
-  document.getElementById('userModal').classList.remove('show');
+  document.getElementById("userModal").classList.remove("show");
 }
 
 async function loadUserForEdit(userId) {
@@ -791,13 +836,13 @@ async function loadUserForEdit(userId) {
     const response = await apiRequest(`/admin/users/${userId}`);
     const user = response.data;
 
-    document.getElementById('userId').value = user.id;
-    document.getElementById('userName').value = user.name;
-    document.getElementById('userEmail').value = user.email;
-    document.getElementById('userRole').value = user.role;
-    document.getElementById('userActive').checked = user.isActive;
+    document.getElementById("userId").value = user.id;
+    document.getElementById("userName").value = user.name;
+    document.getElementById("userEmail").value = user.email;
+    document.getElementById("userRole").value = user.role;
+    document.getElementById("userActive").checked = user.isActive;
   } catch (error) {
-    showToast(error.message, 'error');
+    showToast(error.message, "error");
     closeUserModal();
   }
 }
@@ -809,32 +854,32 @@ function editUser(userId) {
 async function handleUserSubmit(e) {
   e.preventDefault();
 
-  const userId = document.getElementById('userId').value;
-  const errorEl = document.getElementById('userFormError');
+  const userId = document.getElementById("userId").value;
+  const errorEl = document.getElementById("userFormError");
 
   const data = {
-    name: document.getElementById('userName').value,
-    email: document.getElementById('userEmail').value,
-    role: document.getElementById('userRole').value,
-    isActive: document.getElementById('userActive').checked
+    name: document.getElementById("userName").value,
+    email: document.getElementById("userEmail").value,
+    role: document.getElementById("userRole").value,
+    isActive: document.getElementById("userActive").checked,
   };
 
-  const password = document.getElementById('userPassword').value;
+  const password = document.getElementById("userPassword").value;
   if (password) {
     data.password = password;
   }
 
   try {
     if (userId) {
-      await apiRequest(`/admin/users/${userId}`, 'PUT', data);
-      showToast('Foydalanuvchi yangilandi', 'success');
+      await apiRequest(`/admin/users/${userId}`, "PUT", data);
+      showToast("Foydalanuvchi yangilandi", "success");
     } else {
       if (!password) {
-        throw new Error('Parol kiritilishi shart');
+        throw new Error("Parol kiritilishi shart");
       }
       data.password = password;
-      await apiRequest('/admin/users', 'POST', data);
-      showToast('Foydalanuvchi yaratildi', 'success');
+      await apiRequest("/admin/users", "POST", data);
+      showToast("Foydalanuvchi yaratildi", "success");
     }
 
     closeUserModal();
@@ -842,43 +887,43 @@ async function handleUserSubmit(e) {
     loadDashboard();
   } catch (error) {
     errorEl.textContent = error.message;
-    errorEl.style.display = 'block';
+    errorEl.style.display = "block";
   }
 }
 
 async function toggleUserStatus(userId) {
   try {
-    await apiRequest(`/admin/users/${userId}/toggle-status`, 'PUT');
-    showToast('Status o\'zgartirildi', 'success');
+    await apiRequest(`/admin/users/${userId}/toggle-status`, "PUT");
+    showToast("Status o'zgartirildi", "success");
     loadUsers();
   } catch (error) {
-    showToast(error.message, 'error');
+    showToast(error.message, "error");
   }
 }
 
 function confirmDeleteUser(userId) {
   state.currentUserId = userId;
-  
-  const modal = document.getElementById('deleteModal');
-  const confirmBtn = document.getElementById('confirmDeleteBtn');
-  
+
+  const modal = document.getElementById("deleteModal");
+  const confirmBtn = document.getElementById("confirmDeleteBtn");
+
   confirmBtn.onclick = async () => {
     try {
-      await apiRequest(`/admin/users/${userId}`, 'DELETE');
-      showToast('Foydalanuvchi o\'chirildi', 'success');
+      await apiRequest(`/admin/users/${userId}`, "DELETE");
+      showToast("Foydalanuvchi o'chirildi", "success");
       closeDeleteModal();
       loadUsers();
       loadDashboard();
     } catch (error) {
-      showToast(error.message, 'error');
+      showToast(error.message, "error");
     }
   };
-  
-  modal.classList.add('show');
+
+  modal.classList.add("show");
 }
 
 function closeDeleteModal() {
-  document.getElementById('deleteModal').classList.remove('show');
+  document.getElementById("deleteModal").classList.remove("show");
 }
 
 // ============================================
@@ -887,48 +932,50 @@ function closeDeleteModal() {
 async function handleProfileUpdate(e) {
   e.preventDefault();
 
-  const name = document.getElementById('settingsName').value;
+  const name = document.getElementById("settingsName").value;
 
   try {
-    await apiRequest(`/admin/users/${state.user.id}`, 'PUT', { name });
+    await apiRequest(`/admin/users/${state.user.id}`, "PUT", { name });
 
     state.user.name = name;
-    localStorage.setItem('adminUser', JSON.stringify(state.user));
-    
+    localStorage.setItem("adminUser", JSON.stringify(state.user));
+
     // Update sidebar
-    const sidebarAvatar = document.getElementById('sidebarAvatar');
-    const sidebarUserName = document.getElementById('sidebarUserName');
+    const sidebarAvatar = document.getElementById("sidebarAvatar");
+    const sidebarUserName = document.getElementById("sidebarUserName");
     if (sidebarAvatar) sidebarAvatar.textContent = getInitials(name);
     if (sidebarUserName) sidebarUserName.textContent = name;
 
-    showToast('Profil yangilandi', 'success');
+    showToast("Profil yangilandi", "success");
   } catch (error) {
-    showToast(error.message, 'error');
+    showToast(error.message, "error");
   }
 }
 
 async function handlePasswordUpdate(e) {
   e.preventDefault();
 
-  const newPassword = document.getElementById('newPassword').value;
-  const confirmPassword = document.getElementById('confirmPassword').value;
+  const newPassword = document.getElementById("newPassword").value;
+  const confirmPassword = document.getElementById("confirmPassword").value;
 
   if (newPassword !== confirmPassword) {
-    showToast('Parollar mos kelmaydi', 'error');
+    showToast("Parollar mos kelmaydi", "error");
     return;
   }
 
   if (newPassword.length < 6) {
-    showToast('Parol kamida 6 ta belgidan iborat bo\'lishi kerak', 'error');
+    showToast("Parol kamida 6 ta belgidan iborat bo'lishi kerak", "error");
     return;
   }
 
   try {
-    await apiRequest(`/admin/users/${state.user.id}`, 'PUT', { password: newPassword });
-    showToast('Parol yangilandi', 'success');
-    document.getElementById('passwordForm').reset();
+    await apiRequest(`/admin/users/${state.user.id}`, "PUT", {
+      password: newPassword,
+    });
+    showToast("Parol yangilandi", "success");
+    document.getElementById("passwordForm").reset();
   } catch (error) {
-    showToast(error.message, 'error');
+    showToast(error.message, "error");
   }
 }
 
@@ -937,65 +984,65 @@ async function handlePasswordUpdate(e) {
 // ============================================
 function showSection(section) {
   // Hide all sections
-  document.querySelectorAll('.section-content').forEach(el => {
-    el.style.display = 'none';
+  document.querySelectorAll(".section-content").forEach((el) => {
+    el.style.display = "none";
   });
 
   // Show selected section
   const sectionEl = document.getElementById(`${section}Section`);
-  if (sectionEl) sectionEl.style.display = 'block';
+  if (sectionEl) sectionEl.style.display = "block";
 
   // Update nav
-  document.querySelectorAll('.nav-item').forEach(item => {
-    item.classList.remove('active');
+  document.querySelectorAll(".nav-item").forEach((item) => {
+    item.classList.remove("active");
     if (item.dataset.section === section) {
-      item.classList.add('active');
+      item.classList.add("active");
     }
   });
 
   // Update title
   const titles = {
-    dashboard: { title: 'Dashboard', subtitle: 'Statistika va ma\'lumotlar' },
-    orders: { title: 'Zakazlar', subtitle: 'Barcha buyurtmalarni boshqarish' },
-    users: { title: 'Foydalanuvchilar', subtitle: 'Tizim foydalanuvchilari' },
-    settings: { title: 'Sozlamalar', subtitle: 'Profil va tizim sozlamalari' }
+    dashboard: { title: "Dashboard", subtitle: "Statistika va ma'lumotlar" },
+    orders: { title: "Zakazlar", subtitle: "Barcha buyurtmalarni boshqarish" },
+    users: { title: "Foydalanuvchilar", subtitle: "Tizim foydalanuvchilari" },
+    settings: { title: "Sozlamalar", subtitle: "Profil va tizim sozlamalari" },
   };
 
-  const titleInfo = titles[section] || { title: section, subtitle: '' };
-  updateElement('pageTitle', titleInfo.title);
-  updateElement('pageSubtitle', titleInfo.subtitle);
+  const titleInfo = titles[section] || { title: section, subtitle: "" };
+  updateElement("pageTitle", titleInfo.title);
+  updateElement("pageSubtitle", titleInfo.subtitle);
 
   // Load data
-  if (section === 'dashboard') loadDashboard();
-  else if (section === 'orders') loadOrders();
-  else if (section === 'users') loadUsers();
+  if (section === "dashboard") loadDashboard();
+  else if (section === "orders") loadOrders();
+  else if (section === "users") loadUsers();
 
   // Close sidebar on mobile
   closeSidebar();
 }
 
 function toggleSidebar() {
-  DOM.sidebar().classList.toggle('open');
-  DOM.mobileOverlay().classList.toggle('show');
+  DOM.sidebar().classList.toggle("open");
+  DOM.mobileOverlay().classList.toggle("show");
 }
 
 function closeSidebar() {
-  DOM.sidebar().classList.remove('open');
-  DOM.mobileOverlay().classList.remove('show');
+  DOM.sidebar().classList.remove("open");
+  DOM.mobileOverlay().classList.remove("show");
 }
 
 // ============================================
 // THEME
 // ============================================
 function toggleTheme() {
-  const isDark = state.theme === 'dark';
-  state.theme = isDark ? 'light' : 'dark';
-  
-  document.documentElement.setAttribute('data-theme', state.theme);
-  localStorage.setItem('adminTheme', state.theme);
-  
-  const icon = document.getElementById('themeIcon');
-  if (icon) icon.className = isDark ? 'fas fa-moon' : 'fas fa-sun';
+  const isDark = state.theme === "dark";
+  state.theme = isDark ? "light" : "dark";
+
+  document.documentElement.setAttribute("data-theme", state.theme);
+  localStorage.setItem("adminTheme", state.theme);
+
+  const icon = document.getElementById("themeIcon");
+  if (icon) icon.className = isDark ? "fas fa-moon" : "fas fa-sun";
 }
 
 // ============================================
@@ -1003,20 +1050,28 @@ function toggleTheme() {
 // ============================================
 function setupEventListeners() {
   // Login form
-  document.getElementById('adminLoginForm')?.addEventListener('submit', handleLogin);
+  document
+    .getElementById("adminLoginForm")
+    ?.addEventListener("submit", handleLogin);
 
   // User form
-  document.getElementById('userForm')?.addEventListener('submit', handleUserSubmit);
+  document
+    .getElementById("userForm")
+    ?.addEventListener("submit", handleUserSubmit);
 
   // Profile form
-  document.getElementById('profileForm')?.addEventListener('submit', handleProfileUpdate);
+  document
+    .getElementById("profileForm")
+    ?.addEventListener("submit", handleProfileUpdate);
 
   // Password form
-  document.getElementById('passwordForm')?.addEventListener('submit', handlePasswordUpdate);
+  document
+    .getElementById("passwordForm")
+    ?.addEventListener("submit", handlePasswordUpdate);
 
   // Navigation
-  document.querySelectorAll('.nav-item').forEach(item => {
-    item.addEventListener('click', (e) => {
+  document.querySelectorAll(".nav-item").forEach((item) => {
+    item.addEventListener("click", (e) => {
       e.preventDefault();
       const section = item.dataset.section;
       if (section) showSection(section);
@@ -1024,10 +1079,12 @@ function setupEventListeners() {
   });
 
   // Filter tabs
-  document.querySelectorAll('.filter-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
+  document.querySelectorAll(".filter-tab").forEach((tab) => {
+    tab.addEventListener("click", () => {
+      document
+        .querySelectorAll(".filter-tab")
+        .forEach((t) => t.classList.remove("active"));
+      tab.classList.add("active");
       state.filters.status = tab.dataset.status;
       state.pagination.page = 1;
       renderOrders();
@@ -1035,20 +1092,22 @@ function setupEventListeners() {
   });
 
   // View toggle
-  document.querySelectorAll('.view-toggle button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.view-toggle button').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+  document.querySelectorAll(".view-toggle button").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document
+        .querySelectorAll(".view-toggle button")
+        .forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
       state.view = btn.dataset.view;
       renderOrders();
     });
   });
 
   // Search
-  const orderSearch = document.getElementById('orderSearchInput');
+  const orderSearch = document.getElementById("orderSearchInput");
   if (orderSearch) {
     let timeout;
-    orderSearch.addEventListener('input', (e) => {
+    orderSearch.addEventListener("input", (e) => {
       clearTimeout(timeout);
       timeout = setTimeout(() => {
         state.filters.search = e.target.value;
@@ -1059,35 +1118,37 @@ function setupEventListeners() {
   }
 
   // Date filters
-  document.getElementById('dateFrom')?.addEventListener('change', (e) => {
+  document.getElementById("dateFrom")?.addEventListener("change", (e) => {
     state.filters.dateFrom = e.target.value;
     state.pagination.page = 1;
     renderOrders();
   });
 
-  document.getElementById('dateTo')?.addEventListener('change', (e) => {
+  document.getElementById("dateTo")?.addEventListener("change", (e) => {
     state.filters.dateTo = e.target.value;
     state.pagination.page = 1;
     renderOrders();
   });
 
   // Per page select
-  document.getElementById('perPageSelect')?.addEventListener('change', (e) => {
+  document.getElementById("perPageSelect")?.addEventListener("change", (e) => {
     state.pagination.limit = parseInt(e.target.value);
     state.pagination.page = 1;
     renderOrders();
   });
 
   // Pagination
-  document.getElementById('prevPage')?.addEventListener('click', () => {
+  document.getElementById("prevPage")?.addEventListener("click", () => {
     if (state.pagination.page > 1) {
       state.pagination.page--;
       renderOrders();
     }
   });
 
-  document.getElementById('nextPage')?.addEventListener('click', () => {
-    const totalPages = Math.ceil(state.pagination.total / state.pagination.limit);
+  document.getElementById("nextPage")?.addEventListener("click", () => {
+    const totalPages = Math.ceil(
+      state.pagination.total / state.pagination.limit,
+    );
     if (state.pagination.page < totalPages) {
       state.pagination.page++;
       renderOrders();
@@ -1095,10 +1156,10 @@ function setupEventListeners() {
   });
 
   // User filters
-  const userSearch = document.getElementById('userSearchInput');
+  const userSearch = document.getElementById("userSearchInput");
   if (userSearch) {
     let timeout;
-    userSearch.addEventListener('input', (e) => {
+    userSearch.addEventListener("input", (e) => {
       clearTimeout(timeout);
       timeout = setTimeout(() => {
         // Filter logic for users
@@ -1108,8 +1169,8 @@ function setupEventListeners() {
   }
 
   // Escape key closes modals/drawers
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
       closeOrderDrawer();
       closeUserModal();
       closeDeleteModal();
@@ -1118,37 +1179,45 @@ function setupEventListeners() {
 }
 
 function setupKeyboardShortcuts() {
-  document.addEventListener('keydown', (e) => {
+  document.addEventListener("keydown", (e) => {
     // Ctrl/Cmd + K for search
-    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+    if ((e.ctrlKey || e.metaKey) && e.key === "k") {
       e.preventDefault();
-      document.getElementById('globalSearch')?.focus();
+      document.getElementById("globalSearch")?.focus();
     }
-    
+
     // Number keys for navigation
     if (e.altKey) {
-      switch(e.key) {
-        case '1': showSection('dashboard'); break;
-        case '2': showSection('orders'); break;
-        case '3': showSection('users'); break;
-        case '4': showSection('settings'); break;
+      switch (e.key) {
+        case "1":
+          showSection("dashboard");
+          break;
+        case "2":
+          showSection("orders");
+          break;
+        case "3":
+          showSection("users");
+          break;
+        case "4":
+          showSection("settings");
+          break;
       }
     }
   });
 }
 
 function clearFilters() {
-  state.filters = { status: 'all', search: '', dateFrom: '', dateTo: '' };
+  state.filters = { status: "all", search: "", dateFrom: "", dateTo: "" };
   state.pagination.page = 1;
-  
-  document.getElementById('orderSearchInput').value = '';
-  document.getElementById('dateFrom').value = '';
-  document.getElementById('dateTo').value = '';
-  
-  document.querySelectorAll('.filter-tab').forEach(tab => {
-    tab.classList.toggle('active', tab.dataset.status === 'all');
+
+  document.getElementById("orderSearchInput").value = "";
+  document.getElementById("dateFrom").value = "";
+  document.getElementById("dateTo").value = "";
+
+  document.querySelectorAll(".filter-tab").forEach((tab) => {
+    tab.classList.toggle("active", tab.dataset.status === "all");
   });
-  
+
   renderOrders();
 }
 
@@ -1156,8 +1225,8 @@ function clearFilters() {
 // UTILITIES
 // ============================================
 function getInitials(name) {
-  if (!name) return 'XX';
-  const parts = name.trim().split(' ');
+  if (!name) return "XX";
+  const parts = name.trim().split(" ");
   if (parts.length >= 2) {
     return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
   }
@@ -1165,21 +1234,21 @@ function getInitials(name) {
 }
 
 function formatDate(dateString) {
-  if (!dateString) return '-';
+  if (!dateString) return "-";
   const date = new Date(dateString);
-  return date.toLocaleDateString('uz-UZ', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric'
+  return date.toLocaleDateString("uz-UZ", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
   });
 }
 
 function formatTime(dateString) {
-  if (!dateString) return '';
+  if (!dateString) return "";
   const date = new Date(dateString);
-  return date.toLocaleTimeString('uz-UZ', {
-    hour: '2-digit',
-    minute: '2-digit'
+  return date.toLocaleTimeString("uz-UZ", {
+    hour: "2-digit",
+    minute: "2-digit",
   });
 }
 
@@ -1190,50 +1259,50 @@ function updateElement(id, value) {
 
 function getStatusBadgeHTML(status, withIcon = false) {
   const config = STATUS_CONFIG[status] || STATUS_CONFIG.pending;
-  const icon = withIcon ? '<i class="fas fa-chevron-down"></i>' : '';
+  const icon = withIcon ? '<i class="fas fa-chevron-down"></i>' : "";
   return `<span class="status-badge ${config.class}">${config.label}${icon}</span>`;
 }
 
 function mapStatusToLocal(apiStatus) {
   const mapping = {
-    'pending': 'new',
-    'in_progress': 'progress',
-    'completed': 'ready'
+    pending: "new",
+    in_progress: "progress",
+    completed: "ready",
   };
   return mapping[apiStatus] || apiStatus;
 }
 
 function mapStatusToAPI(localStatus) {
   const mapping = {
-    'new': 'pending',
-    'progress': 'in_progress',
-    'ready': 'completed'
+    new: "pending",
+    progress: "in_progress",
+    ready: "completed",
   };
   return mapping[localStatus] || localStatus;
 }
 
 function updateOrdersBadge(count) {
-  const badge = document.getElementById('ordersBadge');
+  const badge = document.getElementById("ordersBadge");
   if (badge) {
     badge.textContent = count;
-    badge.style.display = count > 0 ? 'inline-flex' : 'none';
+    badge.style.display = count > 0 ? "inline-flex" : "none";
   }
 }
 
 // ============================================
 // TOAST NOTIFICATIONS
 // ============================================
-function showToast(message, type = 'success') {
+function showToast(message, type = "success") {
   const container = DOM.toastContainer();
   if (!container) return;
 
-  const toast = document.createElement('div');
+  const toast = document.createElement("div");
   toast.className = `toast ${type}`;
-  
+
   const icons = {
-    success: 'fa-check-circle',
-    error: 'fa-exclamation-circle',
-    warning: 'fa-exclamation-triangle'
+    success: "fa-check-circle",
+    error: "fa-exclamation-circle",
+    warning: "fa-exclamation-triangle",
   };
 
   toast.innerHTML = `
@@ -1241,7 +1310,7 @@ function showToast(message, type = 'success') {
       <i class="fas ${icons[type] || icons.success}"></i>
     </div>
     <div class="toast-content">
-      <h4>${type === 'error' ? 'Xatolik' : type === 'warning' ? 'Ogohlantirish' : 'Muvaffaqiyat'}</h4>
+      <h4>${type === "error" ? "Xatolik" : type === "warning" ? "Ogohlantirish" : "Muvaffaqiyat"}</h4>
       <p>${message}</p>
     </div>
     <button class="toast-close" onclick="this.parentElement.remove()">
@@ -1252,11 +1321,11 @@ function showToast(message, type = 'success') {
   container.appendChild(toast);
 
   // Trigger animation
-  setTimeout(() => toast.classList.add('show'), 10);
+  setTimeout(() => toast.classList.add("show"), 10);
 
   // Auto remove
   setTimeout(() => {
-    toast.classList.remove('show');
+    toast.classList.remove("show");
     setTimeout(() => toast.remove(), 300);
   }, 4000);
 }
