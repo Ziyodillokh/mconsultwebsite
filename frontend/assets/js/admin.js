@@ -199,36 +199,89 @@ async function apiRequest(endpoint, method = "GET", body = null) {
 // ============================================
 async function loadDashboard() {
   try {
-    // Load stats
-    const dashboardResponse = await apiRequest("/admin/dashboard");
-    const stats = dashboardResponse.data;
-
-    // Update dashboard stats
-    updateElement(
-      "statTotalOrders",
-      stats.totalOrders || stats.totalUsers || 0,
-    );
-    updateElement("statNewOrders", stats.newOrders || stats.newUsersToday || 0);
-    updateElement(
-      "statCompletedOrders",
-      stats.completedOrders || stats.activeUsers || 0,
-    );
-    updateElement("statTotalUsers", stats.totalUsers || 0);
-
-    // Load orders for recent orders table
+    // Load orders first to calculate dynamic stats
     await loadOrders();
+
+    // Calculate dynamic statistics from orders
+    const totalOrders = state.orders.length;
+    const newOrders = state.orders.filter(
+      (o) => o.status === "pending" || o.status === "new",
+    ).length;
+    const completedOrders = state.orders.filter(
+      (o) =>
+        o.status === "ready" ||
+        o.status === "completed" ||
+        o.status === "closed",
+    ).length;
+
+    // Load users count
+    let totalUsers = 0;
+    try {
+      const usersResponse = await apiRequest("/admin/users");
+      totalUsers = usersResponse.data?.length || 0;
+    } catch (e) {
+      console.log("Could not load users count");
+    }
+
+    // Update dashboard stats with dynamic values
+    updateElement("statTotalOrders", totalOrders);
+    updateElement("statNewOrders", newOrders);
+    updateElement("statCompletedOrders", completedOrders);
+    updateElement("statTotalUsers", totalUsers);
+
+    // Calculate and update percentages
+    updateStatPercentage("statNewOrdersTrend", newOrders, totalOrders);
+    updateStatPercentage(
+      "statCompletedOrdersTrend",
+      completedOrders,
+      totalOrders,
+    );
+
+    // For total orders and users, show growth (placeholder - could be based on time comparison)
+    updateStatTrend("statTotalOrdersTrend", totalOrders > 0 ? 100 : 0);
+    updateStatTrend("statTotalUsersTrend", totalUsers > 0 ? 100 : 0);
 
     // Render recent orders (first 5)
     renderRecentOrders(state.orders.slice(0, 5));
 
     // Update badge
-    const newOrdersCount = state.orders.filter(
-      (o) => o.status === "pending" || o.status === "new",
-    ).length;
-    updateOrdersBadge(newOrdersCount);
+    updateOrdersBadge(newOrders);
   } catch (error) {
     console.error("Dashboard load error:", error);
     showToast(error.message, "error");
+  }
+}
+
+// Update stat card percentage
+function updateStatPercentage(elementId, count, total) {
+  const trendEl = document.getElementById(elementId);
+  if (!trendEl) return;
+
+  const percentage = total > 0 ? Math.round((count / total) * 100) : 0;
+  const spanEl = trendEl.querySelector("span");
+  if (spanEl) {
+    spanEl.textContent = `${percentage}%`;
+  }
+
+  // Update trend direction
+  if (percentage > 0) {
+    trendEl.classList.remove("down");
+    trendEl.classList.add("up");
+    const icon = trendEl.querySelector("i");
+    if (icon) {
+      icon.className = "fas fa-arrow-up";
+    }
+  }
+}
+
+// Update stat trend
+function updateStatTrend(elementId, percentage) {
+  const trendEl = document.getElementById(elementId);
+  if (!trendEl) return;
+
+  const spanEl = trendEl.querySelector("span");
+  if (spanEl) {
+    spanEl.textContent = percentage > 0 ? `${percentage}%` : "0%";
   }
 }
 
@@ -1126,7 +1179,12 @@ function setupEventListeners() {
 
   // Per page select
   document.getElementById("perPageSelect")?.addEventListener("change", (e) => {
-    state.pagination.limit = parseInt(e.target.value);
+    const value = e.target.value;
+    if (value === "all") {
+      state.pagination.limit = 9999; // Show all orders
+    } else {
+      state.pagination.limit = parseInt(value);
+    }
     state.pagination.page = 1;
     renderOrders();
   });
