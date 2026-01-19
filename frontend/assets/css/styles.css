@@ -1083,24 +1083,31 @@ button:disabled {
   }
 }
 
-/* Mobile scrolling - smooth experience */
-#serviceModal .overflow-y-auto {
-  -webkit-overflow-scrolling: touch;
-  scroll-behavior: smooth;
-}
+/* Mobile scrolling - OPTIMIZED */
+@media (max-width: 1023px) {
+  #serviceModal .overflow-y-auto {
+    transition: none !important;
+    animation: none !important;
+    will-change: scroll-position;
+  }
 
-/* Custom scrollbar for service modal (mobile only) */
-#serviceModal .overflow-y-auto::-webkit-scrollbar {
-  width: 4px;
-}
+  #serviceModal .overflow-y-auto * {
+    transition: none !important;
+    animation: none !important;
+  }
 
-#serviceModal .overflow-y-auto::-webkit-scrollbar-track {
-  background: transparent;
-}
+  #serviceModal .overflow-y-auto::-webkit-scrollbar {
+    width: 4px;
+  }
 
-#serviceModal .overflow-y-auto::-webkit-scrollbar-thumb {
-  background: #dc2626;
-  border-radius: 2px;
+  #serviceModal .overflow-y-auto::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  #serviceModal .overflow-y-auto::-webkit-scrollbar-thumb {
+    background: #dc2626;
+    border-radius: 2px;
+  }
 }
 
 /* Desktop: Ensure no overflow */
@@ -1134,12 +1141,6 @@ button:disabled {
 #serviceModal label {
   word-wrap: break-word;
   overflow-wrap: break-word;
-  hyphens: auto;
-}
-
-/* Ensure text doesn't overflow on any language */
-[data-lang-key] {
-  line-height: 1.4;
 }
 
 /* Smooth transition for form inputs */
@@ -1147,56 +1148,50 @@ button:disabled {
   box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
 }
 
-/* Desktop scrolling - ultra smooth */
+/* Desktop scrolling - PURE NATIVE */
 @media (min-width: 1024px) {
+  /* Force proper height chain */
+  #serviceModal > .lg\\:flex {
+    height: 100vh !important;
+  }
+
+  /* Right panel - flex column */
+  #serviceModal .flex-1.h-full.flex.flex-col {
+    height: 100vh !important;
+    overflow: hidden !important;
+  }
+
+  /* Desktop scroll area - OPTIMIZED FOR TOUCHPAD */
   #serviceModal .desktop-scroll-area {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
     overflow-y: auto !important;
-    scroll-behavior: smooth;
-    overscroll-behavior: contain;
-    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden !important;
+    /* CRITICAL: Disable ALL transitions for scroll performance */
+    transition: none !important;
+    animation: none !important;
+    will-change: scroll-position;
+    contain: layout style;
+  }
+
+  /* Disable transitions on ALL children during scroll */
+  #serviceModal .desktop-scroll-area * {
+    transition: none !important;
+    animation: none !important;
   }
 
   #serviceModal .desktop-scroll-area::-webkit-scrollbar {
-    width: 6px;
+    width: 8px;
   }
 
   #serviceModal .desktop-scroll-area::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 3px;
+    background: #f5f5f5;
   }
 
   #serviceModal .desktop-scroll-area::-webkit-scrollbar-thumb {
     background: #dc2626;
-    border-radius: 3px;
-    transition: background 0.2s ease;
+    border-radius: 4px;
   }
-
-  #serviceModal .desktop-scroll-area::-webkit-scrollbar-thumb:hover {
-    background: #b91c1c;
-  }
-
-  /* Smooth scroll for modal content wrapper */
-  #serviceModal .lg\\:flex {
-    scroll-behavior: smooth;
-  }
-
-  /* Make description area scroll smoothly */
-  #service-desc-desktop {
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-  }
-}
-
-/* Ultra smooth scrolling for all scrollable elements */
-.smooth-scroll {
-  scroll-behavior: smooth !important;
-  -webkit-overflow-scrolling: touch !important;
-  overscroll-behavior: contain;
-}
-
-/* Smooth scrolling for whole page */
-html {
-  scroll-behavior: smooth;
 }
 
 /* Mobile safe area padding */

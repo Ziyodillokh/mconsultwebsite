@@ -1841,6 +1841,14 @@ function openServiceModal(number, title, description, imageUrl) {
   modal.classList.add("flex", "show");
   document.body.style.overflow = "hidden";
 
+  // CRITICAL: Disable scroll-based animations when modal is open
+  if (typeof ScrollTrigger !== "undefined") {
+    ScrollTrigger.getAll().forEach((trigger) => trigger.disable());
+  }
+  if (typeof AOS !== "undefined") {
+    AOS.refreshHard();
+  }
+
   // Apply current language translations to modal
   setLanguage(currentLanguage);
 }
@@ -1850,6 +1858,14 @@ function closeServiceModal() {
   const modal = document.getElementById("serviceModal");
   modal.classList.add("hide");
   modal.classList.remove("show");
+
+  // CRITICAL: Re-enable scroll-based animations when modal closes
+  if (typeof ScrollTrigger !== "undefined") {
+    ScrollTrigger.getAll().forEach((trigger) => trigger.enable());
+  }
+  if (typeof AOS !== "undefined") {
+    AOS.refresh();
+  }
 
   setTimeout(() => {
     modal.classList.add("hidden");
@@ -2041,110 +2057,26 @@ document.addEventListener("keydown", (e) => {
 });
 
 // ============================================
-// ULTRA SMOOTH SCROLL FOR DESKTOP MODAL
+// SMOOTH SCROLL - CSS ONLY (NO JS INTERFERENCE)
 // ============================================
-document.addEventListener("DOMContentLoaded", () => {
-  // Store active scroll handler for cleanup
-  let activeScrollHandler = null;
-  let activeElement = null;
+// SCROLL RESET FOR LANGUAGE CHANGE
+// ============================================
 
-  // Apply smooth scroll to modal scrollable areas
-  const applyUltraSmoothScroll = (element, resetVelocity = false) => {
-    if (!element) return;
-
-    // Remove previous handler if exists
-    if (activeScrollHandler && activeElement) {
-      activeElement.removeEventListener("wheel", activeScrollHandler);
-      activeScrollHandler = null;
+// Reset scroll position when language changes
+window.resetModalScroll = () => {
+  const modal = document.getElementById("serviceModal");
+  if (modal && !modal.classList.contains("hidden")) {
+    // Reset desktop scroll area
+    const desktopScrollArea = modal.querySelector(".desktop-scroll-area");
+    if (desktopScrollArea) {
+      desktopScrollArea.scrollTop = 0;
     }
-
-    let velocity = 0;
-    let animationId = null;
-    const friction = 0.92;
-    const sensitivity = 1.2;
-
-    // Cancel any running animation
-    if (animationId) {
-      cancelAnimationFrame(animationId);
-      animationId = null;
+    // Reset mobile scroll area
+    const mobileScrollArea = modal.querySelector(
+      ".lg\\:hidden .overflow-y-auto",
+    );
+    if (mobileScrollArea) {
+      mobileScrollArea.scrollTop = 0;
     }
-
-    const animate = () => {
-      if (Math.abs(velocity) < 0.5) {
-        velocity = 0;
-        animationId = null;
-        return;
-      }
-
-      element.scrollTop += velocity;
-      velocity *= friction;
-
-      const maxScroll = element.scrollHeight - element.clientHeight;
-      if (element.scrollTop <= 0 || element.scrollTop >= maxScroll) {
-        velocity = 0;
-      }
-
-      animationId = requestAnimationFrame(animate);
-    };
-
-    activeScrollHandler = (e) => {
-      e.preventDefault();
-      velocity += e.deltaY * sensitivity;
-      const maxVelocity = 60;
-      velocity = Math.max(-maxVelocity, Math.min(maxVelocity, velocity));
-
-      if (!animationId) {
-        animationId = requestAnimationFrame(animate);
-      }
-    };
-
-    activeElement = element;
-    element.addEventListener("wheel", activeScrollHandler, { passive: false });
-  };
-
-  // Global function to reset modal scroll (called on language change)
-  window.resetModalScroll = () => {
-    const modal = document.getElementById("serviceModal");
-    if (modal && !modal.classList.contains("hidden")) {
-      // Wait for DOM to update after language change
-      setTimeout(() => {
-        const desktopScrollArea = modal.querySelector(".desktop-scroll-area");
-        if (desktopScrollArea) {
-          // Force layout recalculation
-          desktopScrollArea.style.display = 'none';
-          desktopScrollArea.offsetHeight; // Trigger reflow
-          desktopScrollArea.style.display = '';
-          
-          applyUltraSmoothScroll(desktopScrollArea, true);
-        }
-      }, 150);
-    }
-  };
-
-  // Apply to desktop scroll areas when modal opens
-  const observer = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-      if (
-        mutation.type === "attributes" &&
-        mutation.attributeName === "class"
-      ) {
-        const modal = document.getElementById("serviceModal");
-        if (modal && !modal.classList.contains("hidden")) {
-          setTimeout(() => {
-            const desktopScrollArea = modal.querySelector(
-              ".desktop-scroll-area",
-            );
-            if (desktopScrollArea) {
-              applyUltraSmoothScroll(desktopScrollArea);
-            }
-          }, 100);
-        }
-      }
-    });
-  });
-
-  const serviceModal = document.getElementById("serviceModal");
-  if (serviceModal) {
-    observer.observe(serviceModal, { attributes: true });
   }
-});
+};
