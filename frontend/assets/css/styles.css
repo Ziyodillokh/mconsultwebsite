@@ -1151,7 +1151,7 @@ button:disabled {
 @media (min-width: 1024px) {
   #serviceModal .desktop-scroll-area {
     overflow-y: auto !important;
-    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
   }
 
   #serviceModal .desktop-scroll-area::-webkit-scrollbar {
@@ -1167,6 +1167,15 @@ button:disabled {
     background: #dc2626;
     border-radius: 3px;
   }
+
+  #serviceModal .desktop-scroll-area::-webkit-scrollbar-thumb:hover {
+    background: #b91c1c;
+  }
+}
+
+/* Smooth scrolling for whole page */
+html {
+  scroll-behavior: smooth;
 }
 
 /* Mobile safe area padding */
