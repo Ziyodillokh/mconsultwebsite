@@ -170,6 +170,12 @@ const translations = {
 
     // Language selector
     lang_select: "Tilni tanlang",
+    
+    // User actions
+    btn_logout: "Chiqish",
+    welcome_user: "Xush kelibsiz",
+    login_success: "Muvaffaqiyatli kirdingiz!",
+    register_success: "Ro'yxatdan muvaffaqiyatli o'tdingiz!",
   },
 
   ru: {
@@ -334,6 +340,12 @@ const translations = {
 
     // Language selector
     lang_select: "Выберите язык",
+    
+    // User actions
+    btn_logout: "Выход",
+    welcome_user: "Добро пожаловать",
+    login_success: "Вы успешно вошли!",
+    register_success: "Вы успешно зарегистрировались!",
   },
 
   en: {
@@ -494,6 +506,12 @@ const translations = {
 
     // Language selector
     lang_select: "Select Language",
+    
+    // User actions
+    btn_logout: "Logout",
+    welcome_user: "Welcome",
+    login_success: "Successfully logged in!",
+    register_success: "Successfully registered!",
   },
 };
 
@@ -828,8 +846,9 @@ async function handleLogin(event) {
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
 
-      // Show success message
-      alert(`Xush kelibsiz, ${data.user.name}!`);
+      // Show success message in current language
+      const welcomeMsg = getTranslation('welcome_user');
+      alert(`${welcomeMsg}, ${data.user.name}!`);
 
       // Close modal and reset form
       closeAuthModal("login");
@@ -839,18 +858,22 @@ async function handleLogin(event) {
       updateNavbarForLoggedIn();
     } else {
       loginErrorMsg.textContent =
-        data.message || "Login muvaffaqiyatsiz bo'ldi";
+        data.message || getTranslation('auth_login_error') || "Login muvaffaqiyatsiz bo'ldi";
       loginError.classList.remove("hidden");
     }
   } catch (error) {
     console.error("Login error:", error);
-    loginErrorMsg.textContent =
-      "Server bilan aloqa o'rnatib bo'lmadi. Iltimos qayta urinib ko'ring.";
+    const errorMsgs = {
+      uz: "Server bilan aloqa o'rnatib bo'lmadi. Iltimos qayta urinib ko'ring.",
+      ru: "Не удалось подключиться к серверу. Пожалуйста, попробуйте снова.",
+      en: "Could not connect to server. Please try again."
+    };
+    loginErrorMsg.textContent = errorMsgs[currentLanguage] || errorMsgs.uz;
     loginError.classList.remove("hidden");
   } finally {
     // Enable button
     loginBtn.disabled = false;
-    loginBtnText.textContent = "Kirish";
+    loginBtnText.textContent = getTranslation('btn_login');
   }
 }
 
@@ -905,8 +928,13 @@ async function handleRegister(event) {
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
 
-      // Show success message
-      registerSuccessMsg.textContent = `Xush kelibsiz, ${data.user.name}! Ro'yxatdan o'tish muvaffaqiyatli bo'ldi.`;
+      // Show success message in current language
+      const successMsgs = {
+        uz: `Xush kelibsiz, ${data.user.name}! Ro'yxatdan o'tish muvaffaqiyatli bo'ldi.`,
+        ru: `Добро пожаловать, ${data.user.name}! Регистрация успешна.`,
+        en: `Welcome, ${data.user.name}! Registration successful.`
+      };
+      registerSuccessMsg.textContent = successMsgs[currentLanguage] || successMsgs.uz;
       registerSuccess.classList.remove("hidden");
 
       // Reset form
@@ -919,18 +947,22 @@ async function handleRegister(event) {
       }, 2000);
     } else {
       registerErrorMsg.textContent =
-        data.message || "Ro'yxatdan o'tish muvaffaqiyatsiz bo'ldi";
+        data.message || getTranslation('auth_register_error') || "Ro'yxatdan o'tish muvaffaqiyatsiz bo'ldi";
       registerError.classList.remove("hidden");
     }
   } catch (error) {
     console.error("Register error:", error);
-    registerErrorMsg.textContent =
-      "Server bilan aloqa o'rnatib bo'lmadi. Iltimos qayta urinib ko'ring.";
+    const errorMsgs = {
+      uz: "Server bilan aloqa o'rnatib bo'lmadi. Iltimos qayta urinib ko'ring.",
+      ru: "Не удалось подключиться к серверу. Пожалуйста, попробуйте снова.",
+      en: "Could not connect to server. Please try again."
+    };
+    registerErrorMsg.textContent = errorMsgs[currentLanguage] || errorMsgs.uz;
     registerError.classList.remove("hidden");
   } finally {
     // Enable button
     registerBtn.disabled = false;
-    registerBtnText.textContent = "Ro'yxatdan o'tish";
+    registerBtnText.textContent = getTranslation('auth_register_title');
   }
 }
 
@@ -939,15 +971,73 @@ function updateNavbarForLoggedIn() {
   const user = JSON.parse(localStorage.getItem("user"));
   if (user) {
     console.log("✅ Logged in as:", user.name);
-    // You can update navbar here to show user profile, logout button, etc.
+    
+    // Update desktop login/register buttons
+    const desktopLoginBtn = document.querySelector('button[onclick="openAuthModal(\'login\')"]');
+    const desktopRegisterBtn = document.querySelector('button[onclick="openAuthModal(\'register\')"]');
+    
+    if (desktopLoginBtn && desktopRegisterBtn) {
+      // Replace login button with user info
+      desktopLoginBtn.innerHTML = `<i class="fas fa-user mr-2"></i><span>${user.name.split(' ')[0]}</span>`;
+      desktopLoginBtn.onclick = null;
+      desktopLoginBtn.classList.add('cursor-default');
+      
+      // Replace register button with logout
+      desktopRegisterBtn.innerHTML = `<i class="fas fa-sign-out-alt mr-2"></i><span data-lang-key="btn_logout">${getTranslation('btn_logout')}</span>`;
+      desktopRegisterBtn.onclick = handleLogout;
+      desktopRegisterBtn.classList.remove('bg-white', 'text-red-600');
+      desktopRegisterBtn.classList.add('bg-red-700', 'text-white', 'hover:bg-red-800');
+    }
+    
+    // Update mobile menu buttons
+    const mobileLoginBtn = document.querySelector('#mobileMenu button[onclick="openAuthModal(\'login\')"]');
+    const mobileRegisterBtn = document.querySelector('#mobileMenu button[onclick="openAuthModal(\'register\')"]');
+    
+    if (mobileLoginBtn && mobileRegisterBtn) {
+      mobileLoginBtn.innerHTML = `<i class="fas fa-user mr-2"></i><span>${user.name}</span>`;
+      mobileLoginBtn.onclick = null;
+      mobileLoginBtn.classList.add('cursor-default');
+      
+      mobileRegisterBtn.innerHTML = `<i class="fas fa-sign-out-alt mr-2"></i><span>${getTranslation('btn_logout')}</span>`;
+      mobileRegisterBtn.onclick = handleLogout;
+    }
   }
+}
+
+// Get translation helper
+function getTranslation(key) {
+  return translations[currentLanguage]?.[key] || translations['uz'][key] || key;
+}
+
+// Handle logout
+function handleLogout() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+  
+  // Show logout message
+  const logoutMsg = {
+    uz: "Tizimdan chiqdingiz",
+    ru: "Вы вышли из системы",
+    en: "You have been logged out"
+  };
+  alert(logoutMsg[currentLanguage] || logoutMsg.uz);
+  
+  // Reload page to reset UI
+  window.location.reload();
 }
 
 // Check if user is logged in on page load
 document.addEventListener("DOMContentLoaded", () => {
   const user = localStorage.getItem("user");
-  if (user) {
+  const token = localStorage.getItem("token");
+  
+  if (user && token) {
+    // Verify token is still valid (optional - can add API call)
     updateNavbarForLoggedIn();
+  } else {
+    // Clear any stale data
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
   }
 });
 
