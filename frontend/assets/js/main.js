@@ -677,13 +677,41 @@ function setLanguage(lang) {
     registerName: { uz: "Sizning ismingiz", ru: "Ваше имя", en: "Your name" },
     loginEmail: { uz: "Email manzilingiz", ru: "Ваш email", en: "Your email" },
     loginPassword: { uz: "Parolingiz", ru: "Ваш пароль", en: "Your password" },
-    registerEmail: { uz: "Email manzilingiz", ru: "Ваш email", en: "Your email" },
-    registerPassword: { uz: "Parol kiriting", ru: "Введите пароль", en: "Enter password" },
-    registerConfirmPassword: { uz: "Parolni tasdiqlang", ru: "Подтвердите пароль", en: "Confirm password" },
-    orderPhoneNumberDesktop: { uz: "+998 90 123 45 67", ru: "+998 90 123 45 67", en: "+998 90 123 45 67" },
-    orderUserDescriptionDesktop: { uz: "Qisqacha izoh yozing...", ru: "Напишите краткий комментарий...", en: "Write a brief description..." },
-    orderPhoneNumberMobile: { uz: "+998 90 123 45 67", ru: "+998 90 123 45 67", en: "+998 90 123 45 67" },
-    orderUserDescriptionMobile: { uz: "Qisqacha izoh...", ru: "Краткий комментарий...", en: "Brief description..." },
+    registerEmail: {
+      uz: "Email manzilingiz",
+      ru: "Ваш email",
+      en: "Your email",
+    },
+    registerPassword: {
+      uz: "Parol kiriting",
+      ru: "Введите пароль",
+      en: "Enter password",
+    },
+    registerConfirmPassword: {
+      uz: "Parolni tasdiqlang",
+      ru: "Подтвердите пароль",
+      en: "Confirm password",
+    },
+    orderPhoneNumberDesktop: {
+      uz: "+998 90 123 45 67",
+      ru: "+998 90 123 45 67",
+      en: "+998 90 123 45 67",
+    },
+    orderUserDescriptionDesktop: {
+      uz: "Qisqacha izoh yozing...",
+      ru: "Напишите краткий комментарий...",
+      en: "Write a brief description...",
+    },
+    orderPhoneNumberMobile: {
+      uz: "+998 90 123 45 67",
+      ru: "+998 90 123 45 67",
+      en: "+998 90 123 45 67",
+    },
+    orderUserDescriptionMobile: {
+      uz: "Qisqacha izoh...",
+      ru: "Краткий комментарий...",
+      en: "Brief description...",
+    },
   };
   Object.keys(placeholders).forEach((id) => {
     const el = document.getElementById(id);
@@ -1332,189 +1360,350 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 // SERVICE MODAL & ORDER SYSTEM
 // ============================================
 
-// Service detailed descriptions with HTML formatting
+// Service detailed descriptions with HTML formatting - Multi-language
 const serviceDetails = {
-  "01": `
-    <div class="space-y-4">
-      <p class="text-base sm:text-lg font-semibold text-gray-800">🧮 Biz bilan buxgalteriya tizimi tartiblashtiriladi!</p>
-      <p class="text-gray-600">💸 Biz sizning buxgalteriya va hisobotlaringiz uchun sifatli va izchil xizmatlarni taklif etamiz.</p>
-      
-      <div class="bg-red-50 rounded-xl p-4 border border-red-100">
-        <p class="font-bold text-gray-800 mb-3">Bizning buxgalteriya xizmatlar o'z ichiga oladi:</p>
-        <ul class="space-y-2 text-gray-700">
-          <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Buxgalteriya hisobi yuritish</li>
-          <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Soliq hisoboti tayyorlash</li>
-          <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Tenderlarda qatnashish</li>
-          <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Audit</li>
-          <li class="flex items-start gap-2"><span class="text-green-500">✅</span> 1C va Didox</li>
-        </ul>
-      </div>
-      
-      <div class="bg-gray-50 rounded-xl p-4 border border-gray-100">
-        <p class="font-bold text-gray-800 mb-3">🌟 Nega bizni tanlash kerak?</p>
-        <ul class="space-y-2 text-gray-700 text-sm">
-          <li class="flex items-start gap-2"><span>💼</span> <strong>Tajribali buxgalterlar:</strong> Bizning jamoamiz ko'p yillik tajribaga ega</li>
-          <li class="flex items-start gap-2"><span>💲</span> <strong>Arzon narxlar:</strong> Sifatni yo'qotmasdan raqobatbardosh narxlar</li>
-          <li class="flex items-start gap-2"><span>🤝</span> <strong>Shaxsiylashtirilgan xizmat:</strong> Siz bilan alohida hamkorlik</li>
-          <li class="flex items-start gap-2"><span>💻</span> <strong>Zamonaviy texnologiya:</strong> Eng so'nggi dasturlardan foydalanamiz</li>
-        </ul>
-      </div>
-      
-      <p class="text-red-600 font-semibold">📈 Moliyangizni nazorat qilishga tayyormisiz? Buyurtma bering!</p>
-    </div>
-  `,
-  "02": `
-    <div class="space-y-4">
-      <div class="bg-blue-50 rounded-xl p-4 border border-blue-100">
-        <p class="text-base sm:text-lg font-bold text-gray-800 mb-2">BROKERLIK – BU NIMA?</p>
-        <p class="text-gray-600">Brokerlik — bu mijozlar nomidan moliyaviy operatsiyalarni bajarish faoliyati. Broker siz uchun aksiya, obligatsiya, valyuta, kripto, hatto birja tovarlari bilan savdo qiladi.</p>
-      </div>
-      
-      <div class="bg-gray-50 rounded-xl p-4 border border-gray-100">
-        <p class="font-bold text-gray-800 mb-3">BROKER NIMA ISH QILADI?</p>
-        <ul class="space-y-2 text-gray-700 text-sm">
-          <li class="flex items-start gap-2"><span class="text-red-500">•</span> Bozor holatini tahlil qiladi</li>
-          <li class="flex items-start gap-2"><span class="text-red-500">•</span> Qaysi aktivni qachon sotib olish yoki sotishni tavsiya qiladi</li>
-          <li class="flex items-start gap-2"><span class="text-red-500">•</span> Mijoz buyurtmalarini birjada bajaradi</li>
-          <li class="flex items-start gap-2"><span class="text-red-500">•</span> Risklarni kamaytirish bo'yicha maslahat beradi</li>
-          <li class="flex items-start gap-2"><span class="text-red-500">•</span> Mijozning portfelini boshqaradi</li>
-        </ul>
-      </div>
-      
-      <div class="bg-red-50 rounded-xl p-4 border border-red-100">
-        <p class="font-bold text-gray-800 mb-3">BROKERLIK QANDAY ISHLAYDI?</p>
-        <ul class="space-y-2 text-gray-700 text-sm">
-          <li>1️⃣ Siz broker platformasida akkount ochasiz</li>
-          <li>2️⃣ Hisobingizga pul kiritasiz</li>
-          <li>3️⃣ Broker sizga aktivlar taklif qiladi yoki siz mustaqil tanlaysiz</li>
-          <li>4️⃣ Savdo buyurtmasi beriladi</li>
-          <li>5️⃣ Broker uni birjada amalga oshiradi</li>
-        </ul>
-      </div>
-      
-      <p class="text-red-600 font-semibold">📲 Biz bilan bog'laning va professional yondashuvga guvoh bo'ling!</p>
-    </div>
-  `,
-  "03": `
-    <div class="space-y-4">
-      <p class="text-base sm:text-lg font-bold text-gray-800">🔹 IT — kelajak kasblarining markazi</p>
-      <p class="text-gray-600">IT sohasiga kirish tobora osonlashmoqda:</p>
-      
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <div class="bg-blue-50 rounded-xl p-3 border border-blue-100">
-          <p class="font-bold text-gray-800 flex items-center gap-2"><span>💻</span> Frontend / Backend</p>
-          <p class="text-gray-600 text-sm">Sayt va ilovalar yaratish</p>
+  uz: {
+    "01": `
+      <div class="space-y-4">
+        <p class="text-base sm:text-lg font-semibold text-gray-800">🧮 Biz bilan buxgalteriya tizimi tartiblashtiriladi!</p>
+        <p class="text-gray-600">💸 Biz sizning buxgalteriya va hisobotlaringiz uchun sifatli va izchil xizmatlarni taklif etamiz.</p>
+        
+        <div class="bg-red-50 rounded-xl p-4 border border-red-100">
+          <p class="font-bold text-gray-800 mb-3">Bizning buxgalteriya xizmatlar o'z ichiga oladi:</p>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Buxgalteriya hisobi yuritish</li>
+            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Soliq hisoboti tayyorlash</li>
+            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Tenderlarda qatnashish</li>
+            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Audit</li>
+            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> 1C va Didox</li>
+          </ul>
         </div>
-        <div class="bg-green-50 rounded-xl p-3 border border-green-100">
-          <p class="font-bold text-gray-800 flex items-center gap-2"><span>📱</span> Mobil Development</p>
-          <p class="text-gray-600 text-sm">Android/iOS app ishlab chiqish</p>
+        
+        <p class="text-red-600 font-semibold">📈 Moliyangizni nazorat qilishga tayyormisiz? Buyurtma bering!</p>
+      </div>
+    `,
+    "02": `
+      <div class="space-y-4">
+        <div class="bg-blue-50 rounded-xl p-4 border border-blue-100">
+          <p class="text-base sm:text-lg font-bold text-gray-800 mb-2">BROKERLIK – BU NIMA?</p>
+          <p class="text-gray-600">Brokerlik — bu mijozlar nomidan moliyaviy operatsiyalarni bajarish faoliyati.</p>
         </div>
-        <div class="bg-purple-50 rounded-xl p-3 border border-purple-100">
-          <p class="font-bold text-gray-800 flex items-center gap-2"><span>🤖</span> Sun'iy Intellekt</p>
-          <p class="text-gray-600 text-sm">AI va Data Science</p>
+        
+        <div class="bg-red-50 rounded-xl p-4 border border-red-100">
+          <p class="font-bold text-gray-800 mb-3">BROKERLIK QANDAY ISHLAYDI?</p>
+          <ul class="space-y-2 text-gray-700 text-sm">
+            <li>1️⃣ Siz broker platformasida akkount ochasiz</li>
+            <li>2️⃣ Hisobingizga pul kiritasiz</li>
+            <li>3️⃣ Broker sizga aktivlar taklif qiladi</li>
+            <li>4️⃣ Savdo buyurtmasi beriladi</li>
+            <li>5️⃣ Broker uni birjada amalga oshiradi</li>
+          </ul>
         </div>
-        <div class="bg-red-50 rounded-xl p-3 border border-red-100">
-          <p class="font-bold text-gray-800 flex items-center gap-2"><span>🔐</span> Kiberxavfsizlik</p>
-          <p class="text-gray-600 text-sm">Ma'lumotlarni himoyalash</p>
+        
+        <p class="text-red-600 font-semibold">📲 Biz bilan bog'laning!</p>
+      </div>
+    `,
+    "03": `
+      <div class="space-y-4">
+        <p class="text-base sm:text-lg font-bold text-gray-800">🔹 IT — kelajak kasblarining markazi</p>
+        
+        <div class="grid grid-cols-2 gap-3">
+          <div class="bg-blue-50 rounded-xl p-3 border border-blue-100">
+            <p class="font-bold text-gray-800">💻 Frontend / Backend</p>
+          </div>
+          <div class="bg-green-50 rounded-xl p-3 border border-green-100">
+            <p class="font-bold text-gray-800">📱 Mobil Development</p>
+          </div>
+          <div class="bg-purple-50 rounded-xl p-3 border border-purple-100">
+            <p class="font-bold text-gray-800">🤖 Sun'iy Intellekt</p>
+          </div>
+          <div class="bg-red-50 rounded-xl p-3 border border-red-100">
+            <p class="font-bold text-gray-800">🔐 Kiberxavfsizlik</p>
+          </div>
         </div>
+        
+        <p class="text-red-600 font-semibold">📲 Bizning IT xizmatlarimizga buyurtma bering!</p>
       </div>
-      
-      <div class="bg-gray-50 rounded-xl p-4 border border-gray-100">
-        <p class="text-gray-700">IT mutaxassislarining talab darajasi yil sayin ortmoqda. Eng katta afzallik — <strong>masofadan ishlash</strong> va <strong>yuqori daromad</strong> olish imkoniyati.</p>
-      </div>
-      
-      <p class="text-red-600 font-semibold">📲 Bizning IT xizmatlarimizga buyurtma bering va professionallikning namunasiga guvoh bo'ling!</p>
-    </div>
-  `,
-  "04": `
-    <div class="space-y-4">
-      <p class="text-base sm:text-lg font-bold text-gray-800">Xodimlarni malakasini oshirish xizmati</p>
-      <p class="text-gray-600">Bugungi raqobat kuchli bo'lgan bozor sharoitida kompaniya muvaffaqiyati faqat texnologiya yoki investitsiyaga emas, balki xodimlarning bilim va ko'nikmalariga bevosita bog'liq.</p>
-      
-      <div class="bg-yellow-50 rounded-xl p-4 border border-yellow-100">
-        <p class="font-bold text-gray-800 mb-3">⭐ Malakasini oshirishning asosiy maqsadlari:</p>
-        <ul class="space-y-2 text-gray-700 text-sm">
-          <li class="flex items-start gap-2"><span class="text-yellow-500">⭐</span> Kasbiy bilim va ko'nikmalarni yangilash</li>
-          <li class="flex items-start gap-2"><span class="text-yellow-500">⭐</span> Texnologiya va jarayonlardagi o'zgarishlarga moslashish</li>
-          <li class="flex items-start gap-2"><span class="text-yellow-500">⭐</span> Ish samaradorligini oshirish</li>
-          <li class="flex items-start gap-2"><span class="text-yellow-500">⭐</span> Rahbarlik va boshqaruv ko'nikmalarini rivojlantirish</li>
-          <li class="flex items-start gap-2"><span class="text-yellow-500">⭐</span> Xizmat sifati va mijozlar qoniqishini oshirish</li>
-        </ul>
-      </div>
-      
-      <div class="bg-gray-50 rounded-xl p-4 border border-gray-100">
-        <p class="font-bold text-gray-800 mb-3">Xizmat yo'nalishlari:</p>
-        <div class="space-y-3 text-sm">
-          <div><strong>1. Ichki o'quv dasturlari</strong> - Kompaniya ichida treninglar</div>
-          <div><strong>2. Tashqi treninglar</strong> - Seminarlar, online kurslar (Coursera, Udemy)</div>
-          <div><strong>3. Raqamli kompetensiyalar</strong> - IT, AI, avtomatlashtirish</div>
+    `,
+    "04": `
+      <div class="space-y-4">
+        <p class="text-base sm:text-lg font-bold text-gray-800">Xodimlarni malakasini oshirish xizmati</p>
+        <p class="text-gray-600">Kompaniya muvaffaqiyati xodimlarning bilim va ko'nikmalariga bog'liq.</p>
+        
+        <div class="bg-yellow-50 rounded-xl p-4 border border-yellow-100">
+          <p class="font-bold text-gray-800 mb-3">⭐ Malakasini oshirishning maqsadlari:</p>
+          <ul class="space-y-2 text-gray-700 text-sm">
+            <li class="flex items-start gap-2"><span class="text-yellow-500">⭐</span> Kasbiy bilimlarni yangilash</li>
+            <li class="flex items-start gap-2"><span class="text-yellow-500">⭐</span> Ish samaradorligini oshirish</li>
+            <li class="flex items-start gap-2"><span class="text-yellow-500">⭐</span> Rahbarlik ko'nikmalarini rivojlantirish</li>
+          </ul>
         </div>
+        
+        <p class="text-red-600 font-semibold">📲 Biz bilan bog'laning!</p>
       </div>
-      
-      <p class="text-red-600 font-semibold">📲 Biz bilan bog'laning va professional yondashuvga guvoh bo'ling!</p>
-    </div>
-  `,
-  "05": `
-    <div class="space-y-4">
-      <p class="text-base sm:text-lg font-bold text-gray-800">Litsenziya — qonuniy faoliyatning asosiy talabi</p>
-      <p class="text-gray-600">Ko'p yo'nalishlarda biznes boshlash uchun maxsus ruxsat — litsenziya talab qilinadi.</p>
-      
-      <div class="bg-blue-50 rounded-xl p-4 border border-blue-100">
-        <p class="font-bold text-gray-800 mb-3">Misollar:</p>
-        <div class="grid grid-cols-2 gap-2 text-sm">
-          <div class="flex items-center gap-2"><span>💊</span> Tibbiyot xizmatlari</div>
-          <div class="flex items-center gap-2"><span>🏦</span> Moliyaviy xizmatlar</div>
-          <div class="flex items-center gap-2"><span>📡</span> Telekommunikatsiya</div>
-          <div class="flex items-center gap-2"><span>🛡</span> Xavfsizlik xizmatlari</div>
+    `,
+    "05": `
+      <div class="space-y-4">
+        <p class="text-base sm:text-lg font-bold text-gray-800">Litsenziya — qonuniy faoliyatning asosiy talabi</p>
+        
+        <div class="bg-red-50 rounded-xl p-4 border border-red-100">
+          <p class="font-bold text-gray-800 mb-3">Litsenziya olish uchun kerak:</p>
+          <ul class="space-y-2 text-gray-700 text-sm">
+            <li class="flex items-start gap-2"><span class="text-red-500">•</span> Tashkilot hujjatlari</li>
+            <li class="flex items-start gap-2"><span class="text-red-500">•</span> Mutaxassislar malakasi</li>
+            <li class="flex items-start gap-2"><span class="text-red-500">•</span> Texnik sharoit va talablar</li>
+          </ul>
         </div>
+        
+        <p class="text-red-600 font-semibold">📲 Biz bilan bog'laning!</p>
       </div>
-      
-      <div class="bg-red-50 rounded-xl p-4 border border-red-100">
-        <p class="font-bold text-gray-800 mb-3">Litsenziya olish uchun kerak:</p>
-        <ul class="space-y-2 text-gray-700 text-sm">
-          <li class="flex items-start gap-2"><span class="text-red-500">•</span> Tashkilot hujjatlari</li>
-          <li class="flex items-start gap-2"><span class="text-red-500">•</span> Mutaxassislar malakasi</li>
-          <li class="flex items-start gap-2"><span class="text-red-500">•</span> Texnik sharoit va talablar</li>
-          <li class="flex items-start gap-2"><span class="text-red-500">•</span> Davlat boji va ariza</li>
-        </ul>
+    `,
+    "06": `
+      <div class="space-y-4">
+        <p class="text-base sm:text-lg font-bold text-gray-800">⚡ Energiya Audit Xizmati</p>
+        <p class="text-gray-600">Energiya sarfini optimallashtirish va xarajatlarni 30% gacha tejash!</p>
+        
+        <div class="bg-yellow-50 rounded-xl p-4 border border-yellow-100">
+          <p class="font-bold text-gray-800 mb-3">Energiya audit nima beradi?</p>
+          <ul class="space-y-2 text-gray-700 text-sm">
+            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Energiya sarfi tahlili</li>
+            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Isrof manbalarini aniqlash</li>
+            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Tejash bo'yicha tavsiyalar</li>
+          </ul>
+        </div>
+        
+        <p class="text-red-600 font-semibold">📲 Energiya xarajatlaringizni kamaytiring!</p>
       </div>
-      
-      <div class="bg-green-50 rounded-xl p-4 border border-green-100">
-        <p class="text-gray-700"><strong>Litsenziya biznesni ishonchli va qonuniy qiladi.</strong></p>
+    `,
+  },
+  ru: {
+    "01": `
+      <div class="space-y-4">
+        <p class="text-base sm:text-lg font-semibold text-gray-800">🧮 С нами бухгалтерия будет в порядке!</p>
+        <p class="text-gray-600">💸 Мы предлагаем качественные и последовательные услуги для вашей бухгалтерии и отчётности.</p>
+        
+        <div class="bg-red-50 rounded-xl p-4 border border-red-100">
+          <p class="font-bold text-gray-800 mb-3">Наши бухгалтерские услуги включают:</p>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Ведение бухгалтерского учёта</li>
+            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Подготовка налоговой отчётности</li>
+            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Участие в тендерах</li>
+            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Аудит</li>
+            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> 1C и Didox</li>
+          </ul>
+        </div>
+        
+        <p class="text-red-600 font-semibold">📈 Готовы контролировать свои финансы? Оформите заказ!</p>
       </div>
-      
-      <p class="text-red-600 font-semibold">📲 Biz bilan bog'laning va professional yondashuvga guvoh bo'ling!</p>
-    </div>
-  `,
-  "06": `
-    <div class="space-y-4">
-      <p class="text-base sm:text-lg font-bold text-gray-800">⚡ Energiya Audit Xizmati</p>
-      <p class="text-gray-600">Energiya sarfini optimallashtirish va xarajatlarni 30% gacha tejash imkoniyati!</p>
-      
-      <div class="bg-yellow-50 rounded-xl p-4 border border-yellow-100">
-        <p class="font-bold text-gray-800 mb-3">Energiya audit nima beradi?</p>
-        <ul class="space-y-2 text-gray-700 text-sm">
-          <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Energiya sarfi tahlili</li>
-          <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Isrof manbalarini aniqlash</li>
-          <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Tejash bo'yicha tavsiyalar</li>
-          <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Zamonaviy yechimlar taklifi</li>
-          <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Ekologik standartlarga moslik</li>
-        </ul>
+    `,
+    "02": `
+      <div class="space-y-4">
+        <div class="bg-blue-50 rounded-xl p-4 border border-blue-100">
+          <p class="text-base sm:text-lg font-bold text-gray-800 mb-2">ЧТО ТАКОЕ БРОКЕРСТВО?</p>
+          <p class="text-gray-600">Брокерство — это деятельность по выполнению финансовых операций от имени клиентов.</p>
+        </div>
+        
+        <div class="bg-red-50 rounded-xl p-4 border border-red-100">
+          <p class="font-bold text-gray-800 mb-3">КАК РАБОТАЕТ БРОКЕРСТВО?</p>
+          <ul class="space-y-2 text-gray-700 text-sm">
+            <li>1️⃣ Вы открываете счёт на брокерской платформе</li>
+            <li>2️⃣ Пополняете свой счёт</li>
+            <li>3️⃣ Брокер предлагает вам активы</li>
+            <li>4️⃣ Подаётся торговый ордер</li>
+            <li>5️⃣ Брокер исполняет его на бирже</li>
+          </ul>
+        </div>
+        
+        <p class="text-red-600 font-semibold">📲 Свяжитесь с нами!</p>
       </div>
-      
-      <div class="bg-green-50 rounded-xl p-4 border border-green-100">
-        <p class="font-bold text-gray-800 mb-3">💡 Afzalliklar:</p>
-        <ul class="space-y-2 text-gray-700 text-sm">
-          <li>• Elektr energiyasini 20-30% tejash</li>
-          <li>• Xarajatlarni kamaytirish</li>
-          <li>• Atrof-muhitni asrash</li>
-          <li>• Zamonaviy uskunalar tavsiyasi</li>
-        </ul>
+    `,
+    "03": `
+      <div class="space-y-4">
+        <p class="text-base sm:text-lg font-bold text-gray-800">🔹 IT — центр профессий будущего</p>
+        
+        <div class="grid grid-cols-2 gap-3">
+          <div class="bg-blue-50 rounded-xl p-3 border border-blue-100">
+            <p class="font-bold text-gray-800">💻 Frontend / Backend</p>
+          </div>
+          <div class="bg-green-50 rounded-xl p-3 border border-green-100">
+            <p class="font-bold text-gray-800">📱 Мобильная разработка</p>
+          </div>
+          <div class="bg-purple-50 rounded-xl p-3 border border-purple-100">
+            <p class="font-bold text-gray-800">🤖 Искусственный интеллект</p>
+          </div>
+          <div class="bg-red-50 rounded-xl p-3 border border-red-100">
+            <p class="font-bold text-gray-800">🔐 Кибербезопасность</p>
+          </div>
+        </div>
+        
+        <p class="text-red-600 font-semibold">📲 Закажите наши IT-услуги!</p>
       </div>
-      
-      <p class="text-red-600 font-semibold">📲 Energiya xarajatlaringizni kamaytirishga tayyormisiz? Biz bilan bog'laning!</p>
-    </div>
-  `,
+    `,
+    "04": `
+      <div class="space-y-4">
+        <p class="text-base sm:text-lg font-bold text-gray-800">Услуги по повышению квалификации</p>
+        <p class="text-gray-600">Успех компании зависит от знаний и навыков сотрудников.</p>
+        
+        <div class="bg-yellow-50 rounded-xl p-4 border border-yellow-100">
+          <p class="font-bold text-gray-800 mb-3">⭐ Цели повышения квалификации:</p>
+          <ul class="space-y-2 text-gray-700 text-sm">
+            <li class="flex items-start gap-2"><span class="text-yellow-500">⭐</span> Обновление профессиональных знаний</li>
+            <li class="flex items-start gap-2"><span class="text-yellow-500">⭐</span> Повышение эффективности работы</li>
+            <li class="flex items-start gap-2"><span class="text-yellow-500">⭐</span> Развитие лидерских навыков</li>
+          </ul>
+        </div>
+        
+        <p class="text-red-600 font-semibold">📲 Свяжитесь с нами!</p>
+      </div>
+    `,
+    "05": `
+      <div class="space-y-4">
+        <p class="text-base sm:text-lg font-bold text-gray-800">Лицензия — основное требование законной деятельности</p>
+        
+        <div class="bg-red-50 rounded-xl p-4 border border-red-100">
+          <p class="font-bold text-gray-800 mb-3">Для получения лицензии необходимо:</p>
+          <ul class="space-y-2 text-gray-700 text-sm">
+            <li class="flex items-start gap-2"><span class="text-red-500">•</span> Документы организации</li>
+            <li class="flex items-start gap-2"><span class="text-red-500">•</span> Квалификация специалистов</li>
+            <li class="flex items-start gap-2"><span class="text-red-500">•</span> Технические условия и требования</li>
+          </ul>
+        </div>
+        
+        <p class="text-red-600 font-semibold">📲 Свяжитесь с нами!</p>
+      </div>
+    `,
+    "06": `
+      <div class="space-y-4">
+        <p class="text-base sm:text-lg font-bold text-gray-800">⚡ Услуги энергоаудита</p>
+        <p class="text-gray-600">Оптимизация энергопотребления и экономия до 30%!</p>
+        
+        <div class="bg-yellow-50 rounded-xl p-4 border border-yellow-100">
+          <p class="font-bold text-gray-800 mb-3">Что даёт энергоаудит?</p>
+          <ul class="space-y-2 text-gray-700 text-sm">
+            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Анализ энергопотребления</li>
+            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Выявление источников потерь</li>
+            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Рекомендации по экономии</li>
+          </ul>
+        </div>
+        
+        <p class="text-red-600 font-semibold">📲 Сократите свои энергозатраты!</p>
+      </div>
+    `,
+  },
+  en: {
+    "01": `
+      <div class="space-y-4">
+        <p class="text-base sm:text-lg font-semibold text-gray-800">🧮 Your accounting system will be organized with us!</p>
+        <p class="text-gray-600">💸 We offer quality and consistent services for your accounting and reporting.</p>
+        
+        <div class="bg-red-50 rounded-xl p-4 border border-red-100">
+          <p class="font-bold text-gray-800 mb-3">Our accounting services include:</p>
+          <ul class="space-y-2 text-gray-700">
+            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Accounting management</li>
+            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Tax report preparation</li>
+            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Tender participation</li>
+            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Audit</li>
+            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> 1C and Didox</li>
+          </ul>
+        </div>
+        
+        <p class="text-red-600 font-semibold">📈 Ready to control your finances? Place an order!</p>
+      </div>
+    `,
+    "02": `
+      <div class="space-y-4">
+        <div class="bg-blue-50 rounded-xl p-4 border border-blue-100">
+          <p class="text-base sm:text-lg font-bold text-gray-800 mb-2">WHAT IS BROKERAGE?</p>
+          <p class="text-gray-600">Brokerage is the activity of executing financial operations on behalf of clients.</p>
+        </div>
+        
+        <div class="bg-red-50 rounded-xl p-4 border border-red-100">
+          <p class="font-bold text-gray-800 mb-3">HOW DOES BROKERAGE WORK?</p>
+          <ul class="space-y-2 text-gray-700 text-sm">
+            <li>1️⃣ You open an account on a broker platform</li>
+            <li>2️⃣ You deposit funds to your account</li>
+            <li>3️⃣ Broker offers you assets</li>
+            <li>4️⃣ A trade order is placed</li>
+            <li>5️⃣ Broker executes it on the exchange</li>
+          </ul>
+        </div>
+        
+        <p class="text-red-600 font-semibold">📲 Contact us!</p>
+      </div>
+    `,
+    "03": `
+      <div class="space-y-4">
+        <p class="text-base sm:text-lg font-bold text-gray-800">🔹 IT — the center of future professions</p>
+        
+        <div class="grid grid-cols-2 gap-3">
+          <div class="bg-blue-50 rounded-xl p-3 border border-blue-100">
+            <p class="font-bold text-gray-800">💻 Frontend / Backend</p>
+          </div>
+          <div class="bg-green-50 rounded-xl p-3 border border-green-100">
+            <p class="font-bold text-gray-800">📱 Mobile Development</p>
+          </div>
+          <div class="bg-purple-50 rounded-xl p-3 border border-purple-100">
+            <p class="font-bold text-gray-800">🤖 Artificial Intelligence</p>
+          </div>
+          <div class="bg-red-50 rounded-xl p-3 border border-red-100">
+            <p class="font-bold text-gray-800">🔐 Cybersecurity</p>
+          </div>
+        </div>
+        
+        <p class="text-red-600 font-semibold">📲 Order our IT services!</p>
+      </div>
+    `,
+    "04": `
+      <div class="space-y-4">
+        <p class="text-base sm:text-lg font-bold text-gray-800">Employee Training Services</p>
+        <p class="text-gray-600">Company success depends on employees' knowledge and skills.</p>
+        
+        <div class="bg-yellow-50 rounded-xl p-4 border border-yellow-100">
+          <p class="font-bold text-gray-800 mb-3">⭐ Training goals:</p>
+          <ul class="space-y-2 text-gray-700 text-sm">
+            <li class="flex items-start gap-2"><span class="text-yellow-500">⭐</span> Update professional knowledge</li>
+            <li class="flex items-start gap-2"><span class="text-yellow-500">⭐</span> Increase work efficiency</li>
+            <li class="flex items-start gap-2"><span class="text-yellow-500">⭐</span> Develop leadership skills</li>
+          </ul>
+        </div>
+        
+        <p class="text-red-600 font-semibold">📲 Contact us!</p>
+      </div>
+    `,
+    "05": `
+      <div class="space-y-4">
+        <p class="text-base sm:text-lg font-bold text-gray-800">License — the main requirement for legal activity</p>
+        
+        <div class="bg-red-50 rounded-xl p-4 border border-red-100">
+          <p class="font-bold text-gray-800 mb-3">To obtain a license you need:</p>
+          <ul class="space-y-2 text-gray-700 text-sm">
+            <li class="flex items-start gap-2"><span class="text-red-500">•</span> Organization documents</li>
+            <li class="flex items-start gap-2"><span class="text-red-500">•</span> Specialist qualifications</li>
+            <li class="flex items-start gap-2"><span class="text-red-500">•</span> Technical conditions and requirements</li>
+          </ul>
+        </div>
+        
+        <p class="text-red-600 font-semibold">📲 Contact us!</p>
+      </div>
+    `,
+    "06": `
+      <div class="space-y-4">
+        <p class="text-base sm:text-lg font-bold text-gray-800">⚡ Energy Audit Services</p>
+        <p class="text-gray-600">Optimize energy consumption and save up to 30%!</p>
+        
+        <div class="bg-yellow-50 rounded-xl p-4 border border-yellow-100">
+          <p class="font-bold text-gray-800 mb-3">What does energy audit provide?</p>
+          <ul class="space-y-2 text-gray-700 text-sm">
+            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Energy consumption analysis</li>
+            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Identify waste sources</li>
+            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Savings recommendations</li>
+          </ul>
+        </div>
+        
+        <p class="text-red-600 font-semibold">📲 Reduce your energy costs!</p>
+      </div>
+    `,
+  },
 };
 
 // Open Service Modal
@@ -1565,10 +1754,11 @@ function openServiceModal(number, title, description, imageUrl) {
   if (desktopElements.serviceNumber)
     desktopElements.serviceNumber.value = number;
 
-  // Use detailed description if available
+  // Use detailed description if available (language-specific)
+  const langDetails = serviceDetails[currentLanguage] || serviceDetails["uz"];
   if (desktopElements.desc) {
-    if (serviceDetails[number]) {
-      desktopElements.desc.innerHTML = serviceDetails[number];
+    if (langDetails && langDetails[formattedNumber]) {
+      desktopElements.desc.innerHTML = langDetails[formattedNumber];
     } else {
       desktopElements.desc.textContent = description;
     }
@@ -1585,10 +1775,10 @@ function openServiceModal(number, title, description, imageUrl) {
   if (mobileElements.serviceName) mobileElements.serviceName.value = title;
   if (mobileElements.serviceNumber) mobileElements.serviceNumber.value = number;
 
-  // Use detailed description for mobile
+  // Use detailed description for mobile (language-specific)
   if (mobileElements.desc) {
-    if (serviceDetails[number]) {
-      mobileElements.desc.innerHTML = serviceDetails[number];
+    if (langDetails && langDetails[formattedNumber]) {
+      mobileElements.desc.innerHTML = langDetails[formattedNumber];
     } else {
       mobileElements.desc.textContent = description;
     }
