@@ -1,1305 +1,181 @@
 /* ============================================ */
-/* CROSS-BROWSER MOBILE OPTIMIZATIONS */
+/* FOOTER MOBILE - Clean Minimal Design */
 /* ============================================ */
 
-/* Safe area for notched phones (iPhone X+) */
-@supports (padding: max(0px)) {
-  body {
-    padding-left: max(0px, env(safe-area-inset-left));
-    padding-right: max(0px, env(safe-area-inset-right));
-    padding-bottom: max(0px, env(safe-area-inset-bottom));
-  }
-}
-
-/* Prevent horizontal scroll - all browsers */
-html,
-body {
-  overflow-x: hidden;
-  max-width: 100vw;
-  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-}
-
-/* Fix for older Safari flexbox bugs */
-.flex {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-/* Fix for older browsers grid support */
-@supports not (display: grid) {
-  .grid {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-flex-wrap: wrap;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-  }
-}
-
-/* Touch-friendly tap targets */
 @media (max-width: 768px) {
-  a,
-  button {
-    min-height: 44px;
-    min-width: 44px;
-  }
-
-  /* SCROLLER - Mobileda o'rtacha tezlik */
-  .scroller-inner {
-    animation: scroll 12s linear infinite !important;
-    font-size: 1.25rem !important;
-    gap: 0.75rem !important;
-  }
-
-  .scroller-inner span {
-    white-space: nowrap !important;
-  }
-
-  /* Improve touch scrolling */
-  .scroller {
-    -webkit-overflow-scrolling: touch;
-    padding: 0.75rem 0 !important;
-  }
-
-  /* ============================================ */
-  /* XIZMATLAR SECTION - MOBILE GRID */
-  /* ============================================ */
-
-  #xizmatlar {
-    padding: 3rem 1rem !important;
-  }
-
-  #xizmatlar .grid.md\\:grid-cols-2.lg\\:grid-cols-3 {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 1rem !important;
-  }
-
-  #xizmatlar .premium-card {
-    min-height: auto !important;
-    padding: 1.25rem !important;
-  }
-
-  #xizmatlar .premium-card > div:first-child {
-    height: 160px !important;
-    margin-bottom: 1rem !important;
-  }
-
-  #xizmatlar .premium-card h3 {
-    font-size: 1.25rem !important;
-    margin-bottom: 0.5rem !important;
-  }
-
-  #xizmatlar .premium-card p {
-    font-size: 0.85rem !important;
-    margin-bottom: 1rem !important;
-  }
-
-  #xizmatlar .card-number {
-    font-size: 4rem !important;
-    opacity: 0.02 !important;
-  }
-
-  /* ============================================ */
-  /* MARKETING & SOTUV SECTION - MOBILE */
-  /* ============================================ */
-
-  /* Marketing card - qora fonda premium xizmat */
-  #xizmatlar .mt-20.group {
-    padding: 1.5rem !important;
-    margin-top: 2rem !important;
-    flex-direction: column !important;
-  }
-
-  #xizmatlar .mt-20.group .flex-1:first-child {
-    order: 1 !important;
-  }
-
-  #xizmatlar .mt-20.group .flex-1:last-child {
-    order: 2 !important;
-    height: 200px !important;
-    margin-bottom: 1rem !important;
-  }
-
-  /* Premium xizmat badge */
-  #xizmatlar .mt-20.group .inline-flex.items-center.gap-2 {
-    padding: 0.5rem 1rem !important;
-    margin-bottom: 1rem !important;
-  }
-
-  #xizmatlar .mt-20.group .inline-flex.items-center.gap-2 span {
-    font-size: 0.65rem !important;
-    letter-spacing: 0.1em !important;
-  }
-
-  /* Marketing & Sotuv sarlavha */
-  #xizmatlar .mt-20.group h3 {
-    font-size: 2rem !important;
-    line-height: 1.2 !important;
-    margin-bottom: 1rem !important;
-  }
-
-  #xizmatlar .mt-20.group h3 br {
-    display: none !important;
-  }
-
-  /* Marketing description */
-  #xizmatlar .mt-20.group p.text-lg {
-    font-size: 0.9rem !important;
-    line-height: 1.6 !important;
-    padding-left: 1rem !important;
-    margin-bottom: 1rem !important;
-  }
-
-  /* SMM, Brending, Reklama tags */
-  #xizmatlar .mt-20.group .flex.flex-wrap {
-    gap: 0.5rem !important;
-    margin-bottom: 1rem !important;
-    flex-wrap: wrap !important;
-  }
-
-  #xizmatlar .mt-20.group .flex.flex-wrap > div {
-    padding: 0.5rem 0.75rem !important;
-    gap: 0.5rem !important;
-    flex: 0 0 auto !important;
-  }
-
-  #xizmatlar .mt-20.group .flex.flex-wrap > div img {
-    width: 1.75rem !important;
-    height: 1.75rem !important;
-  }
-
-  #xizmatlar .mt-20.group .flex.flex-wrap > div span {
-    font-size: 0.7rem !important;
-  }
-
-  /* Sotuvni Boshlash button */
-  #xizmatlar .mt-20.group a.inline-flex {
-    padding: 0.875rem 1.5rem !important;
-    font-size: 0.75rem !important;
-    width: 100% !important;
-    justify-content: center !important;
-  }
-
-  /* Marketing rasm */
-  #xizmatlar .mt-20.group .h-\[320px\] {
-    height: 180px !important;
-    width: 100% !important;
-  }
-
-  #xizmatlar .mt-20.group .h-\[320px\] img {
-    height: 100% !important;
-    border-radius: 1rem !important;
-  }
-
-  /* Dekorativ elementlarni yashirish */
-  #xizmatlar .mt-20.group .absolute {
-    display: none !important;
-  }
-
-  /* ============================================ */
-  /* BIZ HAQIMIZDA SECTION - MOBILE */
-  /* ============================================ */
-
-  #biz-haqimizda {
-    padding: 3rem 1rem !important;
-  }
-
-  #biz-haqimizda .grid.md\\:grid-cols-2.lg\\:grid-cols-3 {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 0.75rem !important;
-  }
-
-  /* Rasmli kartalar - mobile */
-  #biz-haqimizda .grid > div {
-    border-radius: 1rem !important;
-  }
-
-  #biz-haqimizda .grid > div .h-48 {
-    height: 120px !important;
-  }
-
-  #biz-haqimizda .grid > div .h-48 img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-  }
-
-  #biz-haqimizda .grid > div .p-6 {
-    padding: 0.875rem !important;
-  }
-
-  #biz-haqimizda .grid > div h3 {
-    font-size: 0.875rem !important;
-    margin-bottom: 0.25rem !important;
-  }
-
-  #biz-haqimizda .grid > div p {
-    font-size: 0.7rem !important;
-    line-height: 1.4 !important;
-  }
-
-  /* Badge raqam */
-  #biz-haqimizda .grid > div .absolute span {
-    font-size: 0.6rem !important;
-    padding: 0.2rem 0.5rem !important;
-  }
-
-  /* ============================================ */
-  /* BOG'LANISH SECTION - MOBILE */
-  /* ============================================ */
-
-  #boglanish {
-    padding: 3rem 1rem !important;
-  }
-
-  #boglanish .grid.grid-cols-2.lg\\:grid-cols-4 {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 0.75rem !important;
-  }
-
-  #boglanish .grid > a {
-    padding: 1rem !important;
-  }
-
-  #boglanish .text-4xl.lg\\:text-5xl {
-    font-size: 1.75rem !important;
-    margin-bottom: 0.5rem !important;
-  }
-
-  #boglanish h3 {
-    font-size: 0.8rem !important;
-    margin-bottom: 0.25rem !important;
-  }
-
-  #boglanish .text-red-600.font-semibold {
-    font-size: 0.65rem !important;
-  }
-
-  /* CTA box */
-  #boglanish .mt-12.lg\\:mt-16 .bg-gradient-to-r {
-    padding: 1.5rem !important;
-    border-radius: 1rem !important;
-  }
-
-  #boglanish .mt-12 h3 {
-    font-size: 1.25rem !important;
-  }
-
-  #boglanish .mt-12 p {
-    font-size: 0.875rem !important;
-    margin-bottom: 1rem !important;
-  }
-
-  #boglanish .mt-12 a {
-    padding: 0.75rem 1.5rem !important;
-    font-size: 0.75rem !important;
-  }
-
-  /* Better image loading on mobile */
-  img {
-    content-visibility: auto;
-  }
-
-  /* NAVBAR MOBILE */
-  nav {
+  #footer {
     padding: 0 !important;
   }
 
-  nav > .flex.justify-between {
-    padding: 0.5rem 0.75rem !important;
-  }
-
-  /* Logo kichikroq */
-  nav .w-16.h-16 {
-    width: 2.5rem !important;
-    height: 2.5rem !important;
-  }
-
-  nav .h-12.w-12 {
-    width: 1.75rem !important;
-    height: 1.75rem !important;
-  }
-
-  nav .text-2xl {
-    font-size: 1.1rem !important;
-  }
-
-  nav .text-xs {
-    font-size: 0.6rem !important;
-  }
-
-  nav .gap-3 {
-    gap: 0.5rem !important;
-  }
-
-  /* Desktop menu yashirin */
-  nav .hidden.lg\\:flex {
+  /* Hide decorative elements on mobile */
+  #footer > .absolute {
     display: none !important;
   }
 
-  /* Hamburger menu ko'rinsin */
-  nav .h-8.w-8 {
-    display: flex !important;
+  #footer > div:nth-child(4) {
+    padding: 2rem 1.25rem !important;
   }
 
-  /* Hero section optimizations */
-  #asosiy > .w-full > .grid.lg\\:grid-cols-2 {
-    display: flex !important;
-    flex-direction: column !important;
-  }
-
-  /* Hero 4 ta rasm - gorizontal swipe/scroll */
-  #asosiy .relative .grid.grid-cols-2 {
+  /* Grid layout - 2 columns side by side */
+  #footer .grid.md\\:grid-cols-2.lg\\:grid-cols-4 {
     display: flex !important;
     flex-direction: row !important;
-    overflow-x: auto !important;
-    scroll-snap-type: x mandatory !important;
-    -webkit-overflow-scrolling: touch !important;
-    gap: 0.75rem !important;
-    padding-bottom: 0.5rem !important;
-    scrollbar-width: none !important;
-  }
-
-  #asosiy .relative .grid.grid-cols-2::-webkit-scrollbar {
-    display: none !important;
-  }
-
-  #asosiy .relative .grid.grid-cols-2 > div {
-    flex: 0 0 75% !important;
-    height: 180px !important;
-    margin: 0 !important;
-    scroll-snap-align: start !important;
-    border-radius: 12px !important;
-  }
-
-  #asosiy .relative .grid.grid-cols-2 .hero-image {
-    height: 180px !important;
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    flex: 0 0 75% !important;
-    scroll-snap-align: start !important;
-  }
-
-  #asosiy .relative .grid.grid-cols-2 .hero-image.mt-6,
-  #asosiy .relative .grid.grid-cols-2 .hero-image.-mt-6 {
-    margin-top: 0 !important;
-  }
-
-  /* 98% badge mobileda - uzun va ingichka */
-  #asosiy .absolute.-bottom-4.-left-4 {
-    position: relative !important;
-    bottom: auto !important;
-    left: auto !important;
-    margin-top: 1rem !important;
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
+    flex-wrap: nowrap !important;
     gap: 1rem !important;
-    width: 100% !important;
-    padding: 0.75rem 1.5rem !important;
-    border-radius: 12px !important;
   }
 
-  #asosiy .absolute.-bottom-4.-left-4 .text-3xl {
-    font-size: 1.75rem !important;
+  /* HIDE Links and Services on mobile */
+  #footer .footer-links,
+  #footer .footer-services {
+    display: none !important;
+  }
+
+  /* Company section - left side */
+  #footer .footer-company {
+    text-align: left !important;
+    padding-bottom: 0 !important;
     margin-bottom: 0 !important;
+    border-bottom: none !important;
+    order: 1 !important;
+    flex: 1 !important;
   }
 
-  #asosiy .absolute.-bottom-4.-left-4 .text-\[10px\] {
-    font-size: 10px !important;
-    line-height: 1.3 !important;
-    white-space: nowrap !important;
-  }
-
-  #asosiy .absolute.-bottom-4.-left-4 .text-\[10px\] br {
-    display: inline !important;
-  }
-
-  #asosiy .absolute.-bottom-4.-left-4 .text-\[10px\] br::after {
-    content: " " !important;
-  }
-
-  /* Hero features - 10+, 500+, 24/7 grid */
-  #asosiy .grid.grid-cols-3 {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 0.5rem !important;
-  }
-
-  /* Barcha hero-feature bir xil balandlikda */
-  #asosiy .grid.grid-cols-3 > .hero-feature {
-    min-height: 70px !important;
-    padding: 0.75rem !important;
-  }
-
-  /* 3-chi element (24/7) - 2 ta joy oladi, gorizontal */
-  #asosiy .grid.grid-cols-3 > .hero-feature:nth-child(3) {
-    grid-column: span 2 !important;
-    display: flex !important;
+  #footer .footer-company > a {
+    justify-content: flex-start !important;
     flex-direction: row !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 0.75rem !important;
-    min-height: 70px !important;
-    padding: 0.75rem 1rem !important;
+    margin-bottom: 0.75rem !important;
   }
 
-  #asosiy .grid.grid-cols-3 > .hero-feature:nth-child(3) .text-2xl {
-    margin-bottom: 0 !important;
+  #footer .footer-company > a > div:first-child {
+    width: 2.75rem !important;
+    height: 2.75rem !important;
+    border-radius: 0.75rem !important;
   }
 
-  #asosiy .grid.grid-cols-3 > .hero-feature:nth-child(3) .text-\[10px\] br {
-    display: none !important;
+  #footer .footer-company > a > div:first-child span {
+    font-size: 1rem !important;
   }
 
-  #asosiy
-    .grid.grid-cols-3
-    > .hero-feature:nth-child(3)
-    .text-\[10px\]::before {
-    content: "" !important;
-  }
-
-  /* HOME PAGE MATNLARI TO'LIQ KO'RINSIN */
-  #asosiy {
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
-    padding-top: 7rem !important;
-  }
-
-  #asosiy h1 {
-    font-size: 1.75rem !important;
-    line-height: 1.3 !important;
-    word-break: normal !important;
-    white-space: normal !important;
-    margin-top: 1rem !important;
-  }
-
-  #asosiy h1 br {
-    display: none !important;
-  }
-
-  #asosiy p {
-    font-size: 0.9rem !important;
-    line-height: 1.6 !important;
-  }
-
-  /* Hero buttons */
-  #asosiy .flex-col.sm\\:flex-row {
-    flex-direction: column !important;
-    gap: 0.75rem !important;
-  }
-
-  #asosiy a.bg-red-600,
-  #asosiy a.border-2 {
-    width: 100% !important;
-    text-align: center !important;
-    padding: 0.875rem 1.5rem !important;
-    font-size: 0.75rem !important;
-  }
-
-  /* Reduce animations on mobile for performance */
-  .animate-slide-up {
-    animation-duration: 0.5s !important;
-  }
-
-  /* Text wrapping */
-  h1,
-  h2,
-  h3,
-  p {
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
-  }
-
-  /* Card touch feedback */
-  .premium-card:active,
-  .contact-card:active,
-  .about-card:active {
-    transform: scale(0.98);
-  }
-
-  /* YUTUQLAR - 4 ta statistika 2x2 grid */
-  #yutuqlar {
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
-  }
-
-  #yutuqlar .max-w-\[1600px\] {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-
-  #yutuqlar .grid.md\\:grid-cols-4 {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 0.75rem !important;
-  }
-
-  #yutuqlar .grid.md\\:grid-cols-4 > div {
-    padding: 1rem !important;
-  }
-
-  #yutuqlar .grid.md\\:grid-cols-4 .text-6xl {
-    font-size: 2rem !important;
-    margin-bottom: 0.25rem !important;
-  }
-
-  #yutuqlar .grid.md\\:grid-cols-4 .text-lg {
-    font-size: 0.7rem !important;
-    margin-bottom: 0.25rem !important;
-  }
-
-  #yutuqlar .grid.md\\:grid-cols-4 .text-sm {
-    font-size: 0.65rem !important;
-    display: none !important;
-  }
-
-  #yutuqlar .section-title {
-    font-size: 1.5rem !important;
-  }
-
-  #yutuqlar .mb-20 {
-    margin-bottom: 1rem !important;
-  }
-
-  /* BOG'LANISH - kontaktlar grid */
-  #boglanish .grid.lg\\:grid-cols-4 {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 0.75rem !important;
-  }
-
-  #boglanish .grid.lg\\:grid-cols-4 > a {
-    padding: 1rem !important;
-  }
-
-  #boglanish .grid.lg\\:grid-cols-4 .text-6xl {
-    font-size: 2rem !important;
-    margin-bottom: 0.5rem !important;
-  }
-
-  #boglanish .grid.lg\\:grid-cols-4 h3 {
-    font-size: 0.875rem !important;
-  }
-
-  #boglanish .grid.lg\\:grid-cols-4 p {
-    font-size: 0.7rem !important;
-    margin-bottom: 0.25rem !important;
-  }
-
-  /* 3-chi element (Email) - 2 ta joy oladi, gorizontal */
-  #boglanish .grid.lg\\:grid-cols-4 > a:nth-child(3) {
-    grid-column: span 2 !important;
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 1rem !important;
+  #footer .footer-company > a > div:last-child {
     text-align: left !important;
   }
 
-  #boglanish .grid.lg\\:grid-cols-4 > a:nth-child(3) .text-6xl {
-    margin-bottom: 0 !important;
-  }
-
-  /* FOOTER MOBILE - Professional Design */
-  footer {
-    padding: 0 !important;
-  }
-
-  footer > div:first-child {
-    padding: 2rem 1.5rem !important;
-  }
-
-  /* Grid - 2 ustun */
-  footer .grid.md\\:grid-cols-2.lg\\:grid-cols-4 {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 1.5rem 1rem !important;
-  }
-
-  /* Birinchi ustun (Logo va info) - to'liq kenglik */
-  footer .grid > div:first-child {
-    grid-column: 1 / -1 !important;
-    text-align: center !important;
-    padding-bottom: 1.5rem !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-    margin-bottom: 0.5rem !important;
-  }
-
-  footer .grid > div:first-child .text-2xl {
-    font-size: 1.25rem !important;
-  }
-
-  footer .grid > div:first-child p {
-    font-size: 0.8rem !important;
-    line-height: 1.6 !important;
-    max-width: 280px !important;
-    margin: 0 auto 1rem auto !important;
-  }
-
-  /* Social icons */
-  footer .flex.gap-4 {
-    justify-content: center !important;
-  }
-
-  footer .w-10.h-10 {
-    width: 2.25rem !important;
-    height: 2.25rem !important;
-    font-size: 0.9rem !important;
-  }
-
-  /* Qolgan 3 ta bo'lim - chapda 2 ta, o'ngda 1 ta */
-  footer h4 {
-    font-size: 0.85rem !important;
-    margin-bottom: 0.75rem !important;
-    letter-spacing: 0.05em !important;
-  }
-
-  footer ul {
-    gap: 0.4rem !important;
-  }
-
-  footer li {
-    font-size: 0.8rem !important;
-  }
-
-  /* Xizmatlar ro'yxati - 2 ustunga */
-  footer .grid > div:nth-child(3) ul {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 0.35rem 0.5rem !important;
-  }
-
-  footer .grid > div:nth-child(3) li a {
-    font-size: 0.7rem !important;
-    gap: 0.25rem !important;
-  }
-
-  footer .grid > div:nth-child(3) li a i {
-    font-size: 0.5rem !important;
-  }
-
-  footer ul.space-y-3 {
-    gap: 0.35rem !important;
-  }
-
-  footer ul.space-y-4 {
-    gap: 0.5rem !important;
-  }
-
-  /* Contact section - to'liq kenglik pastda */
-  footer .grid > div:last-child {
-    grid-column: 1 / -1 !important;
-    padding-top: 1rem !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
-    margin-top: 0.5rem !important;
-  }
-
-  footer .grid > div:last-child ul {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 0.75rem !important;
-  }
-
-  footer .grid > div:last-child li {
-    font-size: 0.75rem !important;
-  }
-
-  footer .grid > div:last-child .flex.items-start,
-  footer .grid > div:last-child .flex.items-center {
-    gap: 0.4rem !important;
-    align-items: center !important;
-  }
-
-  footer .grid > div:last-child i {
-    font-size: 0.85rem !important;
-    width: 16px !important;
-  }
-
-  footer .grid > div:last-child span,
-  footer .grid > div:last-child a {
-    font-size: 0.75rem !important;
-  }
-
-  /* Footer bottom */
-  footer .border-t {
-    padding: 1rem !important;
-  }
-
-  footer .border-t > div {
-    flex-direction: column !important;
-    text-align: center !important;
-    gap: 0.5rem !important;
-  }
-
-  footer .border-t p {
-    font-size: 0.7rem !important;
-  }
-
-  footer .border-t .flex.gap-6 {
-    justify-content: center !important;
-    gap: 1rem !important;
-  }
-
-  footer .border-t .flex.gap-6 a {
-    font-size: 0.7rem !important;
-  }
-}
-
-/* Very small screens (iPhone SE, etc) */
-@media (max-width: 375px) {
-  /* Scroller normal tezlik */
-  .scroller-inner {
-    animation: scroll 12s linear infinite !important;
+  #footer .footer-company > a > div:last-child span {
     font-size: 1rem !important;
   }
 
-  #asosiy h1 {
-    font-size: 1.4rem !important;
-  }
-
-  nav a .text-2xl,
-  nav .flex-col .text-2xl {
-    font-size: 1rem !important;
-  }
-
-  nav .text-xs {
-    font-size: 0.6rem !important;
-  }
-
-  .hero-feature {
-    padding: 0.375rem !important;
-  }
-
-  .hero-feature .text-2xl {
-    font-size: 1rem !important;
-  }
-
-  .grid-cols-3 {
-    gap: 0.25rem !important;
-  }
-
-  /* Yutuqlar - 2x2 grid saqlansin */
-  #yutuqlar .grid.md\\:grid-cols-4 {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-
-  #yutuqlar .grid.md\\:grid-cols-4 .text-6xl {
-    font-size: 1.5rem !important;
-  }
-
-  #yutuqlar .grid.md\\:grid-cols-4 .text-lg {
-    font-size: 0.6rem !important;
-  }
-
-  /* Bog'lanish - 2x2 grid saqlansin */
-  #boglanish .grid.lg\\:grid-cols-4 {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-
-  #boglanish .grid.lg\\:grid-cols-4 .text-6xl {
-    font-size: 1.5rem !important;
-  }
-
-  /* Hero rasmlar kichikroq */
-  #asosiy .relative .grid.grid-cols-2 > div,
-  #asosiy .relative .grid.grid-cols-2 .hero-image {
-    height: 140px !important;
-    flex: 0 0 80% !important;
-  }
-
-  /* Marketing & Sotuv - juda kichik ekranlar */
-  #xizmatlar .mt-20.group {
-    padding: 1rem !important;
-  }
-
-  #xizmatlar .mt-20.group h3 {
-    font-size: 1.5rem !important;
-  }
-
-  #xizmatlar .mt-20.group p.text-lg {
-    font-size: 0.8rem !important;
-  }
-
-  #xizmatlar .mt-20.group .h-\[320px\] {
-    height: 150px !important;
-  }
-
-  #xizmatlar .mt-20.group .flex.flex-wrap > div {
-    padding: 0.4rem 0.5rem !important;
-  }
-
-  #xizmatlar .mt-20.group .flex.flex-wrap > div img {
-    width: 1.5rem !important;
-    height: 1.5rem !important;
-  }
-
-  #xizmatlar .mt-20.group .flex.flex-wrap > div span {
-    font-size: 0.6rem !important;
-  }
-
-  /* Biz Haqimizda - juda kichik ekranlar */
-  #biz-haqimizda .grid.md\\:grid-cols-2.lg\\:grid-cols-3 {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 0.5rem !important;
-  }
-
-  #biz-haqimizda .grid > div .h-48 {
-    height: 100px !important;
-  }
-
-  #biz-haqimizda .grid > div .p-6 {
-    padding: 0.625rem !important;
-  }
-
-  #biz-haqimizda .grid > div h3 {
-    font-size: 0.75rem !important;
-  }
-
-  #biz-haqimizda .grid > div p {
-    font-size: 0.6rem !important;
-    display: -webkit-box !important;
-    -webkit-line-clamp: 2 !important;
-    line-clamp: 2 !important;
-    -webkit-box-orient: vertical !important;
-    overflow: hidden !important;
-  }
-
-  /* Footer - juda kichik ekranlar */
-  footer .grid > div:nth-child(3) ul {
-    grid-template-columns: 1fr !important;
-  }
-}
-
-/* ============================================ */
-/* MOBILE FOOTER OPTIMIZATION */
-/* ============================================ */
-@media (max-width: 768px) {
-  /* Footer main container */
-  footer {
-    padding-bottom: env(safe-area-inset-bottom, 0);
-  }
-
-  footer > div:first-child {
-    padding: 2rem 1rem !important;
-  }
-
-  /* Footer grid - stack on mobile */
-  footer > div:first-child > div {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 2rem !important;
-  }
-
-  /* Company info section */
-  footer > div:first-child > div > div:first-child {
-    text-align: center;
-  }
-
-  footer > div:first-child > div > div:first-child a.syncopate {
-    justify-content: center;
-    display: block;
-  }
-
-  footer > div:first-child > div > div:first-child p {
-    max-width: 280px;
-    margin: 0 auto 1.5rem;
-  }
-
-  /* Social icons - center them */
-  footer > div:first-child > div > div:first-child .flex.gap-3 {
-    justify-content: center;
-  }
-
-  footer > div:first-child > div > div:first-child .flex.gap-3 a {
-    width: 44px;
-    height: 44px;
-    font-size: 1.1rem;
-  }
-
-  /* Quick links and Services - centered headings, right-aligned items */
-  footer > div:first-child > div > div:nth-child(2),
-  footer > div:first-child > div > div:nth-child(3) {
-    text-align: center;
-  }
-
-  /* Footer headings - exactly centered */
-  footer h4 {
-    font-size: 0.875rem !important;
-    margin-bottom: 1rem !important;
-    text-align: center !important;
-    display: block;
-    width: 100%;
-  }
-
-  /* Footer links container - centered */
-  footer ul {
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    padding-right: 15%;
-  }
-
-  footer ul li {
-    margin-bottom: 0.5rem;
-  }
-
-  footer ul li a,
-  footer ul li button {
-    font-size: 0.8rem !important;
-    padding: 0.375rem 0;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    text-align: right;
-  }
-
-  /* Services list - 2 columns on mobile, centered grid */
-  footer > div:first-child > div > div:nth-child(3) ul {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 0.5rem 1rem !important;
-    padding-right: 0;
-    padding-left: 0;
-    max-width: 280px;
-    margin: 0 auto;
-    align-items: start;
-  }
-
-  footer > div:first-child > div > div:nth-child(3) ul li {
-    text-align: left;
-  }
-
-  footer > div:first-child > div > div:nth-child(3) ul li a {
-    font-size: 0.7rem !important;
-    justify-content: flex-start;
-  }
-
-  /* Quick links - 2 columns centered */
-  footer > div:first-child > div > div:nth-child(2) ul {
-    display: grid !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 0.5rem 1rem !important;
-    padding-right: 0;
-    padding-left: 0;
-    max-width: 260px;
-    margin: 0 auto;
-    align-items: start;
-  }
-
-  footer > div:first-child > div > div:nth-child(2) ul li {
-    text-align: left;
-  }
-
-  footer > div:first-child > div > div:nth-child(2) ul li a,
-  footer > div:first-child > div > div:nth-child(2) ul li button {
-    justify-content: flex-start;
-  }
-
-  /* Contact info section */
-  footer > div:first-child > div > div:nth-child(4) {
-    text-align: center;
-    background: rgba(255, 255, 255, 0.03);
-    padding: 1.5rem;
-    border-radius: 1rem;
-    margin-top: 0.5rem;
-  }
-
-  footer > div:first-child > div > div:nth-child(4) ul {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
-  }
-
-  footer > div:first-child > div > div:nth-child(4) ul li {
-    justify-content: center;
-  }
-
-  /* Bottom footer */
-  footer .border-t.border-gray-800 > div {
-    padding: 1rem !important;
-    text-align: center;
-  }
-
-  footer .border-t.border-gray-800 p {
-    font-size: 0.65rem !important;
-    margin-bottom: 0.5rem;
-  }
-
-  footer .border-t.border-gray-800 .flex.gap-4 {
-    justify-content: center;
-    gap: 1.5rem;
-  }
-
-  footer .border-t.border-gray-800 .flex.gap-4 a {
-    font-size: 0.65rem !important;
-  }
-}
-
-/* Mobile navbar language buttons */
-@media (max-width: 1023px) {
-  .mobile-nav-lang-btn {
-    transition:
-      transform 0.2s ease,
-      border-color 0.2s ease;
-  }
-
-  .mobile-nav-lang-btn:active {
-    transform: scale(0.9);
-  }
-
-  .mobile-nav-lang-btn.active {
-    border-color: white !important;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-  }
-}
-
-/* Landscape mode optimization */
-@media (max-height: 500px) and (orientation: landscape) {
-  #asosiy {
-    min-height: auto !important;
-    padding-top: 4rem !important;
-    padding-bottom: 2rem !important;
-  }
-
-  .hero-image {
-    height: 80px !important;
-  }
-
-  section {
-    padding-top: 2rem !important;
-    padding-bottom: 2rem !important;
-  }
-}
-
-/* High DPI screens */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  img {
-    image-rendering: -webkit-optimize-contrast;
-  }
-}
-
-/* Reduce motion for accessibility */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-
-  .scroller-inner {
-    animation: none !important;
-  }
-}
-
-/* Dark mode support (optional) */
-@media (prefers-color-scheme: dark) {
-  /* Uncomment below for dark mode support */
-  /*
-  body {
-    background-color: #1a1a1a;
-    color: #ffffff;
-  }
-  
-  .premium-card,
-  .contact-card {
-    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
-  }
-  */
-}
-
-/* ============================================ */
-/* MULTI-LANGUAGE MOBILE OPTIMIZATIONS */
-/* Rus tilida uzun so'zlar uchun tuzatishlar */
-/* ============================================ */
-
-@media (max-width: 768px) {
-  /* Global text overflow prevention */
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  p,
-  span,
-  a,
-  button {
-    word-wrap: break-word !important;
-    overflow-wrap: break-word !important;
-    hyphens: auto !important;
-    -webkit-hyphens: auto !important;
-  }
-
-  /* Navigation buttons - responsive text */
-  [data-lang-key="btn_login"],
-  [data-lang-key="btn_register"] {
-    font-size: 0.7rem !important;
-    padding: 0.5rem 0.75rem !important;
-    white-space: nowrap !important;
-  }
-
-  /* Mobile menu buttons */
-  .mobile-nav-link {
-    font-size: 0.8rem !important;
-    padding: 0.75rem 1rem !important;
-  }
-
-  /* Hero section text */
-  [data-lang-key="hero_subtitle"] {
-    font-size: 0.75rem !important;
-    letter-spacing: 0.05em !important;
-  }
-
-  [data-lang-key^="hero_title"] {
-    font-size: clamp(1.5rem, 8vw, 2.5rem) !important;
-    line-height: 1.1 !important;
-  }
-
-  [data-lang-key="hero_desc"] {
-    font-size: 0.85rem !important;
-    line-height: 1.5 !important;
-  }
-
-  /* Hero buttons */
-  [data-lang-key="hero_btn_services"],
-  [data-lang-key="hero_btn_contact"] {
-    font-size: 0.7rem !important;
-    padding: 0.6rem 1rem !important;
-  }
-
-  /* Stats text - shorter */
-  [data-lang-key="hero_stat_experience"],
-  [data-lang-key="hero_stat_clients"],
-  [data-lang-key="hero_stat_support"] {
-    font-size: 0.6rem !important;
-    line-height: 1.2 !important;
-  }
-
-  [data-lang-key="hero_satisfaction"] {
+  #footer .footer-company > a > div:last-child p {
     font-size: 0.55rem !important;
   }
 
-  /* Services section */
-  [data-lang-key="services_title"],
-  [data-lang-key="achievements_title"],
-  [data-lang-key="about_title"] {
-    font-size: 1.75rem !important;
-  }
-
-  [data-lang-key^="service_"][data-lang-key$="_title"] {
-    font-size: 1rem !important;
-    line-height: 1.3 !important;
-  }
-
-  [data-lang-key^="service_"][data-lang-key$="_desc"] {
-    font-size: 0.8rem !important;
-    line-height: 1.4 !important;
-  }
-
-  /* Marketing section */
-  [data-lang-key="marketing_title"] {
-    font-size: 1.5rem !important;
-  }
-
-  [data-lang-key="marketing_desc"] {
-    font-size: 0.8rem !important;
-    line-height: 1.5 !important;
-  }
-
-  [data-lang-key="marketing_btn"] {
-    font-size: 0.75rem !important;
-    padding: 0.6rem 1.25rem !important;
-  }
-
-  /* Achievements */
-  [data-lang-key^="achievements_"][data-lang-key$="_desc"] {
-    font-size: 0.7rem !important;
-    line-height: 1.3 !important;
-  }
-
-  /* About section */
-  [data-lang-key^="about_"][data-lang-key$="_title"] {
-    font-size: 0.9rem !important;
-  }
-
-  [data-lang-key^="about_"][data-lang-key$="_desc"] {
-    font-size: 0.75rem !important;
-    line-height: 1.4 !important;
-  }
-
-  /* Contact section */
-  [data-lang-key="contact_cta_title"] {
-    font-size: 1.1rem !important;
-    line-height: 1.3 !important;
-  }
-
-  [data-lang-key="contact_cta_desc"] {
-    font-size: 0.8rem !important;
-  }
-
-  [data-lang-key="contact_cta_btn"] {
-    font-size: 0.75rem !important;
-    padding: 0.6rem 1.25rem !important;
-  }
-
-  /* Footer */
-  [data-lang-key="footer_desc"] {
+  #footer .footer-company > p {
     font-size: 0.75rem !important;
     line-height: 1.5 !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    color: #9ca3af !important;
   }
 
-  [data-lang-key="footer_copyright"] {
+  /* Social icons - hide on mobile */
+  #footer .footer-socials {
+    display: none !important;
+  }
+
+  /* Contact section - right side vertical list */
+  #footer .footer-contact {
+    width: auto !important;
+    flex: 1 !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    border-top: none !important;
+    order: 2 !important;
+  }
+
+  #footer .footer-contact h4 {
+    display: none !important;
+  }
+
+  /* Contact items - vertical list on right */
+  #footer .footer-contact ul {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+    margin-bottom: 0 !important;
+  }
+
+  #footer .footer-contact ul li {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    gap: 0.5rem !important;
+  }
+
+  #footer .footer-contact ul li:active {
+    transform: none !important;
+    background: transparent !important;
+  }
+
+  #footer .footer-contact ul li > div:first-child {
+    width: auto !important;
+    height: auto !important;
+    min-width: auto !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding-top: 0 !important;
+  }
+
+  #footer .footer-contact ul li > div:first-child i {
+    font-size: 0.8rem !important;
+    color: #dc2626 !important;
+  }
+
+  #footer .footer-contact ul li > div:last-child {
+    width: auto !important;
+  }
+
+  #footer .footer-contact ul li > div:last-child span:first-child {
+    display: none !important;
+  }
+
+  #footer .footer-contact ul li > div:last-child span:last-child,
+  #footer .footer-contact ul li > div:last-child a {
+    font-size: 0.75rem !important;
+    font-weight: 400 !important;
+    color: #9ca3af !important;
+    word-break: normal !important;
+    white-space: nowrap !important;
+    line-height: 1 !important;
+    display: inline !important;
+  }
+
+  /* Bottom copyright - eng pastga */
+  #footer .border-t {
+    border-color: rgba(255, 255, 255, 0.06) !important;
+    margin-top: 1.5rem !important;
+    order: 3 !important;
+  }
+
+  #footer .border-t > div {
+    flex-direction: column !important;
+    text-align: center !important;
+    gap: 0.5rem !important;
+    padding: 1.25rem 1rem !important;
+  }
+
+  #footer .border-t p {
     font-size: 0.65rem !important;
+    color: #6b7280 !important;
   }
 
-  /* Auth modals */
-  [data-lang-key="auth_login_title"],
-  [data-lang-key="auth_register_title"] {
-    font-size: 1.25rem !important;
-  }
-
-  [data-lang-key="auth_no_account"],
-  [data-lang-key="auth_have_account"] {
-    font-size: 0.75rem !important;
-  }
-
-  /* CTA section */
-  [data-lang-key="cta_title"] {
-    font-size: 1.5rem !important;
-  }
-
-  [data-lang-key="cta_desc"] {
-    font-size: 0.85rem !important;
-  }
-
-  [data-lang-key="cta_btn"] {
-    font-size: 0.75rem !important;
-  }
-
-  /* Prevent layout breaking with long words */
-  .premium-card,
-  .service-card,
-  .about-card {
-    overflow: hidden !important;
-  }
-
-  /* Language dropdown in mobile */
-  #mobileLangDropdown {
-    right: 0 !important;
-    left: auto !important;
+  #footer .border-t > div > div {
+    display: none !important;
   }
 }

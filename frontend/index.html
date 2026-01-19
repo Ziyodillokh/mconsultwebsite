@@ -1452,17 +1452,38 @@
       </section>
     </main>
 
-    <footer class="bg-gray-900 text-white">
+    <footer
+      id="footer"
+      class="bg-gradient-to-b from-gray-900 via-gray-900 to-black text-white relative overflow-hidden"
+    >
+      <!-- Decorative Elements -->
+      <div
+        class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-600 via-red-500 to-red-600"
+      ></div>
+      <div
+        class="absolute top-20 right-10 w-64 h-64 bg-red-600/5 rounded-full blur-3xl"
+      ></div>
+      <div
+        class="absolute bottom-20 left-10 w-48 h-48 bg-red-600/5 rounded-full blur-3xl"
+      ></div>
+
       <!-- Main Footer -->
-      <div class="max-w-[1200px] mx-auto px-6 py-12 lg:py-16">
+      <div class="max-w-[1200px] mx-auto px-6 py-12 lg:py-16 relative z-10">
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           <!-- Company Info -->
-          <div class="lg:col-span-1">
-            <a
-              href="#asosiy"
-              class="text-xl lg:text-2xl font-bold syncopate text-white mb-4 inline-block"
-            >
-              MAG'ZUNA CONSULT<span class="text-red-500">.</span>
+          <div class="footer-company lg:col-span-1">
+            <a href="#asosiy" class="flex items-center gap-3 mb-5 group">
+              <div
+                class="w-12 h-12 bg-gradient-to-br from-red-600 to-red-700 rounded-xl flex items-center justify-center shadow-lg shadow-red-600/20 group-hover:scale-110 transition-transform"
+              >
+                <span class="text-white text-lg font-black">MC</span>
+              </div>
+              <div>
+                <span class="text-lg font-bold text-white syncopate"
+                  >MAG'ZUNA</span
+                >
+                <p class="text-xs text-red-400 font-medium">CONSULT</p>
+              </div>
             </a>
             <p
               class="text-gray-400 mb-6 leading-relaxed text-sm"
@@ -1471,224 +1492,237 @@
               O'zbekistonning yetakchi konsalting kompaniyasi. 10+ yillik
               tajriba bilan biznesingizni rivojlantiramiz.
             </p>
-            <div class="flex gap-3">
+            <div class="flex gap-2 footer-socials">
               <a
                 href="https://t.me/yourusername"
                 aria-label="Telegram"
-                class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-red-600 transition-all duration-300"
+                class="w-10 h-10 bg-gray-800/80 backdrop-blur rounded-xl flex items-center justify-center hover:bg-gradient-to-br hover:from-red-600 hover:to-red-700 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-red-600/20"
               >
-                <i class="fab fa-telegram"></i>
+                <i class="fab fa-telegram text-sm"></i>
               </a>
               <a
                 href="https://instagram.com/yourusername"
                 aria-label="Instagram"
-                class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-red-600 transition-all duration-300"
+                class="w-10 h-10 bg-gray-800/80 backdrop-blur rounded-xl flex items-center justify-center hover:bg-gradient-to-br hover:from-red-600 hover:to-red-700 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-red-600/20"
               >
-                <i class="fab fa-instagram"></i>
+                <i class="fab fa-instagram text-sm"></i>
               </a>
               <a
                 href="https://facebook.com/yourusername"
-                class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-red-600 transition-all duration-300"
+                aria-label="Facebook"
+                class="w-10 h-10 bg-gray-800/80 backdrop-blur rounded-xl flex items-center justify-center hover:bg-gradient-to-br hover:from-red-600 hover:to-red-700 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-red-600/20"
               >
-                <i class="fab fa-facebook-f"></i>
+                <i class="fab fa-facebook-f text-sm"></i>
               </a>
               <a
                 href="https://linkedin.com/company/yourusername"
-                class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-red-600 transition-all duration-300"
+                aria-label="LinkedIn"
+                class="w-10 h-10 bg-gray-800/80 backdrop-blur rounded-xl flex items-center justify-center hover:bg-gradient-to-br hover:from-red-600 hover:to-red-700 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-red-600/20"
               >
-                <i class="fab fa-linkedin-in"></i>
+                <i class="fab fa-linkedin-in text-sm"></i>
               </a>
             </div>
           </div>
 
           <!-- Quick Links -->
-          <div>
+          <div class="footer-links">
             <h4
-              class="text-base font-bold uppercase mb-4 text-white"
+              class="text-sm font-bold uppercase mb-5 text-white flex items-center gap-2"
               data-lang-key="footer_links"
             >
-              Havolalar
+              <span class="w-8 h-0.5 bg-red-600 rounded"></span>Havolalar
             </h4>
-            <ul class="space-y-2 text-sm">
+            <ul class="space-y-3 text-sm">
               <li>
                 <a
                   href="#asosiy"
-                  class="text-gray-400 hover:text-red-500 transition flex items-center gap-2"
+                  class="text-gray-400 hover:text-white hover:pl-2 transition-all duration-300 flex items-center gap-2"
                   data-lang-key="nav_home"
-                  ><i class="fas fa-chevron-right text-xs text-red-500"></i
+                  ><i class="fas fa-angle-right text-red-500 text-xs"></i
                   >Asosiy</a
                 >
               </li>
               <li>
                 <a
                   href="#xizmatlar"
-                  class="text-gray-400 hover:text-red-500 transition flex items-center gap-2"
+                  class="text-gray-400 hover:text-white hover:pl-2 transition-all duration-300 flex items-center gap-2"
                   data-lang-key="nav_services"
-                  ><i class="fas fa-chevron-right text-xs text-red-500"></i
+                  ><i class="fas fa-angle-right text-red-500 text-xs"></i
                   >Xizmatlar</a
                 >
               </li>
               <li>
                 <a
                   href="#yutuqlar"
-                  class="text-gray-400 hover:text-red-500 transition flex items-center gap-2"
+                  class="text-gray-400 hover:text-white hover:pl-2 transition-all duration-300 flex items-center gap-2"
                   data-lang-key="nav_achievements"
-                  ><i class="fas fa-chevron-right text-xs text-red-500"></i
+                  ><i class="fas fa-angle-right text-red-500 text-xs"></i
                   >Yutuqlar</a
                 >
               </li>
               <li>
                 <a
                   href="#biz-haqimizda"
-                  class="text-gray-400 hover:text-red-500 transition flex items-center gap-2"
+                  class="text-gray-400 hover:text-white hover:pl-2 transition-all duration-300 flex items-center gap-2"
                   data-lang-key="nav_about"
-                  ><i class="fas fa-chevron-right text-xs text-red-500"></i>Biz
+                  ><i class="fas fa-angle-right text-red-500 text-xs"></i>Biz
                   Haqimizda</a
                 >
               </li>
               <li>
                 <a
                   href="#boglanish"
-                  class="text-gray-400 hover:text-red-500 transition flex items-center gap-2"
+                  class="text-gray-400 hover:text-white hover:pl-2 transition-all duration-300 flex items-center gap-2"
                   data-lang-key="nav_contact"
-                  ><i class="fas fa-chevron-right text-xs text-red-500"></i
+                  ><i class="fas fa-angle-right text-red-500 text-xs"></i
                   >Bog'lanish</a
                 >
-              </li>
-              <li>
-                <button
-                  onclick="openAuthModal('login')"
-                  class="text-gray-400 hover:text-red-500 transition flex items-center gap-2"
-                  data-lang-key="btn_login"
-                >
-                  <i class="fas fa-chevron-right text-xs text-red-500"></i
-                  >Kirish
-                </button>
               </li>
             </ul>
           </div>
 
           <!-- Services -->
-          <div>
+          <div class="footer-services">
             <h4
-              class="text-base font-bold uppercase mb-4 text-white"
+              class="text-sm font-bold uppercase mb-5 text-white flex items-center gap-2"
               data-lang-key="footer_services"
             >
-              Xizmatlar
+              <span class="w-8 h-0.5 bg-red-600 rounded"></span>Xizmatlar
             </h4>
-            <ul class="space-y-2 text-sm">
+            <ul class="space-y-3 text-sm footer-services-list">
               <li>
                 <a
                   href="#xizmatlar"
-                  class="text-gray-400 hover:text-red-500 transition flex items-center gap-2"
+                  class="text-gray-400 hover:text-white transition-all duration-300 flex items-center gap-2"
                   data-lang-key="service_1_title"
-                  ><i class="fas fa-circle text-[6px] text-red-500"></i
+                  ><span class="w-1.5 h-1.5 bg-red-500 rounded-full"></span
                   >Buxgalteriya</a
                 >
               </li>
               <li>
                 <a
                   href="#xizmatlar"
-                  class="text-gray-400 hover:text-red-500 transition flex items-center gap-2"
+                  class="text-gray-400 hover:text-white transition-all duration-300 flex items-center gap-2"
                   data-lang-key="service_2_title"
-                  ><i class="fas fa-circle text-[6px] text-red-500"></i
+                  ><span class="w-1.5 h-1.5 bg-red-500 rounded-full"></span
                   >Brokerlik</a
                 >
               </li>
               <li>
                 <a
                   href="#xizmatlar"
-                  class="text-gray-400 hover:text-red-500 transition flex items-center gap-2"
+                  class="text-gray-400 hover:text-white transition-all duration-300 flex items-center gap-2"
                   data-lang-key="service_3_title"
-                  ><i class="fas fa-circle text-[6px] text-red-500"></i>IT
+                  ><span class="w-1.5 h-1.5 bg-red-500 rounded-full"></span>IT
                   Xizmatlari</a
                 >
               </li>
               <li>
                 <a
                   href="#xizmatlar"
-                  class="text-gray-400 hover:text-red-500 transition flex items-center gap-2"
+                  class="text-gray-400 hover:text-white transition-all duration-300 flex items-center gap-2"
                   data-lang-key="service_4_title"
-                  ><i class="fas fa-circle text-[6px] text-red-500"></i>HR
+                  ><span class="w-1.5 h-1.5 bg-red-500 rounded-full"></span>HR
                   Xizmatlari</a
                 >
               </li>
               <li>
                 <a
                   href="#xizmatlar"
-                  class="text-gray-400 hover:text-red-500 transition flex items-center gap-2"
+                  class="text-gray-400 hover:text-white transition-all duration-300 flex items-center gap-2"
                   data-lang-key="service_5_title"
-                  ><i class="fas fa-circle text-[6px] text-red-500"></i
+                  ><span class="w-1.5 h-1.5 bg-red-500 rounded-full"></span
                   >Konsalting</a
                 >
               </li>
               <li>
                 <a
                   href="#xizmatlar"
-                  class="text-gray-400 hover:text-red-500 transition flex items-center gap-2"
+                  class="text-gray-400 hover:text-white transition-all duration-300 flex items-center gap-2"
                   data-lang-key="service_6_title"
-                  ><i class="fas fa-circle text-[6px] text-red-500"></i
+                  ><span class="w-1.5 h-1.5 bg-red-500 rounded-full"></span
                   >Marketing</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#xizmatlar"
-                  class="text-gray-400 hover:text-red-500 transition flex items-center gap-2"
-                  data-lang-key="footer_sales"
-                  ><i class="fas fa-circle text-[6px] text-red-500"></i>Sotuv</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#xizmatlar"
-                  class="text-gray-400 hover:text-red-500 transition flex items-center gap-2"
-                  data-lang-key="footer_branding"
-                  ><i class="fas fa-circle text-[6px] text-red-500"></i
-                  >Branding</a
                 >
               </li>
             </ul>
           </div>
 
           <!-- Contact Info -->
-          <div>
+          <div class="footer-contact">
             <h4
-              class="text-base font-bold uppercase mb-4 text-white"
+              class="text-sm font-bold uppercase mb-5 text-white flex items-center gap-2"
               data-lang-key="footer_contact"
             >
-              Aloqa
+              <span class="w-8 h-0.5 bg-red-600 rounded"></span>Aloqa
             </h4>
-            <ul class="space-y-3 text-sm">
-              <li class="flex items-start gap-2">
-                <i
-                  class="fas fa-map-marker-alt text-red-500 mt-0.5 text-xs"
-                ></i>
-                <span class="text-gray-400" data-lang-key="footer_address"
-                  >Toshkent, Chilonzor tumani</span
+            <ul class="space-y-4 text-sm">
+              <li class="flex items-start gap-3 group">
+                <div
+                  class="w-9 h-9 bg-gray-800/80 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-red-600 transition-colors"
                 >
+                  <i
+                    class="fas fa-map-marker-alt text-red-400 group-hover:text-white text-xs"
+                  ></i>
+                </div>
+                <div>
+                  <span class="text-gray-500 text-xs block mb-0.5">Manzil</span>
+                  <span class="text-gray-300" data-lang-key="footer_address"
+                    >Toshkent, Chilonzor tumani</span
+                  >
+                </div>
               </li>
-              <li class="flex items-center gap-2">
-                <i class="fas fa-phone text-red-500 text-xs"></i>
-                <a
-                  href="tel:+998901234567"
-                  class="text-gray-400 hover:text-red-500 transition"
-                  >+998 90 123 45 67</a
+              <li class="flex items-start gap-3 group">
+                <div
+                  class="w-9 h-9 bg-gray-800/80 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-red-600 transition-colors"
                 >
+                  <i
+                    class="fas fa-phone text-red-400 group-hover:text-white text-xs"
+                  ></i>
+                </div>
+                <div>
+                  <span class="text-gray-500 text-xs block mb-0.5"
+                    >Telefon</span
+                  >
+                  <a
+                    href="tel:+998901234567"
+                    class="text-gray-300 hover:text-white transition"
+                    >+998 90 123 45 67</a
+                  >
+                </div>
               </li>
-              <li class="flex items-center gap-2">
-                <i class="fas fa-envelope text-red-500 text-xs"></i>
-                <a
-                  href="mailto:info@magzuna.uz"
-                  class="text-gray-400 hover:text-red-500 transition"
-                  >info@magzuna.uz</a
+              <li class="flex items-start gap-3 group">
+                <div
+                  class="w-9 h-9 bg-gray-800/80 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-red-600 transition-colors"
                 >
+                  <i
+                    class="fas fa-envelope text-red-400 group-hover:text-white text-xs"
+                  ></i>
+                </div>
+                <div>
+                  <span class="text-gray-500 text-xs block mb-0.5">Email</span>
+                  <a
+                    href="mailto:info@magzuna.uz"
+                    class="text-gray-300 hover:text-white transition"
+                    >info@magzuna.uz</a
+                  >
+                </div>
               </li>
-              <li class="flex items-center gap-2">
-                <i class="fas fa-clock text-red-500 text-xs"></i>
-                <span class="text-gray-400" data-lang-key="footer_hours"
-                  >Dush-Jum: 9:00 - 18:00</span
+              <li class="flex items-start gap-3 group">
+                <div
+                  class="w-9 h-9 bg-gray-800/80 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-red-600 transition-colors"
                 >
+                  <i
+                    class="fas fa-clock text-red-400 group-hover:text-white text-xs"
+                  ></i>
+                </div>
+                <div>
+                  <span class="text-gray-500 text-xs block mb-0.5"
+                    >Ish vaqti</span
+                  >
+                  <span class="text-gray-300" data-lang-key="footer_hours"
+                    >Dush-Jum: 9:00 - 18:00</span
+                  >
+                </div>
               </li>
             </ul>
           </div>
@@ -1696,26 +1730,28 @@
       </div>
 
       <!-- Bottom Footer -->
-      <div class="border-t border-gray-800">
+      <div class="border-t border-gray-800/50 relative z-10">
         <div
-          class="max-w-[1200px] mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-3"
+          class="max-w-[1200px] mx-auto px-6 py-5 flex flex-col md:flex-row justify-between items-center gap-4"
         >
           <p class="text-gray-500 text-xs" data-lang-key="footer_copyright">
             © 2026 Mag'zuna Consult. Barcha huquqlar himoyalangan.
           </p>
-          <div class="flex gap-4 text-xs">
+          <div class="flex items-center gap-6 text-xs">
             <a
               href="#"
-              class="text-gray-500 hover:text-red-500 transition"
+              class="text-gray-500 hover:text-red-500 transition flex items-center gap-1"
               data-lang-key="footer_privacy"
-              >Maxfiylik</a
             >
+              <i class="fas fa-shield-alt text-[10px]"></i>Maxfiylik
+            </a>
             <a
               href="#"
-              class="text-gray-500 hover:text-red-500 transition"
+              class="text-gray-500 hover:text-red-500 transition flex items-center gap-1"
               data-lang-key="footer_terms"
-              >Shartlar</a
             >
+              <i class="fas fa-file-contract text-[10px]"></i>Shartlar
+            </a>
           </div>
         </div>
       </div>
