@@ -12,7 +12,7 @@ import { User } from "../entities/user.entity";
     TypeOrmModule.forFeature([User]),
     PassportModule.register({ defaultStrategy: "jwt" }),
     JwtModule.register({
-      secret: process.env.JWT_SECRET || "your_secret_key",
+      secret: process.env.JWT_SECRET || "magzuna-secret-key-2024",
       signOptions: { expiresIn: process.env.JWT_EXPIRATION || "24h" },
     }),
   ],
