@@ -1,20 +1,43 @@
 /* ============================================ */
-/* EXTRA MOBILE OPTIMIZATIONS */
+/* CROSS-BROWSER MOBILE OPTIMIZATIONS */
 /* ============================================ */
 
-/* Safe area for notched phones */
+/* Safe area for notched phones (iPhone X+) */
 @supports (padding: max(0px)) {
   body {
     padding-left: max(0px, env(safe-area-inset-left));
     padding-right: max(0px, env(safe-area-inset-right));
+    padding-bottom: max(0px, env(safe-area-inset-bottom));
   }
 }
 
-/* Prevent horizontal scroll */
+/* Prevent horizontal scroll - all browsers */
 html,
 body {
   overflow-x: hidden;
   max-width: 100vw;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+/* Fix for older Safari flexbox bugs */
+.flex {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+/* Fix for older browsers grid support */
+@supports not (display: grid) {
+  .grid {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
 }
 
 /* Touch-friendly tap targets */
@@ -28,11 +51,255 @@ body {
   /* SCROLLER - Mobileda o'rtacha tezlik */
   .scroller-inner {
     animation: scroll 12s linear infinite !important;
+    font-size: 1.25rem !important;
+    gap: 0.75rem !important;
+  }
+
+  .scroller-inner span {
+    white-space: nowrap !important;
   }
 
   /* Improve touch scrolling */
   .scroller {
     -webkit-overflow-scrolling: touch;
+    padding: 0.75rem 0 !important;
+  }
+
+  /* ============================================ */
+  /* XIZMATLAR SECTION - MOBILE GRID */
+  /* ============================================ */
+
+  #xizmatlar {
+    padding: 3rem 1rem !important;
+  }
+
+  #xizmatlar .grid.md\\:grid-cols-2.lg\\:grid-cols-3 {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  #xizmatlar .premium-card {
+    min-height: auto !important;
+    padding: 1.25rem !important;
+  }
+
+  #xizmatlar .premium-card > div:first-child {
+    height: 160px !important;
+    margin-bottom: 1rem !important;
+  }
+
+  #xizmatlar .premium-card h3 {
+    font-size: 1.25rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  #xizmatlar .premium-card p {
+    font-size: 0.85rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  #xizmatlar .card-number {
+    font-size: 4rem !important;
+    opacity: 0.02 !important;
+  }
+
+  /* ============================================ */
+  /* MARKETING & SOTUV SECTION - MOBILE */
+  /* ============================================ */
+
+  /* Marketing card - qora fonda premium xizmat */
+  #xizmatlar .mt-20.group {
+    padding: 1.5rem !important;
+    margin-top: 2rem !important;
+    flex-direction: column !important;
+  }
+
+  #xizmatlar .mt-20.group .flex-1:first-child {
+    order: 1 !important;
+  }
+
+  #xizmatlar .mt-20.group .flex-1:last-child {
+    order: 2 !important;
+    height: 200px !important;
+    margin-bottom: 1rem !important;
+  }
+
+  /* Premium xizmat badge */
+  #xizmatlar .mt-20.group .inline-flex.items-center.gap-2 {
+    padding: 0.5rem 1rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  #xizmatlar .mt-20.group .inline-flex.items-center.gap-2 span {
+    font-size: 0.65rem !important;
+    letter-spacing: 0.1em !important;
+  }
+
+  /* Marketing & Sotuv sarlavha */
+  #xizmatlar .mt-20.group h3 {
+    font-size: 2rem !important;
+    line-height: 1.2 !important;
+    margin-bottom: 1rem !important;
+  }
+
+  #xizmatlar .mt-20.group h3 br {
+    display: none !important;
+  }
+
+  /* Marketing description */
+  #xizmatlar .mt-20.group p.text-lg {
+    font-size: 0.9rem !important;
+    line-height: 1.6 !important;
+    padding-left: 1rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  /* SMM, Brending, Reklama tags */
+  #xizmatlar .mt-20.group .flex.flex-wrap {
+    gap: 0.5rem !important;
+    margin-bottom: 1rem !important;
+    flex-wrap: wrap !important;
+  }
+
+  #xizmatlar .mt-20.group .flex.flex-wrap > div {
+    padding: 0.5rem 0.75rem !important;
+    gap: 0.5rem !important;
+    flex: 0 0 auto !important;
+  }
+
+  #xizmatlar .mt-20.group .flex.flex-wrap > div img {
+    width: 1.75rem !important;
+    height: 1.75rem !important;
+  }
+
+  #xizmatlar .mt-20.group .flex.flex-wrap > div span {
+    font-size: 0.7rem !important;
+  }
+
+  /* Sotuvni Boshlash button */
+  #xizmatlar .mt-20.group a.inline-flex {
+    padding: 0.875rem 1.5rem !important;
+    font-size: 0.75rem !important;
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  /* Marketing rasm */
+  #xizmatlar .mt-20.group .h-\[320px\] {
+    height: 180px !important;
+    width: 100% !important;
+  }
+
+  #xizmatlar .mt-20.group .h-\[320px\] img {
+    height: 100% !important;
+    border-radius: 1rem !important;
+  }
+
+  /* Dekorativ elementlarni yashirish */
+  #xizmatlar .mt-20.group .absolute {
+    display: none !important;
+  }
+
+  /* ============================================ */
+  /* BIZ HAQIMIZDA SECTION - MOBILE */
+  /* ============================================ */
+
+  #biz-haqimizda {
+    padding: 3rem 1rem !important;
+  }
+
+  #biz-haqimizda .grid.md\\:grid-cols-2.lg\\:grid-cols-3 {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.75rem !important;
+  }
+
+  /* Rasmli kartalar - mobile */
+  #biz-haqimizda .grid > div {
+    border-radius: 1rem !important;
+  }
+
+  #biz-haqimizda .grid > div .h-48 {
+    height: 120px !important;
+  }
+
+  #biz-haqimizda .grid > div .h-48 img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  #biz-haqimizda .grid > div .p-6 {
+    padding: 0.875rem !important;
+  }
+
+  #biz-haqimizda .grid > div h3 {
+    font-size: 0.875rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+
+  #biz-haqimizda .grid > div p {
+    font-size: 0.7rem !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Badge raqam */
+  #biz-haqimizda .grid > div .absolute span {
+    font-size: 0.6rem !important;
+    padding: 0.2rem 0.5rem !important;
+  }
+
+  /* ============================================ */
+  /* BOG'LANISH SECTION - MOBILE */
+  /* ============================================ */
+
+  #boglanish {
+    padding: 3rem 1rem !important;
+  }
+
+  #boglanish .grid.grid-cols-2.lg\\:grid-cols-4 {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.75rem !important;
+  }
+
+  #boglanish .grid > a {
+    padding: 1rem !important;
+  }
+
+  #boglanish .text-4xl.lg\\:text-5xl {
+    font-size: 1.75rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  #boglanish h3 {
+    font-size: 0.8rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+
+  #boglanish .text-red-600.font-semibold {
+    font-size: 0.65rem !important;
+  }
+
+  /* CTA box */
+  #boglanish .mt-12.lg\\:mt-16 .bg-gradient-to-r {
+    padding: 1.5rem !important;
+    border-radius: 1rem !important;
+  }
+
+  #boglanish .mt-12 h3 {
+    font-size: 1.25rem !important;
+  }
+
+  #boglanish .mt-12 p {
+    font-size: 0.875rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  #boglanish .mt-12 a {
+    padding: 0.75rem 1.5rem !important;
+    font-size: 0.75rem !important;
   }
 
   /* Better image loading on mobile */
@@ -405,6 +672,22 @@ body {
     font-size: 0.8rem !important;
   }
 
+  /* Xizmatlar ro'yxati - 2 ustunga */
+  footer .grid > div:nth-child(3) ul {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.35rem 0.5rem !important;
+  }
+
+  footer .grid > div:nth-child(3) li a {
+    font-size: 0.7rem !important;
+    gap: 0.25rem !important;
+  }
+
+  footer .grid > div:nth-child(3) li a i {
+    font-size: 0.5rem !important;
+  }
+
   footer ul.space-y-3 {
     gap: 0.35rem !important;
   }
@@ -477,6 +760,7 @@ body {
   /* Scroller normal tezlik */
   .scroller-inner {
     animation: scroll 12s linear infinite !important;
+    font-size: 1rem !important;
   }
 
   #asosiy h1 {
@@ -531,6 +815,253 @@ body {
   #asosiy .relative .grid.grid-cols-2 .hero-image {
     height: 140px !important;
     flex: 0 0 80% !important;
+  }
+
+  /* Marketing & Sotuv - juda kichik ekranlar */
+  #xizmatlar .mt-20.group {
+    padding: 1rem !important;
+  }
+
+  #xizmatlar .mt-20.group h3 {
+    font-size: 1.5rem !important;
+  }
+
+  #xizmatlar .mt-20.group p.text-lg {
+    font-size: 0.8rem !important;
+  }
+
+  #xizmatlar .mt-20.group .h-\[320px\] {
+    height: 150px !important;
+  }
+
+  #xizmatlar .mt-20.group .flex.flex-wrap > div {
+    padding: 0.4rem 0.5rem !important;
+  }
+
+  #xizmatlar .mt-20.group .flex.flex-wrap > div img {
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+  }
+
+  #xizmatlar .mt-20.group .flex.flex-wrap > div span {
+    font-size: 0.6rem !important;
+  }
+
+  /* Biz Haqimizda - juda kichik ekranlar */
+  #biz-haqimizda .grid.md\\:grid-cols-2.lg\\:grid-cols-3 {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.5rem !important;
+  }
+
+  #biz-haqimizda .grid > div .h-48 {
+    height: 100px !important;
+  }
+
+  #biz-haqimizda .grid > div .p-6 {
+    padding: 0.625rem !important;
+  }
+
+  #biz-haqimizda .grid > div h3 {
+    font-size: 0.75rem !important;
+  }
+
+  #biz-haqimizda .grid > div p {
+    font-size: 0.6rem !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+
+  /* Footer - juda kichik ekranlar */
+  footer .grid > div:nth-child(3) ul {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ============================================ */
+/* MOBILE FOOTER OPTIMIZATION */
+/* ============================================ */
+@media (max-width: 768px) {
+  /* Footer main container */
+  footer {
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+
+  footer > div:first-child {
+    padding: 2rem 1rem !important;
+  }
+
+  /* Footer grid - stack on mobile */
+  footer > div:first-child > div {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  /* Company info section */
+  footer > div:first-child > div > div:first-child {
+    text-align: center;
+  }
+
+  footer > div:first-child > div > div:first-child a.syncopate {
+    justify-content: center;
+    display: block;
+  }
+
+  footer > div:first-child > div > div:first-child p {
+    max-width: 280px;
+    margin: 0 auto 1.5rem;
+  }
+
+  /* Social icons - center them */
+  footer > div:first-child > div > div:first-child .flex.gap-3 {
+    justify-content: center;
+  }
+
+  footer > div:first-child > div > div:first-child .flex.gap-3 a {
+    width: 44px;
+    height: 44px;
+    font-size: 1.1rem;
+  }
+
+  /* Quick links and Services - centered headings, right-aligned items */
+  footer > div:first-child > div > div:nth-child(2),
+  footer > div:first-child > div > div:nth-child(3) {
+    text-align: center;
+  }
+
+  /* Footer headings - exactly centered */
+  footer h4 {
+    font-size: 0.875rem !important;
+    margin-bottom: 1rem !important;
+    text-align: center !important;
+    display: block;
+    width: 100%;
+  }
+
+  /* Footer links container - centered */
+  footer ul {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-right: 15%;
+  }
+
+  footer ul li {
+    margin-bottom: 0.5rem;
+  }
+
+  footer ul li a,
+  footer ul li button {
+    font-size: 0.8rem !important;
+    padding: 0.375rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: right;
+  }
+
+  /* Services list - 2 columns on mobile, centered grid */
+  footer > div:first-child > div > div:nth-child(3) ul {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.5rem 1rem !important;
+    padding-right: 0;
+    padding-left: 0;
+    max-width: 280px;
+    margin: 0 auto;
+    align-items: start;
+  }
+
+  footer > div:first-child > div > div:nth-child(3) ul li {
+    text-align: left;
+  }
+
+  footer > div:first-child > div > div:nth-child(3) ul li a {
+    font-size: 0.7rem !important;
+    justify-content: flex-start;
+  }
+
+  /* Quick links - 2 columns centered */
+  footer > div:first-child > div > div:nth-child(2) ul {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.5rem 1rem !important;
+    padding-right: 0;
+    padding-left: 0;
+    max-width: 260px;
+    margin: 0 auto;
+    align-items: start;
+  }
+
+  footer > div:first-child > div > div:nth-child(2) ul li {
+    text-align: left;
+  }
+
+  footer > div:first-child > div > div:nth-child(2) ul li a,
+  footer > div:first-child > div > div:nth-child(2) ul li button {
+    justify-content: flex-start;
+  }
+
+  /* Contact info section */
+  footer > div:first-child > div > div:nth-child(4) {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  footer > div:first-child > div > div:nth-child(4) ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  footer > div:first-child > div > div:nth-child(4) ul li {
+    justify-content: center;
+  }
+
+  /* Bottom footer */
+  footer .border-t.border-gray-800 > div {
+    padding: 1rem !important;
+    text-align: center;
+  }
+
+  footer .border-t.border-gray-800 p {
+    font-size: 0.65rem !important;
+    margin-bottom: 0.5rem;
+  }
+
+  footer .border-t.border-gray-800 .flex.gap-4 {
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  footer .border-t.border-gray-800 .flex.gap-4 a {
+    font-size: 0.65rem !important;
+  }
+}
+
+/* Mobile navbar language buttons */
+@media (max-width: 1023px) {
+  .mobile-nav-lang-btn {
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .mobile-nav-lang-btn:active {
+    transform: scale(0.9);
+  }
+
+  .mobile-nav-lang-btn.active {
+    border-color: white !important;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
   }
 }
 

@@ -2,7 +2,18 @@
 <html lang="uz">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta
+      name="description"
+      content="Mag'zuna Consult - O'zbekistonning yetakchi konsalting kompaniyasi. Buxgalteriya, IT, marketing, HR va biznes xizmatlari."
+    />
+    <meta name="theme-color" content="#dc2626" />
+    <meta name="msapplication-TileColor" content="#dc2626" />
     <title>Mag'zuna | Consult</title>
 
     <!-- Favicon - Dumaloq -->
@@ -18,6 +29,10 @@
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
     />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <link rel="stylesheet" href="./assets/css/styles.css" />
@@ -56,6 +71,7 @@
           >
             <span
               class="relative z-10 text-sm font-bold uppercase tracking-wider text-white group-hover:text-white transition-colors duration-300"
+              data-lang-key="nav_home"
               >Asosiy</span
             >
             <span
@@ -68,6 +84,7 @@
           >
             <span
               class="relative z-10 text-sm font-bold uppercase tracking-wider text-white group-hover:text-white transition-colors duration-300"
+              data-lang-key="nav_services"
               >Xizmatlar</span
             >
             <span
@@ -80,6 +97,7 @@
           >
             <span
               class="relative z-10 text-sm font-bold uppercase tracking-wider text-white group-hover:text-white transition-colors duration-300"
+              data-lang-key="nav_achievements"
               >Yutuqlar</span
             >
             <span
@@ -92,31 +110,243 @@
           >
             <span
               class="relative z-10 text-sm font-bold uppercase tracking-wider text-white group-hover:text-white transition-colors duration-300"
-              >Haqimizda</span
+              data-lang-key="nav_about"
+              >Biz Haqimizda</span
             >
             <span
               class="absolute inset-0 bg-white/20 rounded-lg scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
             ></span>
           </a>
           <div class="w-px h-6 bg-white/20 mx-2"></div>
+
+          <!-- Language Switcher -->
+          <div class="relative" id="langSwitcher">
+            <button
+              id="langBtn"
+              class="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-all duration-300 text-white font-bold text-sm"
+            >
+              <img
+                src="https://flagcdn.com/w20/uz.png"
+                alt="UZ"
+                class="w-5 h-4 rounded-sm"
+                id="currentFlag"
+              />
+              <span id="currentLang">UZ</span>
+              <i
+                class="fas fa-chevron-down text-xs transition-transform"
+                id="langArrow"
+              ></i>
+            </button>
+            <div
+              id="langDropdown"
+              class="absolute top-full right-0 mt-2 bg-white rounded-xl shadow-2xl py-2 min-w-[140px] hidden z-50 border border-gray-100"
+            >
+              <button
+                onclick="setLanguage('uz')"
+                class="lang-option w-full flex items-center gap-3 px-4 py-2.5 hover:bg-red-50 transition-colors text-left"
+              >
+                <img
+                  src="https://flagcdn.com/w20/uz.png"
+                  alt="UZ"
+                  class="w-5 h-4 rounded-sm"
+                />
+                <span class="text-gray-700 font-medium">O'zbekcha</span>
+              </button>
+              <button
+                onclick="setLanguage('ru')"
+                class="lang-option w-full flex items-center gap-3 px-4 py-2.5 hover:bg-red-50 transition-colors text-left"
+              >
+                <img
+                  src="https://flagcdn.com/w20/ru.png"
+                  alt="RU"
+                  class="w-5 h-4 rounded-sm"
+                />
+                <span class="text-gray-700 font-medium">Русский</span>
+              </button>
+              <button
+                onclick="setLanguage('en')"
+                class="lang-option w-full flex items-center gap-3 px-4 py-2.5 hover:bg-red-50 transition-colors text-left"
+              >
+                <img
+                  src="https://flagcdn.com/w20/gb.png"
+                  alt="EN"
+                  class="w-5 h-4 rounded-sm"
+                />
+                <span class="text-gray-700 font-medium">English</span>
+              </button>
+            </div>
+          </div>
+
           <button
             onclick="openAuthModal('login')"
             class="nav-link group relative px-6 py-2 rounded-full bg-transparent text-white font-bold hover:bg-white/10 transition-all duration-300 ml-2 border-2 border-white"
           >
-            <i class="fas fa-sign-in-alt mr-2"></i>Kirish
+            <i class="fas fa-sign-in-alt mr-2"></i
+            ><span data-lang-key="btn_login">Kirish</span>
           </button>
           <button
             onclick="openAuthModal('register')"
             class="nav-link group relative px-6 py-2 rounded-full bg-white text-red-600 font-bold hover:bg-gray-100 transition-all duration-300 ml-2"
           >
-            <i class="fas fa-user-plus mr-2"></i>Ro'yxatdan o'tish
+            <i class="fas fa-user-plus mr-2"></i
+            ><span data-lang-key="btn_register">Ro'yxatdan o'tish</span>
           </button>
         </div>
-        <div
-          class="h-8 w-8 flex flex-col justify-center space-y-1.5 group cursor-pointer"
+
+        <!-- Mobile Language Selector (in navbar) -->
+        <div class="lg:hidden flex items-center gap-2 mr-2">
+          <button
+            onclick="setLanguage('uz')"
+            class="mobile-nav-lang-btn w-8 h-8 rounded-full overflow-hidden border-2 border-white/30 hover:border-white transition-all"
+            title="O'zbekcha"
+          >
+            <img
+              src="https://flagcdn.com/w40/uz.png"
+              alt="UZ"
+              class="w-full h-full object-cover"
+            />
+          </button>
+          <button
+            onclick="setLanguage('ru')"
+            class="mobile-nav-lang-btn w-8 h-8 rounded-full overflow-hidden border-2 border-white/30 hover:border-white transition-all"
+            title="Русский"
+          >
+            <img
+              src="https://flagcdn.com/w40/ru.png"
+              alt="RU"
+              class="w-full h-full object-cover"
+            />
+          </button>
+          <button
+            onclick="setLanguage('en')"
+            class="mobile-nav-lang-btn w-8 h-8 rounded-full overflow-hidden border-2 border-white/30 hover:border-white transition-all"
+            title="English"
+          >
+            <img
+              src="https://flagcdn.com/w40/gb.png"
+              alt="EN"
+              class="w-full h-full object-cover"
+            />
+          </button>
+        </div>
+
+        <button
+          id="mobileMenuBtn"
+          class="lg:hidden h-10 w-10 flex flex-col justify-center items-center space-y-1.5 group cursor-pointer rounded-lg hover:bg-white/10 transition-colors"
+          aria-label="Menyu ochish"
+          aria-expanded="false"
         >
-          <div class="h-0.5 w-6 bg-white transition-all group-hover:w-8"></div>
-          <div class="h-0.5 w-8 bg-white transition-all group-hover:w-6"></div>
+          <span
+            class="hamburger-line h-0.5 w-6 bg-white transition-all duration-300 group-hover:w-7"
+          ></span>
+          <span
+            class="hamburger-line h-0.5 w-7 bg-white transition-all duration-300 group-hover:w-6"
+          ></span>
+          <span
+            class="hamburger-line h-0.5 w-5 bg-white transition-all duration-300 group-hover:w-7"
+          ></span>
+        </button>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div
+        id="mobileMenu"
+        class="lg:hidden hidden bg-red-700 border-t border-red-800"
+      >
+        <div class="px-4 py-4 space-y-2">
+          <a
+            href="#asosiy"
+            class="mobile-nav-link block px-4 py-3 text-white font-bold uppercase tracking-wider text-sm rounded-lg hover:bg-white/10 transition-colors"
+            data-lang-key="nav_home"
+            >Asosiy</a
+          >
+          <a
+            href="#xizmatlar"
+            class="mobile-nav-link block px-4 py-3 text-white font-bold uppercase tracking-wider text-sm rounded-lg hover:bg-white/10 transition-colors"
+            data-lang-key="nav_services"
+            >Xizmatlar</a
+          >
+          <a
+            href="#yutuqlar"
+            class="mobile-nav-link block px-4 py-3 text-white font-bold uppercase tracking-wider text-sm rounded-lg hover:bg-white/10 transition-colors"
+            data-lang-key="nav_achievements"
+            >Yutuqlar</a
+          >
+          <a
+            href="#biz-haqimizda"
+            class="mobile-nav-link block px-4 py-3 text-white font-bold uppercase tracking-wider text-sm rounded-lg hover:bg-white/10 transition-colors"
+            data-lang-key="nav_about"
+            >Biz Haqimizda</a
+          >
+          <a
+            href="#boglanish"
+            class="mobile-nav-link block px-4 py-3 text-white font-bold uppercase tracking-wider text-sm rounded-lg hover:bg-white/10 transition-colors"
+            data-lang-key="nav_contact"
+            >Bog'lanish</a
+          >
+
+          <!-- Mobile Language Switcher -->
+          <div class="pt-3 border-t border-red-800 mb-3">
+            <p
+              class="text-white/60 text-xs uppercase tracking-wider mb-2 px-4"
+              data-lang-key="lang_select"
+            >
+              Tilni tanlang
+            </p>
+            <div class="flex gap-2 px-4">
+              <button
+                onclick="setLanguage('uz')"
+                class="mobile-lang-btn flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-all"
+              >
+                <img
+                  src="https://flagcdn.com/w20/uz.png"
+                  alt="UZ"
+                  class="w-5 h-4 rounded-sm"
+                />
+                <span class="text-white text-sm font-medium">UZ</span>
+              </button>
+              <button
+                onclick="setLanguage('ru')"
+                class="mobile-lang-btn flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-all"
+              >
+                <img
+                  src="https://flagcdn.com/w20/ru.png"
+                  alt="RU"
+                  class="w-5 h-4 rounded-sm"
+                />
+                <span class="text-white text-sm font-medium">RU</span>
+              </button>
+              <button
+                onclick="setLanguage('en')"
+                class="mobile-lang-btn flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-all"
+              >
+                <img
+                  src="https://flagcdn.com/w20/gb.png"
+                  alt="EN"
+                  class="w-5 h-4 rounded-sm"
+                />
+                <span class="text-white text-sm font-medium">EN</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="pt-3 border-t border-red-800 space-y-2">
+            <button
+              onclick="openAuthModal('login')"
+              class="w-full px-4 py-3 text-white font-bold uppercase tracking-wider text-sm rounded-lg border-2 border-white hover:bg-white hover:text-red-600 transition-all"
+              data-lang-key="btn_login"
+            >
+              <i class="fas fa-sign-in-alt mr-2"></i
+              ><span data-lang-key="btn_login">Kirish</span>
+            </button>
+            <button
+              onclick="openAuthModal('register')"
+              class="w-full px-4 py-3 bg-white text-red-600 font-bold uppercase tracking-wider text-sm rounded-lg hover:bg-gray-100 transition-all"
+            >
+              <i class="fas fa-user-plus mr-2"></i
+              ><span data-lang-key="btn_register">Ro'yxatdan o'tish</span>
+            </button>
+          </div>
         </div>
       </div>
     </nav>
@@ -143,19 +373,27 @@
               <p
                 class="uppercase tracking-[0.2em] text-red-600 mb-4 font-bold text-xs"
                 data-aos="fade-down"
-              ></p>
+                data-lang-key="hero_subtitle"
+              >
+                Professional Konsalting Xizmatlari
+              </p>
               <h1
-                class="text-4xl md:text-6xl font-black syncopate mb-5 leading-tight"
+                class="text-4xl md:text-5xl lg:text-6xl font-black syncopate mb-6 leading-tight"
                 data-aos="zoom-in"
               >
-                Biznesingizni <br />
-                <span class="text-red-600">Yangi Cho'qqiga</span> <br />
-                Olib Chiqing
+                <span data-lang-key="hero_title_1">Biznesingizni</span> <br />
+                <span class="text-red-600"
+                  ><span data-lang-key="hero_title_2">Yangi</span>
+                  <span data-lang-key="hero_title_3">Cho'qqiga</span></span
+                >
+                <br />
+                <span data-lang-key="hero_title_4">Olib Chiqing</span>
               </h1>
               <p
                 class="text-base text-gray-600 mb-6 leading-relaxed max-w-xl"
                 data-aos="fade-up"
                 data-aos-delay="200"
+                data-lang-key="hero_desc"
               >
                 Professional konsalting xizmatlari: buxgalteriya, IT, marketing,
                 HR va ko'plab boshqa xizmatlar. 10+ yillik tajriba va 500+
@@ -163,53 +401,56 @@
               </p>
 
               <div
-                class="flex flex-col sm:flex-row gap-3 mb-10"
+                class="flex flex-col sm:flex-row gap-4 mb-10"
                 data-aos="fade-up"
                 data-aos-delay="300"
               >
                 <a
                   href="#xizmatlar"
-                  class="bg-red-600 text-white px-8 py-3 font-bold uppercase tracking-wider hover:bg-black transition duration-500 text-xs inline-flex items-center justify-center gap-2 rounded-full shadow-lg hover:shadow-2xl"
+                  class="bg-red-600 text-white px-8 py-4 font-bold uppercase tracking-wider hover:bg-red-700 transition duration-300 text-sm inline-flex items-center justify-center gap-2 rounded-full shadow-lg hover:shadow-2xl hover:-translate-y-1"
                 >
                   <i class="fas fa-rocket"></i>
-                  Xizmatlarimiz
+                  <span data-lang-key="hero_btn_services">Xizmatlarimiz</span>
                 </a>
                 <a
                   href="#boglanish"
-                  class="border-2 border-red-600 text-red-600 px-8 py-3 font-bold uppercase tracking-wider hover:bg-red-600 hover:text-white transition duration-500 text-xs inline-flex items-center justify-center gap-2 rounded-full"
+                  class="border-2 border-red-600 text-red-600 px-8 py-4 font-bold uppercase tracking-wider hover:bg-red-600 hover:text-white transition duration-300 text-sm inline-flex items-center justify-center gap-2 rounded-full hover:-translate-y-1"
                 >
                   <i class="fas fa-phone"></i>
-                  Bog'lanish
+                  <span data-lang-key="hero_btn_contact">Bog'lanish</span>
                 </a>
               </div>
 
               <div
-                class="grid grid-cols-3 gap-3"
+                class="grid grid-cols-3 gap-4"
                 data-aos="fade-up"
                 data-aos-delay="400"
               >
-                <div class="hero-feature p-3 text-center">
-                  <div class="text-2xl font-black text-red-600 mb-1">10+</div>
+                <div class="hero-feature p-4 text-center">
+                  <div class="text-3xl font-black text-red-600 mb-1">10+</div>
                   <div
-                    class="text-[10px] text-gray-600 uppercase leading-tight"
+                    class="text-xs text-gray-600 uppercase leading-tight font-medium"
+                    data-lang-key="hero_stat_experience"
                   >
-                    Yillik<br />Tajriba
+                    Yillik Tajriba
                   </div>
                 </div>
-                <div class="hero-feature p-3 text-center">
-                  <div class="text-2xl font-black text-red-600 mb-1">500+</div>
+                <div class="hero-feature p-4 text-center">
+                  <div class="text-3xl font-black text-red-600 mb-1">500+</div>
                   <div
-                    class="text-[10px] text-gray-600 uppercase leading-tight"
+                    class="text-xs text-gray-600 uppercase leading-tight font-medium"
+                    data-lang-key="hero_stat_clients"
                   >
-                    Mamnun<br />Mijozlar
+                    Mamnun Mijozlar
                   </div>
                 </div>
-                <div class="hero-feature p-3 text-center">
-                  <div class="text-2xl font-black text-red-600 mb-1">24/7</div>
+                <div class="hero-feature p-4 text-center">
+                  <div class="text-3xl font-black text-red-600 mb-1">24/7</div>
                   <div
-                    class="text-[10px] text-gray-600 uppercase leading-tight"
+                    class="text-xs text-gray-600 uppercase leading-tight font-medium"
+                    data-lang-key="hero_stat_support"
                   >
-                    Onlayn<br />Qo'llab Quvvatlash
+                    Qo'llab-quvvatlash
                   </div>
                 </div>
               </div>
@@ -268,7 +509,10 @@
                 style="animation-delay: 0.6s"
               >
                 <div class="text-3xl font-black mb-1">98%</div>
-                <div class="text-[10px] uppercase tracking-wider leading-tight">
+                <div
+                  class="text-[10px] uppercase tracking-wider leading-tight"
+                  data-lang-key="hero_satisfaction"
+                >
                   Mijozlar<br />Mamnunligi
                 </div>
               </div>
@@ -280,27 +524,16 @@
       <div class="scroller">
         <div
           class="scroller-inner text-4xl font-black uppercase tracking-tighter flex space-x-12"
+          id="scrollerContent"
         >
-          <span>Buxgalteriya •</span> <span>Brokerlik •</span>
-          <span>IT Xizmatlari •</span> <span>Malakasini Oshirish •</span>
-          <span>Litsenziya Yordam •</span> <span>Energiya Audit •</span>
-          <span>Marketing & Sotuv •</span>
-          <span>Buxgalteriya •</span> <span>Brokerlik •</span>
-          <span>IT Xizmatlari •</span> <span>Malakasini Oshirish •</span>
-          <span>Litsenziya Yordam •</span> <span>Energiya Audit •</span>
-          <span>Marketing & Sotuv •</span>
-          <span>Buxgalteriya •</span> <span>Brokerlik •</span>
-          <span>IT Xizmatlari •</span> <span>Malakasini Oshirish •</span>
-          <span>Litsenziya Yordam •</span> <span>Energiya Audit •</span>
-          <span>Marketing & Sotuv •</span>
-          <span>Buxgalteriya •</span> <span>Brokerlik •</span>
-          <span>IT Xizmatlari •</span> <span>Malakasini Oshirish •</span>
-          <span>Litsenziya Yordam •</span> <span>Energiya Audit •</span>
-          <span>Marketing & Sotuv •</span>
+          <!-- Scroller content will be generated by JavaScript -->
         </div>
       </div>
 
-      <section id="xizmatlar" class="py-40 px-6 relative overflow-hidden">
+      <section
+        id="xizmatlar"
+        class="py-24 lg:py-32 px-6 relative overflow-hidden"
+      >
         <!-- Decorative elements -->
         <div
           class="absolute top-20 right-0 w-96 h-96 bg-red-100 rounded-full -mr-48 opacity-20"
@@ -309,141 +542,219 @@
           class="absolute bottom-0 left-0 w-72 h-72 bg-red-50 rounded-3xl rotate-45 opacity-15"
         ></div>
 
-        <div class="max-w-[1600px] mx-auto relative z-10">
-          <div class="flex flex-col mb-32">
+        <div class="max-w-[1400px] mx-auto relative z-10">
+          <div class="flex flex-col mb-16 lg:mb-20">
+            <p
+              class="text-red-600 font-bold uppercase tracking-widest text-sm mb-4"
+              data-lang-key="services_subtitle"
+            >
+              Nima taklif qilamiz
+            </p>
             <h2 class="section-title mb-4">
-              Bizning <span class="text-red-600 glow-text">Xizmatlarimiz</span>
+              <span data-lang-key="services_title">Bizning Xizmatlarimiz</span>
             </h2>
-            <div class="h-1 w-40 bg-red-600 neon-border"></div>
+            <div class="h-1 w-32 bg-red-600 rounded-full"></div>
           </div>
 
-          <div class="grid lg:grid-cols-3 gap-12">
-            <div class="premium-card p-12 group">
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="premium-card p-8 lg:p-10 group" data-aos="fade-up">
               <span class="card-number">01</span>
-              <div class="h-2/3 overflow-hidden mb-8">
+              <div class="h-2/3 overflow-hidden mb-6">
                 <img
                   src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=800"
                   class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700"
                   alt="Buxgalteriya"
                 />
               </div>
-              <h3 class="text-4xl font-bold mb-4 uppercase">Buxgalteriya</h3>
-              <p class="text-gray-400 text-sm leading-relaxed mb-6">
+              <h3
+                class="text-2xl lg:text-3xl font-bold mb-3 uppercase"
+                data-lang-key="service_1_title"
+              >
+                Buxgalteriya
+              </h3>
+              <p
+                class="text-gray-500 text-sm leading-relaxed mb-6"
+                data-lang-key="service_1_desc"
+              >
                 Soliq va moliya olamida tartib va aniqlik. Biz har bir
                 tiyiningizni hisoblab beramiz.
               </p>
               <a
                 href="#boglanish"
-                class="text-red-600 font-bold uppercase tracking-widest text-xs border-b border-red-600 pb-2"
-                >Batafsil</a
-              >
+                class="text-red-600 font-bold uppercase tracking-widest text-xs border-b-2 border-red-600 pb-1 hover:text-red-700 transition-colors inline-flex items-center gap-2"
+                ><span data-lang-key="btn_more">Batafsil</span>
+                <i class="fas fa-arrow-right text-xs"></i
+              ></a>
             </div>
 
-            <div class="premium-card p-12 group">
+            <div
+              class="premium-card p-8 lg:p-10 group"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
               <span class="card-number">02</span>
-              <div class="h-2/3 overflow-hidden mb-8">
+              <div class="h-2/3 overflow-hidden mb-6">
                 <img
                   src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&q=80&w=800"
                   class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700"
                   alt="Brokerlik"
                 />
               </div>
-              <h3 class="text-4xl font-bold mb-4 uppercase">Brokerlik</h3>
-              <p class="text-gray-400 text-sm leading-relaxed mb-6">
+              <h3
+                class="text-2xl lg:text-3xl font-bold mb-3 uppercase"
+                data-lang-key="service_2_title"
+              >
+                Brokerlik
+              </h3>
+              <p
+                class="text-gray-500 text-sm leading-relaxed mb-6"
+                data-lang-key="service_2_desc"
+              >
                 Investitsiya va birja operatsiyalari bo'yicha professional
                 maslahatlar.
               </p>
               <a
                 href="#boglanish"
-                class="text-red-600 font-bold uppercase tracking-widest text-xs border-b border-red-600 pb-2"
-                >Batafsil</a
-              >
+                class="text-red-600 font-bold uppercase tracking-widest text-xs border-b-2 border-red-600 pb-1 hover:text-red-700 transition-colors inline-flex items-center gap-2"
+                ><span data-lang-key="btn_more">Batafsil</span>
+                <i class="fas fa-arrow-right text-xs"></i
+              ></a>
             </div>
 
-            <div class="premium-card p-12 group">
+            <div
+              class="premium-card p-8 lg:p-10 group"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
               <span class="card-number">03</span>
-              <div class="h-2/3 overflow-hidden mb-8">
+              <div class="h-2/3 overflow-hidden mb-6">
                 <img
                   src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800"
                   class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700"
                   alt="IT"
                 />
               </div>
-              <h3 class="text-4xl font-bold mb-4 uppercase">IT Xizmatlari</h3>
-              <p class="text-gray-400 text-sm leading-relaxed mb-6">
+              <h3
+                class="text-2xl lg:text-3xl font-bold mb-3 uppercase"
+                data-lang-key="service_3_title"
+              >
+                IT Xizmatlari
+              </h3>
+              <p
+                class="text-gray-500 text-sm leading-relaxed mb-6"
+                data-lang-key="service_3_desc"
+              >
                 Biznesingizni raqamli dunyo bilan bog'laymiz. Dasturlash va
                 kiber xavfsizlik.
               </p>
               <a
                 href="#boglanish"
-                class="text-red-600 font-bold uppercase tracking-widest text-xs border-b border-red-600 pb-2"
-                >Batafsil</a
-              >
+                class="text-red-600 font-bold uppercase tracking-widest text-xs border-b-2 border-red-600 pb-1 hover:text-red-700 transition-colors inline-flex items-center gap-2"
+                ><span data-lang-key="btn_more">Batafsil</span>
+                <i class="fas fa-arrow-right text-xs"></i
+              ></a>
             </div>
 
-            <div class="premium-card p-12 group">
+            <div
+              class="premium-card p-8 lg:p-10 group"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
               <span class="card-number">04</span>
-              <div class="h-2/3 overflow-hidden mb-8">
+              <div class="h-2/3 overflow-hidden mb-6">
                 <img
                   src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&q=80&w=800"
                   class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700"
                   alt="HR"
                 />
               </div>
-              <h3 class="text-3xl font-bold mb-4 uppercase">Malaka Oshirish</h3>
-              <p class="text-gray-400 text-sm leading-relaxed mb-6">
+              <h3
+                class="text-2xl lg:text-3xl font-bold mb-3 uppercase"
+                data-lang-key="service_4_title"
+              >
+                Malaka Oshirish
+              </h3>
+              <p
+                class="text-gray-500 text-sm leading-relaxed mb-6"
+                data-lang-key="service_4_desc"
+              >
                 Xodimlarni professional darajaga ko'tarish va malaka
                 shaklantirish programmalari.
               </p>
               <a
                 href="#boglanish"
-                class="text-red-600 font-bold uppercase tracking-widest text-xs border-b border-red-600 pb-2"
-                >Batafsil</a
-              >
+                class="text-red-600 font-bold uppercase tracking-widest text-xs border-b-2 border-red-600 pb-1 hover:text-red-700 transition-colors inline-flex items-center gap-2"
+                ><span data-lang-key="btn_more">Batafsil</span>
+                <i class="fas fa-arrow-right text-xs"></i
+              ></a>
             </div>
 
-            <div class="premium-card p-12 group">
+            <div
+              class="premium-card p-8 lg:p-10 group"
+              data-aos="fade-up"
+              data-aos-delay="400"
+            >
               <span class="card-number">05</span>
-              <div class="h-2/3 overflow-hidden mb-8">
+              <div class="h-2/3 overflow-hidden mb-6">
                 <img
                   src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=800"
                   class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700"
                   alt="Litsenziya"
                 />
               </div>
-              <h3 class="text-4xl font-bold mb-4 uppercase">
+              <h3
+                class="text-2xl lg:text-3xl font-bold mb-3 uppercase"
+                data-lang-key="service_5_title"
+              >
                 Litsenziya Yordam
               </h3>
-              <p class="text-gray-400 text-sm leading-relaxed mb-6">
+              <p
+                class="text-gray-500 text-sm leading-relaxed mb-6"
+                data-lang-key="service_5_desc"
+              >
                 Biznesni ro'yxatga olish, ruxsatnoma va litsenziya olishda
                 amaliy yordam berish.
               </p>
               <a
                 href="#boglanish"
-                class="text-red-600 font-bold uppercase tracking-widest text-xs border-b border-red-600 pb-2"
-                >Batafsil</a
-              >
+                class="text-red-600 font-bold uppercase tracking-widest text-xs border-b-2 border-red-600 pb-1 hover:text-red-700 transition-colors inline-flex items-center gap-2"
+                ><span data-lang-key="btn_more">Batafsil</span>
+                <i class="fas fa-arrow-right text-xs"></i
+              ></a>
             </div>
 
-            <div class="premium-card p-12 group">
+            <div
+              class="premium-card p-8 lg:p-10 group"
+              data-aos="fade-up"
+              data-aos-delay="500"
+            >
               <span class="card-number">06</span>
-              <div class="h-2/3 overflow-hidden mb-8">
+              <div class="h-2/3 overflow-hidden mb-6">
                 <img
                   src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&q=80&w=800"
                   class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700"
                   alt="Energy"
                 />
               </div>
-              <h3 class="text-4xl font-bold mb-4 uppercase">Energiya Audit</h3>
-              <p class="text-gray-400 text-sm leading-relaxed mb-6">
+              <h3
+                class="text-2xl lg:text-3xl font-bold mb-3 uppercase"
+                data-lang-key="service_6_title"
+              >
+                Energiya Audit
+              </h3>
+              <p
+                class="text-gray-500 text-sm leading-relaxed mb-6"
+                data-lang-key="service_6_desc"
+              >
                 Energiya sarfini optimallashtirish va xarajatlarni 30% gacha
                 tejash.
               </p>
               <a
                 href="#boglanish"
-                class="text-red-600 font-bold uppercase tracking-widest text-xs border-b border-red-600 pb-2"
-                >Batafsil</a
-              >
+                class="text-red-600 font-bold uppercase tracking-widest text-xs border-b-2 border-red-600 pb-1 hover:text-red-700 transition-colors inline-flex items-center gap-2"
+                ><span data-lang-key="btn_more">Batafsil</span>
+                <i class="fas fa-arrow-right text-xs"></i
+              ></a>
             </div>
           </div>
 
@@ -473,17 +784,17 @@
               </div>
               <h3
                 class="text-4xl lg:text-6xl font-black uppercase mb-6 text-gray-900 leading-tight"
+                data-lang-key="marketing_title"
               >
-                Marketing <br />
-                & <span class="text-red-600">Sotuv</span>
+                Marketing & Sotuv
               </h3>
               <p
                 class="text-lg text-gray-600 max-w-xl mb-8 leading-relaxed border-l-4 border-red-600 pl-6"
+                data-lang-key="marketing_desc"
               >
                 Biz biznesingizni nafaqat ko'rsatamiz, balki uni bozordagi
                 yetakchiga aylantiramiz. Professional marketing strategiyasi
-                bilan sotuvingizni
-                <strong class="text-red-600">3x</strong> oshiring.
+                bilan sotuvingizni 3x oshiring.
               </p>
               <div class="flex flex-wrap gap-6 mb-8">
                 <div
@@ -494,7 +805,9 @@
                     class="w-10 h-10 rounded-lg object-cover"
                     alt="SMM"
                   />
-                  <span class="text-sm font-bold text-gray-800"
+                  <span
+                    class="text-sm font-bold text-gray-800"
+                    data-lang-key="marketing_smm"
                     >SMM strategiya</span
                   >
                 </div>
@@ -506,7 +819,11 @@
                     class="w-10 h-10 rounded-lg object-cover"
                     alt="Brending"
                   />
-                  <span class="text-sm font-bold text-gray-800">Brending</span>
+                  <span
+                    class="text-sm font-bold text-gray-800"
+                    data-lang-key="marketing_branding"
+                    >Brending</span
+                  >
                 </div>
                 <div
                   class="flex items-center gap-3 bg-gray-50 px-4 py-3 rounded-xl"
@@ -516,14 +833,18 @@
                     class="w-10 h-10 rounded-lg object-cover"
                     alt="Reklama"
                   />
-                  <span class="text-sm font-bold text-gray-800">Reklama</span>
+                  <span
+                    class="text-sm font-bold text-gray-800"
+                    data-lang-key="marketing_ads"
+                    >Reklama</span
+                  >
                 </div>
               </div>
               <a
                 href="#boglanish"
                 class="inline-flex items-center gap-3 bg-red-600 text-white px-8 py-4 font-bold uppercase rounded-full hover:bg-red-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
               >
-                Sotuvni Boshlash
+                <span data-lang-key="marketing_btn">Sotuvni Boshlash</span>
                 <svg
                   class="w-5 h-5"
                   fill="none"
@@ -553,7 +874,10 @@
         </div>
       </section>
 
-      <section id="yutuqlar" class="py-32 stats-bg relative overflow-hidden">
+      <section
+        id="yutuqlar"
+        class="py-20 lg:py-28 stats-bg relative overflow-hidden"
+      >
         <!-- Decorative shapes -->
         <div
           class="absolute top-0 left-0 w-96 h-96 bg-red-200 rounded-full -ml-48 -mt-48 opacity-20"
@@ -562,81 +886,111 @@
           class="absolute bottom-0 right-0 w-72 h-72 bg-red-100 rounded-3xl opacity-15"
         ></div>
 
-        <div class="max-w-[1600px] mx-auto px-6 relative z-10">
-          <div class="text-center mb-20">
-            <h2 class="section-title text-black mb-6">
-              Bizning <span class="text-red-600">Yutuqlarimiz</span>
+        <div class="max-w-[1200px] mx-auto px-6 relative z-10">
+          <div class="text-center mb-12 lg:mb-16">
+            <p
+              class="text-red-600 font-bold uppercase tracking-widest text-sm mb-4"
+              data-lang-key="achievements_subtitle"
+            >
+              Raqamlarda
+            </p>
+            <h2
+              class="section-title text-black mb-4"
+              data-lang-key="achievements_title"
+            >
+              Bizning Yutuqlarimiz
             </h2>
-            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p
+              class="text-base lg:text-lg text-gray-600 max-w-2xl mx-auto"
+              data-lang-key="achievements_desc"
+            >
               Raqamlar bizning ishimizning sifati va mijozlarimiz ishonchini aks
               ettiradi
             </p>
           </div>
-          <div class="grid md:grid-cols-4 gap-12 text-center">
+          <div
+            class="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 text-center"
+          >
             <div
               data-aos="fade-up"
-              class="bg-white/80 backdrop-blur p-8 rounded-lg shadow-lg"
+              class="bg-white/90 backdrop-blur p-6 lg:p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow border border-red-50"
             >
-              <div class="text-6xl font-black italic text-red-600 mb-3">
+              <div class="text-4xl lg:text-5xl font-black text-red-600 mb-2">
                 10+
               </div>
               <div
-                class="uppercase tracking-widest font-bold text-lg text-black mb-2"
+                class="uppercase tracking-wider font-bold text-sm lg:text-base text-gray-900 mb-1"
+                data-lang-key="achievements_1"
               >
                 Yillik Tajriba
               </div>
-              <p class="text-gray-500 text-sm">
+              <p
+                class="text-gray-500 text-xs lg:text-sm hidden lg:block"
+                data-lang-key="achievements_1_desc"
+              >
                 O'n yildan ortiq bozorda faol ishlaymiz
               </p>
             </div>
             <div
               data-aos="fade-up"
               data-aos-delay="100"
-              class="bg-white/80 backdrop-blur p-8 rounded-lg shadow-lg"
+              class="bg-white/90 backdrop-blur p-6 lg:p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow border border-red-50"
             >
-              <div class="text-6xl font-black italic text-red-600 mb-3">
+              <div class="text-4xl lg:text-5xl font-black text-red-600 mb-2">
                 500+
               </div>
               <div
-                class="uppercase tracking-widest font-bold text-lg text-black mb-2"
+                class="uppercase tracking-wider font-bold text-sm lg:text-base text-gray-900 mb-1"
+                data-lang-key="achievements_2"
               >
                 Kompaniyalar
               </div>
-              <p class="text-gray-500 text-sm">
+              <p
+                class="text-gray-500 text-xs lg:text-sm hidden lg:block"
+                data-lang-key="achievements_2_desc"
+              >
                 Yuzlab kompaniyalarga xizmat ko'rsatdik
               </p>
             </div>
             <div
               data-aos="fade-up"
               data-aos-delay="200"
-              class="bg-white/80 backdrop-blur p-8 rounded-lg shadow-lg"
+              class="bg-white/90 backdrop-blur p-6 lg:p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow border border-red-50"
             >
-              <div class="text-6xl font-black italic text-red-600 mb-3">
+              <div class="text-4xl lg:text-5xl font-black text-red-600 mb-2">
                 98%
               </div>
               <div
-                class="uppercase tracking-widest font-bold text-lg text-black mb-2"
+                class="uppercase tracking-wider font-bold text-sm lg:text-base text-gray-900 mb-1"
+                data-lang-key="achievements_3"
               >
-                Natija
+                Mamnunlik
               </div>
-              <p class="text-gray-500 text-sm">
+              <p
+                class="text-gray-500 text-xs lg:text-sm hidden lg:block"
+                data-lang-key="achievements_3_desc"
+              >
                 Mijozlarimizning mamnunlik darajasi
               </p>
             </div>
             <div
               data-aos="fade-up"
               data-aos-delay="300"
-              class="bg-white/80 backdrop-blur p-8 rounded-lg shadow-lg"
+              class="bg-white/90 backdrop-blur p-6 lg:p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow border border-red-50"
             >
-              <div class="text-6xl font-black italic text-red-600 mb-3">
+              <div class="text-4xl lg:text-5xl font-black text-red-600 mb-2">
                 24/7
               </div>
               <div
-                class="uppercase tracking-widest font-bold text-lg text-black mb-2"
+                class="uppercase tracking-wider font-bold text-sm lg:text-base text-gray-900 mb-1"
+                data-lang-key="achievements_4"
               >
-                Qo'llab-quvvatlash
+                Yordam
               </div>
-              <p class="text-gray-500 text-sm">
+              <p
+                class="text-gray-500 text-xs lg:text-sm hidden lg:block"
+                data-lang-key="achievements_4_desc"
+              >
                 Har qanday vaqtda sizning xizmatingizdamiz
               </p>
             </div>
@@ -646,7 +1000,7 @@
 
       <section
         id="biz-haqimizda"
-        class="py-28 px-6 bg-gradient-to-br from-white via-gray-50 to-white relative overflow-hidden"
+        class="py-20 lg:py-28 px-6 bg-gradient-to-br from-white via-gray-50 to-white relative overflow-hidden"
       >
         <!-- Decorative shapes -->
         <div
@@ -655,96 +1009,145 @@
         <div
           class="absolute bottom-0 left-0 w-96 h-96 bg-red-100 rounded-full -ml-48 -mb-48 opacity-20"
         ></div>
-        <div
-          class="absolute top-1/3 right-1/4 w-1 h-64 bg-gradient-to-b from-red-600 to-transparent opacity-20"
-        ></div>
 
         <div class="max-w-[1200px] mx-auto relative z-10">
-          <div class="text-center mb-20">
-            <h2 class="section-title mb-6 text-black" data-aos="fade-up">
-              Nima Uchun <span class="text-red-600">Biz?</span>
-            </h2>
-            <div
-              class="h-1 w-40 bg-gradient-to-r from-red-600 via-red-400 to-transparent mx-auto mb-8 rounded-full"
-            ></div>
+          <div class="text-center mb-12 lg:mb-16">
             <p
-              class="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed font-medium"
+              class="text-red-600 font-bold uppercase tracking-widest text-sm mb-4"
+              data-aos="fade-up"
+              data-lang-key="about_subtitle"
             >
-              Bizning maxfiy - odamlar va ularning muvaffaqiyati
+              Afzalliklarimiz
             </p>
+            <h2 class="section-title mb-4 text-black" data-aos="fade-up">
+              <span data-lang-key="about_title">Nima Uchun</span>
+              <span class="text-red-600" data-lang-key="about_title_2"
+                >Biz?</span
+              >
+            </h2>
+            <div class="h-1 w-32 bg-red-600 mx-auto mb-6 rounded-full"></div>
             <p
-              class="text-base text-gray-600 max-w-2xl mx-auto mt-4 leading-relaxed"
+              class="text-base lg:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed"
+              data-aos="fade-up"
+              data-lang-key="about_desc"
             >
-              10 yil tajribada sanoat bo'ylab qo'llab-quvvatlagan 500+
-              kompaniya. Biz faqat xizmat ko'rsatmiz emas, strategik hamkorlik
-              va uzoq muddat rivojlanishga yo'naltiramiz.
+              10+ yil tajriba, 500+ mamnun kompaniya. Biz strategik hamkorlik va
+              uzoq muddatli rivojlanishga yo'naltiramiz.
             </p>
           </div>
 
-          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-20">
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- Card 1 -->
             <div
-              class="group relative bg-white rounded-2xl p-10 shadow-lg hover:shadow-2xl transition-all duration-300 border border-red-100 overflow-hidden"
+              class="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:-translate-y-2"
               data-aos="fade-up"
               data-aos-delay="0"
             >
-              <div
-                class="absolute inset-0 bg-gradient-to-br from-red-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              ></div>
-              <div class="relative z-10">
+              <div class="relative h-48 overflow-hidden">
                 <img
-                  src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&h=400&fit=crop"
-                  alt="Tezkor Natija"
-                  class="w-full h-32 object-cover rounded-lg mb-6 group-hover:scale-105 transition-transform duration-300"
+                  src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop"
+                  alt="Tezkor natija"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                <h3 class="text-xl font-bold mb-3 text-black">Tezkor Natija</h3>
-                <p class="text-gray-700 leading-relaxed text-sm">
-                  Sizning vazifalaringizni tezda va samarali hal qilamiz.
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"
+                ></div>
+                <div class="absolute bottom-4 left-4 right-4">
+                  <span
+                    class="bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full"
+                    >01</span
+                  >
+                </div>
+              </div>
+              <div class="p-6">
+                <h3
+                  class="text-xl font-bold mb-3 text-gray-900 group-hover:text-red-600 transition-colors"
+                  data-lang-key="about_1_title"
+                >
+                  Tezkor Natija
+                </h3>
+                <p
+                  class="text-gray-600 leading-relaxed text-sm"
+                  data-lang-key="about_1_desc"
+                >
+                  Sizning vazifalaringizni tezda va samarali hal qilamiz. Vaqtni
+                  tejash - pul tejash.
                 </p>
               </div>
             </div>
 
             <!-- Card 2 -->
             <div
-              class="group relative bg-white rounded-2xl p-10 shadow-lg hover:shadow-2xl transition-all duration-300 border border-red-100 overflow-hidden"
+              class="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:-translate-y-2"
               data-aos="fade-up"
               data-aos-delay="100"
             >
-              <div
-                class="absolute inset-0 bg-gradient-to-br from-red-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              ></div>
-              <div class="relative z-10">
+              <div class="relative h-48 overflow-hidden">
                 <img
-                  src="https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=600&h=400&fit=crop"
-                  alt="Premium Sifat"
-                  class="w-full h-32 object-cover rounded-lg mb-6 group-hover:scale-105 transition-transform duration-300"
+                  src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=300&fit=crop"
+                  alt="Premium sifat"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                <h3 class="text-xl font-bold mb-3 text-black">Premium Sifat</h3>
-                <p class="text-gray-700 leading-relaxed text-sm">
-                  Har bitta loyihada eng yuqori standartni qo'llaymiz.
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"
+                ></div>
+                <div class="absolute bottom-4 left-4 right-4">
+                  <span
+                    class="bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full"
+                    >02</span
+                  >
+                </div>
+              </div>
+              <div class="p-6">
+                <h3
+                  class="text-xl font-bold mb-3 text-gray-900 group-hover:text-red-600 transition-colors"
+                  data-lang-key="about_2_title"
+                >
+                  Premium Sifat
+                </h3>
+                <p
+                  class="text-gray-600 leading-relaxed text-sm"
+                  data-lang-key="about_2_desc"
+                >
+                  Har bitta loyihada eng yuqori standartni qo'llaymiz. Sifat
+                  bizning ustuvorligimiz.
                 </p>
               </div>
             </div>
 
             <!-- Card 3 -->
             <div
-              class="group relative bg-white rounded-2xl p-10 shadow-lg hover:shadow-2xl transition-all duration-300 border border-red-100 overflow-hidden"
+              class="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:-translate-y-2"
               data-aos="fade-up"
               data-aos-delay="200"
             >
-              <div
-                class="absolute inset-0 bg-gradient-to-br from-red-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              ></div>
-              <div class="relative z-10">
+              <div class="relative h-48 overflow-hidden">
                 <img
-                  src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&h=400&fit=crop"
-                  alt="Ishonchli Hamkor"
-                  class="w-full h-32 object-cover rounded-lg mb-6 group-hover:scale-105 transition-transform duration-300"
+                  src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=400&h=300&fit=crop"
+                  alt="Ishonchli hamkor"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                <h3 class="text-xl font-bold mb-3 text-black">
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"
+                ></div>
+                <div class="absolute bottom-4 left-4 right-4">
+                  <span
+                    class="bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full"
+                    >03</span
+                  >
+                </div>
+              </div>
+              <div class="p-6">
+                <h3
+                  class="text-xl font-bold mb-3 text-gray-900 group-hover:text-red-600 transition-colors"
+                  data-lang-key="about_3_title"
+                >
                   Ishonchli Hamkor
                 </h3>
-                <p class="text-gray-700 leading-relaxed text-sm">
+                <p
+                  class="text-gray-600 leading-relaxed text-sm"
+                  data-lang-key="about_3_desc"
+                >
                   Uzoq muddat hamkorlik va o'zaro sodiqlik asosida ishlaymiz.
                 </p>
               </div>
@@ -752,72 +1155,116 @@
 
             <!-- Card 4 -->
             <div
-              class="group relative bg-white rounded-2xl p-10 shadow-lg hover:shadow-2xl transition-all duration-300 border border-red-100 overflow-hidden"
+              class="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:-translate-y-2"
               data-aos="fade-up"
               data-aos-delay="300"
             >
-              <div
-                class="absolute inset-0 bg-gradient-to-br from-red-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              ></div>
-              <div class="relative z-10">
+              <div class="relative h-48 overflow-hidden">
                 <img
-                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop"
-                  alt="Mutaxassis Jamoa"
-                  class="w-full h-32 object-cover rounded-lg mb-6 group-hover:scale-105 transition-transform duration-300"
+                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=300&fit=crop"
+                  alt="Mutaxassis jamoa"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                <h3 class="text-xl font-bold mb-3 text-black">
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"
+                ></div>
+                <div class="absolute bottom-4 left-4 right-4">
+                  <span
+                    class="bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full"
+                    >04</span
+                  >
+                </div>
+              </div>
+              <div class="p-6">
+                <h3
+                  class="text-xl font-bold mb-3 text-gray-900 group-hover:text-red-600 transition-colors"
+                  data-lang-key="about_4_title"
+                >
                   Mutaxassis Jamoa
                 </h3>
-                <p class="text-gray-700 leading-relaxed text-sm">
-                  Har sohada o'z sohasining eng yaxshi mutaxassislari bilan.
+                <p
+                  class="text-gray-600 leading-relaxed text-sm"
+                  data-lang-key="about_4_desc"
+                >
+                  Har sohada o'z sohasining eng yaxshi mutaxassislari bilan
+                  ishlaymiz.
                 </p>
               </div>
             </div>
 
             <!-- Card 5 -->
             <div
-              class="group relative bg-white rounded-2xl p-10 shadow-lg hover:shadow-2xl transition-all duration-300 border border-red-100 overflow-hidden"
+              class="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:-translate-y-2"
               data-aos="fade-up"
               data-aos-delay="400"
             >
-              <div
-                class="absolute inset-0 bg-gradient-to-br from-red-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              ></div>
-              <div class="relative z-10">
+              <div class="relative h-48 overflow-hidden">
                 <img
-                  src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=600&h=400&fit=crop"
-                  alt="24/7 Qo'llab-quvvatlash"
-                  class="w-full h-32 object-cover rounded-lg mb-6 group-hover:scale-105 transition-transform duration-300"
+                  src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&h=300&fit=crop"
+                  alt="24/7 Yordam"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                <h3 class="text-xl font-bold mb-3 text-black">
-                  24/7 Qo'llab-quvvatlash
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"
+                ></div>
+                <div class="absolute bottom-4 left-4 right-4">
+                  <span
+                    class="bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full"
+                    >05</span
+                  >
+                </div>
+              </div>
+              <div class="p-6">
+                <h3
+                  class="text-xl font-bold mb-3 text-gray-900 group-hover:text-red-600 transition-colors"
+                  data-lang-key="about_5_title"
+                >
+                  24/7 Yordam
                 </h3>
-                <p class="text-gray-700 leading-relaxed text-sm">
-                  Har qanday vaqtda sizning fikrimizda bo'lamiz.
+                <p
+                  class="text-gray-600 leading-relaxed text-sm"
+                  data-lang-key="about_5_desc"
+                >
+                  Har qanday vaqtda sizning xizmatingizdamiz. Tez va
+                  professional yordam.
                 </p>
               </div>
             </div>
 
             <!-- Card 6 -->
             <div
-              class="group relative bg-white rounded-2xl p-10 shadow-lg hover:shadow-2xl transition-all duration-300 border border-red-100 overflow-hidden"
+              class="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:-translate-y-2"
               data-aos="fade-up"
               data-aos-delay="500"
             >
-              <div
-                class="absolute inset-0 bg-gradient-to-br from-red-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              ></div>
-              <div class="relative z-10">
+              <div class="relative h-48 overflow-hidden">
                 <img
-                  src="https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=600&h=400&fit=crop"
-                  alt="Sertifikatsiya Olgan"
-                  class="w-full h-32 object-cover rounded-lg mb-6 group-hover:scale-105 transition-transform duration-300"
+                  src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400&h=300&fit=crop"
+                  alt="Sertifikatsiyalangan"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                <h3 class="text-xl font-bold mb-3 text-black">
-                  Sertifikatsiya Olgan
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"
+                ></div>
+                <div class="absolute bottom-4 left-4 right-4">
+                  <span
+                    class="bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full"
+                    >06</span
+                  >
+                </div>
+              </div>
+              <div class="p-6">
+                <h3
+                  class="text-xl font-bold mb-3 text-gray-900 group-hover:text-red-600 transition-colors"
+                  data-lang-key="about_6_title"
+                >
+                  Sertifikatsiyalangan
                 </h3>
-                <p class="text-gray-700 leading-relaxed text-sm">
-                  Xalqaro standartlar va sertifikatsiya bilan ishlashimiz.
+                <p
+                  class="text-gray-600 leading-relaxed text-sm"
+                  data-lang-key="about_6_desc"
+                >
+                  Xalqaro standartlar va sertifikatsiya bilan ishlaymiz.
                 </p>
               </div>
             </div>
@@ -827,53 +1274,57 @@
 
       <section
         id="boglanish"
-        class="py-40 px-6 relative bg-gradient-to-b from-gray-50 to-white overflow-hidden"
+        class="py-20 lg:py-28 px-6 relative bg-gradient-to-b from-gray-50 to-white overflow-hidden"
       >
         <!-- Decorative elements -->
         <div
           class="absolute top-0 right-0 w-96 h-96 bg-red-100 rounded-full -mr-48 -mt-48 opacity-25"
         ></div>
-        <div
-          class="absolute bottom-10 left-10 w-72 h-72 border-4 border-red-200 rounded-3xl opacity-20 rotate-45"
-        ></div>
 
-        <div class="absolute inset-0 opacity-5 z-0">
-          <img
-            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2000"
-            class="w-full h-full object-cover"
-          />
-        </div>
-        <div class="max-w-[1600px] mx-auto relative z-10">
-          <div class="text-center mb-16">
-            <h2 class="section-title mb-8 text-black" data-aos="zoom-in">
-              Bizga <span class="text-red-600">Murojaat</span> Qiling
+        <div class="max-w-[1200px] mx-auto relative z-10">
+          <div class="text-center mb-12 lg:mb-16">
+            <p
+              class="text-red-600 font-bold uppercase tracking-widest text-sm mb-4"
+              data-aos="fade-up"
+              data-lang-key="contact_subtitle"
+            >
+              Bog'lanish
+            </p>
+            <h2 class="section-title mb-4 text-black" data-aos="zoom-in">
+              <span data-lang-key="contact_title">Bizga</span>
+              <span class="text-red-600" data-lang-key="contact_title_2"
+                >Murojaat</span
+              >
+              <span data-lang-key="contact_title_3">Qiling</span>
             </h2>
-            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p
+              class="text-base lg:text-lg text-gray-600 max-w-2xl mx-auto"
+              data-aos="fade-up"
+              data-lang-key="contact_desc"
+            >
               O'zbekistonning eng kuchli biznes mutaxassislari bilan bog'laning
-              va biznesingizni yangi bosqichga olib chiqing
             </p>
           </div>
 
-          <div class="grid lg:grid-cols-4 gap-12">
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
             <!-- Telegram -->
             <a
               href="https://t.me/yourusername"
               target="_blank"
-              class="group text-center hover:bg-red-50 p-8 rounded-xl transition-all duration-300"
+              class="group text-center bg-white hover:bg-red-50 p-6 lg:p-8 rounded-2xl transition-all duration-300 shadow-lg hover:shadow-xl border border-gray-100 hover:-translate-y-1"
               data-aos="fade-up"
             >
               <div
-                class="text-6xl mb-4 text-red-600 group-hover:scale-125 transition-transform"
+                class="text-4xl lg:text-5xl mb-3 text-red-600 group-hover:scale-110 transition-transform"
               >
                 <i class="fab fa-telegram"></i>
               </div>
-              <h3 class="text-lg font-bold uppercase mb-2 text-black">
+              <h3
+                class="text-base lg:text-lg font-bold uppercase mb-1 text-gray-900"
+              >
                 Telegram
               </h3>
-              <p class="text-gray-600 text-sm mb-4">Tez aloqa</p>
-              <div
-                class="text-red-600 font-bold uppercase tracking-widest text-xs hover:text-red-700"
-              >
+              <div class="text-red-600 font-semibold text-xs lg:text-sm">
                 @yourusername
               </div>
             </a>
@@ -882,22 +1333,21 @@
             <a
               href="https://instagram.com/yourusername"
               target="_blank"
-              class="group text-center hover:bg-red-50 p-8 rounded-xl transition-all duration-300"
+              class="group text-center bg-white hover:bg-red-50 p-6 lg:p-8 rounded-2xl transition-all duration-300 shadow-lg hover:shadow-xl border border-gray-100 hover:-translate-y-1"
               data-aos="fade-up"
               data-aos-delay="100"
             >
               <div
-                class="text-6xl mb-4 text-red-600 group-hover:scale-125 transition-transform"
+                class="text-4xl lg:text-5xl mb-3 text-red-600 group-hover:scale-110 transition-transform"
               >
                 <i class="fab fa-instagram"></i>
               </div>
-              <h3 class="text-lg font-bold uppercase mb-2 text-black">
+              <h3
+                class="text-base lg:text-lg font-bold uppercase mb-1 text-gray-900"
+              >
                 Instagram
               </h3>
-              <p class="text-gray-600 text-sm mb-4">Ijtimoiy tarmoq</p>
-              <div
-                class="text-red-600 font-bold uppercase tracking-widest text-xs hover:text-red-700"
-              >
+              <div class="text-red-600 font-semibold text-xs lg:text-sm">
                 @yourusername
               </div>
             </a>
@@ -905,20 +1355,21 @@
             <!-- Email -->
             <a
               href="mailto:info@magzuna.uz"
-              class="group text-center hover:bg-red-50 p-8 rounded-xl transition-all duration-300"
+              class="group text-center bg-white hover:bg-red-50 p-6 lg:p-8 rounded-2xl transition-all duration-300 shadow-lg hover:shadow-xl border border-gray-100 hover:-translate-y-1"
               data-aos="fade-up"
               data-aos-delay="200"
             >
               <div
-                class="text-6xl mb-4 text-red-600 group-hover:scale-125 transition-transform"
+                class="text-4xl lg:text-5xl mb-3 text-red-600 group-hover:scale-110 transition-transform"
               >
                 <i class="fas fa-envelope"></i>
               </div>
-              <h3 class="text-lg font-bold uppercase mb-2 text-black">Email</h3>
-              <p class="text-gray-600 text-sm mb-4">Rasmiy manzil</p>
-              <div
-                class="text-red-600 font-bold uppercase tracking-widest text-xs hover:text-red-700"
+              <h3
+                class="text-base lg:text-lg font-bold uppercase mb-1 text-gray-900"
               >
+                Email
+              </h3>
+              <div class="text-red-600 font-semibold text-xs lg:text-sm">
                 info@magzuna.uz
               </div>
             </a>
@@ -926,43 +1377,51 @@
             <!-- Telefon -->
             <a
               href="tel:+998901234567"
-              class="group text-center hover:bg-red-50 p-8 rounded-xl transition-all duration-300"
+              class="group text-center bg-white hover:bg-red-50 p-6 lg:p-8 rounded-2xl transition-all duration-300 shadow-lg hover:shadow-xl border border-gray-100 hover:-translate-y-1"
               data-aos="fade-up"
               data-aos-delay="300"
             >
               <div
-                class="text-6xl mb-4 text-red-600 group-hover:scale-125 transition-transform"
+                class="text-4xl lg:text-5xl mb-3 text-red-600 group-hover:scale-110 transition-transform"
               >
                 <i class="fas fa-phone"></i>
               </div>
-              <h3 class="text-lg font-bold uppercase mb-2 text-black">
+              <h3
+                class="text-base lg:text-lg font-bold uppercase mb-1 text-gray-900"
+                data-lang-key="contact_phone"
+              >
                 Telefon
               </h3>
-              <p class="text-gray-600 text-sm mb-4">Qo'ng'iroq</p>
-              <div
-                class="text-red-600 font-bold uppercase tracking-widest text-xs hover:text-red-700"
-              >
+              <div class="text-red-600 font-semibold text-xs lg:text-sm">
                 +998 90 123 45 67
               </div>
             </a>
           </div>
 
-          <div class="mt-24 text-center" data-aos="fade-up">
-            <h3
-              class="text-3xl font-black uppercase mb-4 text-black leading-tight"
+          <div class="mt-12 lg:mt-16 text-center" data-aos="fade-up">
+            <div
+              class="bg-gradient-to-r from-red-600 to-red-700 rounded-2xl p-8 lg:p-12 text-white"
             >
-              Birgalikda <span class="text-red-600">Kuchlimiz</span>
-            </h3>
-            <p class="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
-              Bugun bizga murojaat qiling va sizning biznesingiz uchun
-              individual strategiya ishlab chiqamiz
-            </p>
-            <a
-              href="#xizmatlar"
-              class="inline-block bg-red-600 text-white px-12 py-4 font-bold uppercase hover:bg-red-700 hover:shadow-lg transition-all rounded-lg"
-            >
-              Bepul Konsultatsiya
-            </a>
+              <h3
+                class="text-2xl lg:text-3xl font-black uppercase mb-3"
+                data-lang-key="cta_title"
+              >
+                Birgalikda <span class="text-white/90">Kuchlimiz</span>
+              </h3>
+              <p
+                class="text-base lg:text-lg text-white/80 mb-6 max-w-xl mx-auto"
+                data-lang-key="cta_desc"
+              >
+                Bugun bizga murojaat qiling va bepul konsultatsiya oling
+              </p>
+              <a
+                href="#xizmatlar"
+                class="inline-block bg-white text-red-600 px-8 lg:px-12 py-3 lg:py-4 font-bold uppercase hover:bg-gray-100 hover:shadow-lg transition-all rounded-full text-sm lg:text-base"
+              >
+                <i class="fas fa-phone-alt mr-2"></i
+                ><span data-lang-key="cta_btn">Bepul Konsultatsiya</span>
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -970,29 +1429,34 @@
 
     <footer class="bg-gray-900 text-white">
       <!-- Main Footer -->
-      <div class="max-w-[1600px] mx-auto px-6 py-16">
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+      <div class="max-w-[1200px] mx-auto px-6 py-12 lg:py-16">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           <!-- Company Info -->
-          <div>
+          <div class="lg:col-span-1">
             <a
               href="#asosiy"
-              class="text-2xl font-bold syncopate text-white mb-6 inline-block"
+              class="text-xl lg:text-2xl font-bold syncopate text-white mb-4 inline-block"
             >
               MAG'ZUNA CONSULT<span class="text-red-500">.</span>
             </a>
-            <p class="text-gray-400 mb-6 leading-relaxed">
+            <p
+              class="text-gray-400 mb-6 leading-relaxed text-sm"
+              data-lang-key="footer_desc"
+            >
               O'zbekistonning yetakchi konsalting kompaniyasi. 10+ yillik
-              tajriba bilan biznesingizni yangi cho'qqilarga olib chiqamiz.
+              tajriba bilan biznesingizni rivojlantiramiz.
             </p>
-            <div class="flex gap-4">
+            <div class="flex gap-3">
               <a
                 href="https://t.me/yourusername"
+                aria-label="Telegram"
                 class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-red-600 transition-all duration-300"
               >
                 <i class="fab fa-telegram"></i>
               </a>
               <a
                 href="https://instagram.com/yourusername"
+                aria-label="Instagram"
                 class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-red-600 transition-all duration-300"
               >
                 <i class="fab fa-instagram"></i>
@@ -1014,101 +1478,149 @@
 
           <!-- Quick Links -->
           <div>
-            <h4 class="text-lg font-bold uppercase mb-6 text-white">
-              Tezkor Havolalar
+            <h4
+              class="text-base font-bold uppercase mb-4 text-white"
+              data-lang-key="footer_links"
+            >
+              Havolalar
             </h4>
-            <ul class="space-y-3">
+            <ul class="space-y-2 text-sm">
               <li>
                 <a
                   href="#asosiy"
-                  class="text-gray-400 hover:text-red-500 transition"
+                  class="text-gray-400 hover:text-red-500 transition flex items-center gap-2"
+                  data-lang-key="nav_home"
+                  ><i class="fas fa-chevron-right text-xs text-red-500"></i
                   >Asosiy</a
                 >
               </li>
               <li>
                 <a
                   href="#xizmatlar"
-                  class="text-gray-400 hover:text-red-500 transition"
+                  class="text-gray-400 hover:text-red-500 transition flex items-center gap-2"
+                  data-lang-key="nav_services"
+                  ><i class="fas fa-chevron-right text-xs text-red-500"></i
                   >Xizmatlar</a
                 >
               </li>
               <li>
                 <a
                   href="#yutuqlar"
-                  class="text-gray-400 hover:text-red-500 transition"
-                  >Yutuqlarimiz</a
+                  class="text-gray-400 hover:text-red-500 transition flex items-center gap-2"
+                  data-lang-key="nav_achievements"
+                  ><i class="fas fa-chevron-right text-xs text-red-500"></i
+                  >Yutuqlar</a
                 >
               </li>
               <li>
                 <a
                   href="#biz-haqimizda"
-                  class="text-gray-400 hover:text-red-500 transition"
-                  >Biz haqimizda</a
+                  class="text-gray-400 hover:text-red-500 transition flex items-center gap-2"
+                  data-lang-key="nav_about"
+                  ><i class="fas fa-chevron-right text-xs text-red-500"></i>Biz
+                  Haqimizda</a
                 >
               </li>
               <li>
                 <a
                   href="#boglanish"
-                  class="text-gray-400 hover:text-red-500 transition"
+                  class="text-gray-400 hover:text-red-500 transition flex items-center gap-2"
+                  data-lang-key="nav_contact"
+                  ><i class="fas fa-chevron-right text-xs text-red-500"></i
                   >Bog'lanish</a
                 >
+              </li>
+              <li>
+                <button
+                  onclick="openAuthModal('login')"
+                  class="text-gray-400 hover:text-red-500 transition flex items-center gap-2"
+                  data-lang-key="btn_login"
+                >
+                  <i class="fas fa-chevron-right text-xs text-red-500"></i
+                  >Kirish
+                </button>
               </li>
             </ul>
           </div>
 
           <!-- Services -->
           <div>
-            <h4 class="text-lg font-bold uppercase mb-6 text-white">
+            <h4
+              class="text-base font-bold uppercase mb-4 text-white"
+              data-lang-key="footer_services"
+            >
               Xizmatlar
             </h4>
-            <ul class="space-y-3">
+            <ul class="space-y-2 text-sm">
               <li>
                 <a
                   href="#xizmatlar"
-                  class="text-gray-400 hover:text-red-500 transition"
+                  class="text-gray-400 hover:text-red-500 transition flex items-center gap-2"
+                  data-lang-key="service_1_title"
+                  ><i class="fas fa-circle text-[6px] text-red-500"></i
                   >Buxgalteriya</a
                 >
               </li>
               <li>
                 <a
                   href="#xizmatlar"
-                  class="text-gray-400 hover:text-red-500 transition"
+                  class="text-gray-400 hover:text-red-500 transition flex items-center gap-2"
+                  data-lang-key="service_2_title"
+                  ><i class="fas fa-circle text-[6px] text-red-500"></i
                   >Brokerlik</a
                 >
               </li>
               <li>
                 <a
                   href="#xizmatlar"
-                  class="text-gray-400 hover:text-red-500 transition"
-                  >IT Xizmatlari</a
+                  class="text-gray-400 hover:text-red-500 transition flex items-center gap-2"
+                  data-lang-key="service_3_title"
+                  ><i class="fas fa-circle text-[6px] text-red-500"></i>IT
+                  Xizmatlari</a
                 >
               </li>
               <li>
                 <a
                   href="#xizmatlar"
-                  class="text-gray-400 hover:text-red-500 transition"
-                  >Malaka Oshirish</a
+                  class="text-gray-400 hover:text-red-500 transition flex items-center gap-2"
+                  data-lang-key="service_4_title"
+                  ><i class="fas fa-circle text-[6px] text-red-500"></i>HR
+                  Xizmatlari</a
                 >
               </li>
               <li>
                 <a
                   href="#xizmatlar"
-                  class="text-gray-400 hover:text-red-500 transition"
-                  >Litsenziyaga Yordam</a
+                  class="text-gray-400 hover:text-red-500 transition flex items-center gap-2"
+                  data-lang-key="service_5_title"
+                  ><i class="fas fa-circle text-[6px] text-red-500"></i
+                  >Konsalting</a
                 >
               </li>
               <li>
                 <a
                   href="#xizmatlar"
-                  class="text-gray-400 hover:text-red-500 transition"
-                  >Energiya Audit</a
+                  class="text-gray-400 hover:text-red-500 transition flex items-center gap-2"
+                  data-lang-key="service_6_title"
+                  ><i class="fas fa-circle text-[6px] text-red-500"></i
+                  >Marketing</a
                 >
               </li>
               <li>
                 <a
                   href="#xizmatlar"
-                  class="text-gray-400 hover:text-red-500 transition"
-                  >Marketing & Sotuv</a
+                  class="text-gray-400 hover:text-red-500 transition flex items-center gap-2"
+                  data-lang-key="footer_sales"
+                  ><i class="fas fa-circle text-[6px] text-red-500"></i>Sotuv</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#xizmatlar"
+                  class="text-gray-400 hover:text-red-500 transition flex items-center gap-2"
+                  data-lang-key="footer_branding"
+                  ><i class="fas fa-circle text-[6px] text-red-500"></i
+                  >Branding</a
                 >
               </li>
             </ul>
@@ -1116,33 +1628,42 @@
 
           <!-- Contact Info -->
           <div>
-            <h4 class="text-lg font-bold uppercase mb-6 text-white">Aloqa</h4>
-            <ul class="space-y-4">
-              <li class="flex items-start gap-3">
-                <i class="fas fa-map-marker-alt text-red-500 mt-1"></i>
-                <span class="text-gray-400"
-                  >Toshkent sh., Chilonzor tumani, Bunyodkor ko'chasi 15</span
+            <h4
+              class="text-base font-bold uppercase mb-4 text-white"
+              data-lang-key="footer_contact"
+            >
+              Aloqa
+            </h4>
+            <ul class="space-y-3 text-sm">
+              <li class="flex items-start gap-2">
+                <i
+                  class="fas fa-map-marker-alt text-red-500 mt-0.5 text-xs"
+                ></i>
+                <span class="text-gray-400" data-lang-key="footer_address"
+                  >Toshkent, Chilonzor tumani</span
                 >
               </li>
-              <li class="flex items-center gap-3">
-                <i class="fas fa-phone text-red-500"></i>
+              <li class="flex items-center gap-2">
+                <i class="fas fa-phone text-red-500 text-xs"></i>
                 <a
                   href="tel:+998901234567"
                   class="text-gray-400 hover:text-red-500 transition"
                   >+998 90 123 45 67</a
                 >
               </li>
-              <li class="flex items-center gap-3">
-                <i class="fas fa-envelope text-red-500"></i>
+              <li class="flex items-center gap-2">
+                <i class="fas fa-envelope text-red-500 text-xs"></i>
                 <a
                   href="mailto:info@magzuna.uz"
                   class="text-gray-400 hover:text-red-500 transition"
                   >info@magzuna.uz</a
                 >
               </li>
-              <li class="flex items-center gap-3">
-                <i class="fas fa-clock text-red-500"></i>
-                <span class="text-gray-400">Dush-Jum: 9:00 - 18:00</span>
+              <li class="flex items-center gap-2">
+                <i class="fas fa-clock text-red-500 text-xs"></i>
+                <span class="text-gray-400" data-lang-key="footer_hours"
+                  >Dush-Jum: 9:00 - 18:00</span
+                >
               </li>
             </ul>
           </div>
@@ -1152,17 +1673,23 @@
       <!-- Bottom Footer -->
       <div class="border-t border-gray-800">
         <div
-          class="max-w-[1600px] mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-4"
+          class="max-w-[1200px] mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-3"
         >
-          <p class="text-gray-500 text-sm">
+          <p class="text-gray-500 text-xs" data-lang-key="footer_copyright">
             © 2026 Mag'zuna Consult. Barcha huquqlar himoyalangan.
           </p>
-          <div class="flex gap-6 text-sm">
-            <a href="#" class="text-gray-500 hover:text-red-500 transition"
-              >Maxfiylik siyosati</a
+          <div class="flex gap-4 text-xs">
+            <a
+              href="#"
+              class="text-gray-500 hover:text-red-500 transition"
+              data-lang-key="footer_privacy"
+              >Maxfiylik</a
             >
-            <a href="#" class="text-gray-500 hover:text-red-500 transition"
-              >Foydalanish shartlari</a
+            <a
+              href="#"
+              class="text-gray-500 hover:text-red-500 transition"
+              data-lang-key="footer_terms"
+              >Shartlar</a
             >
           </div>
         </div>
@@ -1178,7 +1705,12 @@
         class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 animate-scale-in"
       >
         <div class="flex justify-between items-center mb-6">
-          <h2 class="text-3xl font-bold text-black">Kirish</h2>
+          <h2
+            class="text-3xl font-bold text-black"
+            data-lang-key="auth_login_title"
+          >
+            Kirish
+          </h2>
           <button
             onclick="closeAuthModal('login')"
             class="text-gray-400 hover:text-gray-600 transition"
@@ -1189,7 +1721,9 @@
 
         <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-4">
           <div>
-            <label class="block text-sm font-bold text-gray-700 mb-2"
+            <label
+              class="block text-sm font-bold text-gray-700 mb-2"
+              data-lang-key="auth_email"
               >Email</label
             >
             <input
@@ -1202,7 +1736,9 @@
           </div>
 
           <div>
-            <label class="block text-sm font-bold text-gray-700 mb-2"
+            <label
+              class="block text-sm font-bold text-gray-700 mb-2"
+              data-lang-key="auth_password"
               >Parol</label
             >
             <input
@@ -1227,15 +1763,18 @@
             class="w-full bg-red-600 text-white py-3 rounded-lg font-bold hover:bg-red-700 transition-all duration-300 flex items-center justify-center gap-2"
           >
             <i class="fas fa-sign-in-alt"></i>
-            <span id="loginBtnText">Kirish</span>
+            <span id="loginBtnText" data-lang-key="auth_login_title"
+              >Kirish</span
+            >
           </button>
 
           <div class="text-center text-gray-600 text-sm">
-            Akkauntingiz yo'qmi?
+            <span data-lang-key="auth_no_account">Akkauntingiz yo'qmi?</span>
             <button
               type="button"
               onclick="switchAuthModal()"
               class="text-red-600 font-bold hover:underline"
+              data-lang-key="auth_register_link"
             >
               Ro'yxatdan o'ting
             </button>
@@ -1253,7 +1792,12 @@
         class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 animate-scale-in"
       >
         <div class="flex justify-between items-center mb-6">
-          <h2 class="text-3xl font-bold text-black">Ro'yxatdan o'tish</h2>
+          <h2
+            class="text-3xl font-bold text-black"
+            data-lang-key="auth_register_title"
+          >
+            Ro'yxatdan o'tish
+          </h2>
           <button
             onclick="closeAuthModal('register')"
             class="text-gray-400 hover:text-gray-600 transition"
@@ -1268,7 +1812,9 @@
           class="space-y-4"
         >
           <div>
-            <label class="block text-sm font-bold text-gray-700 mb-2"
+            <label
+              class="block text-sm font-bold text-gray-700 mb-2"
+              data-lang-key="auth_name"
               >Ismi</label
             >
             <input
@@ -1281,7 +1827,9 @@
           </div>
 
           <div>
-            <label class="block text-sm font-bold text-gray-700 mb-2"
+            <label
+              class="block text-sm font-bold text-gray-700 mb-2"
+              data-lang-key="auth_email"
               >Email</label
             >
             <input
@@ -1294,7 +1842,9 @@
           </div>
 
           <div>
-            <label class="block text-sm font-bold text-gray-700 mb-2"
+            <label
+              class="block text-sm font-bold text-gray-700 mb-2"
+              data-lang-key="auth_password"
               >Parol</label
             >
             <input
@@ -1305,7 +1855,12 @@
               class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-600 focus:outline-none transition"
               placeholder="••••••••"
             />
-            <p class="text-xs text-gray-500 mt-1">Kamida 6 ta belgi</p>
+            <p
+              class="text-xs text-gray-500 mt-1"
+              data-lang-key="auth_min_chars"
+            >
+              Kamida 6 ta belgi
+            </p>
           </div>
 
           <div
@@ -1328,15 +1883,20 @@
             class="w-full bg-red-600 text-white py-3 rounded-lg font-bold hover:bg-red-700 transition-all duration-300 flex items-center justify-center gap-2"
           >
             <i class="fas fa-user-plus"></i>
-            <span id="registerBtnText">Ro'yxatdan o'tish</span>
+            <span id="registerBtnText" data-lang-key="auth_register_title"
+              >Ro'yxatdan o'tish</span
+            >
           </button>
 
           <div class="text-center text-gray-600 text-sm">
-            Allaqachon akkauntingiz bor?
+            <span data-lang-key="auth_have_account"
+              >Allaqachon akkauntingiz bor?</span
+            >
             <button
               type="button"
               onclick="switchAuthModal()"
               class="text-red-600 font-bold hover:underline"
+              data-lang-key="auth_login_link"
             >
               Kirish
             </button>

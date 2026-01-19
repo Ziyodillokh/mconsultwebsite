@@ -1,8 +1,8 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { AppDataSource } from "./database.config";
 import { AuthModule } from "./auth/auth.module";
+import { AdminModule } from "./admin/admin.module";
 import { AppController } from "./app.controller";
 import { User } from "./entities/user.entity";
 
@@ -20,14 +20,14 @@ import { User } from "./entities/user.entity";
       password: process.env.DB_PASSWORD || "postgres",
       database: process.env.DB_NAME || "magzuna_db",
       entities: [User],
-      migrations: ["src/migrations/*.ts"],
-      synchronize: process.env.DB_SYNC === "true" ? true : false,
+      migrations: ["dist/migrations/*.js"],
+      synchronize: process.env.DB_SYNC === "true",
       logging: false,
-      retryAttempts: 3,
-      retryDelay: 3000,
     }),
+
     TypeOrmModule.forFeature([User]),
     AuthModule,
+    AdminModule,
   ],
   controllers: [AppController],
 })
