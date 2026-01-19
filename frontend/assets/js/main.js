@@ -1740,17 +1740,23 @@ function openServiceModal(number, title, description, imageUrl) {
     successEl: document.getElementById("orderFormSuccessMobile"),
   };
 
+  // Get translated service title based on service number
+  const serviceKey = `service_${number}_title`;
+  const translatedTitle = translations[currentLanguage]?.[serviceKey] || title;
+
   // Populate DESKTOP
   if (desktopElements.number)
     desktopElements.number.textContent = formattedNumber;
-  if (desktopElements.titleLeft) desktopElements.titleLeft.textContent = title;
+  if (desktopElements.titleLeft)
+    desktopElements.titleLeft.textContent = translatedTitle;
   if (desktopElements.titleRight)
-    desktopElements.titleRight.textContent = title;
+    desktopElements.titleRight.textContent = translatedTitle;
   if (desktopElements.image) {
     desktopElements.image.src = imageUrl;
-    desktopElements.image.alt = title;
+    desktopElements.image.alt = translatedTitle;
   }
-  if (desktopElements.serviceName) desktopElements.serviceName.value = title;
+  if (desktopElements.serviceName)
+    desktopElements.serviceName.value = translatedTitle;
   if (desktopElements.serviceNumber)
     desktopElements.serviceNumber.value = number;
 
@@ -1767,12 +1773,13 @@ function openServiceModal(number, title, description, imageUrl) {
   // Populate MOBILE
   if (mobileElements.number)
     mobileElements.number.textContent = formattedNumber;
-  if (mobileElements.title) mobileElements.title.textContent = title;
+  if (mobileElements.title) mobileElements.title.textContent = translatedTitle;
   if (mobileElements.image) {
     mobileElements.image.src = imageUrl;
-    mobileElements.image.alt = title;
+    mobileElements.image.alt = translatedTitle;
   }
-  if (mobileElements.serviceName) mobileElements.serviceName.value = title;
+  if (mobileElements.serviceName)
+    mobileElements.serviceName.value = translatedTitle;
   if (mobileElements.serviceNumber) mobileElements.serviceNumber.value = number;
 
   // Use detailed description for mobile (language-specific)
