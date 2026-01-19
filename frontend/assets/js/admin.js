@@ -1,200 +1,185 @@
-// Admin Panel JavaScript
+/**
+ * ============================================
+ * MAGZUNA ADMIN PANEL - Modern SaaS UI
+ * Professional JavaScript for Admin Dashboard
+ * ============================================
+ */
+
 const API_URL = "/api";
 
-// State
-let currentUser = null;
-let currentPage = 1;
-let currentLimit = 10;
-let currentSearch = "";
-let currentRoleFilter = "";
-let currentStatusFilter = "";
-let deleteUserId = null;
+// ============================================
+// STATE MANAGEMENT
+// ============================================
+const state = {
+  user: null,
+  orders: [],
+  users: [],
+  currentOrderId: null,
+  currentUserId: null,
+  filters: {
+    status: 'all',
+    search: '',
+    dateFrom: '',
+    dateTo: ''
+  },
+  pagination: {
+    page: 1,
+    limit: 10,
+    total: 0
+  },
+  view: 'table', // 'table' or 'cards'
+  theme: localStorage.getItem('adminTheme') || 'light'
+};
 
-// DOM Elements
-const loginModal = document.getElementById("loginModal");
-const adminLayout = document.getElementById("adminLayout");
-const sidebar = document.getElementById("sidebar");
+// Status configurations
+const STATUS_CONFIG = {
+  new: { label: "Yangi", class: "status-new" },
+  accepted: { label: "Qabul qilingan", class: "status-accepted" },
+  progress: { label: "Jarayonda", class: "status-progress" },
+  ready: { label: "Tayyor", class: "status-ready" },
+  closed: { label: "Yopilgan", class: "status-closed" },
+  cancelled: { label: "Bekor qilingan", class: "status-cancelled" },
+  // Backend compatibility
+  pending: { label: "Yangi", class: "status-new" },
+  in_progress: { label: "Jarayonda", class: "status-progress" },
+  completed: { label: "Tayyor", class: "status-ready" }
+};
 
-// Initialize
-document.addEventListener("DOMContentLoaded", () => {
+// ============================================
+// DOM ELEMENTS
+// ============================================
+const DOM = {
+  loginModal: () => document.getElementById('loginModal'),
+  adminLayout: () => document.getElementById('adminLayout'),
+  sidebar: () => document.getElementById('sidebar'),
+  mobileOverlay: () => document.getElementById('mobileOverlay'),
+  orderDrawer: () => document.getElementById('orderDrawer'),
+  drawerOverlay: () => document.getElementById('drawerOverlay'),
+  toastContainer: () => document.getElementById('toastContainer')
+};
+
+// ============================================
+// INITIALIZATION
+// ============================================
+document.addEventListener('DOMContentLoaded', () => {
+  initTheme();
   checkAuth();
   setupEventListeners();
+  setupKeyboardShortcuts();
 });
 
-// Check Authentication
+function initTheme() {
+  if (state.theme === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    const icon = document.getElementById('themeIcon');
+    if (icon) icon.className = 'fas fa-sun';
+  }
+}
+
+// ============================================
+// AUTHENTICATION
+// ============================================
 function checkAuth() {
-  const token = localStorage.getItem("adminToken");
-  const user = localStorage.getItem("adminUser");
+  const token = localStorage.getItem('adminToken');
+  const user = localStorage.getItem('adminUser');
 
   if (token && user) {
     try {
-      currentUser = JSON.parse(user);
-      if (currentUser.role === "admin") {
+      state.user = JSON.parse(user);
+      if (state.user.role === 'admin') {
         showAdminPanel();
         loadDashboard();
         return;
       }
     } catch (e) {
-      console.error("Parse error:", e);
+      console.error('Parse error:', e);
     }
   }
-
   showLoginModal();
 }
 
-// Show Login Modal
 function showLoginModal() {
-  loginModal.classList.remove("hidden");
-  adminLayout.classList.add("hidden");
+  DOM.loginModal().classList.remove('hidden');
+  DOM.adminLayout().style.display = 'none';
 }
 
-// Show Admin Panel
 function showAdminPanel() {
-  loginModal.classList.add("hidden");
-  adminLayout.classList.remove("hidden");
+  DOM.loginModal().classList.add('hidden');
+  DOM.adminLayout().style.display = 'block';
 
-  // Update user info
-  document.getElementById("adminName").textContent = currentUser.name;
-  document.getElementById("adminEmail").textContent = currentUser.email;
+  // Update user info in sidebar
+  const initials = getInitials(state.user.name);
+  const sidebarAvatar = document.getElementById('sidebarAvatar');
+  const sidebarUserName = document.getElementById('sidebarUserName');
+  
+  if (sidebarAvatar) sidebarAvatar.textContent = initials;
+  if (sidebarUserName) sidebarUserName.textContent = state.user.name;
 
-  // Update admin initials
-  const initials = getInitials(currentUser.name);
-  const initialsEl = document.getElementById("adminInitials");
-  if (initialsEl) {
-    initialsEl.textContent = initials;
-  }
-
-  // Update header admin info
-  const headerInitials = document.getElementById("headerAdminInitials");
-  const headerName = document.getElementById("headerAdminName");
-  const welcomeName = document.getElementById("welcomeName");
-  if (headerInitials) headerInitials.textContent = initials;
-  if (headerName) headerName.textContent = currentUser.name.split(" ")[0];
-  if (welcomeName) welcomeName.textContent = currentUser.name.split(" ")[0];
-
-  // Settings
-  if (document.getElementById("settingsName")) {
-    document.getElementById("settingsName").value = currentUser.name;
-  }
-  if (document.getElementById("settingsEmail")) {
-    document.getElementById("settingsEmail").value = currentUser.email;
-  }
+  // Update settings form
+  const settingsName = document.getElementById('settingsName');
+  const settingsEmail = document.getElementById('settingsEmail');
+  if (settingsName) settingsName.value = state.user.name;
+  if (settingsEmail) settingsEmail.value = state.user.email;
 }
 
-// Get initials from name
-function getInitials(name) {
-  if (!name) return "AD";
-  const parts = name.trim().split(" ");
-  if (parts.length >= 2) {
-    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
-  }
-  return name.substring(0, 2).toUpperCase();
-}
-
-// Setup Event Listeners
-function setupEventListeners() {
-  // Login Form
-  document
-    .getElementById("adminLoginForm")
-    .addEventListener("submit", handleLogin);
-
-  // User Form
-  document
-    .getElementById("userForm")
-    .addEventListener("submit", handleUserSubmit);
-
-  // Profile Form
-  document
-    .getElementById("profileForm")
-    .addEventListener("submit", handleProfileUpdate);
-
-  // Password Form
-  document
-    .getElementById("passwordForm")
-    .addEventListener("submit", handlePasswordUpdate);
-
-  // Search & Filters
-  let searchTimeout;
-  document.getElementById("searchInput").addEventListener("input", (e) => {
-    clearTimeout(searchTimeout);
-    searchTimeout = setTimeout(() => {
-      currentSearch = e.target.value;
-      currentPage = 1;
-      loadUsers();
-    }, 300);
-  });
-
-  document.getElementById("roleFilter").addEventListener("change", (e) => {
-    currentRoleFilter = e.target.value;
-    currentPage = 1;
-    loadUsers();
-  });
-
-  document.getElementById("statusFilter").addEventListener("change", (e) => {
-    currentStatusFilter = e.target.value;
-    currentPage = 1;
-    loadUsers();
-  });
-}
-
-// Handle Login
 async function handleLogin(e) {
   e.preventDefault();
 
-  const email = document.getElementById("loginEmail").value;
-  const password = document.getElementById("loginPassword").value;
-  const errorEl = document.getElementById("loginError");
+  const email = document.getElementById('loginEmail').value;
+  const password = document.getElementById('loginPassword').value;
+  const errorEl = document.getElementById('loginError');
 
   try {
     const response = await fetch(`${API_URL}/auth/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
     });
 
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error(data.message || "Login xatosi");
+      throw new Error(data.message || 'Login xatosi');
     }
 
-    if (data.user.role !== "admin") {
-      throw new Error("Admin huquqi talab qilinadi");
+    if (data.user.role !== 'admin') {
+      throw new Error('Admin huquqi talab qilinadi');
     }
 
-    // Save to localStorage
-    localStorage.setItem("adminToken", data.token);
-    localStorage.setItem("adminUser", JSON.stringify(data.user));
+    localStorage.setItem('adminToken', data.token);
+    localStorage.setItem('adminUser', JSON.stringify(data.user));
+    state.user = data.user;
 
-    currentUser = data.user;
     showAdminPanel();
     loadDashboard();
+    errorEl.classList.remove('show');
 
-    errorEl.classList.add("hidden");
   } catch (error) {
-    errorEl.textContent = error.message;
-    errorEl.classList.remove("hidden");
+    errorEl.querySelector('span').textContent = error.message;
+    errorEl.classList.add('show');
   }
 }
 
-// Logout
 function logout() {
-  localStorage.removeItem("adminToken");
-  localStorage.removeItem("adminUser");
-  currentUser = null;
+  localStorage.removeItem('adminToken');
+  localStorage.removeItem('adminUser');
+  state.user = null;
   showLoginModal();
+  showToast('Tizimdan chiqdingiz', 'success');
 }
 
-// API Request Helper
-async function apiRequest(endpoint, method = "GET", body = null) {
-  const token = localStorage.getItem("adminToken");
+// ============================================
+// API HELPERS
+// ============================================
+async function apiRequest(endpoint, method = 'GET', body = null) {
+  const token = localStorage.getItem('adminToken');
 
   const options = {
     method,
     headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }
   };
 
   if (body) {
@@ -208,78 +193,523 @@ async function apiRequest(endpoint, method = "GET", body = null) {
     if (response.status === 401 || response.status === 403) {
       logout();
     }
-    throw new Error(data.message || "Xatolik yuz berdi");
+    throw new Error(data.message || 'Xatolik yuz berdi');
   }
 
   return data;
 }
 
-// Load Dashboard
+// ============================================
+// DASHBOARD
+// ============================================
 async function loadDashboard() {
   try {
-    const response = await apiRequest("/admin/dashboard");
-    const stats = response.data;
+    // Load stats
+    const dashboardResponse = await apiRequest('/admin/dashboard');
+    const stats = dashboardResponse.data;
 
-    // Update stats
-    document.getElementById("statTotalUsers").textContent = stats.totalUsers;
-    document.getElementById("statActiveUsers").textContent = stats.activeUsers;
-    document.getElementById("statAdminUsers").textContent = stats.adminUsers;
-    document.getElementById("statNewUsersToday").textContent =
-      stats.newUsersToday;
-    document.getElementById("statNewUsersThisWeek").textContent =
-      stats.newUsersThisWeek;
-    document.getElementById("statNewUsersThisMonth").textContent =
-      stats.newUsersThisMonth;
+    // Update dashboard stats
+    updateElement('statTotalOrders', stats.totalOrders || stats.totalUsers || 0);
+    updateElement('statNewOrders', stats.newOrders || stats.newUsersToday || 0);
+    updateElement('statCompletedOrders', stats.completedOrders || stats.activeUsers || 0);
+    updateElement('statTotalUsers', stats.totalUsers || 0);
 
-    // Update percentages
-    const activePercent =
-      stats.totalUsers > 0
-        ? Math.round((stats.activeUsers / stats.totalUsers) * 100)
-        : 0;
-    const inactivePercent =
-      stats.totalUsers > 0
-        ? Math.round((stats.inactiveUsers / stats.totalUsers) * 100)
-        : 0;
+    // Load orders for recent orders table
+    await loadOrders();
 
-    document.getElementById("statActivePercent").textContent =
-      activePercent + "%";
-    document.getElementById("statInactivePercent").textContent =
-      inactivePercent + "%";
+    // Render recent orders (first 5)
+    renderRecentOrders(state.orders.slice(0, 5));
 
-    // Update progress bars
-    const weekProgress =
-      stats.totalUsers > 0
-        ? (stats.newUsersThisWeek / stats.totalUsers) * 100
-        : 0;
-    const monthProgress =
-      stats.totalUsers > 0
-        ? (stats.newUsersThisMonth / stats.totalUsers) * 100
-        : 0;
+    // Update badge
+    const newOrdersCount = state.orders.filter(o => o.status === 'pending' || o.status === 'new').length;
+    updateOrdersBadge(newOrdersCount);
 
-    document.getElementById("weekProgress").style.width =
-      Math.min(weekProgress * 5, 100) + "%";
-    document.getElementById("monthProgress").style.width =
-      Math.min(monthProgress * 2, 100) + "%";
-
-    // Load recent users
-    const usersResponse = await apiRequest(
-      "/admin/users?limit=5&sortBy=createdAt&sortOrder=DESC",
-    );
-    renderRecentUsers(usersResponse.data.users);
   } catch (error) {
-    console.error("Dashboard load error:", error);
-    showToast(error.message, "error");
+    console.error('Dashboard load error:', error);
+    showToast(error.message, 'error');
   }
 }
 
-// Render Recent Users
-function renderRecentUsers(users) {
-  const tbody = document.getElementById("recentUsersTable");
+function renderRecentOrders(orders) {
+  const tbody = document.getElementById('recentOrdersTable');
+  const countEl = document.getElementById('recentOrdersCount');
+  
+  if (countEl) countEl.textContent = `${orders.length} ta`;
 
-  if (users.length === 0) {
+  if (!tbody) return;
+
+  if (orders.length === 0) {
     tbody.innerHTML = `
       <tr>
-        <td colspan="5" class="text-center py-8 text-gray-500">
+        <td colspan="6" style="text-align: center; padding: 40px; color: var(--gray-500);">
+          Hozircha zakazlar yo'q
+        </td>
+      </tr>
+    `;
+    return;
+  }
+
+  tbody.innerHTML = orders.map(order => `
+    <tr onclick="openOrderDrawer('${order.id}')" style="cursor: pointer;">
+      <td><span class="order-id">#${order.id?.slice(-6) || '000000'}</span></td>
+      <td>
+        <div class="customer-cell">
+          <div class="customer-avatar">${getInitials(order.user?.name || 'M')}</div>
+          <div class="customer-info">
+            <h4>${order.user?.name || 'Noma\'lum'}</h4>
+            <a href="tel:${order.phoneNumber}">${order.phoneNumber}</a>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div class="service-cell">
+          <div class="service-icon"><i class="fas fa-briefcase"></i></div>
+          <span class="service-name">${order.serviceName || 'Xizmat'}</span>
+        </div>
+      </td>
+      <td>
+        <div class="date-cell">
+          <div class="date">${formatDate(order.createdAt)}</div>
+          <div class="time">${formatTime(order.createdAt)}</div>
+        </div>
+      </td>
+      <td>${getStatusBadgeHTML(order.status)}</td>
+      <td class="actions-cell">
+        <button class="action-btn view" onclick="event.stopPropagation(); openOrderDrawer('${order.id}')" title="Ko'rish">
+          <i class="fas fa-eye"></i>
+        </button>
+        <button class="action-btn call" onclick="event.stopPropagation(); window.open('tel:${order.phoneNumber}')" title="Qo'ng'iroq">
+          <i class="fas fa-phone"></i>
+        </button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+// ============================================
+// ORDERS MANAGEMENT
+// ============================================
+async function loadOrders() {
+  try {
+    const orders = await apiRequest('/orders');
+    state.orders = Array.isArray(orders) ? orders : (orders.data || []);
+    
+    // Load stats
+    try {
+      const stats = await apiRequest('/orders/stats');
+      updateOrderCounts(stats);
+    } catch (e) {
+      // Stats endpoint might not exist, calculate from orders
+      updateOrderCountsFromOrders();
+    }
+
+    renderOrders();
+    
+  } catch (error) {
+    console.error('Orders load error:', error);
+    showToast(error.message, 'error');
+  }
+}
+
+function updateOrderCounts(stats) {
+  updateElement('countAll', stats.total || state.orders.length);
+  updateElement('countNew', stats.pending || 0);
+  updateElement('countAccepted', stats.accepted || 0);
+  updateElement('countProgress', stats.inProgress || stats.in_progress || 0);
+  updateElement('countReady', stats.completed || stats.ready || 0);
+  updateElement('countClosed', stats.closed || 0);
+  updateElement('countCancelled', stats.cancelled || 0);
+  updateElement('totalOrdersCount', `${stats.total || state.orders.length} ta`);
+}
+
+function updateOrderCountsFromOrders() {
+  const counts = {
+    all: state.orders.length,
+    new: 0, pending: 0,
+    accepted: 0,
+    progress: 0, in_progress: 0,
+    ready: 0, completed: 0,
+    closed: 0,
+    cancelled: 0
+  };
+
+  state.orders.forEach(order => {
+    const status = order.status || 'pending';
+    if (counts[status] !== undefined) counts[status]++;
+  });
+
+  updateElement('countAll', counts.all);
+  updateElement('countNew', counts.new + counts.pending);
+  updateElement('countAccepted', counts.accepted);
+  updateElement('countProgress', counts.progress + counts.in_progress);
+  updateElement('countReady', counts.ready + counts.completed);
+  updateElement('countClosed', counts.closed);
+  updateElement('countCancelled', counts.cancelled);
+  updateElement('totalOrdersCount', `${counts.all} ta`);
+}
+
+function renderOrders() {
+  const { status, search, dateFrom, dateTo } = state.filters;
+  
+  let filteredOrders = [...state.orders];
+
+  // Status filter
+  if (status !== 'all') {
+    filteredOrders = filteredOrders.filter(order => {
+      const orderStatus = order.status || 'pending';
+      // Handle status mapping
+      if (status === 'new') return orderStatus === 'new' || orderStatus === 'pending';
+      if (status === 'progress') return orderStatus === 'progress' || orderStatus === 'in_progress';
+      if (status === 'ready') return orderStatus === 'ready' || orderStatus === 'completed';
+      return orderStatus === status;
+    });
+  }
+
+  // Search filter
+  if (search) {
+    const searchLower = search.toLowerCase();
+    filteredOrders = filteredOrders.filter(order => 
+      order.phoneNumber?.includes(search) ||
+      order.user?.name?.toLowerCase().includes(searchLower) ||
+      order.serviceName?.toLowerCase().includes(searchLower) ||
+      order.description?.toLowerCase().includes(searchLower)
+    );
+  }
+
+  // Date filter
+  if (dateFrom) {
+    const fromDate = new Date(dateFrom);
+    filteredOrders = filteredOrders.filter(order => new Date(order.createdAt) >= fromDate);
+  }
+  if (dateTo) {
+    const toDate = new Date(dateTo);
+    toDate.setHours(23, 59, 59, 999);
+    filteredOrders = filteredOrders.filter(order => new Date(order.createdAt) <= toDate);
+  }
+
+  // Pagination
+  const { page, limit } = state.pagination;
+  const total = filteredOrders.length;
+  const startIndex = (page - 1) * limit;
+  const paginatedOrders = filteredOrders.slice(startIndex, startIndex + limit);
+
+  // Update pagination info
+  state.pagination.total = total;
+  updateElement('showingFrom', total > 0 ? startIndex + 1 : 0);
+  updateElement('showingTo', Math.min(startIndex + limit, total));
+  updateElement('totalOrders', total);
+
+  // Render based on view
+  if (state.view === 'table') {
+    renderOrdersTable(paginatedOrders);
+  } else {
+    renderOrdersCards(paginatedOrders);
+  }
+
+  renderPagination();
+}
+
+function renderOrdersTable(orders) {
+  const tbody = document.getElementById('ordersTableBody');
+  const emptyState = document.getElementById('ordersEmptyState');
+  const tableWrapper = document.getElementById('ordersTableView');
+  const cardsView = document.getElementById('ordersCardsView');
+
+  if (!tbody) return;
+
+  // Show/hide views
+  tableWrapper.style.display = 'block';
+  cardsView.classList.remove('active');
+
+  if (orders.length === 0) {
+    tbody.innerHTML = '';
+    emptyState.style.display = 'block';
+    return;
+  }
+
+  emptyState.style.display = 'none';
+
+  tbody.innerHTML = orders.map(order => `
+    <tr onclick="openOrderDrawer('${order.id}')">
+      <td><span class="order-id">#${order.id?.slice(-6) || '000000'}</span></td>
+      <td>
+        <div class="customer-cell">
+          <div class="customer-avatar">${getInitials(order.user?.name || 'M')}</div>
+          <div class="customer-info">
+            <h4>${order.user?.name || 'Noma\'lum'}</h4>
+            <a href="tel:${order.phoneNumber}" onclick="event.stopPropagation();">${order.phoneNumber}</a>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div class="service-cell">
+          <div class="service-icon"><i class="fas fa-briefcase"></i></div>
+          <span class="service-name">${order.serviceName || 'Xizmat'}</span>
+        </div>
+      </td>
+      <td>
+        <div class="date-cell">
+          <div class="date">${formatDate(order.createdAt)}</div>
+          <div class="time">${formatTime(order.createdAt)}</div>
+        </div>
+      </td>
+      <td>
+        <div class="status-wrapper">
+          ${getStatusBadgeHTML(order.status, true)}
+        </div>
+      </td>
+      <td class="actions-cell" onclick="event.stopPropagation();">
+        <button class="action-btn view" onclick="openOrderDrawer('${order.id}')" title="Ko'rish">
+          <i class="fas fa-eye"></i>
+        </button>
+        <button class="action-btn call" onclick="window.open('tel:${order.phoneNumber}')" title="Qo'ng'iroq">
+          <i class="fas fa-phone"></i>
+        </button>
+        <button class="action-btn delete" onclick="confirmDeleteOrder('${order.id}')" title="O'chirish">
+          <i class="fas fa-trash"></i>
+        </button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function renderOrdersCards(orders) {
+  const cardsView = document.getElementById('ordersCardsView');
+  const tableWrapper = document.getElementById('ordersTableView');
+  const emptyState = document.getElementById('ordersEmptyState');
+
+  if (!cardsView) return;
+
+  // Show/hide views
+  tableWrapper.style.display = 'none';
+  cardsView.classList.add('active');
+
+  if (orders.length === 0) {
+    cardsView.innerHTML = '';
+    emptyState.style.display = 'block';
+    return;
+  }
+
+  emptyState.style.display = 'none';
+
+  cardsView.innerHTML = orders.map(order => `
+    <div class="order-card" onclick="openOrderDrawer('${order.id}')">
+      <div class="order-card-header">
+        <span class="order-card-id">#${order.id?.slice(-6) || '000000'}</span>
+        ${getStatusBadgeHTML(order.status)}
+      </div>
+      <div class="order-card-customer">
+        <div class="customer-avatar">${getInitials(order.user?.name || 'M')}</div>
+        <div class="customer-info">
+          <h4>${order.user?.name || 'Noma\'lum'}</h4>
+          <a href="tel:${order.phoneNumber}" onclick="event.stopPropagation();">${order.phoneNumber}</a>
+        </div>
+      </div>
+      <div class="order-card-service">
+        <div class="service-icon"><i class="fas fa-briefcase"></i></div>
+        <span class="service-name">${order.serviceName || 'Xizmat'}</span>
+      </div>
+      <div class="order-card-footer">
+        <span class="order-card-date">
+          <i class="fas fa-calendar" style="margin-right: 6px; opacity: 0.5;"></i>
+          ${formatDate(order.createdAt)}
+        </span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderPagination() {
+  const { page, limit, total } = state.pagination;
+  const totalPages = Math.ceil(total / limit);
+  const container = document.getElementById('paginationNumbers');
+  const prevBtn = document.getElementById('prevPage');
+  const nextBtn = document.getElementById('nextPage');
+
+  if (!container) return;
+
+  // Enable/disable prev/next buttons
+  prevBtn.disabled = page <= 1;
+  nextBtn.disabled = page >= totalPages;
+
+  // Generate page numbers
+  let html = '';
+  const startPage = Math.max(1, page - 2);
+  const endPage = Math.min(totalPages, page + 2);
+
+  for (let i = startPage; i <= endPage; i++) {
+    html += `<button class="pagination-btn ${i === page ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
+  }
+
+  container.innerHTML = html;
+}
+
+function goToPage(page) {
+  state.pagination.page = page;
+  renderOrders();
+}
+
+// ============================================
+// ORDER DRAWER
+// ============================================
+function openOrderDrawer(orderId) {
+  const order = state.orders.find(o => o.id === orderId);
+  if (!order) return;
+
+  state.currentOrderId = orderId;
+
+  // Populate drawer
+  updateElement('drawerOrderId', order.id?.slice(-6) || '000000');
+  updateElement('drawerCustomerName', order.user?.name || 'Noma\'lum');
+  
+  const phoneEl = document.getElementById('drawerPhone');
+  if (phoneEl) {
+    phoneEl.innerHTML = `<a href="tel:${order.phoneNumber}">${order.phoneNumber}</a>`;
+  }
+  
+  updateElement('drawerEmail', order.user?.email || '-');
+  updateElement('drawerServiceName', order.serviceName || '-');
+  updateElement('drawerDescription', order.description || '-');
+
+  // Highlight current status
+  const currentStatus = mapStatusToLocal(order.status);
+  document.querySelectorAll('#orderDrawer .status-badge').forEach(btn => {
+    btn.style.opacity = btn.dataset.status === currentStatus ? '1' : '0.5';
+    btn.style.transform = btn.dataset.status === currentStatus ? 'scale(1.05)' : 'scale(1)';
+  });
+
+  // Render timeline
+  renderOrderTimeline(order);
+
+  // Show drawer
+  DOM.orderDrawer().classList.add('open');
+  DOM.drawerOverlay().classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeOrderDrawer() {
+  DOM.orderDrawer().classList.remove('open');
+  DOM.drawerOverlay().classList.remove('show');
+  document.body.style.overflow = '';
+  state.currentOrderId = null;
+}
+
+function renderOrderTimeline(order) {
+  const timeline = document.getElementById('orderTimeline');
+  if (!timeline) return;
+
+  const currentStatus = mapStatusToLocal(order.status);
+  const statuses = ['new', 'accepted', 'progress', 'ready', 'closed'];
+  const currentIndex = statuses.indexOf(currentStatus);
+
+  timeline.innerHTML = statuses.map((status, index) => {
+    const config = STATUS_CONFIG[status];
+    const isCompleted = index < currentIndex;
+    const isActive = index === currentIndex;
+
+    return `
+      <div class="timeline-item ${isCompleted ? 'completed' : ''} ${isActive ? 'active' : ''}">
+        <h4>${config.label}</h4>
+        <p>${isCompleted ? 'Bajarildi' : isActive ? 'Hozirgi holat' : 'Kutilmoqda'}</p>
+      </div>
+    `;
+  }).join('');
+}
+
+async function setOrderStatus(newStatus) {
+  if (!state.currentOrderId) return;
+
+  try {
+    // Map local status to API status
+    const apiStatus = mapStatusToAPI(newStatus);
+    
+    await apiRequest(`/orders/${state.currentOrderId}/status`, 'PUT', { status: apiStatus });
+    
+    showToast('Status yangilandi', 'success');
+    
+    // Update local state
+    const order = state.orders.find(o => o.id === state.currentOrderId);
+    if (order) {
+      order.status = apiStatus;
+    }
+
+    // Update UI
+    document.querySelectorAll('#orderDrawer .status-badge').forEach(btn => {
+      btn.style.opacity = btn.dataset.status === newStatus ? '1' : '0.5';
+      btn.style.transform = btn.dataset.status === newStatus ? 'scale(1.05)' : 'scale(1)';
+    });
+
+    renderOrderTimeline(order);
+    renderOrders();
+    updateOrderCountsFromOrders();
+
+    // Update badge
+    const newOrdersCount = state.orders.filter(o => o.status === 'pending' || o.status === 'new').length;
+    updateOrdersBadge(newOrdersCount);
+
+  } catch (error) {
+    showToast(error.message, 'error');
+  }
+}
+
+async function saveOrderChanges() {
+  if (!state.currentOrderId) return;
+
+  const comment = document.getElementById('orderComment')?.value;
+  
+  // If there's a comment, you might want to save it
+  // For now, just close the drawer
+  closeOrderDrawer();
+  showToast('O\'zgarishlar saqlandi', 'success');
+}
+
+async function confirmDeleteOrder(orderId) {
+  state.currentOrderId = orderId;
+  
+  const modal = document.getElementById('deleteModal');
+  const confirmBtn = document.getElementById('confirmDeleteBtn');
+  
+  confirmBtn.onclick = async () => {
+    try {
+      await apiRequest(`/orders/${orderId}`, 'DELETE');
+      showToast('Zakaz o\'chirildi', 'success');
+      closeDeleteModal();
+      await loadOrders();
+    } catch (error) {
+      showToast(error.message, 'error');
+    }
+  };
+  
+  modal.classList.add('show');
+}
+
+// ============================================
+// USERS MANAGEMENT
+// ============================================
+async function loadUsers() {
+  try {
+    let endpoint = `/admin/users?page=${state.pagination.page}&limit=${state.pagination.limit}`;
+    
+    const response = await apiRequest(endpoint);
+    state.users = response.data?.users || [];
+    
+    renderUsersTable();
+    updateElement('totalUsersCount', `${response.data?.total || state.users.length} ta`);
+    
+  } catch (error) {
+    console.error('Users load error:', error);
+    showToast(error.message, 'error');
+  }
+}
+
+function renderUsersTable() {
+  const tbody = document.getElementById('usersTableBody');
+  if (!tbody) return;
+
+  if (state.users.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="6" style="text-align: center; padding: 40px; color: var(--gray-500);">
           Foydalanuvchilar topilmadi
         </td>
       </tr>
@@ -287,306 +717,124 @@ function renderRecentUsers(users) {
     return;
   }
 
-  tbody.innerHTML = users
-    .map(
-      (user) => `
+  tbody.innerHTML = state.users.map(user => `
     <tr>
-      <td class="py-3 px-4">
-        <div class="flex items-center gap-3">
-          <div class="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
-            <span class="text-red-600 font-semibold text-sm">${user.name.charAt(0).toUpperCase()}</span>
+      <td>
+        <div class="customer-cell">
+          <div class="customer-avatar">${getInitials(user.name)}</div>
+          <div class="customer-info">
+            <h4>${user.name}</h4>
           </div>
-          <span class="font-medium text-gray-900">${user.name}</span>
         </div>
       </td>
-      <td class="py-3 px-4 text-gray-600">${user.email}</td>
-      <td class="py-3 px-4">
-        <span class="badge ${user.role === "admin" ? "badge-purple" : "badge-primary"}">
-          ${user.role === "admin" ? "Admin" : "User"}
+      <td style="color: var(--gray-600);">${user.email}</td>
+      <td>
+        <span class="status-badge ${user.role === 'admin' ? 'status-accepted' : 'status-new'}" style="cursor: default;">
+          ${user.role === 'admin' ? 'Admin' : 'User'}
         </span>
       </td>
-      <td class="py-3 px-4">
-        <span class="badge ${user.isActive ? "badge-success" : "badge-danger"}">
-          ${user.isActive ? "Faol" : "Nofaol"}
+      <td>
+        <span class="status-badge ${user.isActive ? 'status-ready' : 'status-cancelled'}" style="cursor: default;">
+          ${user.isActive ? 'Faol' : 'Nofaol'}
         </span>
       </td>
-      <td class="py-3 px-4 text-gray-500 text-sm">${formatDate(user.createdAt)}</td>
-    </tr>
-  `,
-    )
-    .join("");
-}
-
-// Load Users
-async function loadUsers() {
-  try {
-    let endpoint = `/admin/users?page=${currentPage}&limit=${currentLimit}`;
-
-    if (currentSearch) {
-      endpoint += `&search=${encodeURIComponent(currentSearch)}`;
-    }
-    if (currentRoleFilter) {
-      endpoint += `&role=${currentRoleFilter}`;
-    }
-    if (currentStatusFilter) {
-      endpoint += `&isActive=${currentStatusFilter}`;
-    }
-
-    const response = await apiRequest(endpoint);
-    renderUsersTable(response.data);
-    renderPagination(response.data);
-  } catch (error) {
-    console.error("Users load error:", error);
-    showToast(error.message, "error");
-  }
-}
-
-// Render Users Table
-function renderUsersTable(data) {
-  const tbody = document.getElementById("usersTableBody");
-
-  if (data.users.length === 0) {
-    tbody.innerHTML = `
-      <tr>
-        <td colspan="6">
-          <div class="empty-state">
-            <i class="fas fa-users"></i>
-            <h3>Foydalanuvchilar topilmadi</h3>
-            <p>Qidiruv shartlarini o'zgartirib ko'ring</p>
-          </div>
-        </td>
-      </tr>
-    `;
-    return;
-  }
-
-  tbody.innerHTML = data.users
-    .map(
-      (user) => `
-    <tr>
-      <td class="py-4 px-6">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center">
-            <span class="text-white font-semibold">${user.name.charAt(0).toUpperCase()}</span>
-          </div>
-          <span class="font-medium text-gray-900">${user.name}</span>
-        </div>
-      </td>
-      <td class="py-4 px-6 text-gray-600">${user.email}</td>
-      <td class="py-4 px-6">
-        <span class="badge ${user.role === "admin" ? "badge-purple" : "badge-primary"}">
-          <i class="fas ${user.role === "admin" ? "fa-shield-alt" : "fa-user"} mr-1"></i>
-          ${user.role === "admin" ? "Admin" : "User"}
-        </span>
-      </td>
-      <td class="py-4 px-6">
-        <span class="badge ${user.isActive ? "badge-success" : "badge-danger"}">
-          <i class="fas ${user.isActive ? "fa-check-circle" : "fa-times-circle"} mr-1"></i>
-          ${user.isActive ? "Faol" : "Nofaol"}
-        </span>
-      </td>
-      <td class="py-4 px-6 text-gray-500 text-sm">${formatDate(user.createdAt)}</td>
-      <td class="py-4 px-6 text-right">
-        <div class="flex items-center justify-end gap-2">
-          <button onclick="editUser('${user.id}')" class="action-btn action-btn-edit" title="Tahrirlash">
-            <i class="fas fa-pen"></i>
+      <td style="color: var(--gray-500);">${formatDate(user.createdAt)}</td>
+      <td class="actions-cell">
+        <button class="action-btn edit" onclick="editUser('${user.id}')" title="Tahrirlash">
+          <i class="fas fa-pen"></i>
+        </button>
+        <button class="action-btn view" onclick="toggleUserStatus('${user.id}')" title="Status">
+          <i class="fas fa-power-off"></i>
+        </button>
+        ${user.id !== state.user?.id ? `
+          <button class="action-btn delete" onclick="confirmDeleteUser('${user.id}')" title="O'chirish">
+            <i class="fas fa-trash"></i>
           </button>
-          <button onclick="toggleUserStatus('${user.id}')" class="action-btn action-btn-toggle" title="Status o'zgartirish">
-            <i class="fas fa-power-off"></i>
-          </button>
-          ${
-            user.id !== currentUser.id
-              ? `<button onclick="confirmDelete('${user.id}')" class="action-btn action-btn-delete" title="O'chirish">
-              <i class="fas fa-trash"></i>
-            </button>`
-              : ""
-          }
-        </div>
+        ` : ''}
       </td>
     </tr>
-  `,
-    )
-    .join("");
-
-  // Update showing info
-  const from = (data.page - 1) * data.limit + 1;
-  const to = Math.min(data.page * data.limit, data.total);
-  document.getElementById("showingFrom").textContent = from;
-  document.getElementById("showingTo").textContent = to;
-  document.getElementById("totalUsers").textContent = data.total;
+  `).join('');
 }
 
-// Render Pagination
-function renderPagination(data) {
-  const container = document.getElementById("paginationButtons");
-  let html = "";
-
-  // Previous button
-  html += `
-    <button onclick="goToPage(${data.page - 1})" class="pagination-btn" ${data.page <= 1 ? "disabled" : ""}>
-      <i class="fas fa-chevron-left"></i>
-    </button>
-  `;
-
-  // Page numbers
-  const startPage = Math.max(1, data.page - 2);
-  const endPage = Math.min(data.totalPages, data.page + 2);
-
-  for (let i = startPage; i <= endPage; i++) {
-    html += `
-      <button onclick="goToPage(${i})" class="pagination-btn ${i === data.page ? "active" : ""}">
-        ${i}
-      </button>
-    `;
-  }
-
-  // Next button
-  html += `
-    <button onclick="goToPage(${data.page + 1})" class="pagination-btn" ${data.page >= data.totalPages ? "disabled" : ""}>
-      <i class="fas fa-chevron-right"></i>
-    </button>
-  `;
-
-  container.innerHTML = html;
-}
-
-// Go to Page
-function goToPage(page) {
-  currentPage = page;
-  loadUsers();
-}
-
-// Show Section
-function showSection(section) {
-  // Hide all sections
-  document.getElementById("dashboardSection").classList.add("hidden");
-  document.getElementById("usersSection").classList.add("hidden");
-  document.getElementById("settingsSection").classList.add("hidden");
-  document.getElementById("ordersSection").classList.add("hidden");
-
-  // Remove active from all nav links
-  document.querySelectorAll(".nav-link").forEach((link) => {
-    link.classList.remove("active");
-  });
-
-  // Show selected section
-  document.getElementById(`${section}Section`).classList.remove("hidden");
-
-  // Set active nav link
-  document.querySelector(`a[href="#${section}"]`).classList.add("active");
-
-  // Update title
-  const titles = {
-    dashboard: "Dashboard",
-    users: "Foydalanuvchilar",
-    settings: "Sozlamalar",
-    orders: "Zakazlar",
-  };
-  document.getElementById("pageTitle").textContent = titles[section];
-
-  // Load data if needed
-  if (section === "dashboard") {
-    loadDashboard();
-  } else if (section === "users") {
-    loadUsers();
-  } else if (section === "orders") {
-    loadOrders();
-  }
-
-  // Close sidebar on mobile
-  if (window.innerWidth < 1024) {
-    sidebar.classList.remove("sidebar-open");
-  }
-}
-
-// Toggle Sidebar
-function toggleSidebar() {
-  sidebar.classList.toggle("sidebar-open");
-}
-
-// User Modal
 function openUserModal(userId = null) {
-  const modal = document.getElementById("userModal");
-  const title = document.getElementById("userModalTitle");
-  const passwordField = document.getElementById("passwordField");
-  const passwordInput = document.getElementById("userPassword");
-  const passwordHint = document.getElementById("passwordHint");
+  const modal = document.getElementById('userModal');
+  const title = document.getElementById('userModalTitle');
+  const passwordField = document.getElementById('passwordField');
+  const passwordInput = document.getElementById('userPassword');
+  const passwordHint = document.getElementById('passwordHint');
 
   // Reset form
-  document.getElementById("userForm").reset();
-  document.getElementById("userId").value = "";
-  document.getElementById("userFormError").classList.add("hidden");
+  document.getElementById('userForm').reset();
+  document.getElementById('userId').value = '';
+  document.getElementById('userFormError').style.display = 'none';
 
   if (userId) {
-    title.textContent = "Foydalanuvchini tahrirlash";
-    passwordInput.removeAttribute("required");
-    passwordHint.classList.remove("hidden");
+    title.textContent = 'Foydalanuvchini tahrirlash';
+    passwordInput.removeAttribute('required');
+    passwordHint.style.display = 'block';
     loadUserForEdit(userId);
   } else {
-    title.textContent = "Yangi foydalanuvchi";
-    passwordInput.setAttribute("required", "");
-    passwordHint.classList.add("hidden");
+    title.textContent = 'Yangi foydalanuvchi';
+    passwordInput.setAttribute('required', '');
+    passwordHint.style.display = 'none';
   }
 
-  modal.classList.remove("hidden");
+  modal.classList.add('show');
 }
 
 function closeUserModal() {
-  document.getElementById("userModal").classList.add("hidden");
+  document.getElementById('userModal').classList.remove('show');
 }
 
-// Load User for Edit
 async function loadUserForEdit(userId) {
   try {
     const response = await apiRequest(`/admin/users/${userId}`);
     const user = response.data;
 
-    document.getElementById("userId").value = user.id;
-    document.getElementById("userName").value = user.name;
-    document.getElementById("userEmail").value = user.email;
-    document.getElementById("userRole").value = user.role;
-    document.getElementById("userActive").checked = user.isActive;
+    document.getElementById('userId').value = user.id;
+    document.getElementById('userName').value = user.name;
+    document.getElementById('userEmail').value = user.email;
+    document.getElementById('userRole').value = user.role;
+    document.getElementById('userActive').checked = user.isActive;
   } catch (error) {
-    showToast(error.message, "error");
+    showToast(error.message, 'error');
     closeUserModal();
   }
 }
 
-// Edit User
 function editUser(userId) {
   openUserModal(userId);
 }
 
-// Handle User Submit
 async function handleUserSubmit(e) {
   e.preventDefault();
 
-  const userId = document.getElementById("userId").value;
-  const errorEl = document.getElementById("userFormError");
+  const userId = document.getElementById('userId').value;
+  const errorEl = document.getElementById('userFormError');
 
   const data = {
-    name: document.getElementById("userName").value,
-    email: document.getElementById("userEmail").value,
-    role: document.getElementById("userRole").value,
-    isActive: document.getElementById("userActive").checked,
+    name: document.getElementById('userName').value,
+    email: document.getElementById('userEmail').value,
+    role: document.getElementById('userRole').value,
+    isActive: document.getElementById('userActive').checked
   };
 
-  const password = document.getElementById("userPassword").value;
+  const password = document.getElementById('userPassword').value;
   if (password) {
     data.password = password;
   }
 
   try {
     if (userId) {
-      await apiRequest(`/admin/users/${userId}`, "PUT", data);
-      showToast("Foydalanuvchi yangilandi");
+      await apiRequest(`/admin/users/${userId}`, 'PUT', data);
+      showToast('Foydalanuvchi yangilandi', 'success');
     } else {
       if (!password) {
-        throw new Error("Parol kiritilishi shart");
+        throw new Error('Parol kiritilishi shart');
       }
       data.password = password;
-      await apiRequest("/admin/users", "POST", data);
-      showToast("Foydalanuvchi yaratildi");
+      await apiRequest('/admin/users', 'POST', data);
+      showToast('Foydalanuvchi yaratildi', 'success');
     }
 
     closeUserModal();
@@ -594,340 +842,445 @@ async function handleUserSubmit(e) {
     loadDashboard();
   } catch (error) {
     errorEl.textContent = error.message;
-    errorEl.classList.remove("hidden");
+    errorEl.style.display = 'block';
   }
 }
 
-// Toggle User Status
 async function toggleUserStatus(userId) {
   try {
-    await apiRequest(`/admin/users/${userId}/toggle-status`, "PUT");
-    showToast("Status o'zgartirildi");
+    await apiRequest(`/admin/users/${userId}/toggle-status`, 'PUT');
+    showToast('Status o\'zgartirildi', 'success');
     loadUsers();
-    loadDashboard();
   } catch (error) {
-    showToast(error.message, "error");
+    showToast(error.message, 'error');
   }
 }
 
-// Delete User
-function confirmDelete(userId) {
-  deleteUserId = userId;
-  document.getElementById("deleteModal").classList.remove("hidden");
-  document.getElementById("confirmDeleteBtn").onclick = () => deleteUser();
+function confirmDeleteUser(userId) {
+  state.currentUserId = userId;
+  
+  const modal = document.getElementById('deleteModal');
+  const confirmBtn = document.getElementById('confirmDeleteBtn');
+  
+  confirmBtn.onclick = async () => {
+    try {
+      await apiRequest(`/admin/users/${userId}`, 'DELETE');
+      showToast('Foydalanuvchi o\'chirildi', 'success');
+      closeDeleteModal();
+      loadUsers();
+      loadDashboard();
+    } catch (error) {
+      showToast(error.message, 'error');
+    }
+  };
+  
+  modal.classList.add('show');
 }
 
 function closeDeleteModal() {
-  document.getElementById("deleteModal").classList.add("hidden");
-  deleteUserId = null;
+  document.getElementById('deleteModal').classList.remove('show');
 }
 
-async function deleteUser() {
-  if (!deleteUserId) return;
-
-  try {
-    await apiRequest(`/admin/users/${deleteUserId}`, "DELETE");
-    showToast("Foydalanuvchi o'chirildi");
-    closeDeleteModal();
-    loadUsers();
-    loadDashboard();
-  } catch (error) {
-    showToast(error.message, "error");
-  }
-}
-
-// Handle Profile Update
+// ============================================
+// PROFILE & SETTINGS
+// ============================================
 async function handleProfileUpdate(e) {
   e.preventDefault();
 
-  const name = document.getElementById("settingsName").value;
+  const name = document.getElementById('settingsName').value;
 
   try {
-    await apiRequest(`/admin/users/${currentUser.id}`, "PUT", { name });
+    await apiRequest(`/admin/users/${state.user.id}`, 'PUT', { name });
 
-    currentUser.name = name;
-    localStorage.setItem("adminUser", JSON.stringify(currentUser));
-    document.getElementById("adminName").textContent = name;
+    state.user.name = name;
+    localStorage.setItem('adminUser', JSON.stringify(state.user));
+    
+    // Update sidebar
+    const sidebarAvatar = document.getElementById('sidebarAvatar');
+    const sidebarUserName = document.getElementById('sidebarUserName');
+    if (sidebarAvatar) sidebarAvatar.textContent = getInitials(name);
+    if (sidebarUserName) sidebarUserName.textContent = name;
 
-    showToast("Profil yangilandi");
+    showToast('Profil yangilandi', 'success');
   } catch (error) {
-    showToast(error.message, "error");
+    showToast(error.message, 'error');
   }
 }
 
-// Handle Password Update
 async function handlePasswordUpdate(e) {
   e.preventDefault();
 
-  const newPassword = document.getElementById("newPassword").value;
-  const confirmPassword = document.getElementById("confirmPassword").value;
+  const newPassword = document.getElementById('newPassword').value;
+  const confirmPassword = document.getElementById('confirmPassword').value;
 
   if (newPassword !== confirmPassword) {
-    showToast("Parollar mos kelmaydi", "error");
+    showToast('Parollar mos kelmaydi', 'error');
     return;
   }
 
   if (newPassword.length < 6) {
-    showToast("Parol kamida 6 ta belgidan iborat bo'lishi kerak", "error");
+    showToast('Parol kamida 6 ta belgidan iborat bo\'lishi kerak', 'error');
     return;
   }
 
   try {
-    await apiRequest(`/admin/users/${currentUser.id}`, "PUT", {
-      password: newPassword,
-    });
-
-    showToast("Parol yangilandi");
-    document.getElementById("passwordForm").reset();
+    await apiRequest(`/admin/users/${state.user.id}`, 'PUT', { password: newPassword });
+    showToast('Parol yangilandi', 'success');
+    document.getElementById('passwordForm').reset();
   } catch (error) {
-    showToast(error.message, "error");
+    showToast(error.message, 'error');
   }
-}
-
-// Toast Notification
-function showToast(message, type = "success") {
-  const toast = document.getElementById("toast");
-  const icon = document.getElementById("toastIcon");
-  const msg = document.getElementById("toastMessage");
-
-  msg.textContent = message;
-
-  if (type === "error") {
-    icon.className = "fas fa-exclamation-circle text-red-500";
-  } else {
-    icon.className = "fas fa-check-circle text-green-500";
-  }
-
-  toast.classList.add("toast-show");
-
-  setTimeout(() => {
-    toast.classList.remove("toast-show");
-  }, 3000);
-}
-
-// Format Date
-function formatDate(dateString) {
-  const date = new Date(dateString);
-  return date.toLocaleDateString("uz-UZ", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
 }
 
 // ============================================
-// ORDERS MANAGEMENT
+// NAVIGATION
 // ============================================
-
-let allOrders = [];
-let currentOrderId = null;
-
-// Load Orders
-async function loadOrders() {
-  try {
-    const orders = await apiRequest("/orders");
-    allOrders = orders;
-
-    // Load stats
-    const stats = await apiRequest("/orders/stats");
-    updateOrderStats(stats);
-
-    renderOrders(orders);
-    updateOrdersBadge(stats.pending);
-  } catch (error) {
-    console.error("Orders load error:", error);
-    showToast(error.message, "error");
-  }
-}
-
-// Update Order Stats
-function updateOrderStats(stats) {
-  document.getElementById("statTotalOrders").textContent = stats.total;
-  document.getElementById("statPendingOrders").textContent = stats.pending;
-  document.getElementById("statInProgressOrders").textContent =
-    stats.inProgress;
-  document.getElementById("statCompletedOrders").textContent = stats.completed;
-  document.getElementById("statCancelledOrders").textContent = stats.cancelled;
-}
-
-// Update Orders Badge
-function updateOrdersBadge(count) {
-  const badge = document.getElementById("ordersBadge");
-  if (count > 0) {
-    badge.textContent = count;
-    badge.classList.remove("hidden");
-  } else {
-    badge.classList.add("hidden");
-  }
-}
-
-// Render Orders
-function renderOrders(orders) {
-  const tbody = document.getElementById("ordersTableBody");
-  const emptyState = document.getElementById("ordersEmptyState");
-  const searchValue =
-    document.getElementById("orderSearchInput")?.value?.toLowerCase() || "";
-  const statusFilter =
-    document.getElementById("orderStatusFilter")?.value || "";
-
-  // Filter orders
-  let filteredOrders = orders.filter((order) => {
-    const matchesSearch =
-      order.serviceName.toLowerCase().includes(searchValue) ||
-      order.phoneNumber.includes(searchValue) ||
-      order.user?.name?.toLowerCase().includes(searchValue) ||
-      order.description.toLowerCase().includes(searchValue);
-
-    const matchesStatus = !statusFilter || order.status === statusFilter;
-
-    return matchesSearch && matchesStatus;
+function showSection(section) {
+  // Hide all sections
+  document.querySelectorAll('.section-content').forEach(el => {
+    el.style.display = 'none';
   });
 
-  if (filteredOrders.length === 0) {
-    tbody.innerHTML = "";
-    emptyState.classList.remove("hidden");
-    return;
-  }
+  // Show selected section
+  const sectionEl = document.getElementById(`${section}Section`);
+  if (sectionEl) sectionEl.style.display = 'block';
 
-  emptyState.classList.add("hidden");
+  // Update nav
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.classList.remove('active');
+    if (item.dataset.section === section) {
+      item.classList.add('active');
+    }
+  });
 
-  tbody.innerHTML = filteredOrders
-    .map(
-      (order) => `
-    <tr class="border-b border-gray-100 hover:bg-gray-50 transition cursor-pointer" onclick="openOrderModal('${order.id}')">
-      <td class="py-4 px-6">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
-            <span class="text-red-600 font-bold text-sm">${order.serviceNumber}</span>
-          </div>
-          <span class="font-medium text-gray-900">${order.serviceName}</span>
-        </div>
-      </td>
-      <td class="py-4 px-6">
-        <div>
-          <p class="font-medium text-gray-900">${order.user?.name || "-"}</p>
-          <p class="text-xs text-gray-500">${order.user?.email || "-"}</p>
-        </div>
-      </td>
-      <td class="py-4 px-6">
-        <a href="tel:${order.phoneNumber}" class="text-red-600 font-medium hover:underline">
-          ${order.phoneNumber}
-        </a>
-      </td>
-      <td class="py-4 px-6">
-        <p class="text-gray-600 text-sm truncate max-w-[200px]" title="${order.description}">
-          ${order.description}
-        </p>
-      </td>
-      <td class="py-4 px-6">
-        ${getStatusBadge(order.status)}
-      </td>
-      <td class="py-4 px-6 text-gray-500 text-sm">
-        ${formatDate(order.createdAt)}
-      </td>
-      <td class="py-4 px-6 text-right">
-        <button onclick="event.stopPropagation(); openOrderModal('${order.id}')" 
-                class="text-gray-400 hover:text-red-600 transition">
-          <i class="fas fa-eye"></i>
-        </button>
-      </td>
-    </tr>
-  `,
-    )
-    .join("");
-}
-
-// Get Status Badge HTML
-function getStatusBadge(status) {
-  const badges = {
-    pending:
-      '<span class="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-medium">Kutilmoqda</span>',
-    in_progress:
-      '<span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">Jarayonda</span>',
-    completed:
-      '<span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">Bajarilgan</span>',
-    cancelled:
-      '<span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-xs font-medium">Bekor qilingan</span>',
+  // Update title
+  const titles = {
+    dashboard: { title: 'Dashboard', subtitle: 'Statistika va ma\'lumotlar' },
+    orders: { title: 'Zakazlar', subtitle: 'Barcha buyurtmalarni boshqarish' },
+    users: { title: 'Foydalanuvchilar', subtitle: 'Tizim foydalanuvchilari' },
+    settings: { title: 'Sozlamalar', subtitle: 'Profil va tizim sozlamalari' }
   };
-  return badges[status] || badges.pending;
+
+  const titleInfo = titles[section] || { title: section, subtitle: '' };
+  updateElement('pageTitle', titleInfo.title);
+  updateElement('pageSubtitle', titleInfo.subtitle);
+
+  // Load data
+  if (section === 'dashboard') loadDashboard();
+  else if (section === 'orders') loadOrders();
+  else if (section === 'users') loadUsers();
+
+  // Close sidebar on mobile
+  closeSidebar();
 }
 
-// Open Order Modal
-function openOrderModal(orderId) {
-  const order = allOrders.find((o) => o.id === orderId);
-  if (!order) return;
-
-  currentOrderId = orderId;
-
-  document.getElementById("orderServiceName").textContent =
-    `${order.serviceNumber} - ${order.serviceName}`;
-  document.getElementById("orderCustomerName").textContent =
-    order.user?.name || "-";
-  document.getElementById("orderCustomerEmail").textContent =
-    order.user?.email || "-";
-  document.getElementById("orderPhone").textContent = order.phoneNumber;
-  document.getElementById("orderDescription").textContent = order.description;
-  document.getElementById("orderStatusSelect").value = order.status;
-  document.getElementById("orderCreatedAt").textContent = formatDate(
-    order.createdAt,
-  );
-
-  document.getElementById("orderModal").classList.remove("hidden");
+function toggleSidebar() {
+  DOM.sidebar().classList.toggle('open');
+  DOM.mobileOverlay().classList.toggle('show');
 }
 
-// Close Order Modal
-function closeOrderModal() {
-  document.getElementById("orderModal").classList.add("hidden");
-  currentOrderId = null;
+function closeSidebar() {
+  DOM.sidebar().classList.remove('open');
+  DOM.mobileOverlay().classList.remove('show');
 }
 
-// Update Order Status
-async function updateOrderStatus() {
-  if (!currentOrderId) return;
-
-  const status = document.getElementById("orderStatusSelect").value;
-
-  try {
-    await apiRequest(`/orders/${currentOrderId}/status`, "PUT", { status });
-    showToast("Status yangilandi");
-    closeOrderModal();
-    loadOrders();
-  } catch (error) {
-    showToast(error.message, "error");
-  }
+// ============================================
+// THEME
+// ============================================
+function toggleTheme() {
+  const isDark = state.theme === 'dark';
+  state.theme = isDark ? 'light' : 'dark';
+  
+  document.documentElement.setAttribute('data-theme', state.theme);
+  localStorage.setItem('adminTheme', state.theme);
+  
+  const icon = document.getElementById('themeIcon');
+  if (icon) icon.className = isDark ? 'fas fa-moon' : 'fas fa-sun';
 }
 
-// Delete Current Order
-async function deleteCurrentOrder() {
-  if (!currentOrderId) return;
+// ============================================
+// EVENT LISTENERS
+// ============================================
+function setupEventListeners() {
+  // Login form
+  document.getElementById('adminLoginForm')?.addEventListener('submit', handleLogin);
 
-  if (!confirm("Ushbu zakazni o'chirishni xohlaysizmi?")) return;
+  // User form
+  document.getElementById('userForm')?.addEventListener('submit', handleUserSubmit);
 
-  try {
-    await apiRequest(`/orders/${currentOrderId}`, "DELETE");
-    showToast("Zakaz o'chirildi");
-    closeOrderModal();
-    loadOrders();
-  } catch (error) {
-    showToast(error.message, "error");
-  }
-}
+  // Profile form
+  document.getElementById('profileForm')?.addEventListener('submit', handleProfileUpdate);
 
-// Setup Order Filters
-document.addEventListener("DOMContentLoaded", () => {
-  // Order search
-  const orderSearch = document.getElementById("orderSearchInput");
+  // Password form
+  document.getElementById('passwordForm')?.addEventListener('submit', handlePasswordUpdate);
+
+  // Navigation
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+      const section = item.dataset.section;
+      if (section) showSection(section);
+    });
+  });
+
+  // Filter tabs
+  document.querySelectorAll('.filter-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      state.filters.status = tab.dataset.status;
+      state.pagination.page = 1;
+      renderOrders();
+    });
+  });
+
+  // View toggle
+  document.querySelectorAll('.view-toggle button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.view-toggle button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      state.view = btn.dataset.view;
+      renderOrders();
+    });
+  });
+
+  // Search
+  const orderSearch = document.getElementById('orderSearchInput');
   if (orderSearch) {
-    let searchTimeout;
-    orderSearch.addEventListener("input", () => {
-      clearTimeout(searchTimeout);
-      searchTimeout = setTimeout(() => renderOrders(allOrders), 300);
+    let timeout;
+    orderSearch.addEventListener('input', (e) => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        state.filters.search = e.target.value;
+        state.pagination.page = 1;
+        renderOrders();
+      }, 300);
     });
   }
 
-  // Order status filter
-  const orderStatusFilter = document.getElementById("orderStatusFilter");
-  if (orderStatusFilter) {
-    orderStatusFilter.addEventListener("change", () => renderOrders(allOrders));
+  // Date filters
+  document.getElementById('dateFrom')?.addEventListener('change', (e) => {
+    state.filters.dateFrom = e.target.value;
+    state.pagination.page = 1;
+    renderOrders();
+  });
+
+  document.getElementById('dateTo')?.addEventListener('change', (e) => {
+    state.filters.dateTo = e.target.value;
+    state.pagination.page = 1;
+    renderOrders();
+  });
+
+  // Per page select
+  document.getElementById('perPageSelect')?.addEventListener('change', (e) => {
+    state.pagination.limit = parseInt(e.target.value);
+    state.pagination.page = 1;
+    renderOrders();
+  });
+
+  // Pagination
+  document.getElementById('prevPage')?.addEventListener('click', () => {
+    if (state.pagination.page > 1) {
+      state.pagination.page--;
+      renderOrders();
+    }
+  });
+
+  document.getElementById('nextPage')?.addEventListener('click', () => {
+    const totalPages = Math.ceil(state.pagination.total / state.pagination.limit);
+    if (state.pagination.page < totalPages) {
+      state.pagination.page++;
+      renderOrders();
+    }
+  });
+
+  // User filters
+  const userSearch = document.getElementById('userSearchInput');
+  if (userSearch) {
+    let timeout;
+    userSearch.addEventListener('input', (e) => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        // Filter logic for users
+        loadUsers();
+      }, 300);
+    });
   }
-});
+
+  // Escape key closes modals/drawers
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeOrderDrawer();
+      closeUserModal();
+      closeDeleteModal();
+    }
+  });
+}
+
+function setupKeyboardShortcuts() {
+  document.addEventListener('keydown', (e) => {
+    // Ctrl/Cmd + K for search
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      e.preventDefault();
+      document.getElementById('globalSearch')?.focus();
+    }
+    
+    // Number keys for navigation
+    if (e.altKey) {
+      switch(e.key) {
+        case '1': showSection('dashboard'); break;
+        case '2': showSection('orders'); break;
+        case '3': showSection('users'); break;
+        case '4': showSection('settings'); break;
+      }
+    }
+  });
+}
+
+function clearFilters() {
+  state.filters = { status: 'all', search: '', dateFrom: '', dateTo: '' };
+  state.pagination.page = 1;
+  
+  document.getElementById('orderSearchInput').value = '';
+  document.getElementById('dateFrom').value = '';
+  document.getElementById('dateTo').value = '';
+  
+  document.querySelectorAll('.filter-tab').forEach(tab => {
+    tab.classList.toggle('active', tab.dataset.status === 'all');
+  });
+  
+  renderOrders();
+}
+
+// ============================================
+// UTILITIES
+// ============================================
+function getInitials(name) {
+  if (!name) return 'XX';
+  const parts = name.trim().split(' ');
+  if (parts.length >= 2) {
+    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+  }
+  return name.substring(0, 2).toUpperCase();
+}
+
+function formatDate(dateString) {
+  if (!dateString) return '-';
+  const date = new Date(dateString);
+  return date.toLocaleDateString('uz-UZ', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
+  });
+}
+
+function formatTime(dateString) {
+  if (!dateString) return '';
+  const date = new Date(dateString);
+  return date.toLocaleTimeString('uz-UZ', {
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+}
+
+function updateElement(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = value;
+}
+
+function getStatusBadgeHTML(status, withIcon = false) {
+  const config = STATUS_CONFIG[status] || STATUS_CONFIG.pending;
+  const icon = withIcon ? '<i class="fas fa-chevron-down"></i>' : '';
+  return `<span class="status-badge ${config.class}">${config.label}${icon}</span>`;
+}
+
+function mapStatusToLocal(apiStatus) {
+  const mapping = {
+    'pending': 'new',
+    'in_progress': 'progress',
+    'completed': 'ready'
+  };
+  return mapping[apiStatus] || apiStatus;
+}
+
+function mapStatusToAPI(localStatus) {
+  const mapping = {
+    'new': 'pending',
+    'progress': 'in_progress',
+    'ready': 'completed'
+  };
+  return mapping[localStatus] || localStatus;
+}
+
+function updateOrdersBadge(count) {
+  const badge = document.getElementById('ordersBadge');
+  if (badge) {
+    badge.textContent = count;
+    badge.style.display = count > 0 ? 'inline-flex' : 'none';
+  }
+}
+
+// ============================================
+// TOAST NOTIFICATIONS
+// ============================================
+function showToast(message, type = 'success') {
+  const container = DOM.toastContainer();
+  if (!container) return;
+
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  
+  const icons = {
+    success: 'fa-check-circle',
+    error: 'fa-exclamation-circle',
+    warning: 'fa-exclamation-triangle'
+  };
+
+  toast.innerHTML = `
+    <div class="toast-icon">
+      <i class="fas ${icons[type] || icons.success}"></i>
+    </div>
+    <div class="toast-content">
+      <h4>${type === 'error' ? 'Xatolik' : type === 'warning' ? 'Ogohlantirish' : 'Muvaffaqiyat'}</h4>
+      <p>${message}</p>
+    </div>
+    <button class="toast-close" onclick="this.parentElement.remove()">
+      <i class="fas fa-times"></i>
+    </button>
+  `;
+
+  container.appendChild(toast);
+
+  // Trigger animation
+  setTimeout(() => toast.classList.add('show'), 10);
+
+  // Auto remove
+  setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => toast.remove(), 300);
+  }, 4000);
+}
+
+// ============================================
+// GLOBAL FUNCTIONS (for inline onclick)
+// ============================================
+window.showSection = showSection;
+window.toggleSidebar = toggleSidebar;
+window.closeSidebar = closeSidebar;
+window.toggleTheme = toggleTheme;
+window.logout = logout;
+window.loadDashboard = loadDashboard;
+window.loadOrders = loadOrders;
+window.openOrderDrawer = openOrderDrawer;
+window.closeOrderDrawer = closeOrderDrawer;
+window.setOrderStatus = setOrderStatus;
+window.saveOrderChanges = saveOrderChanges;
+window.confirmDeleteOrder = confirmDeleteOrder;
+window.openUserModal = openUserModal;
+window.closeUserModal = closeUserModal;
+window.editUser = editUser;
+window.toggleUserStatus = toggleUserStatus;
+window.confirmDeleteUser = confirmDeleteUser;
+window.closeDeleteModal = closeDeleteModal;
+window.goToPage = goToPage;
+window.clearFilters = clearFilters;

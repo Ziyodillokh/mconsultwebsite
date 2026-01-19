@@ -1,1187 +1,686 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="uz">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin Panel - Mag'zuna Consult</title>
-    <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg" />
-    <link rel="apple-touch-icon" href="../assets/images/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <link rel="stylesheet" href="../assets/css/admin.css" />
-  </head>
-  <body class="bg-gray-50 min-h-screen">
-    <!-- Login Modal -->
-    <div
-      id="loginModal"
-      class="fixed inset-0 bg-gradient-to-br from-gray-900 via-red-900/20 to-gray-900 z-50 flex items-center justify-center p-4"
-    >
-      <div
-        class="bg-white rounded-3xl shadow-2xl max-w-md w-full p-8 relative overflow-hidden"
-      >
-        <!-- Background decoration -->
-        <div
-          class="absolute -top-20 -right-20 w-40 h-40 bg-red-100 rounded-full opacity-50"
-        ></div>
-        <div
-          class="absolute -bottom-10 -left-10 w-32 h-32 bg-red-50 rounded-full opacity-50"
-        ></div>
-
-        <div class="relative z-10">
-          <div class="text-center mb-8">
-            <!-- Logo -->
-            <div
-              class="w-20 h-20 mx-auto mb-4 rounded-full overflow-hidden shadow-xl border-4 border-white bg-gradient-to-br from-red-600 to-red-700 flex items-center justify-center"
-            >
-              <span class="text-white text-3xl font-black tracking-tight"
-                >MC</span
-              >
-            </div>
-            <h1 class="text-2xl font-bold text-gray-900">Admin Panel</h1>
-            <p class="text-gray-500 mt-2">Mag'zuna Consult boshqaruv tizimi</p>
-          </div>
-
-          <form id="adminLoginForm" class="space-y-5">
-            <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-2"
-                >Email</label
-              >
-              <div class="relative">
-                <i
-                  class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
-                ></i>
-                <input
-                  type="email"
-                  id="loginEmail"
-                  required
-                  class="w-full pl-12 pr-4 py-3.5 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:outline-none transition bg-gray-50 focus:bg-white"
-                  placeholder="admin@magzuna.uz"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-2"
-                >Parol</label
-              >
-              <div class="relative">
-                <i
-                  class="fas fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
-                ></i>
-                <input
-                  type="password"
-                  id="loginPassword"
-                  required
-                  class="w-full pl-12 pr-4 py-3.5 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:outline-none transition bg-gray-50 focus:bg-white"
-                  placeholder="••••••••"
-                />
-              </div>
-            </div>
-
-            <div
-              id="loginError"
-              class="hidden bg-red-50 border-2 border-red-200 text-red-600 px-4 py-3 rounded-xl text-sm font-medium"
-            ></div>
-
-            <button
-              type="submit"
-              class="w-full bg-gradient-to-r from-red-600 to-red-700 text-white py-4 rounded-xl font-bold hover:from-red-700 hover:to-red-800 transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-            >
-              <i class="fas fa-sign-in-alt"></i>
-              Kirish
-            </button>
-          </form>
-
-          <div class="mt-8 text-center">
-            <a
-              href="../"
-              class="inline-flex items-center gap-2 text-gray-500 hover:text-red-600 transition text-sm font-medium"
-            >
-              <i class="fas fa-arrow-left"></i>Bosh sahifaga qaytish
-            </a>
-          </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel - Mag'zuna Consult</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg" />
+  <link rel="apple-touch-icon" href="../assets/images/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../assets/css/admin.css" />
+</head>
+<body>
+  <!-- Login Modal -->
+  <div id="loginModal" class="login-modal">
+    <div class="login-card">
+      <div class="login-logo">
+        <div class="login-logo-icon">
+          <i class="fas fa-shield-halved"></i>
         </div>
+        <h1>Admin Panel</h1>
+        <p>Mag'zuna Consult boshqaruv tizimi</p>
+      </div>
+      
+      <form id="adminLoginForm" class="login-form">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="loginEmail" required placeholder="admin@magzuna.uz" />
+        </div>
+        
+        <div class="form-group">
+          <label>Parol</label>
+          <input type="password" id="loginPassword" required placeholder="••••••••" />
+        </div>
+        
+        <div id="loginError" class="login-error">
+          <i class="fas fa-exclamation-circle"></i>
+          <span>Email yoki parol noto'g'ri</span>
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-lg">
+          <i class="fas fa-sign-in-alt"></i>
+          Kirish
+        </button>
+      </form>
+      
+      <div style="text-align: center; margin-top: 24px;">
+        <a href="../" style="color: var(--gray-500); text-decoration: none; font-size: 13px; font-weight: 500;">
+          <i class="fas fa-arrow-left" style="margin-right: 6px;"></i>
+          Bosh sahifaga qaytish
+        </a>
       </div>
     </div>
+  </div>
 
-    <!-- Main Admin Layout -->
-    <div id="adminLayout" class="hidden">
-      <!-- Sidebar -->
-      <aside
-        id="sidebar"
-        class="fixed left-0 top-0 h-full w-64 bg-gradient-to-b from-gray-900 to-gray-800 text-white z-40 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 shadow-2xl"
-      >
-        <!-- Logo -->
-        <div class="p-6 border-b border-gray-700/50">
-          <a href="../" class="flex items-center gap-3 group">
-            <div
-              class="w-12 h-12 rounded-xl overflow-hidden shadow-lg border-2 border-white/20 group-hover:border-red-500 transition-all duration-300 bg-white"
-            >
-              <img
-                src="../assets/images/logo.png"
-                alt="Mag'zuna Logo"
-                class="w-full h-full object-cover"
-              />
-            </div>
-            <div>
-              <span class="text-xl font-bold tracking-tight">MAG'ZUNA</span>
-              <p class="text-xs text-gray-400 font-medium">Admin Panel</p>
-            </div>
-          </a>
+  <!-- Main Admin Layout -->
+  <div id="adminLayout" class="admin-layout" style="display: none;">
+    
+    <!-- Sidebar -->
+    <aside id="sidebar" class="admin-sidebar">
+      <!-- Logo -->
+      <div class="sidebar-logo">
+        <div class="sidebar-logo-icon">
+          <i class="fas fa-bolt"></i>
         </div>
-
-        <!-- Navigation -->
-        <nav class="p-4 space-y-2">
-          <a
-            href="#dashboard"
-            onclick="showSection('dashboard')"
-            class="nav-link active flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300"
-          >
-            <i class="fas fa-chart-pie w-5"></i>
+        <div class="sidebar-logo-text">
+          <h1>MAG'ZUNA</h1>
+          <span>Admin Panel</span>
+        </div>
+      </div>
+      
+      <!-- Navigation -->
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <div class="nav-section-title">Asosiy</div>
+          <a href="#dashboard" class="nav-item active" data-section="dashboard">
+            <i class="fas fa-chart-pie"></i>
             <span>Dashboard</span>
           </a>
-          <a
-            href="#orders"
-            onclick="showSection('orders')"
-            class="nav-link flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300"
-          >
-            <i class="fas fa-shopping-cart w-5"></i>
+          <a href="#orders" class="nav-item" data-section="orders">
+            <i class="fas fa-shopping-bag"></i>
             <span>Zakazlar</span>
-            <span
-              id="ordersBadge"
-              class="ml-auto bg-red-500 text-white text-xs px-2 py-0.5 rounded-full hidden"
-              >0</span
-            >
+            <span id="ordersBadge" class="badge">0</span>
           </a>
-          <a
-            href="#users"
-            onclick="showSection('users')"
-            class="nav-link flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300"
-          >
-            <i class="fas fa-users w-5"></i>
+        </div>
+        
+        <div class="nav-section">
+          <div class="nav-section-title">Boshqaruv</div>
+          <a href="#users" class="nav-item" data-section="users">
+            <i class="fas fa-users"></i>
             <span>Foydalanuvchilar</span>
           </a>
-          <a
-            href="#settings"
-            onclick="showSection('settings')"
-            class="nav-link flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300"
-          >
-            <i class="fas fa-cog w-5"></i>
+          <a href="#settings" class="nav-item" data-section="settings">
+            <i class="fas fa-cog"></i>
             <span>Sozlamalar</span>
           </a>
-        </nav>
-
-        <!-- User Info -->
-        <div
-          class="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-700/50 bg-gray-900/50 backdrop-blur-sm"
-        >
-          <div class="flex items-center gap-3 mb-3">
-            <div class="relative">
-              <div
-                id="adminAvatar"
-                class="w-11 h-11 rounded-full overflow-hidden border-2 border-red-500 shadow-lg"
-              >
-                <img
-                  src="../assets/images/admin.png"
-                  alt="Admin"
-                  class="w-full h-full object-cover"
-                />
-              </div>
-              <span
-                class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-gray-900 rounded-full"
-              ></span>
-            </div>
-            <div class="flex-1 min-w-0">
-              <p id="adminName" class="font-semibold text-sm truncate">Admin</p>
-              <p id="adminEmail" class="text-gray-400 text-xs truncate">
-                admin@magzuna.uz
-              </p>
-            </div>
+        </div>
+      </nav>
+      
+      <!-- Sidebar Footer -->
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="sidebar-user-avatar" id="sidebarAvatar">AD</div>
+          <div class="sidebar-user-info">
+            <h4 id="sidebarUserName">Admin</h4>
+            <span id="sidebarUserRole">Administrator</span>
           </div>
-          <button
-            onclick="logout()"
-            class="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-gray-800 hover:bg-red-600 rounded-xl transition-all duration-300 text-sm font-medium group"
-          >
-            <i
-              class="fas fa-sign-out-alt group-hover:rotate-12 transition-transform"
-            ></i>
-            Chiqish
+        </div>
+        <button class="sidebar-logout" onclick="logout()">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Chiqish</span>
+        </button>
+      </div>
+    </aside>
+    
+    <!-- Mobile Overlay -->
+    <div id="mobileOverlay" class="mobile-overlay" onclick="closeSidebar()"></div>
+    
+    <!-- Main Content -->
+    <main class="admin-main">
+      <!-- Header -->
+      <header class="admin-header">
+        <div class="header-left">
+          <button class="sidebar-toggle" onclick="toggleSidebar()">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="page-title">
+            <h1 id="pageTitle">Dashboard</h1>
+            <p id="pageSubtitle">Statistika va ma'lumotlar</p>
+          </div>
+        </div>
+        
+        <div class="header-right">
+          <div class="header-search">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Qidirish..." id="globalSearch" />
+            <kbd>⌘K</kbd>
+          </div>
+          
+          <button class="theme-toggle" onclick="toggleTheme()" title="Mavzuni o'zgartirish">
+            <i class="fas fa-moon" id="themeIcon"></i>
+          </button>
+          
+          <button class="header-btn" onclick="loadDashboard()" title="Yangilash">
+            <i class="fas fa-sync-alt"></i>
+          </button>
+          
+          <button class="header-btn" title="Bildirishnomalar">
+            <i class="fas fa-bell"></i>
+            <span class="notification-dot"></span>
           </button>
         </div>
-      </aside>
-
-      <!-- Mobile Menu Button -->
-      <button
-        id="mobileMenuBtn"
-        onclick="toggleSidebar()"
-        class="lg:hidden fixed top-4 left-4 z-50 w-10 h-10 bg-red-600 text-white rounded-lg flex items-center justify-center shadow-lg"
-      >
-        <i class="fas fa-bars"></i>
-      </button>
-
-      <!-- Main Content -->
-      <main class="lg:ml-64 min-h-screen bg-gray-50">
-        <!-- Header -->
-        <header
-          class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-30 px-6 py-4 flex items-center justify-between border-b border-gray-100"
-        >
-          <div class="lg:hidden w-10"></div>
-          <div>
-            <h1 id="pageTitle" class="text-xl font-bold text-gray-900">
-              Dashboard
-            </h1>
-            <p class="text-xs text-gray-500 mt-0.5">
-              Mag'zuna Consult boshqaruvi
-            </p>
-          </div>
-          <div class="flex items-center gap-3">
-            <button
-              class="relative w-10 h-10 flex items-center justify-center text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-xl transition-all"
-            >
-              <i class="fas fa-bell text-lg"></i>
-              <span
-                class="absolute top-2 right-2 w-2 h-2 bg-red-600 rounded-full animate-pulse"
-              ></span>
-            </button>
-            <button
-              onclick="loadDashboard()"
-              class="w-10 h-10 flex items-center justify-center text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-xl transition-all"
-              title="Yangilash"
-            >
-              <i class="fas fa-sync-alt text-lg"></i>
-            </button>
-            <div
-              class="hidden md:flex items-center gap-2 pl-3 border-l border-gray-200"
-            >
-              <div
-                class="w-8 h-8 rounded-full overflow-hidden border-2 border-red-500"
-              >
-                <img
-                  id="headerAdminAvatar"
-                  src="../assets/images/admin.png"
-                  alt="Admin"
-                  class="w-full h-full object-cover"
-                />
-              </div>
-              <span
-                id="headerAdminName"
-                class="text-sm font-medium text-gray-700"
-                >Admin</span
-              >
-            </div>
-          </div>
-        </header>
-
+      </header>
+      
+      <!-- Content Area -->
+      <div class="admin-content">
+        
         <!-- Dashboard Section -->
-        <section id="dashboardSection" class="p-6">
-          <!-- Welcome Banner -->
-          <div
-            class="bg-gradient-to-r from-red-600 to-red-700 rounded-2xl p-6 mb-8 text-white relative overflow-hidden"
-          >
-            <div
-              class="absolute right-0 top-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"
-            ></div>
-            <div
-              class="absolute left-20 bottom-0 w-32 h-32 bg-white/5 rounded-full translate-y-1/2"
-            ></div>
-            <div class="relative z-10">
-              <h2 class="text-2xl font-bold mb-2">
-                Xush kelibsiz, <span id="welcomeName">Admin</span>! 👋
-              </h2>
-              <p class="text-white/80">
-                Mag'zuna Consult boshqaruv paneliga xush kelibsiz. Bugungi
-                statistikangiz quyida.
-              </p>
+        <section id="dashboardSection" class="section-content">
+          <!-- Stats Grid -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-card-header">
+                <div class="stat-card-icon primary">
+                  <i class="fas fa-shopping-bag"></i>
+                </div>
+                <div class="stat-card-trend up">
+                  <i class="fas fa-arrow-up"></i>
+                  12%
+                </div>
+              </div>
+              <div class="stat-card-value" id="statTotalOrders">0</div>
+              <div class="stat-card-label">Jami zakazlar</div>
+            </div>
+            
+            <div class="stat-card">
+              <div class="stat-card-header">
+                <div class="stat-card-icon blue">
+                  <i class="fas fa-clock"></i>
+                </div>
+                <div class="stat-card-trend up">
+                  <i class="fas fa-arrow-up"></i>
+                  8%
+                </div>
+              </div>
+              <div class="stat-card-value" id="statNewOrders">0</div>
+              <div class="stat-card-label">Yangi zakazlar</div>
+            </div>
+            
+            <div class="stat-card">
+              <div class="stat-card-header">
+                <div class="stat-card-icon green">
+                  <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="stat-card-trend up">
+                  <i class="fas fa-arrow-up"></i>
+                  15%
+                </div>
+              </div>
+              <div class="stat-card-value" id="statCompletedOrders">0</div>
+              <div class="stat-card-label">Bajarilgan</div>
+            </div>
+            
+            <div class="stat-card">
+              <div class="stat-card-header">
+                <div class="stat-card-icon purple">
+                  <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-card-trend up">
+                  <i class="fas fa-arrow-up"></i>
+                  5%
+                </div>
+              </div>
+              <div class="stat-card-value" id="statTotalUsers">0</div>
+              <div class="stat-card-label">Foydalanuvchilar</div>
             </div>
           </div>
-
-          <!-- Stats Cards -->
-          <div
-            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
-          >
-            <div
-              class="stat-card bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:border-blue-200 transition-all"
-            >
-              <div class="flex items-center justify-between mb-4">
-                <div
-                  class="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/30"
-                >
-                  <i class="fas fa-users text-white text-xl"></i>
-                </div>
-                <span
-                  class="text-green-500 text-sm font-semibold bg-green-50 px-2 py-1 rounded-lg"
-                  ><i class="fas fa-arrow-up mr-1"></i>12%</span
-                >
+          
+          <!-- Recent Orders Preview -->
+          <div class="orders-container">
+            <div class="orders-header">
+              <div class="orders-title">
+                <h2>So'nggi zakazlar</h2>
+                <span class="orders-count" id="recentOrdersCount">0 ta</span>
               </div>
-              <h3 class="text-3xl font-bold text-gray-900" id="statTotalUsers">
-                0
-              </h3>
-              <p class="text-gray-500 text-sm mt-1">Jami foydalanuvchilar</p>
-            </div>
-
-            <div
-              class="stat-card bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:border-green-200 transition-all"
-            >
-              <div class="flex items-center justify-between mb-4">
-                <div
-                  class="w-14 h-14 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center shadow-lg shadow-green-500/30"
-                >
-                  <i class="fas fa-user-check text-white text-xl"></i>
-                </div>
-                <span
-                  class="text-green-500 text-sm font-semibold bg-green-50 px-2 py-1 rounded-lg"
-                  ><i class="fas fa-arrow-up mr-1"></i>8%</span
-                >
-              </div>
-              <h3 class="text-3xl font-bold text-gray-900" id="statActiveUsers">
-                0
-              </h3>
-              <p class="text-gray-500 text-sm mt-1">Faol foydalanuvchilar</p>
-            </div>
-
-            <div
-              class="stat-card bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:border-purple-200 transition-all"
-            >
-              <div class="flex items-center justify-between mb-4">
-                <div
-                  class="w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg shadow-purple-500/30"
-                >
-                  <i class="fas fa-user-shield text-white text-xl"></i>
-                </div>
-                <span
-                  class="text-purple-500 text-sm font-semibold bg-purple-50 px-2 py-1 rounded-lg"
-                  ><i class="fas fa-shield-alt mr-1"></i>Admin</span
-                >
-              </div>
-              <h3 class="text-3xl font-bold text-gray-900" id="statAdminUsers">
-                0
-              </h3>
-              <p class="text-gray-500 text-sm mt-1">Adminlar</p>
-            </div>
-
-            <div
-              class="stat-card bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:border-orange-200 transition-all"
-            >
-              <div class="flex items-center justify-between mb-4">
-                <div
-                  class="w-14 h-14 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center shadow-lg shadow-orange-500/30"
-                >
-                  <i class="fas fa-user-plus text-white text-xl"></i>
-                </div>
-                <span
-                  class="text-orange-500 text-sm font-semibold bg-orange-50 px-2 py-1 rounded-lg"
-                  ><i class="fas fa-clock mr-1"></i>Bugun</span
-                >
-              </div>
-              <h3
-                class="text-3xl font-bold text-gray-900"
-                id="statNewUsersToday"
-              >
-                0
-              </h3>
-              <p class="text-gray-500 text-sm mt-1">Yangi foydalanuvchilar</p>
-            </div>
-          </div>
-
-          <!-- Charts Row -->
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-            <!-- Users Chart -->
-            <div class="bg-white rounded-2xl p-6 shadow-sm">
-              <h3 class="text-lg font-bold text-gray-900 mb-4">
-                Foydalanuvchilar statistikasi
-              </h3>
-              <div class="space-y-4">
-                <div class="flex items-center justify-between">
-                  <span class="text-gray-600">Bu hafta</span>
-                  <span
-                    class="font-bold text-gray-900"
-                    id="statNewUsersThisWeek"
-                    >0</span
-                  >
-                </div>
-                <div class="w-full bg-gray-200 rounded-full h-2">
-                  <div
-                    id="weekProgress"
-                    class="bg-blue-600 h-2 rounded-full transition-all duration-500"
-                    style="width: 0%"
-                  ></div>
-                </div>
-                <div class="flex items-center justify-between">
-                  <span class="text-gray-600">Bu oy</span>
-                  <span
-                    class="font-bold text-gray-900"
-                    id="statNewUsersThisMonth"
-                    >0</span
-                  >
-                </div>
-                <div class="w-full bg-gray-200 rounded-full h-2">
-                  <div
-                    id="monthProgress"
-                    class="bg-green-600 h-2 rounded-full transition-all duration-500"
-                    style="width: 0%"
-                  ></div>
-                </div>
+              <div class="orders-actions">
+                <a href="#orders" class="btn btn-outline btn-sm" onclick="showSection('orders')">
+                  Barchasini ko'rish
+                  <i class="fas fa-arrow-right"></i>
+                </a>
               </div>
             </div>
-
-            <!-- Status Chart -->
-            <div class="bg-white rounded-2xl p-6 shadow-sm">
-              <h3 class="text-lg font-bold text-gray-900 mb-4">
-                Status bo'yicha
-              </h3>
-              <div class="flex items-center justify-center gap-8">
-                <div class="text-center">
-                  <div
-                    class="w-24 h-24 rounded-full border-8 border-green-500 flex items-center justify-center mb-2"
-                  >
-                    <span
-                      class="text-2xl font-bold text-gray-900"
-                      id="statActivePercent"
-                      >0%</span
-                    >
-                  </div>
-                  <p class="text-gray-600 text-sm">Faol</p>
-                </div>
-                <div class="text-center">
-                  <div
-                    class="w-24 h-24 rounded-full border-8 border-red-500 flex items-center justify-center mb-2"
-                  >
-                    <span
-                      class="text-2xl font-bold text-gray-900"
-                      id="statInactivePercent"
-                      >0%</span
-                    >
-                  </div>
-                  <p class="text-gray-600 text-sm">Nofaol</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Recent Users -->
-          <div class="bg-white rounded-2xl p-6 shadow-sm">
-            <div class="flex items-center justify-between mb-6">
-              <h3 class="text-lg font-bold text-gray-900">
-                So'nggi foydalanuvchilar
-              </h3>
-              <a
-                href="#users"
-                onclick="showSection('users')"
-                class="text-red-600 hover:text-red-700 text-sm font-medium"
-              >
-                Barchasini ko'rish <i class="fas fa-arrow-right ml-1"></i>
-              </a>
-            </div>
-            <div class="overflow-x-auto">
-              <table class="w-full">
+            <div class="orders-table-wrapper">
+              <table class="orders-table">
                 <thead>
-                  <tr class="border-b border-gray-200">
-                    <th
-                      class="text-left py-3 px-4 text-sm font-semibold text-gray-600"
-                    >
-                      Foydalanuvchi
-                    </th>
-                    <th
-                      class="text-left py-3 px-4 text-sm font-semibold text-gray-600"
-                    >
-                      Email
-                    </th>
-                    <th
-                      class="text-left py-3 px-4 text-sm font-semibold text-gray-600"
-                    >
-                      Rol
-                    </th>
-                    <th
-                      class="text-left py-3 px-4 text-sm font-semibold text-gray-600"
-                    >
-                      Status
-                    </th>
-                    <th
-                      class="text-left py-3 px-4 text-sm font-semibold text-gray-600"
-                    >
-                      Sana
-                    </th>
+                  <tr>
+                    <th>ID</th>
+                    <th>Mijoz</th>
+                    <th>Xizmat</th>
+                    <th>Sana</th>
+                    <th>Status</th>
+                    <th>Amallar</th>
                   </tr>
                 </thead>
-                <tbody id="recentUsersTable">
-                  <!-- Filled by JS -->
+                <tbody id="recentOrdersTable">
+                  <!-- JS orqali to'ldiriladi -->
                 </tbody>
               </table>
             </div>
           </div>
         </section>
-
-        <!-- Users Section -->
-        <section id="usersSection" class="p-6 hidden">
-          <!-- Toolbar -->
-          <div
-            class="bg-white rounded-2xl p-4 shadow-sm mb-6 flex flex-col md:flex-row items-center justify-between gap-4"
-          >
-            <div class="flex items-center gap-3 w-full md:w-auto">
-              <div class="relative flex-1 md:w-80">
-                <i
-                  class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
-                ></i>
-                <input
-                  type="text"
-                  id="searchInput"
-                  placeholder="Qidirish..."
-                  class="w-full pl-12 pr-4 py-2 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:outline-none transition"
-                />
+        
+        <!-- Orders Section -->
+        <section id="ordersSection" class="section-content" style="display: none;">
+          <div class="orders-container">
+            <!-- Orders Header -->
+            <div class="orders-header">
+              <div class="orders-title">
+                <h2>Barcha zakazlar</h2>
+                <span class="orders-count" id="totalOrdersCount">0 ta</span>
               </div>
-              <select
-                id="roleFilter"
-                class="px-4 py-2 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:outline-none transition"
-              >
+              <div class="orders-actions">
+                <div class="view-toggle">
+                  <button class="active" data-view="table" title="Jadval ko'rinishi">
+                    <i class="fas fa-list"></i>
+                  </button>
+                  <button data-view="cards" title="Karta ko'rinishi">
+                    <i class="fas fa-th-large"></i>
+                  </button>
+                </div>
+                <button class="btn btn-primary btn-sm" onclick="loadOrders()">
+                  <i class="fas fa-sync-alt"></i>
+                  Yangilash
+                </button>
+              </div>
+            </div>
+            
+            <!-- Filter Tabs -->
+            <div class="filter-tabs">
+              <button class="filter-tab active" data-status="all">
+                Barchasi
+                <span class="count" id="countAll">0</span>
+              </button>
+              <button class="filter-tab" data-status="new">
+                <span class="dot"></span>
+                Yangi
+                <span class="count" id="countNew">0</span>
+              </button>
+              <button class="filter-tab" data-status="accepted">
+                <span class="dot"></span>
+                Qabul qilingan
+                <span class="count" id="countAccepted">0</span>
+              </button>
+              <button class="filter-tab" data-status="progress">
+                <span class="dot"></span>
+                Jarayonda
+                <span class="count" id="countProgress">0</span>
+              </button>
+              <button class="filter-tab" data-status="ready">
+                <span class="dot"></span>
+                Tayyor
+                <span class="count" id="countReady">0</span>
+              </button>
+              <button class="filter-tab" data-status="closed">
+                <span class="dot"></span>
+                Yopilgan
+                <span class="count" id="countClosed">0</span>
+              </button>
+              <button class="filter-tab" data-status="cancelled">
+                <span class="dot"></span>
+                Bekor qilingan
+                <span class="count" id="countCancelled">0</span>
+              </button>
+            </div>
+            
+            <!-- Filters Bar -->
+            <div class="orders-filters">
+              <div class="filter-search">
+                <i class="fas fa-search"></i>
+                <input type="text" id="orderSearchInput" placeholder="Telefon, ism yoki xizmat bo'yicha qidirish..." />
+              </div>
+              <div class="filter-date">
+                <input type="date" id="dateFrom" />
+                <span>dan</span>
+                <input type="date" id="dateTo" />
+                <span>gacha</span>
+              </div>
+              <button class="filter-btn secondary" onclick="clearFilters()">
+                <i class="fas fa-times"></i>
+                Tozalash
+              </button>
+            </div>
+            
+            <!-- Orders Table View -->
+            <div class="orders-table-wrapper" id="ordersTableView">
+              <table class="orders-table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Mijoz</th>
+                    <th>Xizmat</th>
+                    <th>Sana</th>
+                    <th>Status</th>
+                    <th>Amallar</th>
+                  </tr>
+                </thead>
+                <tbody id="ordersTableBody">
+                  <!-- JS orqali to'ldiriladi -->
+                </tbody>
+              </table>
+              
+              <!-- Empty State -->
+              <div id="ordersEmptyState" class="empty-state" style="display: none;">
+                <div class="empty-state-icon">
+                  <i class="fas fa-inbox"></i>
+                </div>
+                <h3>Zakazlar topilmadi</h3>
+                <p>Filterlarni o'zgartiring yoki yangi zakaz kuting</p>
+              </div>
+            </div>
+            
+            <!-- Orders Cards View -->
+            <div class="orders-cards" id="ordersCardsView">
+              <!-- JS orqali to'ldiriladi -->
+            </div>
+            
+            <!-- Pagination -->
+            <div class="orders-pagination">
+              <div class="pagination-info">
+                Ko'rsatilmoqda: <strong id="showingFrom">0</strong> - <strong id="showingTo">0</strong>, jami <strong id="totalOrders">0</strong> ta
+              </div>
+              <div class="pagination-controls">
+                <select class="per-page-select" id="perPageSelect">
+                  <option value="10">10 ta</option>
+                  <option value="25">25 ta</option>
+                  <option value="50">50 ta</option>
+                </select>
+                <button class="pagination-btn" id="prevPage" disabled>
+                  <i class="fas fa-chevron-left"></i>
+                </button>
+                <div id="paginationNumbers">
+                  <!-- JS orqali to'ldiriladi -->
+                </div>
+                <button class="pagination-btn" id="nextPage">
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- Users Section -->
+        <section id="usersSection" class="section-content" style="display: none;">
+          <div class="orders-container">
+            <div class="orders-header">
+              <div class="orders-title">
+                <h2>Foydalanuvchilar</h2>
+                <span class="orders-count" id="totalUsersCount">0 ta</span>
+              </div>
+              <div class="orders-actions">
+                <button class="btn btn-primary btn-sm" onclick="openUserModal()">
+                  <i class="fas fa-plus"></i>
+                  Yangi foydalanuvchi
+                </button>
+              </div>
+            </div>
+            
+            <div class="orders-filters">
+              <div class="filter-search">
+                <i class="fas fa-search"></i>
+                <input type="text" id="userSearchInput" placeholder="Ism yoki email bo'yicha qidirish..." />
+              </div>
+              <select id="roleFilter" class="per-page-select">
                 <option value="">Barcha rollar</option>
                 <option value="admin">Admin</option>
                 <option value="user">User</option>
               </select>
-              <select
-                id="statusFilter"
-                class="px-4 py-2 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:outline-none transition"
-              >
+              <select id="statusFilter" class="per-page-select">
                 <option value="">Barcha status</option>
                 <option value="true">Faol</option>
                 <option value="false">Nofaol</option>
               </select>
             </div>
-            <button
-              onclick="openUserModal()"
-              class="w-full md:w-auto bg-red-600 text-white px-6 py-2 rounded-xl font-medium hover:bg-red-700 transition flex items-center justify-center gap-2"
-            >
-              <i class="fas fa-plus"></i>
-              Yangi foydalanuvchi
-            </button>
-          </div>
-
-          <!-- Users Table -->
-          <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
-            <div class="overflow-x-auto">
-              <table class="w-full">
-                <thead class="bg-gray-50">
+            
+            <div class="orders-table-wrapper">
+              <table class="orders-table">
+                <thead>
                   <tr>
-                    <th
-                      class="text-left py-4 px-6 text-sm font-semibold text-gray-600"
-                    >
-                      Foydalanuvchi
-                    </th>
-                    <th
-                      class="text-left py-4 px-6 text-sm font-semibold text-gray-600"
-                    >
-                      Email
-                    </th>
-                    <th
-                      class="text-left py-4 px-6 text-sm font-semibold text-gray-600"
-                    >
-                      Rol
-                    </th>
-                    <th
-                      class="text-left py-4 px-6 text-sm font-semibold text-gray-600"
-                    >
-                      Status
-                    </th>
-                    <th
-                      class="text-left py-4 px-6 text-sm font-semibold text-gray-600"
-                    >
-                      Yaratilgan
-                    </th>
-                    <th
-                      class="text-right py-4 px-6 text-sm font-semibold text-gray-600"
-                    >
-                      Amallar
-                    </th>
+                    <th>Foydalanuvchi</th>
+                    <th>Email</th>
+                    <th>Rol</th>
+                    <th>Status</th>
+                    <th>Yaratilgan</th>
+                    <th>Amallar</th>
                   </tr>
                 </thead>
                 <tbody id="usersTableBody">
-                  <!-- Filled by JS -->
+                  <!-- JS orqali to'ldiriladi -->
                 </tbody>
               </table>
             </div>
-
-            <!-- Pagination -->
-            <div
-              class="px-6 py-4 border-t border-gray-200 flex items-center justify-between"
-            >
-              <p class="text-sm text-gray-600">
-                <span id="showingFrom">0</span> -
-                <span id="showingTo">0</span> dan
-                <span id="totalUsers">0</span> ta
-              </p>
-              <div class="flex items-center gap-2" id="paginationButtons">
-                <!-- Filled by JS -->
-              </div>
-            </div>
           </div>
         </section>
-
-        <!-- Orders Section -->
-        <section id="ordersSection" class="p-6 hidden">
-          <!-- Orders Stats -->
-          <div
-            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-6"
-          >
-            <div
-              class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100"
-            >
-              <div class="flex items-center gap-4">
-                <div
-                  class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center"
-                >
-                  <i class="fas fa-shopping-cart text-white"></i>
-                </div>
-                <div>
-                  <p
-                    class="text-2xl font-bold text-gray-900"
-                    id="statTotalOrders"
-                  >
-                    0
-                  </p>
-                  <p class="text-xs text-gray-500">Jami zakazlar</p>
-                </div>
-              </div>
-            </div>
-            <div
-              class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100"
-            >
-              <div class="flex items-center gap-4">
-                <div
-                  class="w-12 h-12 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-xl flex items-center justify-center"
-                >
-                  <i class="fas fa-clock text-white"></i>
-                </div>
-                <div>
-                  <p
-                    class="text-2xl font-bold text-gray-900"
-                    id="statPendingOrders"
-                  >
-                    0
-                  </p>
-                  <p class="text-xs text-gray-500">Kutilmoqda</p>
-                </div>
-              </div>
-            </div>
-            <div
-              class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100"
-            >
-              <div class="flex items-center gap-4">
-                <div
-                  class="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-500 rounded-xl flex items-center justify-center"
-                >
-                  <i class="fas fa-spinner text-white"></i>
-                </div>
-                <div>
-                  <p
-                    class="text-2xl font-bold text-gray-900"
-                    id="statInProgressOrders"
-                  >
-                    0
-                  </p>
-                  <p class="text-xs text-gray-500">Jarayonda</p>
-                </div>
-              </div>
-            </div>
-            <div
-              class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100"
-            >
-              <div class="flex items-center gap-4">
-                <div
-                  class="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center"
-                >
-                  <i class="fas fa-check text-white"></i>
-                </div>
-                <div>
-                  <p
-                    class="text-2xl font-bold text-gray-900"
-                    id="statCompletedOrders"
-                  >
-                    0
-                  </p>
-                  <p class="text-xs text-gray-500">Bajarilgan</p>
-                </div>
-              </div>
-            </div>
-            <div
-              class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100"
-            >
-              <div class="flex items-center gap-4">
-                <div
-                  class="w-12 h-12 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center"
-                >
-                  <i class="fas fa-times text-white"></i>
-                </div>
-                <div>
-                  <p
-                    class="text-2xl font-bold text-gray-900"
-                    id="statCancelledOrders"
-                  >
-                    0
-                  </p>
-                  <p class="text-xs text-gray-500">Bekor qilingan</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Orders Filter -->
-          <div
-            class="bg-white rounded-2xl p-4 shadow-sm mb-6 flex flex-col md:flex-row items-center gap-4"
-          >
-            <div class="flex items-center gap-3 w-full md:w-auto">
-              <div class="relative flex-1 md:w-80">
-                <i
-                  class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
-                ></i>
-                <input
-                  type="text"
-                  id="orderSearchInput"
-                  placeholder="Qidirish..."
-                  class="w-full pl-12 pr-4 py-2 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:outline-none transition"
-                />
-              </div>
-              <select
-                id="orderStatusFilter"
-                class="px-4 py-2 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:outline-none transition"
-              >
-                <option value="">Barcha status</option>
-                <option value="pending">Kutilmoqda</option>
-                <option value="in_progress">Jarayonda</option>
-                <option value="completed">Bajarilgan</option>
-                <option value="cancelled">Bekor qilingan</option>
-              </select>
-            </div>
-            <button
-              onclick="loadOrders()"
-              class="w-full md:w-auto bg-gray-100 text-gray-700 px-6 py-2 rounded-xl font-medium hover:bg-gray-200 transition flex items-center justify-center gap-2"
-            >
-              <i class="fas fa-sync-alt"></i>
-              Yangilash
-            </button>
-          </div>
-
-          <!-- Orders Table -->
-          <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
-            <div class="overflow-x-auto">
-              <table class="w-full">
-                <thead class="bg-gray-50">
-                  <tr>
-                    <th
-                      class="text-left py-4 px-6 text-sm font-semibold text-gray-600"
-                    >
-                      Xizmat
-                    </th>
-                    <th
-                      class="text-left py-4 px-6 text-sm font-semibold text-gray-600"
-                    >
-                      Mijoz
-                    </th>
-                    <th
-                      class="text-left py-4 px-6 text-sm font-semibold text-gray-600"
-                    >
-                      Telefon
-                    </th>
-                    <th
-                      class="text-left py-4 px-6 text-sm font-semibold text-gray-600"
-                    >
-                      Tavsif
-                    </th>
-                    <th
-                      class="text-left py-4 px-6 text-sm font-semibold text-gray-600"
-                    >
-                      Status
-                    </th>
-                    <th
-                      class="text-left py-4 px-6 text-sm font-semibold text-gray-600"
-                    >
-                      Sana
-                    </th>
-                    <th
-                      class="text-right py-4 px-6 text-sm font-semibold text-gray-600"
-                    >
-                      Amallar
-                    </th>
-                  </tr>
-                </thead>
-                <tbody id="ordersTableBody">
-                  <!-- Filled by JS -->
-                </tbody>
-              </table>
-            </div>
-
-            <!-- Empty State -->
-            <div id="ordersEmptyState" class="hidden py-12 text-center">
-              <div
-                class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4"
-              >
-                <i class="fas fa-shopping-cart text-gray-400 text-3xl"></i>
-              </div>
-              <h3 class="text-lg font-semibold text-gray-900 mb-2">
-                Zakazlar yo'q
-              </h3>
-              <p class="text-gray-500 text-sm">
-                Hozircha hech qanday zakaz mavjud emas
-              </p>
-            </div>
-          </div>
-        </section>
-
+        
         <!-- Settings Section -->
-        <section id="settingsSection" class="p-6 hidden">
-          <div class="max-w-2xl">
-            <div class="bg-white rounded-2xl p-6 shadow-sm mb-6">
-              <h3 class="text-lg font-bold text-gray-900 mb-4">
-                Profil sozlamalari
-              </h3>
-              <form id="profileForm" class="space-y-4">
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-2"
-                    >Ism</label
-                  >
-                  <input
-                    type="text"
-                    id="settingsName"
-                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:outline-none transition"
-                  />
+        <section id="settingsSection" class="section-content" style="display: none;">
+          <div style="max-width: 600px;">
+            <div class="orders-container" style="margin-bottom: 20px;">
+              <div class="orders-header" style="border-bottom: none;">
+                <div class="orders-title">
+                  <h2>Profil sozlamalari</h2>
                 </div>
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-2"
-                    >Email</label
-                  >
-                  <input
-                    type="email"
-                    id="settingsEmail"
-                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:outline-none transition"
-                    disabled
-                  />
-                </div>
-                <button
-                  type="submit"
-                  class="bg-red-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-red-700 transition"
-                >
-                  Saqlash
-                </button>
-              </form>
+              </div>
+              <div style="padding: 0 24px 24px;">
+                <form id="profileForm">
+                  <div class="info-grid">
+                    <div class="info-item">
+                      <label>Ism</label>
+                      <input type="text" id="settingsName" style="width: 100%; padding: 10px 12px; border: 1px solid var(--gray-200); border-radius: var(--radius-md); font-size: 14px; margin-top: 8px;" />
+                    </div>
+                    <div class="info-item">
+                      <label>Email</label>
+                      <input type="email" id="settingsEmail" disabled style="width: 100%; padding: 10px 12px; border: 1px solid var(--gray-200); border-radius: var(--radius-md); font-size: 14px; margin-top: 8px; background: var(--gray-100);" />
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary" style="margin-top: 20px;">
+                    <i class="fas fa-save"></i>
+                    Saqlash
+                  </button>
+                </form>
+              </div>
             </div>
-
-            <div class="bg-white rounded-2xl p-6 shadow-sm">
-              <h3 class="text-lg font-bold text-gray-900 mb-4">
-                Parolni o'zgartirish
-              </h3>
-              <form id="passwordForm" class="space-y-4">
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-2"
-                    >Yangi parol</label
-                  >
-                  <input
-                    type="password"
-                    id="newPassword"
-                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:outline-none transition"
-                    placeholder="••••••••"
-                  />
+            
+            <div class="orders-container">
+              <div class="orders-header" style="border-bottom: none;">
+                <div class="orders-title">
+                  <h2>Parolni o'zgartirish</h2>
                 </div>
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-2"
-                    >Parolni tasdiqlash</label
-                  >
-                  <input
-                    type="password"
-                    id="confirmPassword"
-                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:outline-none transition"
-                    placeholder="••••••••"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  class="bg-gray-900 text-white px-6 py-3 rounded-xl font-medium hover:bg-gray-800 transition"
-                >
-                  Parolni yangilash
-                </button>
-              </form>
+              </div>
+              <div style="padding: 0 24px 24px;">
+                <form id="passwordForm">
+                  <div class="info-grid">
+                    <div class="info-item">
+                      <label>Yangi parol</label>
+                      <input type="password" id="newPassword" placeholder="••••••••" style="width: 100%; padding: 10px 12px; border: 1px solid var(--gray-200); border-radius: var(--radius-md); font-size: 14px; margin-top: 8px;" />
+                    </div>
+                    <div class="info-item">
+                      <label>Parolni tasdiqlash</label>
+                      <input type="password" id="confirmPassword" placeholder="••••••••" style="width: 100%; padding: 10px 12px; border: 1px solid var(--gray-200); border-radius: var(--radius-md); font-size: 14px; margin-top: 8px;" />
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-secondary" style="margin-top: 20px;">
+                    <i class="fas fa-key"></i>
+                    Parolni yangilash
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
         </section>
-      </main>
-    </div>
-
-    <!-- User Modal -->
-    <div
-      id="userModal"
-      class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm"
-    >
-      <div
-        class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 max-h-[90vh] overflow-y-auto"
-      >
-        <div class="flex items-center justify-between mb-6">
-          <h2 id="userModalTitle" class="text-xl font-bold text-gray-900">
-            Yangi foydalanuvchi
-          </h2>
-          <button
-            onclick="closeUserModal()"
-            class="text-gray-400 hover:text-gray-600 transition"
-          >
-            <i class="fas fa-times text-xl"></i>
-          </button>
-        </div>
-
-        <form id="userForm" class="space-y-4">
-          <input type="hidden" id="userId" />
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2"
-              >Ism</label
-            >
-            <input
-              type="text"
-              id="userName"
-              required
-              class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:outline-none transition"
-              placeholder="Foydalanuvchi ismi"
-            />
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2"
-              >Email</label
-            >
-            <input
-              type="email"
-              id="userEmail"
-              required
-              class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:outline-none transition"
-              placeholder="email@example.com"
-            />
-          </div>
-
-          <div id="passwordField">
-            <label class="block text-sm font-medium text-gray-700 mb-2"
-              >Parol</label
-            >
-            <input
-              type="password"
-              id="userPassword"
-              class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:outline-none transition"
-              placeholder="••••••••"
-            />
-            <p id="passwordHint" class="text-xs text-gray-500 mt-1 hidden">
-              Bo'sh qoldiring agar o'zgartirmoqchi bo'lmasangiz
-            </p>
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2"
-              >Rol</label
-            >
-            <select
-              id="userRole"
-              class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:outline-none transition"
-            >
-              <option value="user">User</option>
-              <option value="admin">Admin</option>
-            </select>
-          </div>
-
-          <div class="flex items-center gap-3">
-            <input
-              type="checkbox"
-              id="userActive"
-              checked
-              class="w-5 h-5 rounded border-gray-300 text-red-600 focus:ring-red-500"
-            />
-            <label for="userActive" class="text-sm font-medium text-gray-700"
-              >Faol</label
-            >
-          </div>
-
-          <div
-            id="userFormError"
-            class="hidden bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-xl text-sm"
-          ></div>
-
-          <div class="flex gap-3 pt-2">
-            <button
-              type="button"
-              onclick="closeUserModal()"
-              class="flex-1 px-4 py-3 border-2 border-gray-200 rounded-xl font-medium hover:bg-gray-50 transition"
-            >
-              Bekor qilish
-            </button>
-            <button
-              type="submit"
-              class="flex-1 bg-red-600 text-white px-4 py-3 rounded-xl font-medium hover:bg-red-700 transition"
-            >
-              Saqlash
-            </button>
-          </div>
-        </form>
+        
       </div>
+    </main>
+  </div>
+  
+  <!-- Order Detail Drawer -->
+  <div id="drawerOverlay" class="drawer-overlay" onclick="closeOrderDrawer()"></div>
+  <div id="orderDrawer" class="order-drawer">
+    <div class="drawer-header">
+      <h2>
+        <i class="fas fa-receipt" style="color: var(--primary);"></i>
+        Zakaz #<span id="drawerOrderId">0</span>
+      </h2>
+      <button class="drawer-close" onclick="closeOrderDrawer()">
+        <i class="fas fa-times"></i>
+      </button>
     </div>
-
-    <!-- Delete Confirmation Modal -->
-    <div
-      id="deleteModal"
-      class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm"
-    >
-      <div class="bg-white rounded-2xl shadow-2xl max-w-sm w-full p-6">
-        <div class="text-center">
-          <div
-            class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4"
-          >
-            <i class="fas fa-trash-alt text-red-600 text-2xl"></i>
+    
+    <div class="drawer-content">
+      <!-- Customer Info -->
+      <div class="drawer-section">
+        <div class="drawer-section-title">Mijoz ma'lumotlari</div>
+        <div class="info-grid">
+          <div class="info-item">
+            <label>Ism</label>
+            <span id="drawerCustomerName">-</span>
           </div>
-          <h2 class="text-xl font-bold text-gray-900 mb-2">
-            O'chirishni tasdiqlang
-          </h2>
-          <p class="text-gray-500 mb-6">
-            Ushbu foydalanuvchini o'chirishni xohlaysizmi? Bu amalni qaytarib
-            bo'lmaydi.
-          </p>
-          <div class="flex gap-3">
-            <button
-              onclick="closeDeleteModal()"
-              class="flex-1 px-4 py-3 border-2 border-gray-200 rounded-xl font-medium hover:bg-gray-50 transition"
-            >
-              Bekor qilish
+          <div class="info-item">
+            <label>Telefon</label>
+            <span id="drawerPhone"><a href="tel:">-</a></span>
+          </div>
+          <div class="info-item full">
+            <label>Email</label>
+            <span id="drawerEmail">-</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Service Info -->
+      <div class="drawer-section">
+        <div class="drawer-section-title">Xizmat ma'lumotlari</div>
+        <div class="info-grid">
+          <div class="info-item full">
+            <label>Xizmat nomi</label>
+            <span id="drawerServiceName">-</span>
+          </div>
+          <div class="info-item full">
+            <label>Tavsif</label>
+            <span id="drawerDescription">-</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Status -->
+      <div class="drawer-section">
+        <div class="drawer-section-title">Status</div>
+        <div class="info-grid" style="grid-template-columns: 1fr;">
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button class="status-badge status-new" data-status="new" onclick="setOrderStatus('new')">
+              Yangi
             </button>
-            <button
-              id="confirmDeleteBtn"
-              class="flex-1 bg-red-600 text-white px-4 py-3 rounded-xl font-medium hover:bg-red-700 transition"
-            >
-              O'chirish
+            <button class="status-badge status-accepted" data-status="accepted" onclick="setOrderStatus('accepted')">
+              Qabul qilingan
+            </button>
+            <button class="status-badge status-progress" data-status="progress" onclick="setOrderStatus('progress')">
+              Jarayonda
+            </button>
+            <button class="status-badge status-ready" data-status="ready" onclick="setOrderStatus('ready')">
+              Tayyor
+            </button>
+            <button class="status-badge status-closed" data-status="closed" onclick="setOrderStatus('closed')">
+              Yopilgan
+            </button>
+            <button class="status-badge status-cancelled" data-status="cancelled" onclick="setOrderStatus('cancelled')">
+              Bekor qilingan
             </button>
           </div>
         </div>
       </div>
-    </div>
-
-    <!-- Order Detail Modal -->
-    <div
-      id="orderModal"
-      class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm"
-    >
-      <div
-        class="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-6 max-h-[90vh] overflow-y-auto"
-      >
-        <div class="flex items-center justify-between mb-6">
-          <h2 class="text-xl font-bold text-gray-900">Zakaz tafsilotlari</h2>
-          <button
-            onclick="closeOrderModal()"
-            class="text-gray-400 hover:text-gray-600 transition"
-          >
-            <i class="fas fa-times text-xl"></i>
-          </button>
+      
+      <!-- Timeline -->
+      <div class="drawer-section">
+        <div class="drawer-section-title">Tarix</div>
+        <div class="order-timeline" id="orderTimeline">
+          <!-- JS orqali to'ldiriladi -->
         </div>
-
-        <div class="space-y-4">
-          <!-- Service Info -->
-          <div class="bg-gray-50 rounded-xl p-4">
-            <div class="flex items-center gap-3 mb-3">
-              <div
-                class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center"
-              >
-                <i class="fas fa-briefcase text-red-600"></i>
-              </div>
-              <div>
-                <p class="text-xs text-gray-500">Xizmat</p>
-                <p class="font-semibold text-gray-900" id="orderServiceName">
-                  -
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Customer Info -->
-          <div class="bg-gray-50 rounded-xl p-4">
-            <p class="text-xs text-gray-500 mb-2">Mijoz ma'lumotlari</p>
-            <div class="space-y-2">
-              <div class="flex items-center gap-2">
-                <i class="fas fa-user text-gray-400 w-5"></i>
-                <span class="text-gray-900" id="orderCustomerName">-</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <i class="fas fa-envelope text-gray-400 w-5"></i>
-                <span class="text-gray-900" id="orderCustomerEmail">-</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <i class="fas fa-phone text-gray-400 w-5"></i>
-                <span class="text-gray-900 font-semibold" id="orderPhone"
-                  >-</span
-                >
-              </div>
-            </div>
-          </div>
-
-          <!-- Description -->
-          <div class="bg-gray-50 rounded-xl p-4">
-            <p class="text-xs text-gray-500 mb-2">Tavsif</p>
-            <p class="text-gray-900" id="orderDescription">-</p>
-          </div>
-
-          <!-- Status -->
-          <div class="flex items-center justify-between">
-            <span class="text-sm text-gray-600">Status:</span>
-            <select
-              id="orderStatusSelect"
-              class="px-4 py-2 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:outline-none transition text-sm font-medium"
-            >
-              <option value="pending">Kutilmoqda</option>
-              <option value="in_progress">Jarayonda</option>
-              <option value="completed">Bajarilgan</option>
-              <option value="cancelled">Bekor qilingan</option>
-            </select>
-          </div>
-
-          <!-- Date -->
-          <div class="flex items-center justify-between text-sm">
-            <span class="text-gray-600">Yaratilgan:</span>
-            <span class="text-gray-900" id="orderCreatedAt">-</span>
-          </div>
-        </div>
-
-        <div class="flex gap-3 mt-6 pt-4 border-t border-gray-200">
-          <button
-            onclick="closeOrderModal()"
-            class="flex-1 px-4 py-3 border-2 border-gray-200 rounded-xl font-medium hover:bg-gray-50 transition"
-          >
-            Yopish
-          </button>
-          <button
-            onclick="updateOrderStatus()"
-            class="flex-1 bg-red-600 text-white px-4 py-3 rounded-xl font-medium hover:bg-red-700 transition"
-          >
-            Saqlash
-          </button>
-          <button
-            onclick="deleteCurrentOrder()"
-            class="px-4 py-3 bg-gray-100 text-red-600 rounded-xl font-medium hover:bg-red-50 transition"
-          >
-            <i class="fas fa-trash"></i>
-          </button>
+      </div>
+      
+      <!-- Comment -->
+      <div class="drawer-section">
+        <div class="drawer-section-title">Izoh</div>
+        <div class="comment-box">
+          <textarea id="orderComment" placeholder="Izoh qoldiring..."></textarea>
         </div>
       </div>
     </div>
-
-    <!-- Toast -->
-    <div
-      id="toast"
-      class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300"
-    >
-      <div
-        class="bg-gray-900 text-white px-6 py-4 rounded-xl shadow-lg flex items-center gap-3"
-      >
-        <i id="toastIcon" class="fas fa-check-circle text-green-500"></i>
-        <span id="toastMessage">Muvaffaqiyatli!</span>
+    
+    <div class="drawer-footer">
+      <button class="btn btn-secondary" onclick="closeOrderDrawer()">
+        <i class="fas fa-times"></i>
+        Yopish
+      </button>
+      <button class="btn btn-primary" onclick="saveOrderChanges()">
+        <i class="fas fa-save"></i>
+        Saqlash
+      </button>
+    </div>
+  </div>
+  
+  <!-- User Modal -->
+  <div id="userModal" class="confirm-modal">
+    <div class="confirm-modal-content" style="max-width: 450px;">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+        <h3 id="userModalTitle" style="margin: 0;">Yangi foydalanuvchi</h3>
+        <button onclick="closeUserModal()" style="background: none; border: none; color: var(--gray-500); cursor: pointer; font-size: 18px;">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <form id="userForm">
+        <input type="hidden" id="userId" />
+        
+        <div style="margin-bottom: 16px;">
+          <label style="display: block; font-size: 13px; font-weight: 600; color: var(--gray-700); margin-bottom: 8px;">Ism</label>
+          <input type="text" id="userName" required placeholder="Foydalanuvchi ismi" style="width: 100%; height: 44px; padding: 0 14px; border: 1px solid var(--gray-200); border-radius: var(--radius-md); font-size: 14px;" />
+        </div>
+        
+        <div style="margin-bottom: 16px;">
+          <label style="display: block; font-size: 13px; font-weight: 600; color: var(--gray-700); margin-bottom: 8px;">Email</label>
+          <input type="email" id="userEmail" required placeholder="email@example.com" style="width: 100%; height: 44px; padding: 0 14px; border: 1px solid var(--gray-200); border-radius: var(--radius-md); font-size: 14px;" />
+        </div>
+        
+        <div style="margin-bottom: 16px;" id="passwordField">
+          <label style="display: block; font-size: 13px; font-weight: 600; color: var(--gray-700); margin-bottom: 8px;">Parol</label>
+          <input type="password" id="userPassword" placeholder="••••••••" style="width: 100%; height: 44px; padding: 0 14px; border: 1px solid var(--gray-200); border-radius: var(--radius-md); font-size: 14px;" />
+          <p id="passwordHint" style="display: none; font-size: 11px; color: var(--gray-500); margin-top: 6px;">Bo'sh qoldiring agar o'zgartirmoqchi bo'lmasangiz</p>
+        </div>
+        
+        <div style="margin-bottom: 16px;">
+          <label style="display: block; font-size: 13px; font-weight: 600; color: var(--gray-700); margin-bottom: 8px;">Rol</label>
+          <select id="userRole" style="width: 100%; height: 44px; padding: 0 14px; border: 1px solid var(--gray-200); border-radius: var(--radius-md); font-size: 14px;">
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
+        
+        <div style="margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+          <input type="checkbox" id="userActive" checked style="width: 18px; height: 18px;" />
+          <label for="userActive" style="font-size: 13px; font-weight: 500; color: var(--gray-700);">Faol</label>
+        </div>
+        
+        <div id="userFormError" style="display: none; background: #fef2f2; border: 1px solid #fecaca; color: #dc2626; padding: 12px; border-radius: var(--radius-md); font-size: 13px; margin-bottom: 16px;"></div>
+        
+        <div style="display: flex; gap: 12px;">
+          <button type="button" onclick="closeUserModal()" class="btn btn-secondary" style="flex: 1;">Bekor qilish</button>
+          <button type="submit" class="btn btn-primary" style="flex: 1;">Saqlash</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <!-- Delete Confirmation Modal -->
+  <div id="deleteModal" class="confirm-modal">
+    <div class="confirm-modal-content">
+      <div class="confirm-modal-icon danger">
+        <i class="fas fa-trash-alt"></i>
+      </div>
+      <h3>O'chirishni tasdiqlang</h3>
+      <p>Ushbu elementni o'chirishni xohlaysizmi? Bu amalni qaytarib bo'lmaydi.</p>
+      <div class="confirm-modal-actions">
+        <button class="btn btn-secondary" onclick="closeDeleteModal()">Bekor qilish</button>
+        <button class="btn btn-danger" id="confirmDeleteBtn">O'chirish</button>
       </div>
     </div>
+  </div>
+  
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer">
+    <!-- Toasts will be added here dynamically -->
+  </div>
 
-    <script src="../assets/js/admin.js"></script>
-  </body>
+  <script src="../assets/js/admin.js"></script>
+</body>
 </html>
