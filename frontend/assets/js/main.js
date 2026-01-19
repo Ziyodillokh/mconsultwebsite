@@ -768,6 +768,11 @@ function setLanguage(lang) {
     }
   });
 
+  // Reset modal scroll after language change
+  if (typeof window.resetModalScroll === "function") {
+    setTimeout(() => window.resetModalScroll(), 100);
+  }
+
   console.log("🌐 Language changed to:", lang);
 }
 
@@ -1741,7 +1746,8 @@ function openServiceModal(number, title, description, imageUrl) {
   };
 
   // Get translated service title based on service number
-  const serviceKey = `service_${number}_title`;
+  const serviceNum = parseInt(number, 10); // Convert '01' to 1
+  const serviceKey = `service_${serviceNum}_title`;
   const translatedTitle = translations[currentLanguage]?.[serviceKey] || title;
 
   // Populate DESKTOP
@@ -2031,5 +2037,114 @@ document.addEventListener("keydown", (e) => {
     if (serviceModal && !serviceModal.classList.contains("hidden")) {
       closeServiceModal();
     }
+  }
+});
+
+// ============================================
+// ULTRA SMOOTH SCROLL FOR DESKTOP MODAL
+// ============================================
+document.addEventListener("DOMContentLoaded", () => {
+  // Store active scroll handler for cleanup
+  let activeScrollHandler = null;
+  let activeElement = null;
+
+  // Apply smooth scroll to modal scrollable areas
+  const applyUltraSmoothScroll = (element, resetVelocity = false) => {
+    if (!element) return;
+
+    // Remove previous handler if exists
+    if (activeScrollHandler && activeElement) {
+      activeElement.removeEventListener("wheel", activeScrollHandler);
+      activeScrollHandler = null;
+    }
+
+    let velocity = 0;
+    let animationId = null;
+    const friction = 0.92;
+    const sensitivity = 1.2;
+
+    // Cancel any running animation
+    if (animationId) {
+      cancelAnimationFrame(animationId);
+      animationId = null;
+    }
+
+    const animate = () => {
+      if (Math.abs(velocity) < 0.5) {
+        velocity = 0;
+        animationId = null;
+        return;
+      }
+
+      element.scrollTop += velocity;
+      velocity *= friction;
+
+      const maxScroll = element.scrollHeight - element.clientHeight;
+      if (element.scrollTop <= 0 || element.scrollTop >= maxScroll) {
+        velocity = 0;
+      }
+
+      animationId = requestAnimationFrame(animate);
+    };
+
+    activeScrollHandler = (e) => {
+      e.preventDefault();
+      velocity += e.deltaY * sensitivity;
+      const maxVelocity = 60;
+      velocity = Math.max(-maxVelocity, Math.min(maxVelocity, velocity));
+
+      if (!animationId) {
+        animationId = requestAnimationFrame(animate);
+      }
+    };
+
+    activeElement = element;
+    element.addEventListener("wheel", activeScrollHandler, { passive: false });
+  };
+
+  // Global function to reset modal scroll (called on language change)
+  window.resetModalScroll = () => {
+    const modal = document.getElementById("serviceModal");
+    if (modal && !modal.classList.contains("hidden")) {
+      // Wait for DOM to update after language change
+      setTimeout(() => {
+        const desktopScrollArea = modal.querySelector(".desktop-scroll-area");
+        if (desktopScrollArea) {
+          // Force layout recalculation
+          desktopScrollArea.style.display = 'none';
+          desktopScrollArea.offsetHeight; // Trigger reflow
+          desktopScrollArea.style.display = '';
+          
+          applyUltraSmoothScroll(desktopScrollArea, true);
+        }
+      }, 150);
+    }
+  };
+
+  // Apply to desktop scroll areas when modal opens
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (
+        mutation.type === "attributes" &&
+        mutation.attributeName === "class"
+      ) {
+        const modal = document.getElementById("serviceModal");
+        if (modal && !modal.classList.contains("hidden")) {
+          setTimeout(() => {
+            const desktopScrollArea = modal.querySelector(
+              ".desktop-scroll-area",
+            );
+            if (desktopScrollArea) {
+              applyUltraSmoothScroll(desktopScrollArea);
+            }
+          }, 100);
+        }
+      }
+    });
+  });
+
+  const serviceModal = document.getElementById("serviceModal");
+  if (serviceModal) {
+    observer.observe(serviceModal, { attributes: true });
   }
 });

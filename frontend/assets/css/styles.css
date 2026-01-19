@@ -1147,11 +1147,13 @@ button:disabled {
   box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
 }
 
-/* Desktop scrolling - allow overflow */
+/* Desktop scrolling - ultra smooth */
 @media (min-width: 1024px) {
   #serviceModal .desktop-scroll-area {
     overflow-y: auto !important;
     scroll-behavior: smooth;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
   }
 
   #serviceModal .desktop-scroll-area::-webkit-scrollbar {
@@ -1166,11 +1168,30 @@ button:disabled {
   #serviceModal .desktop-scroll-area::-webkit-scrollbar-thumb {
     background: #dc2626;
     border-radius: 3px;
+    transition: background 0.2s ease;
   }
 
   #serviceModal .desktop-scroll-area::-webkit-scrollbar-thumb:hover {
     background: #b91c1c;
   }
+
+  /* Smooth scroll for modal content wrapper */
+  #serviceModal .lg\\:flex {
+    scroll-behavior: smooth;
+  }
+
+  /* Make description area scroll smoothly */
+  #service-desc-desktop {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Ultra smooth scrolling for all scrollable elements */
+.smooth-scroll {
+  scroll-behavior: smooth !important;
+  -webkit-overflow-scrolling: touch !important;
+  overscroll-behavior: contain;
 }
 
 /* Smooth scrolling for whole page */
