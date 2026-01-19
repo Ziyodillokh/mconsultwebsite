@@ -1219,30 +1219,35 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Hero animations
-gsap.from(".hero-title", {
-  duration: 2,
-  y: 100,
-  opacity: 0,
-  stagger: 0.3,
-  ease: "power4.out",
-});
-
-// Section animations
-const sections = gsap.utils.toArray("section");
-sections.forEach((section) => {
-  gsap.from(section, {
-    scrollTrigger: {
-      trigger: section,
-      start: "top 80%",
-      end: "bottom 20%",
-      toggleActions: "play none none reverse",
-    },
+// Hero animations - only if element exists
+const heroTitle = document.querySelector(".hero-title");
+if (heroTitle) {
+  gsap.from(".hero-title", {
+    duration: 2,
+    y: 100,
     opacity: 0,
-    y: 50,
-    duration: 1,
+    stagger: 0.3,
+    ease: "power4.out",
   });
-});
+}
+
+// Section animations - only if sections exist
+const sections = gsap.utils.toArray("section");
+if (sections.length > 0) {
+  sections.forEach((section) => {
+    gsap.from(section, {
+      scrollTrigger: {
+        trigger: section,
+        start: "top 80%",
+        end: "bottom 20%",
+        toggleActions: "play none none reverse",
+      },
+      opacity: 0,
+      y: 50,
+      duration: 1,
+    });
+  });
+}
 
 // Smooth scroll for navigation links
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
@@ -1841,12 +1846,12 @@ function openServiceModal(number, title, description, imageUrl) {
   modal.classList.add("flex", "show");
   document.body.style.overflow = "hidden";
 
-  // CRITICAL: Disable scroll-based animations when modal is open
-  if (typeof ScrollTrigger !== "undefined") {
-    ScrollTrigger.getAll().forEach((trigger) => trigger.disable());
+  // CRITICAL: Kill ALL GSAP animations and disable ScrollTrigger
+  if (typeof gsap !== "undefined") {
+    gsap.killTweensOf("*"); // Stop all running animations
   }
-  if (typeof AOS !== "undefined") {
-    AOS.refreshHard();
+  if (typeof ScrollTrigger !== "undefined") {
+    ScrollTrigger.getAll().forEach((trigger) => trigger.kill()); // Kill, not just disable
   }
 
   // Apply current language translations to modal
@@ -1859,13 +1864,8 @@ function closeServiceModal() {
   modal.classList.add("hide");
   modal.classList.remove("show");
 
-  // CRITICAL: Re-enable scroll-based animations when modal closes
-  if (typeof ScrollTrigger !== "undefined") {
-    ScrollTrigger.getAll().forEach((trigger) => trigger.enable());
-  }
-  if (typeof AOS !== "undefined") {
-    AOS.refresh();
-  }
+  // Note: ScrollTrigger was killed, it won't restart automatically
+  // This is intentional - animations only run once on page load
 
   setTimeout(() => {
     modal.classList.add("hidden");
