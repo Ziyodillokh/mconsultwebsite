@@ -8,7 +8,7 @@ import {
 import { JwtService } from "@nestjs/jwt";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { User } from "../entities/user.entity";
+import { User, UserRole } from "../entities/user.entity";
 
 @Injectable()
 export class AdminGuard implements CanActivate {
@@ -41,7 +41,7 @@ export class AdminGuard implements CanActivate {
         throw new UnauthorizedException("Foydalanuvchi topilmadi");
       }
 
-      if (user.role !== "admin") {
+      if (user.role !== UserRole.ADMIN) {
         throw new ForbiddenException("Admin huquqi talab qilinadi");
       }
 

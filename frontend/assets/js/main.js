@@ -131,12 +131,14 @@ const translations = {
     auth_register_title: "Ro'yxatdan o'tish",
     auth_email: "Email",
     auth_password: "Parol",
-    auth_name: "Ism",
+    auth_confirm_password: "Parolni tasdiqlang",
+    auth_name: "To'liq ism",
     auth_no_account: "Akkauntingiz yo'qmi?",
     auth_have_account: "Akkauntingiz bormi?",
     auth_register_link: "Ro'yxatdan o'ting",
     auth_login_link: "Kirish",
     auth_min_chars: "Kamida 6 ta belgi",
+    auth_password_mismatch: "Parollar mos kelmadi",
 
     // Additional service cards
     service_4_title: "Malaka Oshirish",
@@ -174,7 +176,7 @@ const translations = {
     // Navigation
     nav_home: "Главная",
     nav_services: "Услуги",
-    nav_achievements: "Достижения",
+    nav_achievements: "Успехи",
     nav_about: "О Нас",
     nav_contact: "Контакты",
     btn_login: "Вход",
@@ -293,12 +295,14 @@ const translations = {
     auth_register_title: "Регистрация",
     auth_email: "Email",
     auth_password: "Пароль",
-    auth_name: "Имя",
+    auth_confirm_password: "Подтвердите пароль",
+    auth_name: "Полное имя",
     auth_no_account: "Нет аккаунта?",
     auth_have_account: "Уже есть аккаунт?",
     auth_register_link: "Зарегистрироваться",
     auth_login_link: "Войти",
     auth_min_chars: "Минимум 6 символов",
+    auth_password_mismatch: "Пароли не совпадают",
 
     // Additional service cards
     service_4_title: "Повышение Квалификации",
@@ -451,12 +455,14 @@ const translations = {
     auth_register_title: "Sign Up",
     auth_email: "Email",
     auth_password: "Password",
-    auth_name: "Name",
+    auth_confirm_password: "Confirm Password",
+    auth_name: "Full Name",
     auth_no_account: "Don't have an account?",
     auth_have_account: "Already have an account?",
     auth_register_link: "Sign up",
     auth_login_link: "Login",
     auth_min_chars: "Minimum 6 characters",
+    auth_password_mismatch: "Passwords do not match",
 
     // Additional service cards
     service_4_title: "Training & Development",
@@ -638,7 +644,36 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
+  // Mobile Language dropdown toggle
+  const mobileLangBtn = document.getElementById("mobileLangBtn");
+  const mobileLangDropdown = document.getElementById("mobileLangDropdown");
+
+  if (mobileLangBtn && mobileLangDropdown) {
+    mobileLangBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      mobileLangDropdown.classList.toggle("hidden");
+    });
+
+    // Close mobile dropdown when clicking outside
+    document.addEventListener("click", (e) => {
+      if (
+        !mobileLangBtn.contains(e.target) &&
+        !mobileLangDropdown.contains(e.target)
+      ) {
+        mobileLangDropdown.classList.add("hidden");
+      }
+    });
+  }
 });
+
+// Close mobile language dropdown function
+function closeMobileLangDropdown() {
+  const mobileLangDropdown = document.getElementById("mobileLangDropdown");
+  if (mobileLangDropdown) {
+    mobileLangDropdown.classList.add("hidden");
+  }
+}
 
 // Initialize plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -826,6 +861,9 @@ async function handleRegister(event) {
   const name = document.getElementById("registerName").value;
   const email = document.getElementById("registerEmail").value;
   const password = document.getElementById("registerPassword").value;
+  const confirmPassword = document.getElementById(
+    "registerConfirmPassword",
+  ).value;
   const registerBtn = document.getElementById("registerBtn");
   const registerBtnText = document.getElementById("registerBtnText");
   const registerError = document.getElementById("registerError");
@@ -836,6 +874,16 @@ async function handleRegister(event) {
   // Clear previous messages
   registerError.classList.add("hidden");
   registerSuccess.classList.add("hidden");
+
+  // Check if passwords match
+  if (password !== confirmPassword) {
+    const mismatchMsg =
+      translations[currentLanguage]?.auth_password_mismatch ||
+      "Parollar mos kelmadi";
+    registerErrorMsg.textContent = mismatchMsg;
+    registerError.classList.remove("hidden");
+    return;
+  }
 
   // Disable button
   registerBtn.disabled = true;

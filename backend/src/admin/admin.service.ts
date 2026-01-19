@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository, Like, ILike } from "typeorm";
 import * as bcrypt from "bcryptjs";
-import { User } from "../entities/user.entity";
+import { User, UserRole } from "../entities/user.entity";
 
 export interface DashboardStats {
   totalUsers: number;
@@ -182,7 +182,7 @@ export class AdminService {
       email: data.email,
       password: hashedPassword,
       name: data.name,
-      role: data.role || "user",
+      role: data.role || UserRole.USER,
       isActive: data.isActive !== undefined ? data.isActive : true,
     });
 
