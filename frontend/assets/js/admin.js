@@ -727,11 +727,11 @@ async function loadOrders() {
   try {
     const orders = await apiRequest("/orders");
     allOrders = orders;
-    
+
     // Load stats
     const stats = await apiRequest("/orders/stats");
     updateOrderStats(stats);
-    
+
     renderOrders(orders);
     updateOrdersBadge(stats.pending);
   } catch (error) {
@@ -744,7 +744,8 @@ async function loadOrders() {
 function updateOrderStats(stats) {
   document.getElementById("statTotalOrders").textContent = stats.total;
   document.getElementById("statPendingOrders").textContent = stats.pending;
-  document.getElementById("statInProgressOrders").textContent = stats.inProgress;
+  document.getElementById("statInProgressOrders").textContent =
+    stats.inProgress;
   document.getElementById("statCompletedOrders").textContent = stats.completed;
   document.getElementById("statCancelledOrders").textContent = stats.cancelled;
 }
@@ -764,31 +765,35 @@ function updateOrdersBadge(count) {
 function renderOrders(orders) {
   const tbody = document.getElementById("ordersTableBody");
   const emptyState = document.getElementById("ordersEmptyState");
-  const searchValue = document.getElementById("orderSearchInput")?.value?.toLowerCase() || "";
-  const statusFilter = document.getElementById("orderStatusFilter")?.value || "";
-  
+  const searchValue =
+    document.getElementById("orderSearchInput")?.value?.toLowerCase() || "";
+  const statusFilter =
+    document.getElementById("orderStatusFilter")?.value || "";
+
   // Filter orders
-  let filteredOrders = orders.filter(order => {
-    const matchesSearch = 
+  let filteredOrders = orders.filter((order) => {
+    const matchesSearch =
       order.serviceName.toLowerCase().includes(searchValue) ||
       order.phoneNumber.includes(searchValue) ||
       order.user?.name?.toLowerCase().includes(searchValue) ||
       order.description.toLowerCase().includes(searchValue);
-    
+
     const matchesStatus = !statusFilter || order.status === statusFilter;
-    
+
     return matchesSearch && matchesStatus;
   });
-  
+
   if (filteredOrders.length === 0) {
     tbody.innerHTML = "";
     emptyState.classList.remove("hidden");
     return;
   }
-  
+
   emptyState.classList.add("hidden");
-  
-  tbody.innerHTML = filteredOrders.map(order => `
+
+  tbody.innerHTML = filteredOrders
+    .map(
+      (order) => `
     <tr class="border-b border-gray-100 hover:bg-gray-50 transition cursor-pointer" onclick="openOrderModal('${order.id}')">
       <td class="py-4 px-6">
         <div class="flex items-center gap-3">
@@ -827,35 +832,46 @@ function renderOrders(orders) {
         </button>
       </td>
     </tr>
-  `).join("");
+  `,
+    )
+    .join("");
 }
 
 // Get Status Badge HTML
 function getStatusBadge(status) {
   const badges = {
-    pending: '<span class="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-medium">Kutilmoqda</span>',
-    in_progress: '<span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">Jarayonda</span>',
-    completed: '<span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">Bajarilgan</span>',
-    cancelled: '<span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-xs font-medium">Bekor qilingan</span>'
+    pending:
+      '<span class="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-medium">Kutilmoqda</span>',
+    in_progress:
+      '<span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">Jarayonda</span>',
+    completed:
+      '<span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">Bajarilgan</span>',
+    cancelled:
+      '<span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-xs font-medium">Bekor qilingan</span>',
   };
   return badges[status] || badges.pending;
 }
 
 // Open Order Modal
 function openOrderModal(orderId) {
-  const order = allOrders.find(o => o.id === orderId);
+  const order = allOrders.find((o) => o.id === orderId);
   if (!order) return;
-  
+
   currentOrderId = orderId;
-  
-  document.getElementById("orderServiceName").textContent = `${order.serviceNumber} - ${order.serviceName}`;
-  document.getElementById("orderCustomerName").textContent = order.user?.name || "-";
-  document.getElementById("orderCustomerEmail").textContent = order.user?.email || "-";
+
+  document.getElementById("orderServiceName").textContent =
+    `${order.serviceNumber} - ${order.serviceName}`;
+  document.getElementById("orderCustomerName").textContent =
+    order.user?.name || "-";
+  document.getElementById("orderCustomerEmail").textContent =
+    order.user?.email || "-";
   document.getElementById("orderPhone").textContent = order.phoneNumber;
   document.getElementById("orderDescription").textContent = order.description;
   document.getElementById("orderStatusSelect").value = order.status;
-  document.getElementById("orderCreatedAt").textContent = formatDate(order.createdAt);
-  
+  document.getElementById("orderCreatedAt").textContent = formatDate(
+    order.createdAt,
+  );
+
   document.getElementById("orderModal").classList.remove("hidden");
 }
 
@@ -868,9 +884,9 @@ function closeOrderModal() {
 // Update Order Status
 async function updateOrderStatus() {
   if (!currentOrderId) return;
-  
+
   const status = document.getElementById("orderStatusSelect").value;
-  
+
   try {
     await apiRequest(`/orders/${currentOrderId}/status`, "PUT", { status });
     showToast("Status yangilandi");
@@ -884,9 +900,9 @@ async function updateOrderStatus() {
 // Delete Current Order
 async function deleteCurrentOrder() {
   if (!currentOrderId) return;
-  
+
   if (!confirm("Ushbu zakazni o'chirishni xohlaysizmi?")) return;
-  
+
   try {
     await apiRequest(`/orders/${currentOrderId}`, "DELETE");
     showToast("Zakaz o'chirildi");
@@ -908,7 +924,7 @@ document.addEventListener("DOMContentLoaded", () => {
       searchTimeout = setTimeout(() => renderOrders(allOrders), 300);
     });
   }
-  
+
   // Order status filter
   const orderStatusFilter = document.getElementById("orderStatusFilter");
   if (orderStatusFilter) {

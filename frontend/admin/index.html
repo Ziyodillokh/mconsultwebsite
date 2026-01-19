@@ -156,7 +156,11 @@
           >
             <i class="fas fa-shopping-cart w-5"></i>
             <span>Zakazlar</span>
-            <span id="ordersBadge" class="ml-auto bg-red-500 text-white text-xs px-2 py-0.5 rounded-full hidden">0</span>
+            <span
+              id="ordersBadge"
+              class="ml-auto bg-red-500 text-white text-xs px-2 py-0.5 rounded-full hidden"
+              >0</span
+            >
           </a>
           <a
             href="#users"
@@ -623,58 +627,105 @@
         <!-- Orders Section -->
         <section id="ordersSection" class="p-6 hidden">
           <!-- Orders Stats -->
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
-            <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-6"
+          >
+            <div
+              class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100"
+            >
               <div class="flex items-center gap-4">
-                <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
+                <div
+                  class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center"
+                >
                   <i class="fas fa-shopping-cart text-white"></i>
                 </div>
                 <div>
-                  <p class="text-2xl font-bold text-gray-900" id="statTotalOrders">0</p>
+                  <p
+                    class="text-2xl font-bold text-gray-900"
+                    id="statTotalOrders"
+                  >
+                    0
+                  </p>
                   <p class="text-xs text-gray-500">Jami zakazlar</p>
                 </div>
               </div>
             </div>
-            <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
+            <div
+              class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100"
+            >
               <div class="flex items-center gap-4">
-                <div class="w-12 h-12 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-xl flex items-center justify-center">
+                <div
+                  class="w-12 h-12 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-xl flex items-center justify-center"
+                >
                   <i class="fas fa-clock text-white"></i>
                 </div>
                 <div>
-                  <p class="text-2xl font-bold text-gray-900" id="statPendingOrders">0</p>
+                  <p
+                    class="text-2xl font-bold text-gray-900"
+                    id="statPendingOrders"
+                  >
+                    0
+                  </p>
                   <p class="text-xs text-gray-500">Kutilmoqda</p>
                 </div>
               </div>
             </div>
-            <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
+            <div
+              class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100"
+            >
               <div class="flex items-center gap-4">
-                <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-500 rounded-xl flex items-center justify-center">
+                <div
+                  class="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-500 rounded-xl flex items-center justify-center"
+                >
                   <i class="fas fa-spinner text-white"></i>
                 </div>
                 <div>
-                  <p class="text-2xl font-bold text-gray-900" id="statInProgressOrders">0</p>
+                  <p
+                    class="text-2xl font-bold text-gray-900"
+                    id="statInProgressOrders"
+                  >
+                    0
+                  </p>
                   <p class="text-xs text-gray-500">Jarayonda</p>
                 </div>
               </div>
             </div>
-            <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
+            <div
+              class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100"
+            >
               <div class="flex items-center gap-4">
-                <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center">
+                <div
+                  class="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center"
+                >
                   <i class="fas fa-check text-white"></i>
                 </div>
                 <div>
-                  <p class="text-2xl font-bold text-gray-900" id="statCompletedOrders">0</p>
+                  <p
+                    class="text-2xl font-bold text-gray-900"
+                    id="statCompletedOrders"
+                  >
+                    0
+                  </p>
                   <p class="text-xs text-gray-500">Bajarilgan</p>
                 </div>
               </div>
             </div>
-            <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
+            <div
+              class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100"
+            >
               <div class="flex items-center gap-4">
-                <div class="w-12 h-12 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center">
+                <div
+                  class="w-12 h-12 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center"
+                >
                   <i class="fas fa-times text-white"></i>
                 </div>
                 <div>
-                  <p class="text-2xl font-bold text-gray-900" id="statCancelledOrders">0</p>
+                  <p
+                    class="text-2xl font-bold text-gray-900"
+                    id="statCancelledOrders"
+                  >
+                    0
+                  </p>
                   <p class="text-xs text-gray-500">Bekor qilingan</p>
                 </div>
               </div>
@@ -682,10 +733,14 @@
           </div>
 
           <!-- Orders Filter -->
-          <div class="bg-white rounded-2xl p-4 shadow-sm mb-6 flex flex-col md:flex-row items-center gap-4">
+          <div
+            class="bg-white rounded-2xl p-4 shadow-sm mb-6 flex flex-col md:flex-row items-center gap-4"
+          >
             <div class="flex items-center gap-3 w-full md:w-auto">
               <div class="relative flex-1 md:w-80">
-                <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                <i
+                  class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+                ></i>
                 <input
                   type="text"
                   id="orderSearchInput"
@@ -719,13 +774,41 @@
               <table class="w-full">
                 <thead class="bg-gray-50">
                   <tr>
-                    <th class="text-left py-4 px-6 text-sm font-semibold text-gray-600">Xizmat</th>
-                    <th class="text-left py-4 px-6 text-sm font-semibold text-gray-600">Mijoz</th>
-                    <th class="text-left py-4 px-6 text-sm font-semibold text-gray-600">Telefon</th>
-                    <th class="text-left py-4 px-6 text-sm font-semibold text-gray-600">Tavsif</th>
-                    <th class="text-left py-4 px-6 text-sm font-semibold text-gray-600">Status</th>
-                    <th class="text-left py-4 px-6 text-sm font-semibold text-gray-600">Sana</th>
-                    <th class="text-right py-4 px-6 text-sm font-semibold text-gray-600">Amallar</th>
+                    <th
+                      class="text-left py-4 px-6 text-sm font-semibold text-gray-600"
+                    >
+                      Xizmat
+                    </th>
+                    <th
+                      class="text-left py-4 px-6 text-sm font-semibold text-gray-600"
+                    >
+                      Mijoz
+                    </th>
+                    <th
+                      class="text-left py-4 px-6 text-sm font-semibold text-gray-600"
+                    >
+                      Telefon
+                    </th>
+                    <th
+                      class="text-left py-4 px-6 text-sm font-semibold text-gray-600"
+                    >
+                      Tavsif
+                    </th>
+                    <th
+                      class="text-left py-4 px-6 text-sm font-semibold text-gray-600"
+                    >
+                      Status
+                    </th>
+                    <th
+                      class="text-left py-4 px-6 text-sm font-semibold text-gray-600"
+                    >
+                      Sana
+                    </th>
+                    <th
+                      class="text-right py-4 px-6 text-sm font-semibold text-gray-600"
+                    >
+                      Amallar
+                    </th>
                   </tr>
                 </thead>
                 <tbody id="ordersTableBody">
@@ -733,14 +816,20 @@
                 </tbody>
               </table>
             </div>
-            
+
             <!-- Empty State -->
             <div id="ordersEmptyState" class="hidden py-12 text-center">
-              <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div
+                class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4"
+              >
                 <i class="fas fa-shopping-cart text-gray-400 text-3xl"></i>
               </div>
-              <h3 class="text-lg font-semibold text-gray-900 mb-2">Zakazlar yo'q</h3>
-              <p class="text-gray-500 text-sm">Hozircha hech qanday zakaz mavjud emas</p>
+              <h3 class="text-lg font-semibold text-gray-900 mb-2">
+                Zakazlar yo'q
+              </h3>
+              <p class="text-gray-500 text-sm">
+                Hozircha hech qanday zakaz mavjud emas
+              </p>
             </div>
           </div>
         </section>
@@ -978,7 +1067,9 @@
       id="orderModal"
       class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm"
     >
-      <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-6 max-h-[90vh] overflow-y-auto">
+      <div
+        class="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-6 max-h-[90vh] overflow-y-auto"
+      >
         <div class="flex items-center justify-between mb-6">
           <h2 class="text-xl font-bold text-gray-900">Zakaz tafsilotlari</h2>
           <button
@@ -993,12 +1084,16 @@
           <!-- Service Info -->
           <div class="bg-gray-50 rounded-xl p-4">
             <div class="flex items-center gap-3 mb-3">
-              <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
+              <div
+                class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center"
+              >
                 <i class="fas fa-briefcase text-red-600"></i>
               </div>
               <div>
                 <p class="text-xs text-gray-500">Xizmat</p>
-                <p class="font-semibold text-gray-900" id="orderServiceName">-</p>
+                <p class="font-semibold text-gray-900" id="orderServiceName">
+                  -
+                </p>
               </div>
             </div>
           </div>
@@ -1017,7 +1112,9 @@
               </div>
               <div class="flex items-center gap-2">
                 <i class="fas fa-phone text-gray-400 w-5"></i>
-                <span class="text-gray-900 font-semibold" id="orderPhone">-</span>
+                <span class="text-gray-900 font-semibold" id="orderPhone"
+                  >-</span
+                >
               </div>
             </div>
           </div>
