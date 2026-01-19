@@ -1041,3 +1041,172 @@ button:disabled {
   background-color: rgba(255, 255, 255, 0.3) !important;
   border: 2px solid rgba(255, 255, 255, 0.5);
 }
+
+/* ============================================ */
+/* SERVICE MODAL - PROFESSIONAL FULL PAGE */
+/* ============================================ */
+
+#serviceModal {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#serviceModal.flex {
+  display: block !important;
+  opacity: 1;
+}
+
+#serviceModal.show {
+  animation: serviceModalFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+#serviceModal.hide {
+  animation: serviceModalFadeOut 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes serviceModalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes serviceModalFadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Mobile scrolling - smooth experience */
+#serviceModal .overflow-y-auto {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar for service modal (mobile only) */
+#serviceModal .overflow-y-auto::-webkit-scrollbar {
+  width: 4px;
+}
+
+#serviceModal .overflow-y-auto::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#serviceModal .overflow-y-auto::-webkit-scrollbar-thumb {
+  background: #dc2626;
+  border-radius: 2px;
+}
+
+/* Desktop: Ensure no overflow */
+@media (min-width: 1024px) {
+  #serviceModal .hidden.lg\\:flex {
+    display: flex !important;
+  }
+
+  #serviceModal .lg\\:hidden {
+    display: none !important;
+  }
+}
+
+/* Mobile: Show mobile layout */
+@media (max-width: 1023px) {
+  #serviceModal .hidden.lg\\:flex {
+    display: none !important;
+  }
+
+  #serviceModal .lg\\:hidden {
+    display: block !important;
+  }
+}
+
+/* Language-safe typography */
+#serviceModal h1,
+#serviceModal h2,
+#serviceModal h3,
+#serviceModal p,
+#serviceModal span,
+#serviceModal label {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+/* Ensure text doesn't overflow on any language */
+[data-lang-key] {
+  line-height: 1.4;
+}
+
+/* Smooth transition for form inputs */
+#serviceModal input:focus {
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+/* Desktop scrolling - allow overflow */
+@media (min-width: 1024px) {
+  #serviceModal .desktop-scroll-area {
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #serviceModal .desktop-scroll-area::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  #serviceModal .desktop-scroll-area::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+  }
+
+  #serviceModal .desktop-scroll-area::-webkit-scrollbar-thumb {
+    background: #dc2626;
+    border-radius: 3px;
+  }
+}
+
+/* Mobile safe area padding */
+@supports (padding-top: env(safe-area-inset-top)) {
+  #serviceModal .mobile-hero-section {
+    padding-top: calc(env(safe-area-inset-top) + 4.5rem);
+  }
+}
+
+/* ============================================ */
+/* HORIZONTAL LANGUAGE FLAGS */
+/* ============================================ */
+
+/* Active language flag indicator */
+.lang-flag-btn.active,
+.mobile-lang-flag.active {
+  background: rgba(255, 255, 255, 0.25) !important;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+}
+
+.lang-flag-btn.active img,
+.mobile-lang-flag.active img {
+  transform: scale(1.1);
+}
+
+/* Smooth transitions */
+.lang-flag-btn,
+.mobile-lang-flag {
+  transition: all 0.2s ease;
+}
+
+.lang-flag-btn img,
+.mobile-lang-flag img {
+  transition: transform 0.2s ease;
+}
+
+/* Mobile flags compact */
+@media (max-width: 640px) {
+  .mobile-lang-flag {
+    width: 32px !important;
+    height: 32px !important;
+  }
+}

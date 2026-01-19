@@ -152,6 +152,28 @@ const translations = {
       "Energiya tejamkorligi va ekologik standartlar bo'yicha professional tahlil.",
     btn_more: "Batafsil",
 
+    // Service Modal Features
+    feature_professional: "Professional yondashuv",
+    feature_professional_desc: "Malakali mutaxassislar",
+    feature_fast: "Tezkor xizmat",
+    feature_fast_desc: "Qisqa muddatda",
+    feature_support: "24/7 Qo'llab-quvvatlash",
+    feature_support_desc: "Doim aloqadamiz",
+    feature_guarantee: "Kafolat",
+    feature_guarantee_desc: "Sifat kafolati",
+
+    // Service Modal Sections
+    service_about: "Xizmat haqida",
+    service_benefits: "Afzalliklar",
+
+    // Order Form
+    order_title: "Buyurtma berish",
+    order_login_required: "Buyurtma berish uchun tizimga kiring",
+    order_login_hint: "Hisobingizga kiring yoki ro'yxatdan o'ting",
+    order_phone: "Telefon raqam",
+    order_description: "Izoh",
+    order_submit: "Yuborish",
+
     // Marketing section extra
     marketing_features:
       "Ijtimoiy tarmoqlar • Kontent yaratish • Brending • Sotuv strategiyasi",
@@ -322,6 +344,28 @@ const translations = {
       "Профессиональный анализ энергоэффективности и экологических стандартов.",
     btn_more: "Подробнее",
 
+    // Service Modal Features
+    feature_professional: "Профессиональный подход",
+    feature_professional_desc: "Квалифицированные специалисты",
+    feature_fast: "Быстрый сервис",
+    feature_fast_desc: "В короткие сроки",
+    feature_support: "Поддержка 24/7",
+    feature_support_desc: "Всегда на связи",
+    feature_guarantee: "Гарантия",
+    feature_guarantee_desc: "Гарантия качества",
+
+    // Service Modal Sections
+    service_about: "О услуге",
+    service_benefits: "Преимущества",
+
+    // Order Form
+    order_title: "Оформить заказ",
+    order_login_required: "Войдите для оформления заказа",
+    order_login_hint: "Войдите в аккаунт или зарегистрируйтесь",
+    order_phone: "Номер телефона",
+    order_description: "Комментарий",
+    order_submit: "Отправить",
+
     // Marketing section extra
     marketing_features:
       "Социальные сети • Создание контента • Брендинг • Стратегия продаж",
@@ -488,6 +532,28 @@ const translations = {
       "Professional analysis of energy efficiency and environmental standards.",
     btn_more: "Learn More",
 
+    // Service Modal Features
+    feature_professional: "Professional Approach",
+    feature_professional_desc: "Qualified specialists",
+    feature_fast: "Fast Service",
+    feature_fast_desc: "Quick turnaround",
+    feature_support: "24/7 Support",
+    feature_support_desc: "Always available",
+    feature_guarantee: "Guarantee",
+    feature_guarantee_desc: "Quality assured",
+
+    // Service Modal Sections
+    service_about: "About Service",
+    service_benefits: "Benefits",
+
+    // Order Form
+    order_title: "Place Order",
+    order_login_required: "Please login to place an order",
+    order_login_hint: "Sign in or register to continue",
+    order_phone: "Phone Number",
+    order_description: "Description",
+    order_submit: "Submit",
+
     // Marketing section extra
     marketing_features:
       "Social Media • Content Creation • Branding • Sales Strategy",
@@ -602,13 +668,29 @@ function setLanguage(lang) {
     }
   });
 
-  // Update language switcher display
+  // Update horizontal language flag buttons (desktop)
+  document.querySelectorAll(".lang-flag-btn").forEach((btn) => {
+    btn.classList.remove("active");
+    if (btn.getAttribute("data-lang") === lang) {
+      btn.classList.add("active");
+    }
+  });
+
+  // Update horizontal language flag buttons (mobile)
+  document.querySelectorAll(".mobile-lang-flag").forEach((btn) => {
+    btn.classList.remove("active");
+    if (btn.getAttribute("data-lang") === lang) {
+      btn.classList.add("active");
+    }
+  });
+
+  // Legacy: Update old dropdown display (if exists)
   const currentFlag = document.getElementById("currentFlag");
   const currentLang = document.getElementById("currentLang");
   if (currentFlag) currentFlag.src = langData[lang].flag;
   if (currentLang) currentLang.textContent = langData[lang].name;
 
-  // Close dropdown
+  // Legacy: Close old dropdown
   const dropdown = document.getElementById("langDropdown");
   if (dropdown) dropdown.classList.add("hidden");
 
@@ -1391,62 +1473,140 @@ const serviceDetails = {
 
 // Open Service Modal
 function openServiceModal(number, title, description, imageUrl) {
-  document.getElementById("serviceModalNumber").textContent = number;
-  document.getElementById("serviceModalTitle").textContent = title;
-  // Also update desktop title
-  const desktopTitle = document.getElementById("serviceModalTitleDesktop");
-  if (desktopTitle) {
-    desktopTitle.textContent = title;
+  // Format number with leading zero
+  const formattedNumber = number.toString().padStart(2, "0");
+
+  // DESKTOP Elements
+  const desktopElements = {
+    number: document.getElementById("serviceModalNumberDesktop"),
+    titleLeft: document.getElementById("serviceModalTitleLeft"),
+    titleRight: document.getElementById("serviceModalTitleDesktop"),
+    desc: document.getElementById("serviceModalDescDesktop"),
+    image: document.getElementById("serviceModalImageDesktop"),
+    loginRequired: document.getElementById("orderLoginRequiredDesktop"),
+    orderForm: document.getElementById("serviceOrderFormDesktop"),
+    serviceName: document.getElementById("orderServiceNameDesktop"),
+    serviceNumber: document.getElementById("orderServiceNumberDesktop"),
+    errorEl: document.getElementById("orderFormErrorDesktop"),
+    successEl: document.getElementById("orderFormSuccessDesktop"),
+  };
+
+  // MOBILE Elements
+  const mobileElements = {
+    number: document.getElementById("serviceModalNumberMobile"),
+    title: document.getElementById("serviceModalTitleMobile"),
+    desc: document.getElementById("serviceModalDescMobile"),
+    image: document.getElementById("serviceModalImageMobile"),
+    loginRequired: document.getElementById("orderLoginRequiredMobile"),
+    orderForm: document.getElementById("serviceOrderFormMobile"),
+    serviceName: document.getElementById("orderServiceNameMobile"),
+    serviceNumber: document.getElementById("orderServiceNumberMobile"),
+    errorEl: document.getElementById("orderFormErrorMobile"),
+    successEl: document.getElementById("orderFormSuccessMobile"),
+  };
+
+  // Populate DESKTOP
+  if (desktopElements.number)
+    desktopElements.number.textContent = formattedNumber;
+  if (desktopElements.titleLeft) desktopElements.titleLeft.textContent = title;
+  if (desktopElements.titleRight)
+    desktopElements.titleRight.textContent = title;
+  if (desktopElements.image) {
+    desktopElements.image.src = imageUrl;
+    desktopElements.image.alt = title;
+  }
+  if (desktopElements.serviceName) desktopElements.serviceName.value = title;
+  if (desktopElements.serviceNumber)
+    desktopElements.serviceNumber.value = number;
+
+  // Use detailed description if available
+  if (desktopElements.desc) {
+    if (serviceDetails[number]) {
+      desktopElements.desc.innerHTML = serviceDetails[number];
+    } else {
+      desktopElements.desc.textContent = description;
+    }
   }
 
-  // Use detailed description if available, otherwise use plain text
-  const descEl = document.getElementById("serviceModalDesc");
-  if (serviceDetails[number]) {
-    descEl.innerHTML = serviceDetails[number];
-  } else {
-    descEl.textContent = description;
+  // Populate MOBILE
+  if (mobileElements.number)
+    mobileElements.number.textContent = formattedNumber;
+  if (mobileElements.title) mobileElements.title.textContent = title;
+  if (mobileElements.image) {
+    mobileElements.image.src = imageUrl;
+    mobileElements.image.alt = title;
   }
+  if (mobileElements.serviceName) mobileElements.serviceName.value = title;
+  if (mobileElements.serviceNumber) mobileElements.serviceNumber.value = number;
 
-  document.getElementById("serviceModalImage").src = imageUrl;
-  document.getElementById("serviceModalImage").alt = title;
-
-  // Set hidden form values
-  document.getElementById("orderServiceName").value = title;
-  document.getElementById("orderServiceNumber").value = number;
+  // Use detailed description for mobile
+  if (mobileElements.desc) {
+    if (serviceDetails[number]) {
+      mobileElements.desc.innerHTML = serviceDetails[number];
+    } else {
+      mobileElements.desc.textContent = description;
+    }
+  }
 
   // Check if user is logged in
   const token = localStorage.getItem("token");
   const user = localStorage.getItem("user");
 
   if (token && user) {
-    // Show order form
-    document.getElementById("orderLoginRequired").classList.add("hidden");
-    document.getElementById("serviceOrderForm").classList.remove("hidden");
-    // Reset form
-    document.getElementById("serviceOrderForm").reset();
-    document.getElementById("orderFormError").classList.add("hidden");
-    document.getElementById("orderFormSuccess").classList.add("hidden");
+    // Show order forms, hide login required
+    if (desktopElements.loginRequired)
+      desktopElements.loginRequired.classList.add("hidden");
+    if (desktopElements.orderForm) {
+      desktopElements.orderForm.classList.remove("hidden");
+      desktopElements.orderForm.reset();
+    }
+    if (desktopElements.errorEl)
+      desktopElements.errorEl.classList.add("hidden");
+    if (desktopElements.successEl)
+      desktopElements.successEl.classList.add("hidden");
+
+    if (mobileElements.loginRequired)
+      mobileElements.loginRequired.classList.add("hidden");
+    if (mobileElements.orderForm) {
+      mobileElements.orderForm.classList.remove("hidden");
+      mobileElements.orderForm.reset();
+    }
+    if (mobileElements.errorEl) mobileElements.errorEl.classList.add("hidden");
+    if (mobileElements.successEl)
+      mobileElements.successEl.classList.add("hidden");
   } else {
-    // Show login required message
-    document.getElementById("orderLoginRequired").classList.remove("hidden");
-    document.getElementById("serviceOrderForm").classList.add("hidden");
+    // Show login required, hide order forms
+    if (desktopElements.loginRequired)
+      desktopElements.loginRequired.classList.remove("hidden");
+    if (desktopElements.orderForm)
+      desktopElements.orderForm.classList.add("hidden");
+
+    if (mobileElements.loginRequired)
+      mobileElements.loginRequired.classList.remove("hidden");
+    if (mobileElements.orderForm)
+      mobileElements.orderForm.classList.add("hidden");
   }
 
   const modal = document.getElementById("serviceModal");
   modal.classList.remove("hidden");
-  modal.classList.add("flex");
+  modal.classList.add("flex", "show");
   document.body.style.overflow = "hidden";
 }
 
 // Close Service Modal
 function closeServiceModal() {
   const modal = document.getElementById("serviceModal");
-  modal.classList.add("hidden");
-  modal.classList.remove("flex");
-  document.body.style.overflow = "";
+  modal.classList.add("hide");
+  modal.classList.remove("show");
+
+  setTimeout(() => {
+    modal.classList.add("hidden");
+    modal.classList.remove("flex", "hide");
+    document.body.style.overflow = "";
+  }, 300);
 }
 
-// Submit Order
+// Submit Order - Desktop
 async function submitOrder(event) {
   event.preventDefault();
 
@@ -1457,14 +1617,18 @@ async function submitOrder(event) {
     return;
   }
 
-  const serviceName = document.getElementById("orderServiceName").value;
-  const serviceNumber = document.getElementById("orderServiceNumber").value;
-  const phoneNumber = document.getElementById("orderPhoneNumber").value;
-  const description = document.getElementById("orderUserDescription").value;
+  const serviceName = document.getElementById("orderServiceNameDesktop").value;
+  const serviceNumber = document.getElementById(
+    "orderServiceNumberDesktop",
+  ).value;
+  const phoneNumber = document.getElementById("orderPhoneNumberDesktop").value;
+  const description = document.getElementById(
+    "orderUserDescriptionDesktop",
+  ).value;
 
-  const errorEl = document.getElementById("orderFormError");
-  const successEl = document.getElementById("orderFormSuccess");
-  const submitBtn = document.getElementById("orderSubmitBtn");
+  const errorEl = document.getElementById("orderFormErrorDesktop");
+  const successEl = document.getElementById("orderFormSuccessDesktop");
+  const submitBtn = document.getElementById("orderSubmitBtnDesktop");
 
   // Validate
   if (!phoneNumber || !description) {
@@ -1506,7 +1670,7 @@ async function submitOrder(event) {
     successEl.classList.remove("hidden");
 
     // Reset form
-    document.getElementById("serviceOrderForm").reset();
+    document.getElementById("serviceOrderFormDesktop").reset();
 
     // Close modal after 3 seconds
     setTimeout(() => {
@@ -1517,7 +1681,88 @@ async function submitOrder(event) {
     errorEl.classList.remove("hidden");
   } finally {
     submitBtn.disabled = false;
-    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Zakaz yuborish';
+    submitBtn.innerHTML =
+      '<i class="fas fa-paper-plane"></i> <span data-lang-key="order_submit">Yuborish</span>';
+  }
+}
+
+// Submit Order - Mobile
+async function submitOrderMobile(event) {
+  event.preventDefault();
+
+  const token = localStorage.getItem("token");
+  if (!token) {
+    closeServiceModal();
+    openAuthModal("login");
+    return;
+  }
+
+  const serviceName = document.getElementById("orderServiceNameMobile").value;
+  const serviceNumber = document.getElementById(
+    "orderServiceNumberMobile",
+  ).value;
+  const phoneNumber = document.getElementById("orderPhoneNumberMobile").value;
+  const description = document.getElementById(
+    "orderUserDescriptionMobile",
+  ).value;
+
+  const errorEl = document.getElementById("orderFormErrorMobile");
+  const successEl = document.getElementById("orderFormSuccessMobile");
+  const submitBtn = document.getElementById("orderSubmitBtnMobile");
+
+  // Validate
+  if (!phoneNumber || !description) {
+    errorEl.textContent = "Barcha maydonlarni to'ldiring";
+    errorEl.classList.remove("hidden");
+    return;
+  }
+
+  // Disable button
+  submitBtn.disabled = true;
+  submitBtn.innerHTML =
+    '<i class="fas fa-spinner fa-spin"></i> Yuborilmoqda...';
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/orders`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        serviceName,
+        serviceNumber,
+        phoneNumber,
+        description,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || "Xatolik yuz berdi");
+    }
+
+    // Success
+    errorEl.classList.add("hidden");
+    successEl.textContent =
+      "Zakazingiz muvaffaqiyatli yuborildi! Tez orada siz bilan bog'lanamiz.";
+    successEl.classList.remove("hidden");
+
+    // Reset form
+    document.getElementById("serviceOrderFormMobile").reset();
+
+    // Close modal after 3 seconds
+    setTimeout(() => {
+      closeServiceModal();
+    }, 3000);
+  } catch (error) {
+    errorEl.textContent = error.message;
+    errorEl.classList.remove("hidden");
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.innerHTML =
+      '<i class="fas fa-paper-plane"></i> <span data-lang-key="order_submit">Yuborish</span>';
   }
 }
 
