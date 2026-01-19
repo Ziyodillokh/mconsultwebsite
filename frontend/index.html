@@ -434,7 +434,7 @@
                   href="#xizmatlar"
                   class="bg-red-600 text-white px-8 py-4 font-bold uppercase tracking-wider hover:bg-red-700 transition duration-300 text-sm inline-flex items-center justify-center gap-2 rounded-full shadow-lg hover:shadow-2xl hover:-translate-y-1"
                 >
-                  <i class="fas fa-rocket"></i>
+                  <i class="fas fa-briefcase"></i>
                   <span data-lang-key="hero_btn_services">Xizmatlarimiz</span>
                 </a>
                 <a
@@ -447,7 +447,7 @@
               </div>
 
               <div
-                class="grid grid-cols-3 gap-4"
+                class="grid grid-cols-2 md:grid-cols-4 gap-4 hero-stats-grid"
                 data-aos="fade-up"
                 data-aos-delay="400"
               >
@@ -478,6 +478,15 @@
                     Qo'llab-quvvatlash
                   </div>
                 </div>
+                <div class="hero-feature p-4 text-center">
+                  <div class="text-3xl font-black text-red-600 mb-1">98%</div>
+                  <div
+                    class="text-xs text-gray-600 uppercase leading-tight font-medium"
+                    data-lang-key="hero_stat_satisfaction"
+                  >
+                    Mijozlar Mamnunligi
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -486,7 +495,8 @@
               data-aos="fade-left"
               data-aos-delay="500"
             >
-              <div class="grid grid-cols-2 gap-3">
+              <!-- Desktop Grid -->
+              <div class="hidden md:grid grid-cols-2 gap-3">
                 <div
                   class="hero-image h-56 animate-slide-up"
                   style="animation-delay: 0.1s"
@@ -529,16 +539,69 @@
                 </div>
               </div>
 
+              <!-- Mobile Swiper Carousel -->
               <div
-                class="absolute -bottom-4 -left-4 bg-red-600 text-white p-5 rounded-2xl shadow-2xl animate-slide-up"
-                style="animation-delay: 0.6s"
+                class="md:hidden hero-mobile-slider relative overflow-hidden rounded-2xl"
               >
-                <div class="text-3xl font-black mb-1">98%</div>
                 <div
-                  class="text-[10px] uppercase tracking-wider leading-tight"
-                  data-lang-key="hero_satisfaction"
+                  class="hero-slider-container flex transition-transform duration-300 ease-out"
+                  id="heroSlider"
                 >
-                  Mijozlar<br />Mamnunligi
+                  <div class="hero-slide min-w-full">
+                    <div class="hero-image h-56 rounded-2xl overflow-hidden">
+                      <img
+                        src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80&w=800"
+                        class="w-full h-full object-cover"
+                        alt="Jamoa"
+                      />
+                    </div>
+                  </div>
+                  <div class="hero-slide min-w-full">
+                    <div class="hero-image h-56 rounded-2xl overflow-hidden">
+                      <img
+                        src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=800"
+                        class="w-full h-full object-cover"
+                        alt="Biznes"
+                      />
+                    </div>
+                  </div>
+                  <div class="hero-slide min-w-full">
+                    <div class="hero-image h-56 rounded-2xl overflow-hidden">
+                      <img
+                        src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800"
+                        class="w-full h-full object-cover"
+                        alt="Strategiya"
+                      />
+                    </div>
+                  </div>
+                  <div class="hero-slide min-w-full">
+                    <div class="hero-image h-56 rounded-2xl overflow-hidden">
+                      <img
+                        src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800"
+                        class="w-full h-full object-cover"
+                        alt="Analytics"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <!-- Slider Dots -->
+                <div class="flex justify-center gap-2 mt-4" id="heroSliderDots">
+                  <button
+                    class="hero-dot w-2.5 h-2.5 rounded-full bg-red-600 transition-all"
+                    data-slide="0"
+                  ></button>
+                  <button
+                    class="hero-dot w-2.5 h-2.5 rounded-full bg-gray-300 transition-all"
+                    data-slide="1"
+                  ></button>
+                  <button
+                    class="hero-dot w-2.5 h-2.5 rounded-full bg-gray-300 transition-all"
+                    data-slide="2"
+                  ></button>
+                  <button
+                    class="hero-dot w-2.5 h-2.5 rounded-full bg-gray-300 transition-all"
+                    data-slide="3"
+                  ></button>
                 </div>
               </div>
             </div>

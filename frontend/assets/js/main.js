@@ -1093,3 +1093,109 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     }
   });
 });
+
+// ============================================
+// HERO IMAGE MOBILE SWIPE SLIDER
+// ============================================
+
+(function initHeroSlider() {
+  const slider = document.getElementById("heroSlider");
+  const dots = document.querySelectorAll(".hero-dot");
+
+  if (!slider) return;
+
+  let currentSlide = 0;
+  let startX = 0;
+  let currentX = 0;
+  let isDragging = false;
+  const totalSlides = 4;
+
+  function updateSlider(animate = true) {
+    if (!animate) {
+      slider.style.transition = "none";
+    } else {
+      slider.style.transition = "transform 0.3s ease-out";
+    }
+    slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+    // Update dots
+    dots.forEach((dot, index) => {
+      if (index === currentSlide) {
+        dot.classList.remove("bg-gray-300");
+        dot.classList.add("bg-red-600");
+      } else {
+        dot.classList.remove("bg-red-600");
+        dot.classList.add("bg-gray-300");
+      }
+    });
+  }
+
+  function goToSlide(index) {
+    currentSlide = Math.max(0, Math.min(index, totalSlides - 1));
+    updateSlider();
+  }
+
+  // Touch events
+  slider.addEventListener(
+    "touchstart",
+    (e) => {
+      startX = e.touches[0].clientX;
+      isDragging = true;
+      slider.style.transition = "none";
+    },
+    { passive: true },
+  );
+
+  slider.addEventListener(
+    "touchmove",
+    (e) => {
+      if (!isDragging) return;
+      currentX = e.touches[0].clientX;
+      const diff = currentX - startX;
+      const percent = (diff / slider.offsetWidth) * 100;
+      slider.style.transform = `translateX(calc(-${currentSlide * 100}% + ${percent}%))`;
+    },
+    { passive: true },
+  );
+
+  slider.addEventListener("touchend", (e) => {
+    if (!isDragging) return;
+    isDragging = false;
+
+    const diff = currentX - startX;
+    const threshold = slider.offsetWidth * 0.2; // 20% threshold
+
+    if (diff < -threshold && currentSlide < totalSlides - 1) {
+      currentSlide++;
+    } else if (diff > threshold && currentSlide > 0) {
+      currentSlide--;
+    }
+
+    updateSlider();
+    startX = 0;
+    currentX = 0;
+  });
+
+  // Dot click events
+  dots.forEach((dot, index) => {
+    dot.addEventListener("click", () => goToSlide(index));
+  });
+
+  // Auto slide every 4 seconds
+  let autoSlide = setInterval(() => {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    updateSlider();
+  }, 4000);
+
+  // Pause auto slide on touch
+  slider.addEventListener("touchstart", () => {
+    clearInterval(autoSlide);
+  });
+
+  slider.addEventListener("touchend", () => {
+    autoSlide = setInterval(() => {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      updateSlider();
+    }, 4000);
+  });
+})();
