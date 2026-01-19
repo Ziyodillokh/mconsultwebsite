@@ -202,6 +202,9 @@ async function loadDashboard() {
     // Load orders first to calculate dynamic stats
     await loadOrders();
 
+    // Load users to get count
+    await loadUsers();
+
     // Calculate dynamic statistics from orders
     const totalOrders = state.orders.length;
     const newOrders = state.orders.filter(
@@ -214,14 +217,8 @@ async function loadDashboard() {
         o.status === "closed",
     ).length;
 
-    // Load users count
-    let totalUsers = 0;
-    try {
-      const usersResponse = await apiRequest("/admin/users");
-      totalUsers = usersResponse.data?.length || 0;
-    } catch (e) {
-      console.log("Could not load users count");
-    }
+    // Get users count from state
+    const totalUsers = state.users.length;
 
     // Update dashboard stats with dynamic values
     updateElement("statTotalOrders", totalOrders);
