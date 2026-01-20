@@ -2540,3 +2540,37 @@ body {
     box-shadow: none;
   }
 }
+
+/* ============================================
+   ORDER NOTIFICATION STYLES
+   ============================================ */
+.order-notification {
+  border-left: 4px solid #3b82f6 !important;
+  animation: slideInBounce 0.5s ease;
+}
+
+.order-notification .toast-icon {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8) !important;
+}
+
+@keyframes slideInBounce {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  60% {
+    transform: translateX(-10px);
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes ring {
+  0% { transform: rotate(0); }
+  25% { transform: rotate(15deg); }
+  50% { transform: rotate(0); }
+  75% { transform: rotate(-15deg); }
+  100% { transform: rotate(0); }
+}

@@ -7,6 +7,7 @@ import { OrdersModule } from "./orders/orders.module";
 import { AppController } from "./app.controller";
 import { User } from "./entities/user.entity";
 import { Order } from "./entities/order.entity";
+import { WebsocketModule } from "./websocket/websocket.module";
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { Order } from "./entities/order.entity";
     AuthModule,
     AdminModule,
     OrdersModule,
+    WebsocketModule,
   ],
   controllers: [AppController],
 })

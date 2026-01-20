@@ -3,6 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { Order, OrderStatus } from "../entities/order.entity";
 import { User } from "../entities/user.entity";
+import { WebsocketGateway } from "../websocket/websocket.service";
 
 export interface CreateOrderDto {
   serviceName: string;
@@ -22,6 +23,7 @@ export class OrdersService {
     private orderRepository: Repository<Order>,
     @InjectRepository(User)
     private userRepository: Repository<User>,
+    private websocketGateway: WebsocketGateway,
   ) {}
 
   async create(userId: string, createOrderDto: CreateOrderDto): Promise<Order> {
@@ -36,7 +38,15 @@ export class OrdersService {
       status: OrderStatus.PENDING,
     });
 
-    return this.orderRepository.save(order);
+    const savedOrder = await this.orderRepository.save(order);
+    
+    // WebSocket orqali admin panelga notification yuborish
+    this.websocketGateway.sendNewOrderNotification({
+      ...savedOrder,
+      user: user,
+    });
+    
+    return savedOrder;
   }
 
   async findAll(): Promise<Order[]> {
@@ -67,7 +77,12 @@ export class OrdersService {
   async updateStatus(id: string, status: OrderStatus): Promise<Order> {
     const order = await this.findOne(id);
     order.status = status;
-    return this.orderRepository.save(order);
+    const updatedOrder = await this.orderRepository.save(order);
+    
+    // Status o'zgarganda notification yuborish
+    this.websocketGateway.sendOrderStatusUpdate(updatedOrder);
+    
+    return updatedOrder;
   }
 
   async remove(id: string): Promise<void> {
