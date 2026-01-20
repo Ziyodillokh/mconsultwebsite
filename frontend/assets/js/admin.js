@@ -22,6 +22,11 @@ const state = {
     dateFrom: "",
     dateTo: "",
   },
+  userFilters: {
+    search: "",
+    role: "",
+    status: "",
+  },
   pagination: {
     page: 1,
     limit: 10,
@@ -785,11 +790,43 @@ async function loadUsers() {
   }
 }
 
+function getFilteredUsers() {
+  let filtered = [...state.users];
+
+  // Search filter
+  if (state.userFilters.search) {
+    const searchLower = state.userFilters.search.toLowerCase();
+    filtered = filtered.filter(
+      (user) =>
+        user.name?.toLowerCase().includes(searchLower) ||
+        user.email?.toLowerCase().includes(searchLower),
+    );
+  }
+
+  // Role filter
+  if (state.userFilters.role) {
+    filtered = filtered.filter((user) => user.role === state.userFilters.role);
+  }
+
+  // Status filter
+  if (state.userFilters.status !== "") {
+    const isActive = state.userFilters.status === "true";
+    filtered = filtered.filter((user) => user.isActive === isActive);
+  }
+
+  return filtered;
+}
+
 function renderUsersTable() {
   const tbody = document.getElementById("usersTableBody");
   if (!tbody) return;
 
-  if (state.users.length === 0) {
+  const filteredUsers = getFilteredUsers();
+
+  // Update count
+  updateElement("totalUsersCount", `${filteredUsers.length} ta`);
+
+  if (filteredUsers.length === 0) {
     tbody.innerHTML = `
       <tr>
         <td colspan="6" style="text-align: center; padding: 40px; color: var(--gray-500);">
@@ -800,7 +837,7 @@ function renderUsersTable() {
     return;
   }
 
-  tbody.innerHTML = state.users
+  tbody.innerHTML = filteredUsers
     .map(
       (user) => `
     <tr>
@@ -1211,9 +1248,27 @@ function setupEventListeners() {
     userSearch.addEventListener("input", (e) => {
       clearTimeout(timeout);
       timeout = setTimeout(() => {
-        // Filter logic for users
-        loadUsers();
+        state.userFilters.search = e.target.value;
+        renderUsersTable();
       }, 300);
+    });
+  }
+
+  // Role filter
+  const roleFilter = document.getElementById("roleFilter");
+  if (roleFilter) {
+    roleFilter.addEventListener("change", (e) => {
+      state.userFilters.role = e.target.value;
+      renderUsersTable();
+    });
+  }
+
+  // Status filter (users)
+  const statusFilter = document.getElementById("statusFilter");
+  if (statusFilter) {
+    statusFilter.addEventListener("change", (e) => {
+      state.userFilters.status = e.target.value;
+      renderUsersTable();
     });
   }
 
