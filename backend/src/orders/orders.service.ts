@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException, BadRequestException } from "@nestjs/common";
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { Order, OrderStatus } from "../entities/order.entity";
@@ -39,13 +43,13 @@ export class OrdersService {
     });
 
     const savedOrder = await this.orderRepository.save(order);
-    
+
     // WebSocket orqali admin panelga notification yuborish
     this.websocketGateway.sendNewOrderNotification({
       ...savedOrder,
       user: user,
     });
-    
+
     return savedOrder;
   }
 
@@ -78,10 +82,10 @@ export class OrdersService {
     const order = await this.findOne(id);
     order.status = status;
     const updatedOrder = await this.orderRepository.save(order);
-    
+
     // Status o'zgarganda notification yuborish
     this.websocketGateway.sendOrderStatusUpdate(updatedOrder);
-    
+
     return updatedOrder;
   }
 

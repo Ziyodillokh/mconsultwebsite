@@ -9,7 +9,11 @@ import { AdminGuard } from "../admin/admin.guard";
 import { WebsocketModule } from "../websocket/websocket.module";
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Order, User]), AuthModule, WebsocketModule],
+  imports: [
+    TypeOrmModule.forFeature([Order, User]),
+    AuthModule,
+    WebsocketModule,
+  ],
   controllers: [OrdersController],
   providers: [OrdersService, AdminGuard],
   exports: [OrdersService],

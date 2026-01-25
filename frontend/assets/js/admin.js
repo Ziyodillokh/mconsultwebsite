@@ -87,62 +87,65 @@ function initTheme() {
 // ============================================
 function initWebSocket() {
   // Backend server URL (port 3000 da backend ishlaydi)
-  const wsUrl = window.location.hostname === 'localhost' 
-    ? 'http://localhost:3000' 
-    : window.location.origin;
-  
+  const wsUrl =
+    window.location.hostname === "localhost"
+      ? "http://localhost:3000"
+      : window.location.origin;
+
   socket = io(wsUrl, {
-    transports: ['websocket', 'polling'],
+    transports: ["websocket", "polling"],
     reconnection: true,
     reconnectionAttempts: 5,
     reconnectionDelay: 1000,
   });
 
   // Ulanganda
-  socket.on('connect', () => {
-    console.log('✅ WebSocket ulandi:', socket.id);
+  socket.on("connect", () => {
+    console.log("✅ WebSocket ulandi:", socket.id);
   });
 
   // Uzilganda
-  socket.on('disconnect', () => {
-    console.log('❌ WebSocket uzildi');
+  socket.on("disconnect", () => {
+    console.log("❌ WebSocket uzildi");
   });
 
   // Yangi zakaz kelganda
-  socket.on('newOrder', (data) => {
-    console.log('🔔 Yangi zakaz:', data);
-    
+  socket.on("newOrder", (data) => {
+    console.log("🔔 Yangi zakaz:", data);
+
     // Ovozli signal
     playNotificationSound();
-    
+
     // Toast notification
     showOrderNotification(data.order);
-    
+
     // Zakazlar ro'yxatini yangilash
     loadOrders();
     loadDashboard();
   });
 
   // Zakaz yangilanganda
-  socket.on('orderUpdate', (data) => {
-    console.log('📝 Zakaz yangilandi:', data);
+  socket.on("orderUpdate", (data) => {
+    console.log("📝 Zakaz yangilandi:", data);
     loadOrders();
   });
 
   // Xatolik
-  socket.on('connect_error', (error) => {
-    console.log('⚠️ WebSocket xatolik:', error.message);
+  socket.on("connect_error", (error) => {
+    console.log("⚠️ WebSocket xatolik:", error.message);
   });
 }
 
 // Notification ovozi
 function playNotificationSound() {
   try {
-    const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2teleBoAQFrN4LeBSQc+mtzWj1sKJHS54sySOx4xZ83mvYQ2CTJqz+y5dygFOYDe4qFbCQhLoeXJf0AEJIK/4pd0MhQ1gMHhnVkENIPF4pVuLRU3g8nmm1cOOYbJ5pVYDD+JzOaRUgxCjc/niE0JRpHS6IFGBUmU1eiASAVKltfnfUUCSpfZ5nhAAkqa3OVwOwNOnt/jaToEUqPi4mI1BFam5uFbMQVZqenePi0FXazu3DcpBWCu8towIwZksO/YLR0FZ7Tw1ScZBWu38dIhFQVvuvPOHBEGc77zyRgOBXbB9ccWCwV5xPfEEggFfMb5wg4GBX/J+8ALAwaBzPy9BwEGhM79ugQAAobR/rgCAAKI0v+3AgADitT/tQEBA4vV/7YBAQOM1/+1AQEE');
+    const audio = new Audio(
+      "data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2teleBoAQFrN4LeBSQc+mtzWj1sKJHS54sySOx4xZ83mvYQ2CTJqz+y5dygFOYDe4qFbCQhLoeXJf0AEJIK/4pd0MhQ1gMHhnVkENIPF4pVuLRU3g8nmm1cOOYbJ5pVYDD+JzOaRUgxCjc/niE0JRpHS6IFGBUmU1eiASAVKltfnfUUCSpfZ5nhAAkqa3OVwOwNOnt/jaToEUqPi4mI1BFam5uFbMQVZqenePi0FXazu3DcpBWCu8towIwZksO/YLR0FZ7Tw1ScZBWu38dIhFQVvuvPOHBEGc77zyRgOBXbB9ccWCwV5xPfEEggFfMb5wg4GBX/J+8ALAwaBzPy9BwEGhM79ugQAAobR/rgCAAKI0v+3AgADitT/tQEBA4vV/7YBAQOM1/+1AQEE",
+    );
     audio.volume = 0.5;
     audio.play().catch(() => {});
   } catch (e) {
-    console.log('Ovoz ijro etilmadi');
+    console.log("Ovoz ijro etilmadi");
   }
 }
 
@@ -153,15 +156,15 @@ function showOrderNotification(order) {
 
   const toast = document.createElement("div");
   toast.className = "toast success order-notification";
-  
+
   toast.innerHTML = `
     <div class="toast-icon" style="background: #3b82f6;">
       <i class="fas fa-bell" style="animation: ring 0.5s ease infinite;"></i>
     </div>
     <div class="toast-content">
       <h4>🎉 Yangi zakaz!</h4>
-      <p><strong>${order?.customer || 'Mijoz'}</strong> - ${order?.service || 'Xizmat'}</p>
-      <small style="color: var(--gray-400);">${order?.phone || ''}</small>
+      <p><strong>${order?.customer || "Mijoz"}</strong> - ${order?.service || "Xizmat"}</p>
+      <small style="color: var(--gray-400);">${order?.phone || ""}</small>
     </div>
     <button class="toast-close" onclick="this.parentElement.remove()">
       <i class="fas fa-times"></i>
@@ -176,19 +179,19 @@ function showOrderNotification(order) {
     toast.classList.remove("show");
     setTimeout(() => toast.remove(), 300);
   }, 8000);
-  
+
   // Browser notification (ruxsat bo'lsa)
-  if (Notification.permission === 'granted') {
-    new Notification('Yangi zakaz!', {
-      body: `${order?.customer || 'Mijoz'} - ${order?.service || 'Xizmat'}`,
-      icon: '../assets/images/favicon.svg'
+  if (Notification.permission === "granted") {
+    new Notification("Yangi zakaz!", {
+      body: `${order?.customer || "Mijoz"} - ${order?.service || "Xizmat"}`,
+      icon: "../assets/images/favicon.svg",
     });
   }
 }
 
 // Browser notification ruxsati so'rash
 function requestNotificationPermission() {
-  if ('Notification' in window && Notification.permission === 'default') {
+  if ("Notification" in window && Notification.permission === "default") {
     Notification.requestPermission();
   }
 }
@@ -233,10 +236,10 @@ function showAdminPanel() {
   const settingsEmail = document.getElementById("settingsEmail");
   if (settingsName) settingsName.value = state.user.name;
   if (settingsEmail) settingsEmail.value = state.user.email;
-  
+
   // WebSocket ulanishini boshlash
   initWebSocket();
-  
+
   // Browser notification ruxsati
   requestNotificationPermission();
 }

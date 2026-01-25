@@ -1,5 +1,4 @@
 import {
-  MessageBody,
   OnGatewayConnection,
   OnGatewayDisconnect,
   WebSocketGateway,
@@ -9,11 +8,9 @@ import { Server, Socket } from "socket.io";
 
 @WebSocketGateway({
   cors: {
-    origin: {
-      "magzunaconsult.uz": true,
-      "magzunaconsult.uz/admin": true,
-      "www.magzunaconsult.uz": true,
-    },
+    origin: "*",
+    methods: ["GET", "POST"],
+    credentials: true,
   },
 })
 export class WebsocketGateway
