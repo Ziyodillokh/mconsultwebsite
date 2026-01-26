@@ -1377,343 +1377,1810 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 const serviceDetails = {
   uz: {
     "01": `
-      <div class="space-y-4">
-        <p class="text-base sm:text-lg font-semibold text-gray-800">🧮 Biz bilan buxgalteriya tizimi tartiblashtiriladi!</p>
-        <p class="text-gray-600">💸 Biz sizning buxgalteriya va hisobotlaringiz uchun sifatli va izchil xizmatlarni taklif etamiz.</p>
-        
-        <div class="bg-red-50 rounded-xl p-4 border border-red-100">
-          <p class="font-bold text-gray-800 mb-3">Bizning buxgalteriya xizmatlar o'z ichiga oladi:</p>
-          <ul class="space-y-2 text-gray-700">
-            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Buxgalteriya hisobi yuritish</li>
-            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Soliq hisoboti tayyorlash</li>
-            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Tenderlarda qatnashish</li>
-            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Audit</li>
-            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> 1C va Didox</li>
-          </ul>
+      <div class="space-y-5">
+        <!-- Hero Banner -->
+        <div class="relative bg-gradient-to-r from-red-600 to-red-700 rounded-2xl p-5 text-white overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+          <div class="relative z-10">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-2xl">🧾</span>
+              <span class="text-white/80 text-sm font-medium">Mag'zuna Consult</span>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Buxgalteriya va Moliyaviy Hisobotlar</h3>
+            <p class="text-white/90 text-sm leading-relaxed">Ishonchli va professional tarzda yuritamiz. Siz biznesingizni rivojlantiring, hisob-kitobni esa bizga topshiring!</p>
+          </div>
         </div>
-        
-        <p class="text-red-600 font-semibold">📈 Moliyangizni nazorat qilishga tayyormisiz? Buyurtma bering!</p>
+
+        <!-- Services Grid -->
+        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-5 border border-blue-100">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+              <i class="fas fa-list-check text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Xizmatlarimiz</h4>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm border border-blue-100/50">
+              <span class="text-green-500 text-lg">✅</span>
+              <span class="text-gray-700 text-sm font-medium">Buxgalteriya hisobini to'liq yuritish</span>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm border border-blue-100/50">
+              <span class="text-green-500 text-lg">✅</span>
+              <span class="text-gray-700 text-sm font-medium">Moliyaviy va soliq hisobotlari</span>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm border border-blue-100/50">
+              <span class="text-green-500 text-lg">✅</span>
+              <span class="text-gray-700 text-sm font-medium">Kompaniyalarni ro'yxatdan o'tkazish</span>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm border border-blue-100/50">
+              <span class="text-green-500 text-lg">✅</span>
+              <span class="text-gray-700 text-sm font-medium">Ish haqi va majburiy to'lovlar</span>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm border border-blue-100/50">
+              <span class="text-green-500 text-lg">✅</span>
+              <span class="text-gray-700 text-sm font-medium">Masofaviy (onlayn) buxgalteriya</span>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm border border-blue-100/50">
+              <span class="text-green-500 text-lg">✅</span>
+              <span class="text-gray-700 text-sm font-medium">Konsalting va maslahatlar</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Why Us Section -->
+        <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-5 border border-amber-100">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-amber-500 rounded-lg flex items-center justify-center">
+              <i class="fas fa-briefcase text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Nega biz?</h4>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="text-center p-3 bg-white rounded-xl shadow-sm">
+              <div class="text-2xl mb-1">👨‍💼</div>
+              <p class="text-sm font-semibold text-gray-800">Tajribali mutaxassislar</p>
+            </div>
+            <div class="text-center p-3 bg-white rounded-xl shadow-sm">
+              <div class="text-2xl mb-1">🔒</div>
+              <p class="text-sm font-semibold text-gray-800">To'liq maxfiylik</p>
+            </div>
+            <div class="text-center p-3 bg-white rounded-xl shadow-sm">
+              <div class="text-2xl mb-1">⚡</div>
+              <p class="text-sm font-semibold text-gray-800">Tezkor xizmat</p>
+            </div>
+            <div class="text-center p-3 bg-white rounded-xl shadow-sm">
+              <div class="text-2xl mb-1">🎯</div>
+              <p class="text-sm font-semibold text-gray-800">Individual yondashuv</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Target Audience -->
+        <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-5 border border-green-100">
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center">
+              <i class="fas fa-users text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Kimlar uchun?</h4>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1.5 bg-white rounded-full text-sm font-medium text-gray-700 shadow-sm border border-green-100">🏢 Yangi kompaniyalar</span>
+            <span class="px-3 py-1.5 bg-white rounded-full text-sm font-medium text-gray-700 shadow-sm border border-green-100">📊 Kichik va o'rta biznes</span>
+            <span class="px-3 py-1.5 bg-white rounded-full text-sm font-medium text-gray-700 shadow-sm border border-green-100">👤 Xususiy tadbirkorlar</span>
+            <span class="px-3 py-1.5 bg-white rounded-full text-sm font-medium text-gray-700 shadow-sm border border-green-100">🌍 Xalqaro hamkorlar</span>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="bg-gradient-to-r from-red-600 to-red-700 rounded-2xl p-4 text-center">
+          <p class="text-white font-bold text-lg mb-1">📈 Moliyangizni professional boshqaring!</p>
+          <p class="text-white/80 text-sm">Hoziroq buyurtma bering va bepul konsultatsiya oling</p>
+        </div>
       </div>
     `,
     "02": `
-      <div class="space-y-4">
-        <div class="bg-blue-50 rounded-xl p-4 border border-blue-100">
-          <p class="text-base sm:text-lg font-bold text-gray-800 mb-2">BROKERLIK – BU NIMA?</p>
-          <p class="text-gray-600">Brokerlik — bu mijozlar nomidan moliyaviy operatsiyalarni bajarish faoliyati.</p>
+      <div class="space-y-5">
+        <!-- Hero Banner -->
+        <div class="relative bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl p-5 text-white overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+          <div class="relative z-10">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-2xl">🌍</span>
+              <span class="text-white/80 text-sm font-medium">Mag'zuna Consult</span>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Import–Eksport va Brokerlik</h3>
+            <p class="text-white/90 text-sm leading-relaxed">Ishonchli hamkoringiz! Biz jarayonlarni soddalashtirib, biznesingiz uchun vaqt va xarajatlarni tejaymiz.</p>
+          </div>
         </div>
-        
-        <div class="bg-red-50 rounded-xl p-4 border border-red-100">
-          <p class="font-bold text-gray-800 mb-3">BROKERLIK QANDAY ISHLAYDI?</p>
-          <ul class="space-y-2 text-gray-700 text-sm">
-            <li>1️⃣ Siz broker platformasida akkount ochasiz</li>
-            <li>2️⃣ Hisobingizga pul kiritasiz</li>
-            <li>3️⃣ Broker sizga aktivlar taklif qiladi</li>
-            <li>4️⃣ Savdo buyurtmasi beriladi</li>
-            <li>5️⃣ Broker uni birjada amalga oshiradi</li>
-          </ul>
+
+        <!-- Services -->
+        <div class="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl p-5 border border-indigo-100">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
+              <i class="fas fa-box text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Brokerlik xizmatlarimiz</h4>
+          </div>
+          <div class="space-y-3">
+            <div class="flex items-start gap-3 bg-white p-3 rounded-xl shadow-sm border border-indigo-100/50">
+              <div class="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-file-alt text-indigo-600 text-sm"></i>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-800 text-sm">Import–eksport hujjatlarini rasmiylashtirish</p>
+                <p class="text-gray-500 text-xs">To'liq hujjat tayyorlash xizmati</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 bg-white p-3 rounded-xl shadow-sm border border-indigo-100/50">
+              <div class="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-laptop text-indigo-600 text-sm"></i>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-800 text-sm">Tender platformalari</p>
+                <p class="text-gray-500 text-xs">e-tender, new.coorporation, SPOT, xt-xarid va boshqalar</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 bg-white p-3 rounded-xl shadow-sm border border-indigo-100/50">
+              <div class="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-gavel text-indigo-600 text-sm"></i>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-800 text-sm">Tender jarayonlarini yuritish</p>
+                <p class="text-gray-500 text-xs">To'liq qo'llab-quvvatlash va maslahat</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 bg-white p-3 rounded-xl shadow-sm border border-indigo-100/50">
+              <div class="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-handshake text-indigo-600 text-sm"></i>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-800 text-sm">Yetkazib beruvchilar bilan ishlash</p>
+                <p class="text-gray-500 text-xs">Hujjatli ishlar va kelishuvlar</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 bg-white p-3 rounded-xl shadow-sm border border-indigo-100/50">
+              <div class="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-stamp text-indigo-600 text-sm"></i>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-800 text-sm">Bojxona va ruxsatnomalar</p>
+                <p class="text-gray-500 text-xs">Professional maslahatlar</p>
+              </div>
+            </div>
+          </div>
         </div>
-        
-        <p class="text-red-600 font-semibold">📲 Biz bilan bog'laning!</p>
+
+        <!-- Why Choose Us -->
+        <div class="bg-gradient-to-br from-green-50 to-teal-50 rounded-2xl p-5 border border-green-100">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center">
+              <i class="fas fa-handshake text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Nega Mag'zuna Consult?</h4>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-white p-4 rounded-xl shadow-sm text-center border border-green-100/50">
+              <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                <i class="fas fa-rocket text-green-600"></i>
+              </div>
+              <p class="font-semibold text-gray-800 text-sm">Tezkor xizmat</p>
+              <p class="text-gray-500 text-xs">Ishonchli va samarali</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm text-center border border-green-100/50">
+              <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                <i class="fas fa-users text-blue-600"></i>
+              </div>
+              <p class="font-semibold text-gray-800 text-sm">Tajribali jamoa</p>
+              <p class="text-gray-500 text-xs">Professional brokerlar</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm text-center border border-green-100/50">
+              <div class="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                <i class="fas fa-clock text-amber-600"></i>
+              </div>
+              <p class="font-semibold text-gray-800 text-sm">Vaqt tejash</p>
+              <p class="text-gray-500 text-xs">Xarajatlarni optimallashtirish</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm text-center border border-green-100/50">
+              <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                <i class="fas fa-trophy text-red-600"></i>
+              </div>
+              <p class="font-semibold text-gray-800 text-sm">Yuqori natija</p>
+              <p class="text-gray-500 text-xs">Tenderlarda muvaffaqiyat</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl p-4 text-center">
+          <p class="text-white font-bold text-lg mb-1">📦 Import-eksportni osonlashtiring!</p>
+          <p class="text-white/80 text-sm">Hoziroq bog'laning va bepul maslahat oling</p>
+        </div>
       </div>
     `,
     "03": `
-      <div class="space-y-4">
-        <p class="text-base sm:text-lg font-bold text-gray-800">🔹 IT — kelajak kasblarining markazi</p>
-        
-        <div class="grid grid-cols-2 gap-3">
-          <div class="bg-blue-50 rounded-xl p-3 border border-blue-100">
-            <p class="font-bold text-gray-800">💻 Frontend / Backend</p>
-          </div>
-          <div class="bg-green-50 rounded-xl p-3 border border-green-100">
-            <p class="font-bold text-gray-800">📱 Mobil Development</p>
-          </div>
-          <div class="bg-purple-50 rounded-xl p-3 border border-purple-100">
-            <p class="font-bold text-gray-800">🤖 Sun'iy Intellekt</p>
-          </div>
-          <div class="bg-red-50 rounded-xl p-3 border border-red-100">
-            <p class="font-bold text-gray-800">🔐 Kiberxavfsizlik</p>
+      <div class="space-y-5">
+        <!-- Hero Banner -->
+        <div class="relative bg-gradient-to-r from-purple-600 to-violet-700 rounded-2xl p-5 text-white overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+          <div class="relative z-10">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-2xl">🚀</span>
+              <span class="text-white/80 text-sm font-medium">Mag'zuna Consult</span>
+            </div>
+            <h3 class="text-xl font-bold mb-2">IT Xizmatlari va Yechimlar</h3>
+            <p class="text-white/90 text-sm leading-relaxed">Biznes jarayonlarini avtomatlashtirish, nazorat qilish va rivojlantirish uchun zamonaviy IT yechimlar taklif qilamiz!</p>
           </div>
         </div>
-        
-        <p class="text-red-600 font-semibold">📲 Bizning IT xizmatlarimizga buyurtma bering!</p>
+
+        <!-- Main Solutions -->
+        <div class="bg-gradient-to-br from-violet-50 to-purple-50 rounded-2xl p-5 border border-violet-100">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-violet-600 rounded-lg flex items-center justify-center">
+              <i class="fas fa-laptop-code text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Asosiy yechimlarimiz</h4>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-violet-100/50 hover:shadow-md transition-shadow">
+              <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-3">
+                <i class="fas fa-users-cog text-white"></i>
+              </div>
+              <h5 class="font-bold text-gray-800 text-sm mb-1">HRM tizimi</h5>
+              <p class="text-gray-500 text-xs">Xodimlar hisobi, ish haqi va faoliyatni boshqarish</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-violet-100/50 hover:shadow-md transition-shadow">
+              <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center mb-3">
+                <i class="fas fa-chart-line text-white"></i>
+              </div>
+              <h5 class="font-bold text-gray-800 text-sm mb-1">CRM tizimi</h5>
+              <p class="text-gray-500 text-xs">Mijozlar bazasi va savdo jarayonlari</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-violet-100/50 hover:shadow-md transition-shadow">
+              <div class="w-10 h-10 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-xl flex items-center justify-center mb-3">
+                <i class="fab fa-telegram text-white"></i>
+              </div>
+              <h5 class="font-bold text-gray-800 text-sm mb-1">Telegram botlar</h5>
+              <p class="text-gray-500 text-xs">Avtomatlashtirilgan muloqot</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-violet-100/50 hover:shadow-md transition-shadow">
+              <div class="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center mb-3">
+                <i class="fas fa-globe text-white"></i>
+              </div>
+              <h5 class="font-bold text-gray-800 text-sm mb-1">Veb-saytlar</h5>
+              <p class="text-gray-500 text-xs">Professional va zamonaviy</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-violet-100/50 hover:shadow-md transition-shadow">
+              <div class="w-10 h-10 bg-gradient-to-br from-pink-500 to-pink-600 rounded-xl flex items-center justify-center mb-3">
+                <i class="fas fa-shopping-cart text-white"></i>
+              </div>
+              <h5 class="font-bold text-gray-800 text-sm mb-1">Internet do'kon</h5>
+              <p class="text-gray-500 text-xs">Onlayn savdoni yo'lga qo'yish</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-violet-100/50 hover:shadow-md transition-shadow">
+              <div class="w-10 h-10 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center mb-3">
+                <i class="fas fa-search text-white"></i>
+              </div>
+              <h5 class="font-bold text-gray-800 text-sm mb-1">SEO optimizatsiya</h5>
+              <p class="text-gray-500 text-xs">Google va Yandex'da yuqori o'rin</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ready Solutions -->
+        <div class="bg-gradient-to-br from-emerald-50 to-green-50 rounded-2xl p-5 border border-emerald-100">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-emerald-600 rounded-lg flex items-center justify-center">
+              <i class="fas fa-check-double text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Tayyor yechimlar</h4>
+          </div>
+          <div class="space-y-2">
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm">
+              <span class="text-green-500">✅</span>
+              <span class="text-gray-700 text-sm"><strong>Bog'chalar uchun</strong> — davomad, to'lovlar va ota-onalar bilan aloqa</span>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm">
+              <span class="text-green-500">✅</span>
+              <span class="text-gray-700 text-sm"><strong>HRM</strong> — ish haqi, hujjatlar va xodimlar nazorati</span>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm">
+              <span class="text-green-500">✅</span>
+              <span class="text-gray-700 text-sm"><strong>CRM</strong> — o'quv markazlari va stomatologiya uchun</span>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm">
+              <span class="text-green-500">✅</span>
+              <span class="text-gray-700 text-sm"><strong>Zakup tizimi</strong> — xaridlarni tezlashtirish</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="bg-gradient-to-r from-purple-600 to-violet-700 rounded-2xl p-4 text-center">
+          <p class="text-white font-bold text-lg mb-1">🔧 Biznesingizni avtomatlashtiring!</p>
+          <p class="text-white/80 text-sm">Rivojlanishning eng to'g'ri yo'li</p>
+        </div>
       </div>
     `,
     "04": `
-      <div class="space-y-4">
-        <p class="text-base sm:text-lg font-bold text-gray-800">Xodimlarni malakasini oshirish xizmati</p>
-        <p class="text-gray-600">Kompaniya muvaffaqiyati xodimlarning bilim va ko'nikmalariga bog'liq.</p>
-        
-        <div class="bg-yellow-50 rounded-xl p-4 border border-yellow-100">
-          <p class="font-bold text-gray-800 mb-3">⭐ Malakasini oshirishning maqsadlari:</p>
-          <ul class="space-y-2 text-gray-700 text-sm">
-            <li class="flex items-start gap-2"><span class="text-yellow-500">⭐</span> Kasbiy bilimlarni yangilash</li>
-            <li class="flex items-start gap-2"><span class="text-yellow-500">⭐</span> Ish samaradorligini oshirish</li>
-            <li class="flex items-start gap-2"><span class="text-yellow-500">⭐</span> Rahbarlik ko'nikmalarini rivojlantirish</li>
-          </ul>
+      <div class="space-y-5">
+        <!-- Hero Banner -->
+        <div class="relative bg-gradient-to-r from-amber-500 to-orange-600 rounded-2xl p-5 text-white overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+          <div class="relative z-10">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-2xl">🎓</span>
+              <span class="text-white/80 text-sm font-medium">Mag'zuna Consult</span>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Xodimlar Malakasini Oshirish</h3>
+            <p class="text-white/90 text-sm leading-relaxed">Bugungi raqobatli bozorda kompaniya muvaffaqiyati xodimlarning bilimi va samaradorligiga bog'liq!</p>
+          </div>
         </div>
-        
-        <p class="text-red-600 font-semibold">📲 Biz bilan bog'laning!</p>
+
+        <!-- Why Important -->
+        <div class="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-2xl p-5 border border-amber-100">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-amber-500 rounded-lg flex items-center justify-center">
+              <i class="fas fa-star text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Malaka oshirishning asosiy foydalari</h4>
+          </div>
+          <div class="space-y-3">
+            <div class="flex items-start gap-3 bg-white p-3 rounded-xl shadow-sm border border-amber-100/50">
+              <div class="w-8 h-8 bg-amber-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <span class="text-amber-600">📚</span>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-800 text-sm">Kasbiy bilim va ko'nikmalarni yangilash</p>
+                <p class="text-gray-500 text-xs">Zamonaviy bilimlar bilan ta'minlash</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 bg-white p-3 rounded-xl shadow-sm border border-amber-100/50">
+              <div class="w-8 h-8 bg-amber-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <span class="text-amber-600">🔄</span>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-800 text-sm">Yangi texnologiyalarga moslashish</p>
+                <p class="text-gray-500 text-xs">Zamonaviy jarayonlarni o'zlashtirish</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 bg-white p-3 rounded-xl shadow-sm border border-amber-100/50">
+              <div class="w-8 h-8 bg-amber-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <span class="text-amber-600">📈</span>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-800 text-sm">Ish samaradorligini oshirish</p>
+                <p class="text-gray-500 text-xs">Yuqori natijalar va unumdorlik</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 bg-white p-3 rounded-xl shadow-sm border border-amber-100/50">
+              <div class="w-8 h-8 bg-amber-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <span class="text-amber-600">👔</span>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-800 text-sm">Rahbarlik ko'nikmalarini rivojlantirish</p>
+                <p class="text-gray-500 text-xs">Liderlik va boshqaruv</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Training Directions -->
+        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-5 border border-blue-100">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+              <i class="fas fa-graduation-cap text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Asosiy yo'nalishlar</h4>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-white p-4 rounded-xl shadow-sm text-center border border-blue-100/50">
+              <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                <i class="fas fa-chalkboard-teacher text-blue-600"></i>
+              </div>
+              <p class="font-semibold text-gray-800 text-sm">Ichki treninglar</p>
+              <p class="text-gray-500 text-xs">Amaliy mashg'ulotlar</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm text-center border border-blue-100/50">
+              <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                <i class="fas fa-users text-green-600"></i>
+              </div>
+              <p class="font-semibold text-gray-800 text-sm">Tashqi seminarlar</p>
+              <p class="text-gray-500 text-xs">Professional markazlar</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm text-center border border-blue-100/50">
+              <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                <i class="fas fa-laptop text-purple-600"></i>
+              </div>
+              <p class="font-semibold text-gray-800 text-sm">Onlayn kurslar</p>
+              <p class="text-gray-500 text-xs">Coursera, Udemy</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm text-center border border-blue-100/50">
+              <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                <i class="fas fa-robot text-red-600"></i>
+              </div>
+              <p class="font-semibold text-gray-800 text-sm">Raqamli ko'nikmalar</p>
+              <p class="text-gray-500 text-xs">IT, AI, avtomatlashtirish</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="bg-gradient-to-r from-amber-500 to-orange-600 rounded-2xl p-4 text-center">
+          <p class="text-white font-bold text-lg mb-1">🚀 Malakali xodim — kuchli biznes!</p>
+          <p class="text-white/80 text-sm">Professional yondashuvni tanlang</p>
+        </div>
       </div>
     `,
     "05": `
-      <div class="space-y-4">
-        <p class="text-base sm:text-lg font-bold text-gray-800">Litsenziya — qonuniy faoliyatning asosiy talabi</p>
-        
-        <div class="bg-red-50 rounded-xl p-4 border border-red-100">
-          <p class="font-bold text-gray-800 mb-3">Litsenziya olish uchun kerak:</p>
-          <ul class="space-y-2 text-gray-700 text-sm">
-            <li class="flex items-start gap-2"><span class="text-red-500">•</span> Tashkilot hujjatlari</li>
-            <li class="flex items-start gap-2"><span class="text-red-500">•</span> Mutaxassislar malakasi</li>
-            <li class="flex items-start gap-2"><span class="text-red-500">•</span> Texnik sharoit va talablar</li>
-          </ul>
+      <div class="space-y-5">
+        <!-- Hero Banner -->
+        <div class="relative bg-gradient-to-r from-teal-600 to-cyan-700 rounded-2xl p-5 text-white overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+          <div class="relative z-10">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-2xl">🔹</span>
+              <span class="text-white/80 text-sm font-medium">Mag'zuna Consult</span>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Litsenziya Olish Xizmati</h3>
+            <p class="text-white/90 text-sm leading-relaxed">Jarayonni tez, oson va huquqiy jihatdan to'g'ri o'tkazmoqchimisiz? Biz sizning ishonchli hamkoringizmiz!</p>
+          </div>
         </div>
-        
-        <p class="text-red-600 font-semibold">📲 Biz bilan bog'laning!</p>
+
+        <!-- Service Areas -->
+        <div class="bg-gradient-to-br from-teal-50 to-cyan-50 rounded-2xl p-5 border border-teal-100">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-teal-600 rounded-lg flex items-center justify-center">
+              <i class="fas fa-building text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Xizmat ko'rsatadigan yo'nalishlar</h4>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="flex items-center gap-3 bg-white p-4 rounded-xl shadow-sm border border-teal-100/50">
+              <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                <span class="text-xl">🏫</span>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-800 text-sm">O'quv markazlari</p>
+                <p class="text-gray-500 text-xs">Malaka oshirish markazlari</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-4 rounded-xl shadow-sm border border-teal-100/50">
+              <div class="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                <span class="text-xl">🏢</span>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-800 text-sm">Xususiy maktablar</p>
+                <p class="text-gray-500 text-xs">Ta'lim muassasalari</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-4 rounded-xl shadow-sm border border-teal-100/50">
+              <div class="w-10 h-10 bg-orange-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                <span class="text-xl">🧱</span>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-800 text-sm">Qurilish faoliyati</p>
+                <p class="text-gray-500 text-xs">Qurilish kompaniyalari</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-4 rounded-xl shadow-sm border border-teal-100/50">
+              <div class="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                <span class="text-xl">📊</span>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-800 text-sm">Audit firmalari</p>
+                <p class="text-gray-500 text-xs">Moliyaviy audit</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-4 rounded-xl shadow-sm border border-teal-100/50 sm:col-span-2">
+              <div class="w-10 h-10 bg-red-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                <span class="text-xl">🏥</span>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-800 text-sm">Tibbiyot va farmasevtika</p>
+                <p class="text-gray-500 text-xs">Tibbiy va dori-darmon tashkilotlari</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- What We Do -->
+        <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-5 border border-green-100">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center">
+              <i class="fas fa-check-circle text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Biz nima qilamiz?</h4>
+          </div>
+          <div class="space-y-3">
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm">
+              <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-file-alt text-white text-sm"></i>
+              </div>
+              <p class="text-gray-700 text-sm font-medium">Hujjatlarni to'liq tayyorlaymiz</p>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm">
+              <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-eye text-white text-sm"></i>
+              </div>
+              <p class="text-gray-700 text-sm font-medium">Ruxsatnoma jarayonini boshidan oxirigacha kuzatamiz</p>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm">
+              <div class="w-8 h-8 bg-amber-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-clock text-white text-sm"></i>
+              </div>
+              <p class="text-gray-700 text-sm font-medium">Litsenziyani qisqa muddatda olib beramiz</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="bg-gradient-to-r from-teal-600 to-cyan-700 rounded-2xl p-4 text-center">
+          <p class="text-white font-bold text-lg mb-1">📲 Vaqtingizni tejang!</p>
+          <p class="text-white/80 text-sm">Litsenziyani professionallarga topshiring</p>
+        </div>
       </div>
     `,
     "06": `
-      <div class="space-y-4">
-        <p class="text-base sm:text-lg font-bold text-gray-800">⚡ Energiya Audit Xizmati</p>
-        <p class="text-gray-600">Energiya sarfini optimallashtirish va xarajatlarni 30% gacha tejash!</p>
-        
-        <div class="bg-yellow-50 rounded-xl p-4 border border-yellow-100">
-          <p class="font-bold text-gray-800 mb-3">Energiya audit nima beradi?</p>
-          <ul class="space-y-2 text-gray-700 text-sm">
-            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Energiya sarfi tahlili</li>
-            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Isrof manbalarini aniqlash</li>
-            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Tejash bo'yicha tavsiyalar</li>
-          </ul>
+      <div class="space-y-5">
+        <!-- Hero Banner -->
+        <div class="relative bg-gradient-to-r from-yellow-500 to-amber-600 rounded-2xl p-5 text-white overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+          <div class="relative z-10">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-2xl">⚡</span>
+              <span class="text-white/80 text-sm font-medium">Mag'zuna Consult</span>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Energiya Auditi</h3>
+            <p class="text-white/90 text-sm leading-relaxed">Biznesingizning haqiqiy quvvati — xarajatlarni kamaytirish, samaradorlikni oshirish va qonuniy talablarni bajarish uchun strategik yechim!</p>
+          </div>
         </div>
-        
-        <p class="text-red-600 font-semibold">📲 Energiya xarajatlaringizni kamaytiring!</p>
+
+        <!-- Legal Basis -->
+        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-5 border border-blue-100">
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+              <i class="fas fa-balance-scale text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Qonuniy asos</h4>
+          </div>
+          <div class="bg-white p-4 rounded-xl shadow-sm border border-blue-100/50">
+            <p class="text-gray-700 text-sm"><strong class="text-blue-600">VMQ 690-son qaroriga muvofiq</strong> energiya auditi barcha energiya iste'molchi korxonalar uchun <span class="text-red-600 font-bold">majburiy</span> hisoblanadi.</p>
+          </div>
+        </div>
+
+        <!-- Benefits -->
+        <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-5 border border-green-100">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center">
+              <i class="fas fa-chart-pie text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Nima beradi?</h4>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-white p-3 rounded-xl shadow-sm text-center border border-green-100/50">
+              <div class="text-2xl mb-2">🔍</div>
+              <p class="text-sm font-semibold text-gray-800">Energiya yo'qotishlarini aniqlash</p>
+            </div>
+            <div class="bg-white p-3 rounded-xl shadow-sm text-center border border-green-100/50">
+              <div class="text-2xl mb-2">🔧</div>
+              <p class="text-sm font-semibold text-gray-800">Samarasiz tizimlarni bartaraf etish</p>
+            </div>
+            <div class="bg-white p-3 rounded-xl shadow-sm text-center border border-green-100/50">
+              <div class="text-2xl mb-2">💰</div>
+              <p class="text-sm font-semibold text-gray-800">Xarajatlarni keskin kamaytirish</p>
+            </div>
+            <div class="bg-white p-3 rounded-xl shadow-sm text-center border border-green-100/50">
+              <div class="text-2xl mb-2">📋</div>
+              <p class="text-sm font-semibold text-gray-800">Qonunchilikka to'liq moslik</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Business Benefits -->
+        <div class="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-2xl p-5 border border-amber-100">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-amber-500 rounded-lg flex items-center justify-center">
+              <i class="fas fa-briefcase text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Biznes uchun foyda</h4>
+          </div>
+          <div class="space-y-2">
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm">
+              <span class="text-yellow-500 text-lg">⚡</span>
+              <span class="text-gray-700 text-sm"><strong class="text-amber-600">30–40%</strong> gacha energiya tejaladi</span>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm">
+              <span class="text-green-500 text-lg">💰</span>
+              <span class="text-gray-700 text-sm">Xarajatlar kamayadi, <strong class="text-green-600">ROI oshadi</strong></span>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm">
+              <span class="text-blue-500 text-lg">🏭</span>
+              <span class="text-gray-700 text-sm">Barqaror va <strong class="text-blue-600">samarali ishlash</strong></span>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm">
+              <span class="text-purple-500 text-lg">🌍</span>
+              <span class="text-gray-700 text-sm"><strong class="text-purple-600">ESG va brend</strong> imiji yaxshilanadi</span>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm">
+              <span class="text-red-500 text-lg">⚖️</span>
+              <span class="text-gray-700 text-sm"><strong class="text-red-600">Jarimalar xavfi</strong> kamayadi</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Audit Results -->
+        <div class="bg-gradient-to-br from-purple-50 to-violet-50 rounded-2xl p-5 border border-purple-100">
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center">
+              <i class="fas fa-file-chart-line text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Audit natijasi</h4>
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <div class="bg-white p-3 rounded-xl shadow-sm text-center">
+              <i class="fas fa-search text-purple-500 mb-1"></i>
+              <p class="text-xs font-medium text-gray-700">Aniq muammolar</p>
+            </div>
+            <div class="bg-white p-3 rounded-xl shadow-sm text-center">
+              <i class="fas fa-lightbulb text-amber-500 mb-1"></i>
+              <p class="text-xs font-medium text-gray-700">Texnik tavsiyalar</p>
+            </div>
+            <div class="bg-white p-3 rounded-xl shadow-sm text-center">
+              <i class="fas fa-map text-blue-500 mb-1"></i>
+              <p class="text-xs font-medium text-gray-700">Yo'l xaritasi</p>
+            </div>
+            <div class="bg-white p-3 rounded-xl shadow-sm text-center">
+              <i class="fas fa-calculator text-green-500 mb-1"></i>
+              <p class="text-xs font-medium text-gray-700">ROI hisoboti</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="bg-gradient-to-r from-yellow-500 to-amber-600 rounded-2xl p-4 text-center">
+          <p class="text-white font-bold text-lg mb-1">🚀 Energiyani foydaga aylantiring!</p>
+          <p class="text-white/80 text-sm">Professional energiya auditini hoziroq buyurtma qiling</p>
+        </div>
       </div>
     `,
   },
   ru: {
     "01": `
-      <div class="space-y-4">
-        <p class="text-base sm:text-lg font-semibold text-gray-800">🧮 С нами бухгалтерия будет в порядке!</p>
-        <p class="text-gray-600">💸 Мы предлагаем качественные и последовательные услуги для вашей бухгалтерии и отчётности.</p>
-        
-        <div class="bg-red-50 rounded-xl p-4 border border-red-100">
-          <p class="font-bold text-gray-800 mb-3">Наши бухгалтерские услуги включают:</p>
-          <ul class="space-y-2 text-gray-700">
-            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Ведение бухгалтерского учёта</li>
-            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Подготовка налоговой отчётности</li>
-            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Участие в тендерах</li>
-            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Аудит</li>
-            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> 1C и Didox</li>
-          </ul>
+      <div class="space-y-5">
+        <!-- Hero Banner -->
+        <div class="relative bg-gradient-to-r from-red-600 to-red-700 rounded-2xl p-5 text-white overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+          <div class="relative z-10">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-2xl">🧾</span>
+              <span class="text-white/80 text-sm font-medium">Mag'zuna Consult</span>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Бухгалтерия и Финансовая Отчётность</h3>
+            <p class="text-white/90 text-sm leading-relaxed">Ведём надёжно и профессионально. Развивайте свой бизнес, а учёт доверьте нам!</p>
+          </div>
         </div>
-        
-        <p class="text-red-600 font-semibold">📈 Готовы контролировать свои финансы? Оформите заказ!</p>
+
+        <!-- Services Grid -->
+        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-5 border border-blue-100">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+              <i class="fas fa-list-check text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Наши услуги</h4>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm border border-blue-100/50">
+              <span class="text-green-500 text-lg">✅</span>
+              <span class="text-gray-700 text-sm font-medium">Полное ведение бухгалтерии</span>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm border border-blue-100/50">
+              <span class="text-green-500 text-lg">✅</span>
+              <span class="text-gray-700 text-sm font-medium">Финансовая и налоговая отчётность</span>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm border border-blue-100/50">
+              <span class="text-green-500 text-lg">✅</span>
+              <span class="text-gray-700 text-sm font-medium">Регистрация компаний</span>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm border border-blue-100/50">
+              <span class="text-green-500 text-lg">✅</span>
+              <span class="text-gray-700 text-sm font-medium">Расчёт зарплаты и взносов</span>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm border border-blue-100/50">
+              <span class="text-green-500 text-lg">✅</span>
+              <span class="text-gray-700 text-sm font-medium">Удалённая (онлайн) бухгалтерия</span>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm border border-blue-100/50">
+              <span class="text-green-500 text-lg">✅</span>
+              <span class="text-gray-700 text-sm font-medium">Консалтинг и консультации</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Why Us Section -->
+        <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-5 border border-amber-100">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-amber-500 rounded-lg flex items-center justify-center">
+              <i class="fas fa-briefcase text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Почему мы?</h4>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="text-center p-3 bg-white rounded-xl shadow-sm">
+              <div class="text-2xl mb-1">👨‍💼</div>
+              <p class="text-sm font-semibold text-gray-800">Опытные специалисты</p>
+            </div>
+            <div class="text-center p-3 bg-white rounded-xl shadow-sm">
+              <div class="text-2xl mb-1">🔒</div>
+              <p class="text-sm font-semibold text-gray-800">Полная конфиденциальность</p>
+            </div>
+            <div class="text-center p-3 bg-white rounded-xl shadow-sm">
+              <div class="text-2xl mb-1">⚡</div>
+              <p class="text-sm font-semibold text-gray-800">Быстрый сервис</p>
+            </div>
+            <div class="text-center p-3 bg-white rounded-xl shadow-sm">
+              <div class="text-2xl mb-1">🎯</div>
+              <p class="text-sm font-semibold text-gray-800">Индивидуальный подход</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Target Audience -->
+        <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-5 border border-green-100">
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center">
+              <i class="fas fa-users text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Для кого?</h4>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1.5 bg-white rounded-full text-sm font-medium text-gray-700 shadow-sm border border-green-100">🏢 Новые компании</span>
+            <span class="px-3 py-1.5 bg-white rounded-full text-sm font-medium text-gray-700 shadow-sm border border-green-100">📊 Малый и средний бизнес</span>
+            <span class="px-3 py-1.5 bg-white rounded-full text-sm font-medium text-gray-700 shadow-sm border border-green-100">👤 Частные предприниматели</span>
+            <span class="px-3 py-1.5 bg-white rounded-full text-sm font-medium text-gray-700 shadow-sm border border-green-100">🌍 Международные партнёры</span>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="bg-gradient-to-r from-red-600 to-red-700 rounded-2xl p-4 text-center">
+          <p class="text-white font-bold text-lg mb-1">📈 Управляйте финансами профессионально!</p>
+          <p class="text-white/80 text-sm">Закажите сейчас и получите бесплатную консультацию</p>
+        </div>
       </div>
     `,
     "02": `
-      <div class="space-y-4">
-        <div class="bg-blue-50 rounded-xl p-4 border border-blue-100">
-          <p class="text-base sm:text-lg font-bold text-gray-800 mb-2">ЧТО ТАКОЕ БРОКЕРСТВО?</p>
-          <p class="text-gray-600">Брокерство — это деятельность по выполнению финансовых операций от имени клиентов.</p>
+      <div class="space-y-5">
+        <!-- Hero Banner -->
+        <div class="relative bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl p-5 text-white overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+          <div class="relative z-10">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-2xl">🌍</span>
+              <span class="text-white/80 text-sm font-medium">Mag'zuna Consult</span>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Импорт–Экспорт и Брокерские Услуги</h3>
+            <p class="text-white/90 text-sm leading-relaxed">Ваш надёжный партнёр! Мы упрощаем процессы, экономя ваше время и деньги.</p>
+          </div>
         </div>
-        
-        <div class="bg-red-50 rounded-xl p-4 border border-red-100">
-          <p class="font-bold text-gray-800 mb-3">КАК РАБОТАЕТ БРОКЕРСТВО?</p>
-          <ul class="space-y-2 text-gray-700 text-sm">
-            <li>1️⃣ Вы открываете счёт на брокерской платформе</li>
-            <li>2️⃣ Пополняете свой счёт</li>
-            <li>3️⃣ Брокер предлагает вам активы</li>
-            <li>4️⃣ Подаётся торговый ордер</li>
-            <li>5️⃣ Брокер исполняет его на бирже</li>
-          </ul>
+
+        <!-- Services -->
+        <div class="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl p-5 border border-indigo-100">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
+              <i class="fas fa-box text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Брокерские услуги</h4>
+          </div>
+          <div class="space-y-3">
+            <div class="flex items-start gap-3 bg-white p-3 rounded-xl shadow-sm border border-indigo-100/50">
+              <div class="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-file-alt text-indigo-600 text-sm"></i>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-800 text-sm">Оформление документов импорта-экспорта</p>
+                <p class="text-gray-500 text-xs">Полная подготовка документации</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 bg-white p-3 rounded-xl shadow-sm border border-indigo-100/50">
+              <div class="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-laptop text-indigo-600 text-sm"></i>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-800 text-sm">Тендерные площадки</p>
+                <p class="text-gray-500 text-xs">e-tender, new.coorporation, SPOT, xt-xarid и другие</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 bg-white p-3 rounded-xl shadow-sm border border-indigo-100/50">
+              <div class="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-gavel text-indigo-600 text-sm"></i>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-800 text-sm">Ведение тендеров</p>
+                <p class="text-gray-500 text-xs">Полное сопровождение и консультации</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 bg-white p-3 rounded-xl shadow-sm border border-indigo-100/50">
+              <div class="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-stamp text-indigo-600 text-sm"></i>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-800 text-sm">Таможня и разрешения</p>
+                <p class="text-gray-500 text-xs">Профессиональные консультации</p>
+              </div>
+            </div>
+          </div>
         </div>
-        
-        <p class="text-red-600 font-semibold">📲 Свяжитесь с нами!</p>
+
+        <!-- Why Choose Us -->
+        <div class="bg-gradient-to-br from-green-50 to-teal-50 rounded-2xl p-5 border border-green-100">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center">
+              <i class="fas fa-handshake text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Почему Mag'zuna Consult?</h4>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-white p-4 rounded-xl shadow-sm text-center border border-green-100/50">
+              <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                <i class="fas fa-rocket text-green-600"></i>
+              </div>
+              <p class="font-semibold text-gray-800 text-sm">Быстрый сервис</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm text-center border border-green-100/50">
+              <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                <i class="fas fa-users text-blue-600"></i>
+              </div>
+              <p class="font-semibold text-gray-800 text-sm">Опытная команда</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm text-center border border-green-100/50">
+              <div class="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                <i class="fas fa-clock text-amber-600"></i>
+              </div>
+              <p class="font-semibold text-gray-800 text-sm">Экономия времени</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm text-center border border-green-100/50">
+              <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                <i class="fas fa-trophy text-red-600"></i>
+              </div>
+              <p class="font-semibold text-gray-800 text-sm">Высокий результат</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl p-4 text-center">
+          <p class="text-white font-bold text-lg mb-1">📦 Упростите импорт-экспорт!</p>
+          <p class="text-white/80 text-sm">Свяжитесь сейчас для бесплатной консультации</p>
+        </div>
       </div>
     `,
     "03": `
-      <div class="space-y-4">
-        <p class="text-base sm:text-lg font-bold text-gray-800">🔹 IT — центр профессий будущего</p>
-        
-        <div class="grid grid-cols-2 gap-3">
-          <div class="bg-blue-50 rounded-xl p-3 border border-blue-100">
-            <p class="font-bold text-gray-800">💻 Frontend / Backend</p>
-          </div>
-          <div class="bg-green-50 rounded-xl p-3 border border-green-100">
-            <p class="font-bold text-gray-800">📱 Мобильная разработка</p>
-          </div>
-          <div class="bg-purple-50 rounded-xl p-3 border border-purple-100">
-            <p class="font-bold text-gray-800">🤖 Искусственный интеллект</p>
-          </div>
-          <div class="bg-red-50 rounded-xl p-3 border border-red-100">
-            <p class="font-bold text-gray-800">🔐 Кибербезопасность</p>
+      <div class="space-y-5">
+        <!-- Hero Banner -->
+        <div class="relative bg-gradient-to-r from-purple-600 to-violet-700 rounded-2xl p-5 text-white overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+          <div class="relative z-10">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-2xl">🚀</span>
+              <span class="text-white/80 text-sm font-medium">Mag'zuna Consult</span>
+            </div>
+            <h3 class="text-xl font-bold mb-2">IT Услуги и Решения</h3>
+            <p class="text-white/90 text-sm leading-relaxed">Современные IT-решения для автоматизации, контроля и развития бизнес-процессов!</p>
           </div>
         </div>
-        
-        <p class="text-red-600 font-semibold">📲 Закажите наши IT-услуги!</p>
+
+        <!-- Main Solutions -->
+        <div class="bg-gradient-to-br from-violet-50 to-purple-50 rounded-2xl p-5 border border-violet-100">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-violet-600 rounded-lg flex items-center justify-center">
+              <i class="fas fa-laptop-code text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Основные решения</h4>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-violet-100/50">
+              <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-3">
+                <i class="fas fa-users-cog text-white"></i>
+              </div>
+              <h5 class="font-bold text-gray-800 text-sm mb-1">HRM система</h5>
+              <p class="text-gray-500 text-xs">Учёт сотрудников и зарплаты</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-violet-100/50">
+              <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center mb-3">
+                <i class="fas fa-chart-line text-white"></i>
+              </div>
+              <h5 class="font-bold text-gray-800 text-sm mb-1">CRM система</h5>
+              <p class="text-gray-500 text-xs">База клиентов и продажи</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-violet-100/50">
+              <div class="w-10 h-10 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-xl flex items-center justify-center mb-3">
+                <i class="fab fa-telegram text-white"></i>
+              </div>
+              <h5 class="font-bold text-gray-800 text-sm mb-1">Telegram боты</h5>
+              <p class="text-gray-500 text-xs">Автоматизация общения</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-violet-100/50">
+              <div class="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center mb-3">
+                <i class="fas fa-globe text-white"></i>
+              </div>
+              <h5 class="font-bold text-gray-800 text-sm mb-1">Веб-сайты</h5>
+              <p class="text-gray-500 text-xs">Профессионально и современно</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-violet-100/50">
+              <div class="w-10 h-10 bg-gradient-to-br from-pink-500 to-pink-600 rounded-xl flex items-center justify-center mb-3">
+                <i class="fas fa-shopping-cart text-white"></i>
+              </div>
+              <h5 class="font-bold text-gray-800 text-sm mb-1">Интернет-магазин</h5>
+              <p class="text-gray-500 text-xs">Онлайн продажи</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-violet-100/50">
+              <div class="w-10 h-10 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center mb-3">
+                <i class="fas fa-search text-white"></i>
+              </div>
+              <h5 class="font-bold text-gray-800 text-sm mb-1">SEO оптимизация</h5>
+              <p class="text-gray-500 text-xs">Топ в Google и Yandex</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ready Solutions -->
+        <div class="bg-gradient-to-br from-emerald-50 to-green-50 rounded-2xl p-5 border border-emerald-100">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-emerald-600 rounded-lg flex items-center justify-center">
+              <i class="fas fa-check-double text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Готовые решения</h4>
+          </div>
+          <div class="space-y-2">
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm">
+              <span class="text-green-500">✅</span>
+              <span class="text-gray-700 text-sm"><strong>Для детсадов</strong> — посещаемость, оплаты и связь с родителями</span>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm">
+              <span class="text-green-500">✅</span>
+              <span class="text-gray-700 text-sm"><strong>HRM</strong> — зарплата, документы, контроль сотрудников</span>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm">
+              <span class="text-green-500">✅</span>
+              <span class="text-gray-700 text-sm"><strong>CRM</strong> — для учебных центров и стоматологий</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="bg-gradient-to-r from-purple-600 to-violet-700 rounded-2xl p-4 text-center">
+          <p class="text-white font-bold text-lg mb-1">🔧 Автоматизируйте свой бизнес!</p>
+          <p class="text-white/80 text-sm">Правильный путь к развитию</p>
+        </div>
       </div>
     `,
     "04": `
-      <div class="space-y-4">
-        <p class="text-base sm:text-lg font-bold text-gray-800">Услуги по повышению квалификации</p>
-        <p class="text-gray-600">Успех компании зависит от знаний и навыков сотрудников.</p>
-        
-        <div class="bg-yellow-50 rounded-xl p-4 border border-yellow-100">
-          <p class="font-bold text-gray-800 mb-3">⭐ Цели повышения квалификации:</p>
-          <ul class="space-y-2 text-gray-700 text-sm">
-            <li class="flex items-start gap-2"><span class="text-yellow-500">⭐</span> Обновление профессиональных знаний</li>
-            <li class="flex items-start gap-2"><span class="text-yellow-500">⭐</span> Повышение эффективности работы</li>
-            <li class="flex items-start gap-2"><span class="text-yellow-500">⭐</span> Развитие лидерских навыков</li>
-          </ul>
+      <div class="space-y-5">
+        <!-- Hero Banner -->
+        <div class="relative bg-gradient-to-r from-amber-500 to-orange-600 rounded-2xl p-5 text-white overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+          <div class="relative z-10">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-2xl">🎓</span>
+              <span class="text-white/80 text-sm font-medium">Mag'zuna Consult</span>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Повышение Квалификации Сотрудников</h3>
+            <p class="text-white/90 text-sm leading-relaxed">В условиях конкуренции успех компании зависит от знаний и эффективности сотрудников!</p>
+          </div>
         </div>
-        
-        <p class="text-red-600 font-semibold">📲 Свяжитесь с нами!</p>
+
+        <!-- Benefits -->
+        <div class="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-2xl p-5 border border-amber-100">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-amber-500 rounded-lg flex items-center justify-center">
+              <i class="fas fa-star text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Основные преимущества</h4>
+          </div>
+          <div class="space-y-3">
+            <div class="flex items-start gap-3 bg-white p-3 rounded-xl shadow-sm">
+              <div class="w-8 h-8 bg-amber-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <span class="text-amber-600">📚</span>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-800 text-sm">Обновление профессиональных знаний</p>
+                <p class="text-gray-500 text-xs">Современные навыки и компетенции</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 bg-white p-3 rounded-xl shadow-sm">
+              <div class="w-8 h-8 bg-amber-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <span class="text-amber-600">📈</span>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-800 text-sm">Повышение эффективности работы</p>
+                <p class="text-gray-500 text-xs">Высокие результаты и продуктивность</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 bg-white p-3 rounded-xl shadow-sm">
+              <div class="w-8 h-8 bg-amber-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <span class="text-amber-600">👔</span>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-800 text-sm">Развитие лидерских навыков</p>
+                <p class="text-gray-500 text-xs">Лидерство и управление</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Training Directions -->
+        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-5 border border-blue-100">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+              <i class="fas fa-graduation-cap text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Основные направления</h4>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-white p-4 rounded-xl shadow-sm text-center">
+              <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                <i class="fas fa-chalkboard-teacher text-blue-600"></i>
+              </div>
+              <p class="font-semibold text-gray-800 text-sm">Внутренние тренинги</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm text-center">
+              <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                <i class="fas fa-users text-green-600"></i>
+              </div>
+              <p class="font-semibold text-gray-800 text-sm">Внешние семинары</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm text-center">
+              <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                <i class="fas fa-laptop text-purple-600"></i>
+              </div>
+              <p class="font-semibold text-gray-800 text-sm">Онлайн курсы</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm text-center">
+              <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                <i class="fas fa-robot text-red-600"></i>
+              </div>
+              <p class="font-semibold text-gray-800 text-sm">Цифровые навыки</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="bg-gradient-to-r from-amber-500 to-orange-600 rounded-2xl p-4 text-center">
+          <p class="text-white font-bold text-lg mb-1">🚀 Квалифицированный сотрудник — сильный бизнес!</p>
+          <p class="text-white/80 text-sm">Выберите профессиональный подход</p>
+        </div>
       </div>
     `,
     "05": `
-      <div class="space-y-4">
-        <p class="text-base sm:text-lg font-bold text-gray-800">Лицензия — основное требование законной деятельности</p>
-        
-        <div class="bg-red-50 rounded-xl p-4 border border-red-100">
-          <p class="font-bold text-gray-800 mb-3">Для получения лицензии необходимо:</p>
-          <ul class="space-y-2 text-gray-700 text-sm">
-            <li class="flex items-start gap-2"><span class="text-red-500">•</span> Документы организации</li>
-            <li class="flex items-start gap-2"><span class="text-red-500">•</span> Квалификация специалистов</li>
-            <li class="flex items-start gap-2"><span class="text-red-500">•</span> Технические условия и требования</li>
-          </ul>
+      <div class="space-y-5">
+        <!-- Hero Banner -->
+        <div class="relative bg-gradient-to-r from-teal-600 to-cyan-700 rounded-2xl p-5 text-white overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+          <div class="relative z-10">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-2xl">🔹</span>
+              <span class="text-white/80 text-sm font-medium">Mag'zuna Consult</span>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Получение Лицензий</h3>
+            <p class="text-white/90 text-sm leading-relaxed">Хотите пройти процесс быстро и юридически грамотно? Мы — ваш надёжный партнёр!</p>
+          </div>
         </div>
-        
-        <p class="text-red-600 font-semibold">📲 Свяжитесь с нами!</p>
+
+        <!-- Service Areas -->
+        <div class="bg-gradient-to-br from-teal-50 to-cyan-50 rounded-2xl p-5 border border-teal-100">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-teal-600 rounded-lg flex items-center justify-center">
+              <i class="fas fa-building text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Направления услуг</h4>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="flex items-center gap-3 bg-white p-4 rounded-xl shadow-sm">
+              <span class="text-xl">🏫</span>
+              <p class="font-semibold text-gray-800 text-sm">Учебные центры</p>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-4 rounded-xl shadow-sm">
+              <span class="text-xl">🏢</span>
+              <p class="font-semibold text-gray-800 text-sm">Частные школы</p>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-4 rounded-xl shadow-sm">
+              <span class="text-xl">🧱</span>
+              <p class="font-semibold text-gray-800 text-sm">Строительство</p>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-4 rounded-xl shadow-sm">
+              <span class="text-xl">📊</span>
+              <p class="font-semibold text-gray-800 text-sm">Аудиторские фирмы</p>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-4 rounded-xl shadow-sm sm:col-span-2">
+              <span class="text-xl">🏥</span>
+              <p class="font-semibold text-gray-800 text-sm">Медицина и фармацевтика</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- What We Do -->
+        <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-5 border border-green-100">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center">
+              <i class="fas fa-check-circle text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Что мы делаем?</h4>
+          </div>
+          <div class="space-y-3">
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm">
+              <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-file-alt text-white text-sm"></i>
+              </div>
+              <p class="text-gray-700 text-sm font-medium">Полная подготовка документов</p>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm">
+              <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-eye text-white text-sm"></i>
+              </div>
+              <p class="text-gray-700 text-sm font-medium">Сопровождение от начала до конца</p>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm">
+              <div class="w-8 h-8 bg-amber-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-clock text-white text-sm"></i>
+              </div>
+              <p class="text-gray-700 text-sm font-medium">Получение лицензии в кратчайшие сроки</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="bg-gradient-to-r from-teal-600 to-cyan-700 rounded-2xl p-4 text-center">
+          <p class="text-white font-bold text-lg mb-1">📲 Экономьте своё время!</p>
+          <p class="text-white/80 text-sm">Доверьте лицензирование профессионалам</p>
+        </div>
       </div>
     `,
     "06": `
-      <div class="space-y-4">
-        <p class="text-base sm:text-lg font-bold text-gray-800">⚡ Услуги энергоаудита</p>
-        <p class="text-gray-600">Оптимизация энергопотребления и экономия до 30%!</p>
-        
-        <div class="bg-yellow-50 rounded-xl p-4 border border-yellow-100">
-          <p class="font-bold text-gray-800 mb-3">Что даёт энергоаудит?</p>
-          <ul class="space-y-2 text-gray-700 text-sm">
-            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Анализ энергопотребления</li>
-            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Выявление источников потерь</li>
-            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Рекомендации по экономии</li>
-          </ul>
+      <div class="space-y-5">
+        <!-- Hero Banner -->
+        <div class="relative bg-gradient-to-r from-yellow-500 to-amber-600 rounded-2xl p-5 text-white overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+          <div class="relative z-10">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-2xl">⚡</span>
+              <span class="text-white/80 text-sm font-medium">Mag'zuna Consult</span>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Энергоаудит</h3>
+            <p class="text-white/90 text-sm leading-relaxed">Реальная сила вашего бизнеса — стратегическое решение для снижения затрат и соответствия требованиям!</p>
+          </div>
         </div>
-        
-        <p class="text-red-600 font-semibold">📲 Сократите свои энергозатраты!</p>
+
+        <!-- Legal Basis -->
+        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-5 border border-blue-100">
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+              <i class="fas fa-balance-scale text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Правовая основа</h4>
+          </div>
+          <div class="bg-white p-4 rounded-xl shadow-sm">
+            <p class="text-gray-700 text-sm"><strong class="text-blue-600">Согласно ПКМ №690</strong> энергоаудит <span class="text-red-600 font-bold">обязателен</span> для всех энергопотребляющих предприятий.</p>
+          </div>
+        </div>
+
+        <!-- Benefits -->
+        <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-5 border border-green-100">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center">
+              <i class="fas fa-chart-pie text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Что даёт?</h4>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-white p-3 rounded-xl shadow-sm text-center">
+              <div class="text-2xl mb-2">🔍</div>
+              <p class="text-sm font-semibold text-gray-800">Выявление потерь энергии</p>
+            </div>
+            <div class="bg-white p-3 rounded-xl shadow-sm text-center">
+              <div class="text-2xl mb-2">💰</div>
+              <p class="text-sm font-semibold text-gray-800">Резкое снижение затрат</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Business Benefits -->
+        <div class="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-2xl p-5 border border-amber-100">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-amber-500 rounded-lg flex items-center justify-center">
+              <i class="fas fa-briefcase text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Выгода для бизнеса</h4>
+          </div>
+          <div class="space-y-2">
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm">
+              <span class="text-yellow-500 text-lg">⚡</span>
+              <span class="text-gray-700 text-sm">Экономия энергии до <strong class="text-amber-600">30–40%</strong></span>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm">
+              <span class="text-green-500 text-lg">💰</span>
+              <span class="text-gray-700 text-sm">Снижение затрат, рост <strong class="text-green-600">ROI</strong></span>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm">
+              <span class="text-purple-500 text-lg">🌍</span>
+              <span class="text-gray-700 text-sm">Улучшение <strong class="text-purple-600">ESG и имиджа</strong> бренда</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="bg-gradient-to-r from-yellow-500 to-amber-600 rounded-2xl p-4 text-center">
+          <p class="text-white font-bold text-lg mb-1">🚀 Превратите энергию в прибыль!</p>
+          <p class="text-white/80 text-sm">Закажите профессиональный энергоаудит сейчас</p>
+        </div>
       </div>
     `,
   },
   en: {
     "01": `
-      <div class="space-y-4">
-        <p class="text-base sm:text-lg font-semibold text-gray-800">🧮 Your accounting system will be organized with us!</p>
-        <p class="text-gray-600">💸 We offer quality and consistent services for your accounting and reporting.</p>
-        
-        <div class="bg-red-50 rounded-xl p-4 border border-red-100">
-          <p class="font-bold text-gray-800 mb-3">Our accounting services include:</p>
-          <ul class="space-y-2 text-gray-700">
-            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Accounting management</li>
-            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Tax report preparation</li>
-            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Tender participation</li>
-            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Audit</li>
-            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> 1C and Didox</li>
-          </ul>
+      <div class="space-y-5">
+        <!-- Hero Banner -->
+        <div class="relative bg-gradient-to-r from-red-600 to-red-700 rounded-2xl p-5 text-white overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+          <div class="relative z-10">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-2xl">🧾</span>
+              <span class="text-white/80 text-sm font-medium">Mag'zuna Consult</span>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Accounting & Financial Reporting</h3>
+            <p class="text-white/90 text-sm leading-relaxed">Reliable and professional management. Focus on growing your business while we handle the accounting!</p>
+          </div>
         </div>
-        
-        <p class="text-red-600 font-semibold">📈 Ready to control your finances? Place an order!</p>
+
+        <!-- Services Grid -->
+        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-5 border border-blue-100">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+              <i class="fas fa-list-check text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Our Services</h4>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm border border-blue-100/50">
+              <span class="text-green-500 text-lg">✅</span>
+              <span class="text-gray-700 text-sm font-medium">Complete bookkeeping</span>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm border border-blue-100/50">
+              <span class="text-green-500 text-lg">✅</span>
+              <span class="text-gray-700 text-sm font-medium">Financial & tax reporting</span>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm border border-blue-100/50">
+              <span class="text-green-500 text-lg">✅</span>
+              <span class="text-gray-700 text-sm font-medium">Company registration</span>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm border border-blue-100/50">
+              <span class="text-green-500 text-lg">✅</span>
+              <span class="text-gray-700 text-sm font-medium">Payroll & mandatory payments</span>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm border border-blue-100/50">
+              <span class="text-green-500 text-lg">✅</span>
+              <span class="text-gray-700 text-sm font-medium">Remote (online) accounting</span>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm border border-blue-100/50">
+              <span class="text-green-500 text-lg">✅</span>
+              <span class="text-gray-700 text-sm font-medium">Consulting & advisory</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Why Us Section -->
+        <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-5 border border-amber-100">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-amber-500 rounded-lg flex items-center justify-center">
+              <i class="fas fa-briefcase text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Why Choose Us?</h4>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="text-center p-3 bg-white rounded-xl shadow-sm">
+              <div class="text-2xl mb-1">👨‍💼</div>
+              <p class="text-sm font-semibold text-gray-800">Experienced Professionals</p>
+            </div>
+            <div class="text-center p-3 bg-white rounded-xl shadow-sm">
+              <div class="text-2xl mb-1">🔒</div>
+              <p class="text-sm font-semibold text-gray-800">Full Confidentiality</p>
+            </div>
+            <div class="text-center p-3 bg-white rounded-xl shadow-sm">
+              <div class="text-2xl mb-1">⚡</div>
+              <p class="text-sm font-semibold text-gray-800">Fast Service</p>
+            </div>
+            <div class="text-center p-3 bg-white rounded-xl shadow-sm">
+              <div class="text-2xl mb-1">🎯</div>
+              <p class="text-sm font-semibold text-gray-800">Individual Approach</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Target Audience -->
+        <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-5 border border-green-100">
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center">
+              <i class="fas fa-users text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Who Is It For?</h4>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1.5 bg-white rounded-full text-sm font-medium text-gray-700 shadow-sm border border-green-100">🏢 New Companies</span>
+            <span class="px-3 py-1.5 bg-white rounded-full text-sm font-medium text-gray-700 shadow-sm border border-green-100">📊 Small & Medium Business</span>
+            <span class="px-3 py-1.5 bg-white rounded-full text-sm font-medium text-gray-700 shadow-sm border border-green-100">👤 Private Entrepreneurs</span>
+            <span class="px-3 py-1.5 bg-white rounded-full text-sm font-medium text-gray-700 shadow-sm border border-green-100">🌍 International Partners</span>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="bg-gradient-to-r from-red-600 to-red-700 rounded-2xl p-4 text-center">
+          <p class="text-white font-bold text-lg mb-1">📈 Manage Your Finances Professionally!</p>
+          <p class="text-white/80 text-sm">Order now and get a free consultation</p>
+        </div>
       </div>
     `,
     "02": `
-      <div class="space-y-4">
-        <div class="bg-blue-50 rounded-xl p-4 border border-blue-100">
-          <p class="text-base sm:text-lg font-bold text-gray-800 mb-2">WHAT IS BROKERAGE?</p>
-          <p class="text-gray-600">Brokerage is the activity of executing financial operations on behalf of clients.</p>
+      <div class="space-y-5">
+        <!-- Hero Banner -->
+        <div class="relative bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl p-5 text-white overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+          <div class="relative z-10">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-2xl">🌍</span>
+              <span class="text-white/80 text-sm font-medium">Mag'zuna Consult</span>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Import–Export & Brokerage</h3>
+            <p class="text-white/90 text-sm leading-relaxed">Your reliable partner! We simplify processes, saving your time and money.</p>
+          </div>
         </div>
-        
-        <div class="bg-red-50 rounded-xl p-4 border border-red-100">
-          <p class="font-bold text-gray-800 mb-3">HOW DOES BROKERAGE WORK?</p>
-          <ul class="space-y-2 text-gray-700 text-sm">
-            <li>1️⃣ You open an account on a broker platform</li>
-            <li>2️⃣ You deposit funds to your account</li>
-            <li>3️⃣ Broker offers you assets</li>
-            <li>4️⃣ A trade order is placed</li>
-            <li>5️⃣ Broker executes it on the exchange</li>
-          </ul>
+
+        <!-- Services -->
+        <div class="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl p-5 border border-indigo-100">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
+              <i class="fas fa-box text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Brokerage Services</h4>
+          </div>
+          <div class="space-y-3">
+            <div class="flex items-start gap-3 bg-white p-3 rounded-xl shadow-sm border border-indigo-100/50">
+              <div class="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-file-alt text-indigo-600 text-sm"></i>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-800 text-sm">Import-export documentation</p>
+                <p class="text-gray-500 text-xs">Complete document preparation</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 bg-white p-3 rounded-xl shadow-sm border border-indigo-100/50">
+              <div class="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-laptop text-indigo-600 text-sm"></i>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-800 text-sm">Tender platforms</p>
+                <p class="text-gray-500 text-xs">e-tender, new.coorporation, SPOT, xt-xarid and more</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 bg-white p-3 rounded-xl shadow-sm border border-indigo-100/50">
+              <div class="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-gavel text-indigo-600 text-sm"></i>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-800 text-sm">Tender management</p>
+                <p class="text-gray-500 text-xs">Full support and consultation</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 bg-white p-3 rounded-xl shadow-sm border border-indigo-100/50">
+              <div class="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-stamp text-indigo-600 text-sm"></i>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-800 text-sm">Customs & permits</p>
+                <p class="text-gray-500 text-xs">Professional consultations</p>
+              </div>
+            </div>
+          </div>
         </div>
-        
-        <p class="text-red-600 font-semibold">📲 Contact us!</p>
+
+        <!-- Why Choose Us -->
+        <div class="bg-gradient-to-br from-green-50 to-teal-50 rounded-2xl p-5 border border-green-100">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center">
+              <i class="fas fa-handshake text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Why Mag'zuna Consult?</h4>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-white p-4 rounded-xl shadow-sm text-center border border-green-100/50">
+              <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                <i class="fas fa-rocket text-green-600"></i>
+              </div>
+              <p class="font-semibold text-gray-800 text-sm">Fast Service</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm text-center border border-green-100/50">
+              <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                <i class="fas fa-users text-blue-600"></i>
+              </div>
+              <p class="font-semibold text-gray-800 text-sm">Experienced Team</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm text-center border border-green-100/50">
+              <div class="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                <i class="fas fa-clock text-amber-600"></i>
+              </div>
+              <p class="font-semibold text-gray-800 text-sm">Time Saving</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm text-center border border-green-100/50">
+              <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                <i class="fas fa-trophy text-red-600"></i>
+              </div>
+              <p class="font-semibold text-gray-800 text-sm">High Success Rate</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl p-4 text-center">
+          <p class="text-white font-bold text-lg mb-1">📦 Simplify Your Import-Export!</p>
+          <p class="text-white/80 text-sm">Contact us now for a free consultation</p>
+        </div>
       </div>
     `,
     "03": `
-      <div class="space-y-4">
-        <p class="text-base sm:text-lg font-bold text-gray-800">🔹 IT — the center of future professions</p>
-        
-        <div class="grid grid-cols-2 gap-3">
-          <div class="bg-blue-50 rounded-xl p-3 border border-blue-100">
-            <p class="font-bold text-gray-800">💻 Frontend / Backend</p>
-          </div>
-          <div class="bg-green-50 rounded-xl p-3 border border-green-100">
-            <p class="font-bold text-gray-800">📱 Mobile Development</p>
-          </div>
-          <div class="bg-purple-50 rounded-xl p-3 border border-purple-100">
-            <p class="font-bold text-gray-800">🤖 Artificial Intelligence</p>
-          </div>
-          <div class="bg-red-50 rounded-xl p-3 border border-red-100">
-            <p class="font-bold text-gray-800">🔐 Cybersecurity</p>
+      <div class="space-y-5">
+        <!-- Hero Banner -->
+        <div class="relative bg-gradient-to-r from-purple-600 to-violet-700 rounded-2xl p-5 text-white overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+          <div class="relative z-10">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-2xl">🚀</span>
+              <span class="text-white/80 text-sm font-medium">Mag'zuna Consult</span>
+            </div>
+            <h3 class="text-xl font-bold mb-2">IT Services & Solutions</h3>
+            <p class="text-white/90 text-sm leading-relaxed">Modern IT solutions for automating, controlling, and developing your business processes!</p>
           </div>
         </div>
-        
-        <p class="text-red-600 font-semibold">📲 Order our IT services!</p>
+
+        <!-- Main Solutions -->
+        <div class="bg-gradient-to-br from-violet-50 to-purple-50 rounded-2xl p-5 border border-violet-100">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-violet-600 rounded-lg flex items-center justify-center">
+              <i class="fas fa-laptop-code text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Main Solutions</h4>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-violet-100/50">
+              <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-3">
+                <i class="fas fa-users-cog text-white"></i>
+              </div>
+              <h5 class="font-bold text-gray-800 text-sm mb-1">HRM System</h5>
+              <p class="text-gray-500 text-xs">Employee & payroll management</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-violet-100/50">
+              <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center mb-3">
+                <i class="fas fa-chart-line text-white"></i>
+              </div>
+              <h5 class="font-bold text-gray-800 text-sm mb-1">CRM System</h5>
+              <p class="text-gray-500 text-xs">Customer base & sales</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-violet-100/50">
+              <div class="w-10 h-10 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-xl flex items-center justify-center mb-3">
+                <i class="fab fa-telegram text-white"></i>
+              </div>
+              <h5 class="font-bold text-gray-800 text-sm mb-1">Telegram Bots</h5>
+              <p class="text-gray-500 text-xs">Automated communication</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-violet-100/50">
+              <div class="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center mb-3">
+                <i class="fas fa-globe text-white"></i>
+              </div>
+              <h5 class="font-bold text-gray-800 text-sm mb-1">Websites</h5>
+              <p class="text-gray-500 text-xs">Professional & modern</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-violet-100/50">
+              <div class="w-10 h-10 bg-gradient-to-br from-pink-500 to-pink-600 rounded-xl flex items-center justify-center mb-3">
+                <i class="fas fa-shopping-cart text-white"></i>
+              </div>
+              <h5 class="font-bold text-gray-800 text-sm mb-1">E-Commerce</h5>
+              <p class="text-gray-500 text-xs">Online sales setup</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-violet-100/50">
+              <div class="w-10 h-10 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center mb-3">
+                <i class="fas fa-search text-white"></i>
+              </div>
+              <h5 class="font-bold text-gray-800 text-sm mb-1">SEO Optimization</h5>
+              <p class="text-gray-500 text-xs">Top Google & Yandex rankings</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ready Solutions -->
+        <div class="bg-gradient-to-br from-emerald-50 to-green-50 rounded-2xl p-5 border border-emerald-100">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-emerald-600 rounded-lg flex items-center justify-center">
+              <i class="fas fa-check-double text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Ready Solutions</h4>
+          </div>
+          <div class="space-y-2">
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm">
+              <span class="text-green-500">✅</span>
+              <span class="text-gray-700 text-sm"><strong>For Kindergartens</strong> — attendance, payments & parent communication</span>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm">
+              <span class="text-green-500">✅</span>
+              <span class="text-gray-700 text-sm"><strong>HRM</strong> — payroll, documents & employee control</span>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm">
+              <span class="text-green-500">✅</span>
+              <span class="text-gray-700 text-sm"><strong>CRM</strong> — for education centers & dental clinics</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="bg-gradient-to-r from-purple-600 to-violet-700 rounded-2xl p-4 text-center">
+          <p class="text-white font-bold text-lg mb-1">🔧 Automate Your Business!</p>
+          <p class="text-white/80 text-sm">The right path to growth</p>
+        </div>
       </div>
     `,
     "04": `
-      <div class="space-y-4">
-        <p class="text-base sm:text-lg font-bold text-gray-800">Employee Training Services</p>
-        <p class="text-gray-600">Company success depends on employees' knowledge and skills.</p>
-        
-        <div class="bg-yellow-50 rounded-xl p-4 border border-yellow-100">
-          <p class="font-bold text-gray-800 mb-3">⭐ Training goals:</p>
-          <ul class="space-y-2 text-gray-700 text-sm">
-            <li class="flex items-start gap-2"><span class="text-yellow-500">⭐</span> Update professional knowledge</li>
-            <li class="flex items-start gap-2"><span class="text-yellow-500">⭐</span> Increase work efficiency</li>
-            <li class="flex items-start gap-2"><span class="text-yellow-500">⭐</span> Develop leadership skills</li>
-          </ul>
+      <div class="space-y-5">
+        <!-- Hero Banner -->
+        <div class="relative bg-gradient-to-r from-amber-500 to-orange-600 rounded-2xl p-5 text-white overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+          <div class="relative z-10">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-2xl">🎓</span>
+              <span class="text-white/80 text-sm font-medium">Mag'zuna Consult</span>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Employee Training & Development</h3>
+            <p class="text-white/90 text-sm leading-relaxed">In today's competitive market, company success depends on employee knowledge and efficiency!</p>
+          </div>
         </div>
-        
-        <p class="text-red-600 font-semibold">📲 Contact us!</p>
+
+        <!-- Benefits -->
+        <div class="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-2xl p-5 border border-amber-100">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-amber-500 rounded-lg flex items-center justify-center">
+              <i class="fas fa-star text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Key Benefits</h4>
+          </div>
+          <div class="space-y-3">
+            <div class="flex items-start gap-3 bg-white p-3 rounded-xl shadow-sm">
+              <div class="w-8 h-8 bg-amber-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <span class="text-amber-600">📚</span>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-800 text-sm">Update professional knowledge</p>
+                <p class="text-gray-500 text-xs">Modern skills and competencies</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 bg-white p-3 rounded-xl shadow-sm">
+              <div class="w-8 h-8 bg-amber-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <span class="text-amber-600">📈</span>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-800 text-sm">Increase work efficiency</p>
+                <p class="text-gray-500 text-xs">High results and productivity</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 bg-white p-3 rounded-xl shadow-sm">
+              <div class="w-8 h-8 bg-amber-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <span class="text-amber-600">👔</span>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-800 text-sm">Develop leadership skills</p>
+                <p class="text-gray-500 text-xs">Leadership and management</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Training Directions -->
+        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-5 border border-blue-100">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+              <i class="fas fa-graduation-cap text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Main Directions</h4>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-white p-4 rounded-xl shadow-sm text-center">
+              <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                <i class="fas fa-chalkboard-teacher text-blue-600"></i>
+              </div>
+              <p class="font-semibold text-gray-800 text-sm">Internal Training</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm text-center">
+              <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                <i class="fas fa-users text-green-600"></i>
+              </div>
+              <p class="font-semibold text-gray-800 text-sm">External Seminars</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm text-center">
+              <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                <i class="fas fa-laptop text-purple-600"></i>
+              </div>
+              <p class="font-semibold text-gray-800 text-sm">Online Courses</p>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-sm text-center">
+              <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                <i class="fas fa-robot text-red-600"></i>
+              </div>
+              <p class="font-semibold text-gray-800 text-sm">Digital Skills</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="bg-gradient-to-r from-amber-500 to-orange-600 rounded-2xl p-4 text-center">
+          <p class="text-white font-bold text-lg mb-1">🚀 Qualified Staff = Strong Business!</p>
+          <p class="text-white/80 text-sm">Choose the professional approach</p>
+        </div>
       </div>
     `,
     "05": `
-      <div class="space-y-4">
-        <p class="text-base sm:text-lg font-bold text-gray-800">License — the main requirement for legal activity</p>
-        
-        <div class="bg-red-50 rounded-xl p-4 border border-red-100">
-          <p class="font-bold text-gray-800 mb-3">To obtain a license you need:</p>
-          <ul class="space-y-2 text-gray-700 text-sm">
-            <li class="flex items-start gap-2"><span class="text-red-500">•</span> Organization documents</li>
-            <li class="flex items-start gap-2"><span class="text-red-500">•</span> Specialist qualifications</li>
-            <li class="flex items-start gap-2"><span class="text-red-500">•</span> Technical conditions and requirements</li>
-          </ul>
+      <div class="space-y-5">
+        <!-- Hero Banner -->
+        <div class="relative bg-gradient-to-r from-teal-600 to-cyan-700 rounded-2xl p-5 text-white overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+          <div class="relative z-10">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-2xl">🔹</span>
+              <span class="text-white/80 text-sm font-medium">Mag'zuna Consult</span>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Licensing Services</h3>
+            <p class="text-white/90 text-sm leading-relaxed">Want to complete the process quickly and legally? We are your reliable partner!</p>
+          </div>
         </div>
-        
-        <p class="text-red-600 font-semibold">📲 Contact us!</p>
+
+        <!-- Service Areas -->
+        <div class="bg-gradient-to-br from-teal-50 to-cyan-50 rounded-2xl p-5 border border-teal-100">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-teal-600 rounded-lg flex items-center justify-center">
+              <i class="fas fa-building text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Service Areas</h4>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="flex items-center gap-3 bg-white p-4 rounded-xl shadow-sm">
+              <span class="text-xl">🏫</span>
+              <p class="font-semibold text-gray-800 text-sm">Training Centers</p>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-4 rounded-xl shadow-sm">
+              <span class="text-xl">🏢</span>
+              <p class="font-semibold text-gray-800 text-sm">Private Schools</p>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-4 rounded-xl shadow-sm">
+              <span class="text-xl">🧱</span>
+              <p class="font-semibold text-gray-800 text-sm">Construction</p>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-4 rounded-xl shadow-sm">
+              <span class="text-xl">📊</span>
+              <p class="font-semibold text-gray-800 text-sm">Audit Firms</p>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-4 rounded-xl shadow-sm sm:col-span-2">
+              <span class="text-xl">🏥</span>
+              <p class="font-semibold text-gray-800 text-sm">Medical & Pharmaceutical</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- What We Do -->
+        <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-5 border border-green-100">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center">
+              <i class="fas fa-check-circle text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">What We Do?</h4>
+          </div>
+          <div class="space-y-3">
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm">
+              <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-file-alt text-white text-sm"></i>
+              </div>
+              <p class="text-gray-700 text-sm font-medium">Complete document preparation</p>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm">
+              <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-eye text-white text-sm"></i>
+              </div>
+              <p class="text-gray-700 text-sm font-medium">End-to-end process support</p>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm">
+              <div class="w-8 h-8 bg-amber-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-clock text-white text-sm"></i>
+              </div>
+              <p class="text-gray-700 text-sm font-medium">Fast license acquisition</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="bg-gradient-to-r from-teal-600 to-cyan-700 rounded-2xl p-4 text-center">
+          <p class="text-white font-bold text-lg mb-1">📲 Save Your Time!</p>
+          <p class="text-white/80 text-sm">Trust licensing to professionals</p>
+        </div>
       </div>
     `,
     "06": `
-      <div class="space-y-4">
-        <p class="text-base sm:text-lg font-bold text-gray-800">⚡ Energy Audit Services</p>
-        <p class="text-gray-600">Optimize energy consumption and save up to 30%!</p>
-        
-        <div class="bg-yellow-50 rounded-xl p-4 border border-yellow-100">
-          <p class="font-bold text-gray-800 mb-3">What does energy audit provide?</p>
-          <ul class="space-y-2 text-gray-700 text-sm">
-            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Energy consumption analysis</li>
-            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Identify waste sources</li>
-            <li class="flex items-start gap-2"><span class="text-green-500">✅</span> Savings recommendations</li>
-          </ul>
+      <div class="space-y-5">
+        <!-- Hero Banner -->
+        <div class="relative bg-gradient-to-r from-yellow-500 to-amber-600 rounded-2xl p-5 text-white overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+          <div class="relative z-10">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-2xl">⚡</span>
+              <span class="text-white/80 text-sm font-medium">Mag'zuna Consult</span>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Energy Audit</h3>
+            <p class="text-white/90 text-sm leading-relaxed">The real power of your business — a strategic solution for reducing costs and meeting legal requirements!</p>
+          </div>
         </div>
-        
-        <p class="text-red-600 font-semibold">📲 Reduce your energy costs!</p>
+
+        <!-- Legal Basis -->
+        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-5 border border-blue-100">
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+              <i class="fas fa-balance-scale text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Legal Basis</h4>
+          </div>
+          <div class="bg-white p-4 rounded-xl shadow-sm">
+            <p class="text-gray-700 text-sm"><strong class="text-blue-600">According to Resolution No. 690</strong>, energy audit is <span class="text-red-600 font-bold">mandatory</span> for all energy-consuming enterprises.</p>
+          </div>
+        </div>
+
+        <!-- Benefits -->
+        <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-5 border border-green-100">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center">
+              <i class="fas fa-chart-pie text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">What Does It Provide?</h4>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-white p-3 rounded-xl shadow-sm text-center">
+              <div class="text-2xl mb-2">🔍</div>
+              <p class="text-sm font-semibold text-gray-800">Identify energy losses</p>
+            </div>
+            <div class="bg-white p-3 rounded-xl shadow-sm text-center">
+              <div class="text-2xl mb-2">💰</div>
+              <p class="text-sm font-semibold text-gray-800">Significantly reduce costs</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Business Benefits -->
+        <div class="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-2xl p-5 border border-amber-100">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-amber-500 rounded-lg flex items-center justify-center">
+              <i class="fas fa-briefcase text-white text-sm"></i>
+            </div>
+            <h4 class="font-bold text-gray-900">Business Benefits</h4>
+          </div>
+          <div class="space-y-2">
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm">
+              <span class="text-yellow-500 text-lg">⚡</span>
+              <span class="text-gray-700 text-sm">Save up to <strong class="text-amber-600">30–40%</strong> energy</span>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm">
+              <span class="text-green-500 text-lg">💰</span>
+              <span class="text-gray-700 text-sm">Reduce costs, increase <strong class="text-green-600">ROI</strong></span>
+            </div>
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm">
+              <span class="text-purple-500 text-lg">🌍</span>
+              <span class="text-gray-700 text-sm">Improve <strong class="text-purple-600">ESG & brand</strong> image</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="bg-gradient-to-r from-yellow-500 to-amber-600 rounded-2xl p-4 text-center">
+          <p class="text-white font-bold text-lg mb-1">🚀 Turn Energy Into Profit!</p>
+          <p class="text-white/80 text-sm">Order professional energy audit now</p>
+        </div>
       </div>
     `,
   },
