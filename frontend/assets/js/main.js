@@ -776,7 +776,49 @@ function setLanguage(lang) {
     setTimeout(() => window.resetModalScroll(), 100);
   }
 
+  // Update language dropdown display
+  updateLangDropdownDisplay(lang);
+
   console.log("🌐 Language changed to:", lang);
+}
+
+// Language dropdown functions
+function updateLangDropdownDisplay(lang) {
+  const flagMap = {
+    uz: { src: "https://flagcdn.com/w40/uz.png", text: "UZ" },
+    ru: { src: "https://flagcdn.com/w40/ru.png", text: "RU" },
+    en: { src: "https://flagcdn.com/w40/gb.png", text: "EN" },
+  };
+
+  const currentLangFlag = document.getElementById("currentLangFlag");
+  const currentLangText = document.getElementById("currentLangText");
+
+  if (currentLangFlag && flagMap[lang]) {
+    currentLangFlag.src = flagMap[lang].src;
+  }
+  if (currentLangText && flagMap[lang]) {
+    currentLangText.textContent = flagMap[lang].text;
+  }
+}
+
+function toggleLangDropdown() {
+  const menu = document.getElementById("langDropdownMenu");
+  if (menu) {
+    if (menu.classList.contains("opacity-0")) {
+      menu.classList.remove("opacity-0", "invisible", "translate-y-2");
+      menu.classList.add("opacity-100", "visible", "translate-y-0");
+    } else {
+      closeLangDropdown();
+    }
+  }
+}
+
+function closeLangDropdown() {
+  const menu = document.getElementById("langDropdownMenu");
+  if (menu) {
+    menu.classList.add("opacity-0", "invisible", "translate-y-2");
+    menu.classList.remove("opacity-100", "visible", "translate-y-0");
+  }
 }
 
 // Initialize language on page load
@@ -798,7 +840,24 @@ document.addEventListener("DOMContentLoaded", () => {
   // Set initial language
   setLanguage(currentLanguage);
 
-  // Language dropdown toggle
+  // New language dropdown toggle
+  const langDropdownBtn = document.getElementById("langDropdownBtn");
+  if (langDropdownBtn) {
+    langDropdownBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleLangDropdown();
+    });
+  }
+
+  // Close dropdown when clicking outside
+  document.addEventListener("click", (e) => {
+    const langSwitcher = document.getElementById("langSwitcher");
+    if (langSwitcher && !langSwitcher.contains(e.target)) {
+      closeLangDropdown();
+    }
+  });
+
+  // Legacy: Language dropdown toggle
   const langBtn = document.getElementById("langBtn");
   const langDropdown = document.getElementById("langDropdown");
   const langArrow = document.getElementById("langArrow");

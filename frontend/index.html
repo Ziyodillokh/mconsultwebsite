@@ -122,50 +122,75 @@
           </a>
           <div class="w-px h-6 bg-white/20 mx-2"></div>
 
-          <!-- Language Switcher - Horizontal Flags -->
-          <div class="flex items-center gap-1" id="langSwitcher">
+          <!-- Language Switcher - Dropdown Style -->
+          <div class="relative" id="langSwitcher">
             <button
-              onclick="setLanguage('uz')"
-              class="lang-flag-btn flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg transition-all duration-200 hover:bg-white/20"
-              data-lang="uz"
-              title="O'zbekcha"
+              id="langDropdownBtn"
+              class="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-all duration-200 border border-white/20"
             >
               <img
+                id="currentLangFlag"
                 src="https://flagcdn.com/w40/uz.png"
-                srcset="https://flagcdn.com/w80/uz.png 2x"
                 alt="UZ"
-                class="w-6 h-4 rounded-sm shadow-lg border border-white/30"
+                class="w-5 h-3.5 rounded-sm shadow-sm"
               />
-              <span class="text-white text-xs font-bold">UZ</span>
+              <span
+                id="currentLangText"
+                class="text-white text-xs font-semibold"
+                >UZ</span
+              >
+              <i class="fas fa-chevron-down text-white/70 text-[10px] ml-1"></i>
             </button>
-            <button
-              onclick="setLanguage('ru')"
-              class="lang-flag-btn flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg transition-all duration-200 hover:bg-white/20"
-              data-lang="ru"
-              title="Русский"
+            <div
+              id="langDropdownMenu"
+              class="absolute top-full right-0 mt-2 bg-white rounded-lg shadow-xl border border-gray-100 py-1 min-w-[120px] opacity-0 invisible transform translate-y-2 transition-all duration-200 z-50"
             >
-              <img
-                src="https://flagcdn.com/w40/ru.png"
-                srcset="https://flagcdn.com/w80/ru.png 2x"
-                alt="RU"
-                class="w-6 h-4 rounded-sm shadow-lg border border-white/30"
-              />
-              <span class="text-white text-xs font-bold">RU</span>
-            </button>
-            <button
-              onclick="setLanguage('en')"
-              class="lang-flag-btn flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg transition-all duration-200 hover:bg-white/20"
-              data-lang="en"
-              title="English"
-            >
-              <img
-                src="https://flagcdn.com/w40/gb.png"
-                srcset="https://flagcdn.com/w80/gb.png 2x"
-                alt="EN"
-                class="w-6 h-4 rounded-sm shadow-lg border border-white/30"
-              />
-              <span class="text-white text-xs font-bold">EN</span>
-            </button>
+              <button
+                onclick="
+                  setLanguage('uz');
+                  closeLangDropdown();
+                "
+                class="lang-option flex items-center gap-2.5 w-full px-3 py-2 hover:bg-gray-50 transition-colors"
+                data-lang="uz"
+              >
+                <img
+                  src="https://flagcdn.com/w40/uz.png"
+                  alt="UZ"
+                  class="w-5 h-3.5 rounded-sm shadow-sm"
+                />
+                <span class="text-gray-700 text-sm font-medium">O'zbekcha</span>
+              </button>
+              <button
+                onclick="
+                  setLanguage('ru');
+                  closeLangDropdown();
+                "
+                class="lang-option flex items-center gap-2.5 w-full px-3 py-2 hover:bg-gray-50 transition-colors"
+                data-lang="ru"
+              >
+                <img
+                  src="https://flagcdn.com/w40/ru.png"
+                  alt="RU"
+                  class="w-5 h-3.5 rounded-sm shadow-sm"
+                />
+                <span class="text-gray-700 text-sm font-medium">Русский</span>
+              </button>
+              <button
+                onclick="
+                  setLanguage('en');
+                  closeLangDropdown();
+                "
+                class="lang-option flex items-center gap-2.5 w-full px-3 py-2 hover:bg-gray-50 transition-colors"
+                data-lang="en"
+              >
+                <img
+                  src="https://flagcdn.com/w40/gb.png"
+                  alt="EN"
+                  class="w-5 h-3.5 rounded-sm shadow-sm"
+                />
+                <span class="text-gray-700 text-sm font-medium">English</span>
+              </button>
+            </div>
           </div>
 
           <button
@@ -386,8 +411,8 @@
                 data-lang-key="hero_desc"
               >
                 Professional konsalting xizmatlari: buxgalteriya, IT, marketing,
-                HR va ko'plab boshqa xizmatlar. 3+ yillik tajriba va 500+
-                mamnun mijozlar bilan ishonchli hamkoringiz.
+                HR va ko'plab boshqa xizmatlar. 3+ yillik tajriba va 500+ mamnun
+                mijozlar bilan ishonchli hamkoringiz.
               </p>
 
               <div
@@ -1434,11 +1459,11 @@
           </div>
 
           <div
-            class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 max-w-lg sm:max-w-2xl lg:max-w-none mx-auto"
+            class="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 lg:gap-6 max-w-lg sm:max-w-3xl mx-auto"
           >
             <!-- Telegram -->
             <a
-              href="https://t.me/Magzuna_consult_mchj"
+              href="https://t.me/@Magzuna_consult_N1"
               target="_blank"
               class="group text-center bg-white hover:bg-red-50 p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl transition-all duration-300 shadow-lg hover:shadow-xl border border-gray-100 hover:-translate-y-1 flex flex-col items-center justify-center"
               data-aos="fade-up"
@@ -1456,7 +1481,7 @@
               <div
                 class="text-red-600 font-semibold text-[10px] sm:text-xs lg:text-sm truncate max-w-full"
               >
-                @Magzuna_consult
+                @Magzuna_consult_N1
               </div>
             </a>
 
@@ -1485,12 +1510,62 @@
               </div>
             </a>
 
+            <!-- Facebook -->
+            <a
+              href="https://www.facebook.com/share/1CFcvMqgSX/"
+              target="_blank"
+              class="group text-center bg-white hover:bg-red-50 p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl transition-all duration-300 shadow-lg hover:shadow-xl border border-gray-100 hover:-translate-y-1 flex flex-col items-center justify-center"
+              data-aos="fade-up"
+              data-aos-delay="150"
+            >
+              <div
+                class="text-3xl sm:text-4xl lg:text-5xl mb-2 sm:mb-3 text-red-600 group-hover:scale-110 transition-transform"
+              >
+                <i class="fab fa-facebook-f"></i>
+              </div>
+              <h3
+                class="text-sm sm:text-base lg:text-lg font-bold uppercase mb-0.5 sm:mb-1 text-gray-900"
+              >
+                Facebook
+              </h3>
+              <div
+                class="text-red-600 font-semibold text-[10px] sm:text-xs lg:text-sm truncate max-w-full"
+              >
+                @magzuna_consult
+              </div>
+            </a>
+
+            <!-- Telefon -->
+            <a
+              href="tel:+998997742722"
+              class="group text-center bg-white hover:bg-red-50 p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl transition-all duration-300 shadow-lg hover:shadow-xl border border-gray-100 hover:-translate-y-1 flex flex-col items-center justify-center"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <div
+                class="text-3xl sm:text-4xl lg:text-5xl mb-2 sm:mb-3 text-red-600 group-hover:scale-110 transition-transform"
+              >
+                <i class="fas fa-phone"></i>
+              </div>
+              <h3
+                class="text-sm sm:text-base lg:text-lg font-bold uppercase mb-0.5 sm:mb-1 text-gray-900"
+                data-lang-key="contact_phone"
+              >
+                Telefon
+              </h3>
+              <div
+                class="text-red-600 font-semibold text-[10px] sm:text-xs lg:text-sm truncate max-w-full"
+              >
+                +998 99 774 27 22
+              </div>
+            </a>
+
             <!-- Email -->
             <a
               href="mailto:info@magzunaconsult.uz"
               class="group text-center bg-white hover:bg-red-50 p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl transition-all duration-300 shadow-lg hover:shadow-xl border border-gray-100 hover:-translate-y-1 flex flex-col items-center justify-center"
               data-aos="fade-up"
-              data-aos-delay="200"
+              data-aos-delay="250"
             >
               <div
                 class="text-3xl sm:text-4xl lg:text-5xl mb-2 sm:mb-3 text-red-600 group-hover:scale-110 transition-transform"
@@ -1509,9 +1584,10 @@
               </div>
             </a>
 
-            <!-- Telefon -->
+            <!-- WhatsApp -->
             <a
-              href="tel:+998997742722"
+              href="https://wa.me/998947793636"
+              target="_blank"
               class="group text-center bg-white hover:bg-red-50 p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl transition-all duration-300 shadow-lg hover:shadow-xl border border-gray-100 hover:-translate-y-1 flex flex-col items-center justify-center"
               data-aos="fade-up"
               data-aos-delay="300"
@@ -1519,18 +1595,17 @@
               <div
                 class="text-3xl sm:text-4xl lg:text-5xl mb-2 sm:mb-3 text-red-600 group-hover:scale-110 transition-transform"
               >
-                <i class="fas fa-phone"></i>
+                <i class="fab fa-whatsapp"></i>
               </div>
               <h3
                 class="text-sm sm:text-base lg:text-lg font-bold uppercase mb-0.5 sm:mb-1 text-gray-900"
-                data-lang-key="contact_phone"
               >
-                Telefon
+                WhatsApp
               </h3>
               <div
                 class="text-red-600 font-semibold text-[10px] sm:text-xs lg:text-sm truncate max-w-full"
               >
-                +998 99 774 27 22
+                +998 947793636
               </div>
             </a>
           </div>
@@ -1555,7 +1630,7 @@
                 href="#xizmatlar"
                 class="inline-block bg-white text-red-600 px-8 lg:px-12 py-3 lg:py-4 font-bold uppercase hover:bg-gray-100 hover:shadow-lg transition-all rounded-full text-sm lg:text-base"
               >
-                <i class="fas fa-phone-alt mr-2"></i
+                <i class="fas fa-arrow-right mr-2"></i
                 ><span data-lang-key="cta_btn">Bepul Konsultatsiya</span>
               </a>
             </div>
@@ -1605,12 +1680,12 @@
               class="text-gray-400 mb-6 leading-relaxed text-sm"
               data-lang-key="footer_desc"
             >
-              O'zbekistonning yetakchi konsalting kompaniyasi. 3+ yillik
-              tajriba bilan biznesingizni rivojlantiramiz.
+              O'zbekistonning yetakchi konsalting kompaniyasi. 3+ yillik tajriba
+              bilan biznesingizni rivojlantiramiz.
             </p>
             <div class="flex gap-2 footer-socials">
               <a
-                href="https://t.me/Magzuna_consult_N1"
+                href="https://t.me/@Magzuna_consult_N1"
                 aria-label="Telegram"
                 class="w-10 h-10 bg-gray-800/80 backdrop-blur rounded-xl flex items-center justify-center hover:bg-gradient-to-br hover:from-red-600 hover:to-red-700 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-red-600/20"
               >
@@ -1624,7 +1699,7 @@
                 <i class="fab fa-instagram text-sm"></i>
               </a>
               <a
-                href="https://facebook.com/yourusername"
+                href="https://www.facebook.com/share/1CFcvMqgSX/"
                 aria-label="Facebook"
                 class="w-10 h-10 bg-gray-800/80 backdrop-blur rounded-xl flex items-center justify-center hover:bg-gradient-to-br hover:from-red-600 hover:to-red-700 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-red-600/20"
               >
@@ -1636,6 +1711,13 @@
                 class="w-10 h-10 bg-gray-800/80 backdrop-blur rounded-xl flex items-center justify-center hover:bg-gradient-to-br hover:from-red-600 hover:to-red-700 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-red-600/20"
               >
                 <i class="fab fa-linkedin-in text-sm"></i>
+              </a>
+              <a
+                href="https://wa.me/998947793636"
+                aria-label="WhatsApp"
+                class="w-10 h-10 bg-gray-800/80 backdrop-blur rounded-xl flex items-center justify-center hover:bg-gradient-to-br hover:from-red-600 hover:to-red-700 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-red-600/20"
+              >
+                <i class="fab fa-whatsapp text-sm"></i>
               </a>
             </div>
           </div>
@@ -2707,3 +2789,5 @@
     <script src="./assets/js/main.js"></script>
   </body>
 </html>
+
+facebook
