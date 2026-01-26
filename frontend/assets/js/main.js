@@ -804,14 +804,14 @@ function updateLangDropdownDisplay(lang) {
 function toggleLangDropdown() {
   const menu = document.getElementById("langDropdownMenu");
   const btn = document.getElementById("langDropdownBtn");
-  
+
   if (menu && btn) {
     if (menu.classList.contains("opacity-0")) {
       // Calculate position
       const btnRect = btn.getBoundingClientRect();
-      menu.style.top = (btnRect.bottom + 8) + "px";
-      menu.style.left = (btnRect.right - menu.offsetWidth) + "px";
-      
+      menu.style.top = btnRect.bottom + 8 + "px";
+      menu.style.left = btnRect.right - menu.offsetWidth + "px";
+
       menu.classList.remove("opacity-0", "invisible", "translate-y-2");
       menu.classList.add("opacity-100", "visible", "translate-y-0");
     } else {
@@ -832,14 +832,14 @@ function closeLangDropdown() {
 function toggleMobileLangDropdown() {
   const menu = document.getElementById("mobileLangDropdown");
   const btn = document.getElementById("mobileLangBtn");
-  
+
   if (menu && btn) {
     if (menu.classList.contains("opacity-0")) {
       // Calculate position
       const btnRect = btn.getBoundingClientRect();
-      menu.style.top = (btnRect.bottom + 8) + "px";
-      menu.style.left = (btnRect.right - menu.offsetWidth) + "px";
-      
+      menu.style.top = btnRect.bottom + 8 + "px";
+      menu.style.left = btnRect.right - menu.offsetWidth + "px";
+
       menu.classList.remove("opacity-0", "invisible", "translate-y-2");
       menu.classList.add("opacity-100", "visible", "translate-y-0");
     } else {
@@ -900,10 +900,15 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("click", (e) => {
     const langSwitcher = document.getElementById("langSwitcher");
     const langDropdownMenu = document.getElementById("langDropdownMenu");
-    if (langSwitcher && !langSwitcher.contains(e.target) && langDropdownMenu && !langDropdownMenu.contains(e.target)) {
+    if (
+      langSwitcher &&
+      !langSwitcher.contains(e.target) &&
+      langDropdownMenu &&
+      !langDropdownMenu.contains(e.target)
+    ) {
       closeLangDropdown();
     }
-    
+
     // Close mobile lang dropdown when clicking outside
     const mobileLangSwitcher = document.getElementById("mobileLangSwitcher");
     if (mobileLangSwitcher && !mobileLangSwitcher.contains(e.target)) {

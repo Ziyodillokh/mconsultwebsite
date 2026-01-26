@@ -144,7 +144,7 @@
             <div
               id="langDropdownMenu"
               class="fixed mt-2 bg-white rounded-lg shadow-xl border border-gray-100 py-1 min-w-[140px] opacity-0 invisible transform translate-y-2 transition-all duration-200 z-[9999]"
-              style="top: auto; right: auto;"
+              style="top: auto; right: auto"
             >
               <button
                 onclick="
@@ -221,10 +221,13 @@
           <div
             id="mobileLangDropdown"
             class="fixed mt-2 bg-white rounded-xl shadow-2xl border border-gray-100 py-2 min-w-[130px] opacity-0 invisible transform translate-y-2 transition-all duration-200 z-[9999]"
-            style="top: auto; right: auto;"
+            style="top: auto; right: auto"
           >
             <button
-              onclick="setLanguage('uz'); closeMobileLangDropdown();"
+              onclick="
+                setLanguage('uz');
+                closeMobileLangDropdown();
+              "
               class="mobile-lang-option flex items-center gap-3 w-full px-4 py-2.5 hover:bg-red-50 transition-colors"
               data-lang="uz"
             >
@@ -236,7 +239,10 @@
               <span class="text-gray-700 text-sm font-semibold">UZ</span>
             </button>
             <button
-              onclick="setLanguage('ru'); closeMobileLangDropdown();"
+              onclick="
+                setLanguage('ru');
+                closeMobileLangDropdown();
+              "
               class="mobile-lang-option flex items-center gap-3 w-full px-4 py-2.5 hover:bg-red-50 transition-colors"
               data-lang="ru"
             >
@@ -248,7 +254,10 @@
               <span class="text-gray-700 text-sm font-semibold">RU</span>
             </button>
             <button
-              onclick="setLanguage('en'); closeMobileLangDropdown();"
+              onclick="
+                setLanguage('en');
+                closeMobileLangDropdown();
+              "
               class="mobile-lang-option flex items-center gap-3 w-full px-4 py-2.5 hover:bg-red-50 transition-colors"
               data-lang="en"
             >
