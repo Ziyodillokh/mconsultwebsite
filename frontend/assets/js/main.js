@@ -23,7 +23,7 @@ const translations = {
     hero_title_3: "Bosqichga",
     hero_title_4: "Olib Chiqamiz",
     hero_desc:
-      "Buxgalteriya, IT, HR va marketing xizmatlarida 10+ yillik tajriba. Sizning muvaffaqiyatingiz - bizning maqsadimiz.",
+      "Buxgalteriya, IT, HR va marketing xizmatlarida 3+ yillik tajriba. Sizning muvaffaqiyatingiz - bizning maqsadimiz.",
     hero_btn_services: "Xizmatlarimiz",
     hero_btn_contact: "Bog'lanish",
     hero_stat_experience: "Yillik tajriba",
@@ -64,6 +64,7 @@ const translations = {
     marketing_branding: "Brending",
     marketing_ads: "Reklama",
     marketing_btn: "Sotuvni Boshlash",
+    marketing_premium: "Premium Xizmat",
 
     // Achievements Section
     achievements_subtitle: "Raqamlarda",
@@ -71,7 +72,7 @@ const translations = {
     achievements_desc:
       "Raqamlar bizning ishimizning sifati va mijozlarimiz ishonchini aks ettiradi",
     achievements_1: "Yillik Tajriba",
-    achievements_1_desc: "O'n yildan ortiq bozorda faol ishlaymiz",
+    achievements_1_desc: "Uch yildan ortiq bozorda faol ishlaymiz",
     achievements_2: "Kompaniyalar",
     achievements_2_desc: "Yuzlab kompaniyalarga xizmat ko'rsatdik",
     achievements_3: "Mamnunlik",
@@ -84,7 +85,7 @@ const translations = {
     about_title: "Nima Uchun",
     about_title_2: "Biz?",
     about_desc:
-      "10+ yil tajriba, 500+ mamnun kompaniya. Biz strategik hamkorlik va uzoq muddatli rivojlanishga yo'naltiramiz.",
+      "3+ yil tajriba, 500+ mamnun kompaniya. Biz strategik hamkorlik va uzoq muddatli rivojlanishga yo'naltiramiz.",
     about_1_title: "Tezkor Natija",
     about_1_desc:
       "Sizning vazifalaringizni tezda va samarali hal qilamiz. Vaqtni tejash - pul tejash.",
@@ -145,7 +146,7 @@ const translations = {
     service_4_title: "Malaka Oshirish",
     service_4_desc:
       "Xodimlarni professional darajaga ko'tarish va malaka shaklantirish programmalari.",
-    service_5_title: "Litsenziya Yordam",
+    service_5_title: "Litsenziyaga Yordam",
     service_5_desc:
       "Biznesni ro'yxatga olish, ruxsatnoma va litsenziya olishda amaliy yordam berish.",
     service_6_title: "Energiya Audit",
@@ -263,6 +264,7 @@ const translations = {
     marketing_branding: "Брендинг",
     marketing_ads: "Реклама",
     marketing_btn: "Начать продажи",
+    marketing_premium: "Премиум Услуга",
 
     // Achievements Section
     achievements_subtitle: "В цифрах",
@@ -270,7 +272,7 @@ const translations = {
     achievements_desc:
       "Цифры отражают качество нашей работы и доверие клиентов",
     achievements_1: "Лет Опыта",
-    achievements_1_desc: "Более десяти лет активно работаем на рынке",
+    achievements_1_desc: "Более трёх лет активно работаем на рынке",
     achievements_2: "Компаний",
     achievements_2_desc: "Оказали услуги сотням компаний",
     achievements_3: "Удовлетворённость",
@@ -283,7 +285,7 @@ const translations = {
     about_title: "Почему",
     about_title_2: "Мы?",
     about_desc:
-      "10+ лет опыта, 500+ довольных компаний. Мы ориентируемся на стратегическое партнёрство и долгосрочное развитие.",
+      "3+ лет опыта, 500+ довольных компаний. Мы ориентируемся на стратегическое партнёрство и долгосрочное развитие.",
     about_1_title: "Быстрый Результат",
     about_1_desc:
       "Решаем ваши задачи быстро и эффективно. Экономия времени - экономия денег.",
@@ -457,6 +459,7 @@ const translations = {
     marketing_branding: "Branding",
     marketing_ads: "Advertising",
     marketing_btn: "Start Selling",
+    marketing_premium: "Premium Service",
 
     // Achievements Section
     achievements_subtitle: "In Numbers",
@@ -464,7 +467,7 @@ const translations = {
     achievements_desc:
       "Numbers reflect the quality of our work and client trust",
     achievements_1: "Years Experience",
-    achievements_1_desc: "Over ten years of active work in the market",
+    achievements_1_desc: "Over three years of active work in the market",
     achievements_2: "Companies",
     achievements_2_desc: "Served hundreds of companies",
     achievements_3: "Satisfaction",
@@ -477,7 +480,7 @@ const translations = {
     about_title: "Why",
     about_title_2: "Us?",
     about_desc:
-      "10+ years of experience, 500+ satisfied companies. We focus on strategic partnership and long-term growth.",
+      "3+ years of experience, 500+ satisfied companies. We focus on strategic partnership and long-term growth.",
     about_1_title: "Fast Results",
     about_1_desc:
       "We solve your tasks quickly and efficiently. Saving time means saving money.",
