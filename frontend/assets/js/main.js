@@ -803,8 +803,15 @@ function updateLangDropdownDisplay(lang) {
 
 function toggleLangDropdown() {
   const menu = document.getElementById("langDropdownMenu");
-  if (menu) {
+  const btn = document.getElementById("langDropdownBtn");
+  
+  if (menu && btn) {
     if (menu.classList.contains("opacity-0")) {
+      // Calculate position
+      const btnRect = btn.getBoundingClientRect();
+      menu.style.top = (btnRect.bottom + 8) + "px";
+      menu.style.left = (btnRect.right - menu.offsetWidth) + "px";
+      
       menu.classList.remove("opacity-0", "invisible", "translate-y-2");
       menu.classList.add("opacity-100", "visible", "translate-y-0");
     } else {
@@ -815,6 +822,34 @@ function toggleLangDropdown() {
 
 function closeLangDropdown() {
   const menu = document.getElementById("langDropdownMenu");
+  if (menu) {
+    menu.classList.add("opacity-0", "invisible", "translate-y-2");
+    menu.classList.remove("opacity-100", "visible", "translate-y-0");
+  }
+}
+
+// Mobile language dropdown functions
+function toggleMobileLangDropdown() {
+  const menu = document.getElementById("mobileLangDropdown");
+  const btn = document.getElementById("mobileLangBtn");
+  
+  if (menu && btn) {
+    if (menu.classList.contains("opacity-0")) {
+      // Calculate position
+      const btnRect = btn.getBoundingClientRect();
+      menu.style.top = (btnRect.bottom + 8) + "px";
+      menu.style.left = (btnRect.right - menu.offsetWidth) + "px";
+      
+      menu.classList.remove("opacity-0", "invisible", "translate-y-2");
+      menu.classList.add("opacity-100", "visible", "translate-y-0");
+    } else {
+      closeMobileLangDropdown();
+    }
+  }
+}
+
+function closeMobileLangDropdown() {
+  const menu = document.getElementById("mobileLangDropdown");
   if (menu) {
     menu.classList.add("opacity-0", "invisible", "translate-y-2");
     menu.classList.remove("opacity-100", "visible", "translate-y-0");
@@ -840,6 +875,18 @@ document.addEventListener("DOMContentLoaded", () => {
   // Set initial language
   setLanguage(currentLanguage);
 
+  // Move language dropdown to body for proper positioning
+  const langDropdownMenu = document.getElementById("langDropdownMenu");
+  if (langDropdownMenu) {
+    document.body.appendChild(langDropdownMenu);
+  }
+
+  // Move mobile language dropdown to body for proper positioning
+  const mobileLangDropdown = document.getElementById("mobileLangDropdown");
+  if (mobileLangDropdown) {
+    document.body.appendChild(mobileLangDropdown);
+  }
+
   // New language dropdown toggle
   const langDropdownBtn = document.getElementById("langDropdownBtn");
   if (langDropdownBtn) {
@@ -852,10 +899,32 @@ document.addEventListener("DOMContentLoaded", () => {
   // Close dropdown when clicking outside
   document.addEventListener("click", (e) => {
     const langSwitcher = document.getElementById("langSwitcher");
-    if (langSwitcher && !langSwitcher.contains(e.target)) {
+    const langDropdownMenu = document.getElementById("langDropdownMenu");
+    if (langSwitcher && !langSwitcher.contains(e.target) && langDropdownMenu && !langDropdownMenu.contains(e.target)) {
       closeLangDropdown();
     }
+    
+    // Close mobile lang dropdown when clicking outside
+    const mobileLangSwitcher = document.getElementById("mobileLangSwitcher");
+    if (mobileLangSwitcher && !mobileLangSwitcher.contains(e.target)) {
+      closeMobileLangDropdown();
+    }
   });
+
+  // Close dropdown on scroll
+  window.addEventListener("scroll", () => {
+    closeLangDropdown();
+    closeMobileLangDropdown();
+  });
+
+  // Mobile language dropdown toggle
+  const mobileLangBtn = document.getElementById("mobileLangBtn");
+  if (mobileLangBtn) {
+    mobileLangBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleMobileLangDropdown();
+    });
+  }
 
   // Legacy: Language dropdown toggle
   const langBtn = document.getElementById("langBtn");
@@ -877,36 +946,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-
-  // Mobile Language dropdown toggle
-  const mobileLangBtn = document.getElementById("mobileLangBtn");
-  const mobileLangDropdown = document.getElementById("mobileLangDropdown");
-
-  if (mobileLangBtn && mobileLangDropdown) {
-    mobileLangBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      mobileLangDropdown.classList.toggle("hidden");
-    });
-
-    // Close mobile dropdown when clicking outside
-    document.addEventListener("click", (e) => {
-      if (
-        !mobileLangBtn.contains(e.target) &&
-        !mobileLangDropdown.contains(e.target)
-      ) {
-        mobileLangDropdown.classList.add("hidden");
-      }
-    });
-  }
 });
-
-// Close mobile language dropdown function
-function closeMobileLangDropdown() {
-  const mobileLangDropdown = document.getElementById("mobileLangDropdown");
-  if (mobileLangDropdown) {
-    mobileLangDropdown.classList.add("hidden");
-  }
-}
 
 // Initialize plugins
 gsap.registerPlugin(ScrollTrigger);
